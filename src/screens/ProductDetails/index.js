@@ -240,9 +240,10 @@ function ProductDetails({ navigation, route }) {
 
                             }
 
+
                         </View>
                         {productDetails.attributes.map((item, key) => (
-                            <View key={key} style={{ flexDirection: 'row', alignItems: 'center', marginTop: wp('2%') }}>
+                            <View key={key} style={{ flexDirection: 'row', alignItems: 'center', marginTop: wp('2%'),flexWrap:'wrap' }}>
                                 <Text style={[styles.productAttr, { marginTop: 0, marginRight: wp('2%') }]}>{item.option.name}</Text>
                                 {item.values.map((item2, key2) => (
                                     <TouchableOpacity key={key2} onPress={() => {
@@ -254,10 +255,13 @@ function ProductDetails({ navigation, route }) {
                                     </TouchableOpacity>
                                 ))}
                             </View>
-                        ))}
 
+
+                        ))}
+                        
                     </View>
-                    <View style={styles.productPriceQtySec}>
+                    <Text style={[styles.wholeSaleprice2, {marginTop:'3%'}]}>10+Kg Wholesale Price<Text style={{ color: BKColor.textColor2,fontWeight:'700' }}> Rs.200</Text></Text>
+                    <View style={styles.productPriceQtySec}>                                            
                         <View style={styles.productPriceSec}>
                             <Text style={styles.productOldPrice}>Rs.{productDetails.products_price}</Text>
                             <Text style={styles.productPrice}>Rs.{productDetails.discounted_price}</Text>
@@ -296,7 +300,7 @@ function ProductDetails({ navigation, route }) {
 
                     </View>
                     {productDetails.products_specification != '' &&
-                    
+
                         <View style={styles.productDecSec}>
                             <Text style={styles.productDecHeading}>Specification</Text>
                             <Text style={styles.productDec}>{((productDetails.products_specification).replace(regex, '')).replace(secondRegEx, '')}</Text>
