@@ -61,7 +61,7 @@ export default StyleSheet.create({
         height: hp('18%'),
         width: wp('54%'),
         borderRadius: hp('3%'),
-        backgroundColor: BKColor.iconBackground1,
+        backgroundColor: '#BBD675',
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',

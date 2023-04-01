@@ -8,6 +8,7 @@ import { BKColor } from "../../common/values/BKColor";
 import { POST_SIGNIN_API, POST_FORGET_PASSWORD } from "../../config/ApiConfig";
 import { PostApiFetch } from "../../config/CommonFunction";
 import { showMessage, hideMessage } from "react-native-flash-message";
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 function ForgetPassword({ navigation }) {
     const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +24,7 @@ function ForgetPassword({ navigation }) {
             PostApiFetch(POST_FORGET_PASSWORD, formData)
                 .then(([status, response]) => {
                     if (status == 200) {
-                        if(response.status == true){
+                        if (response.status == true) {
                             navigation.navigate('FpOtpVerification', {
                                 forgetPasswordOtp: response.forget_password_otp,
                                 userId: response.userDetails[0].id
@@ -33,7 +34,7 @@ function ForgetPassword({ navigation }) {
                                 type: "info",
                                 backgroundColor: "#808080",
                             })
-                        }else{
+                        } else {
                             setLoginErrorMessage(response.massage);
                         }
                     } else {
@@ -55,7 +56,11 @@ function ForgetPassword({ navigation }) {
         <View style={pageContainerStyle}>
             <View style={styles.loginLogoSection}>
                 <View style={styles.loginLogoSection.logo}>
-                    <Image source={require('../../assets/images/header-logo.png')} resizeMode='cover' />
+                    <Image source={require('../../assets/images/header-logo.png')} resizeMode='cover' style={{
+                        height: hp('14%'),
+                        width: hp('14%'),
+                        borderRadius: hp('7%'),
+                    }} />
                 </View>
                 <Text style={styles.loginLogoSection.text1}>Forget Password</Text>
             </View>

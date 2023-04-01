@@ -158,7 +158,7 @@ export const activeButton = {
     width: '100%',
     justifyContent: 'center',
     borderRadius: 13,
-    backgroundColor: BKColor.btnBackgroundColor1
+    backgroundColor: BKColor.textColor2
   },
   text: {
     color: '#FFFFFF',

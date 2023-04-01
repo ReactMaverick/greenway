@@ -45,7 +45,7 @@ export default StyleSheet.create({
             width: '25%',
             justifyContent: 'center',
             borderRadius: 13,
-            backgroundColor: BKColor.btnBackgroundColor1
+            backgroundColor: BKColor.textColor2
         }
     },
     loginFooter: {

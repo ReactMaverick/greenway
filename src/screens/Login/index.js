@@ -11,6 +11,7 @@ import {
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { pageContainerStyle } from '../../common/values/BKStyles';
 import {
   inputLevel,
@@ -217,12 +218,13 @@ function Login({ navigation }) {
           <View style={styles.loginLogoSection}>
             <View style={styles.loginLogoSection.logo}>
               <Image
-                source={require('../../assets/images/header-logo.png')}
+                source={require('../../assets/images/header-logo.png')} style={{ height: hp('14%'),
+                width: hp('14%'),borderRadius: hp('7%'), }}
                 resizeMode="cover"
               />
             </View>
-            <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
-            <Text style={styles.loginLogoSection.text2}>Kollupaatikadai</Text>
+            <Text style={styles.loginLogoSection.text1}>Welcome to our</Text>
+            <Text style={styles.loginLogoSection.text2}>Greenway app</Text>
           </View>
           <Text style={{ textAlign: 'center', color: BKColor.textColor2 }}>
             {loginErrorMessage}
@@ -324,13 +326,13 @@ function Login({ navigation }) {
                 //   setSocial('facebook');
                 // });
               }}>
-              <AntDesign
-                name="apple1"
+              <FontAwesome
+                name="facebook"
                 color={BKColor.textColor1}
                 size={fontSize.h3}
                 style={styles.socialLoginButton.icon}
               />
-              <Text style={styles.socialLoginButton.text}>Facebook</Text>
+              <Text style={styles.socialLoginButton.text2}>Facebook</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.loginFooter}>

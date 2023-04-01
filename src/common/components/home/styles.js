@@ -136,7 +136,7 @@ export default StyleSheet.create({
     zIndex: 1,
     color: BKColor.textColor2,
     position: 'absolute',
-    top: 20,
+    top: 45,
     right: wp('4%'),
     // backgroundColor: BKColor.white,
     // borderRadius: 12,
@@ -165,6 +165,12 @@ export default StyleSheet.create({
     // height: wp('20%'),
     width: wp('20%'),
     alignItems: 'center'
+  },
+  wholeSaleprice: {
+    fontSize: fontSize.h5,
+    fontFamily: fontFamily.regular,
+    color:BKColor.textColor1,
+    paddingBottom: hp('1.5%')
   }
 
 });

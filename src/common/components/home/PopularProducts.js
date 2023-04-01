@@ -70,6 +70,7 @@ function PopularProducts({ navigation }) {
 
                         </View>
                         <ScrollView>
+                            
                             <View style={styles.productContainer}>
                                 {allPopularProducts.map((item, key) => (
 

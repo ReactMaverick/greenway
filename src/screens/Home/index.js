@@ -29,7 +29,7 @@ function Home({ navigation }) {
                 }}>
                     <Image source={require('../../assets/images/menu_alt_03.png')} resizeMode='cover' />
                 </TouchableOpacity>
-                <Text style={pageHeader.text}>Kollupaatikadai</Text>
+                <Text style={pageHeader.text}>Greenway</Text>
                 <TouchableOpacity style={styles.headerIcon} onPress={()=>{navigation.navigate('Search')}}>
                 <Fontisto name="search" color={BKColor.textColor1} size={fontSize.h3} style={styles.headerIcon.icon} />
                 </TouchableOpacity>
@@ -39,9 +39,9 @@ function Home({ navigation }) {
             <PopularProducts navigation={navigation} />
             {/* <Brands navigation={navigation} /> */}
             <PopularCategory navigation={navigation} />
-            <ShippingArea navigation={navigation} />
+            {/* <ShippingArea navigation={navigation} /> */}
 
-            <GiftsArea navigation={navigation} />
+            {/* <GiftsArea navigation={navigation} /> */}
 
 
         </ScrollView>

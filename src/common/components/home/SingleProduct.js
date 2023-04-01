@@ -44,8 +44,9 @@ function SingleProduct({ navigation, index, item }) {
             }
             )
         }}>
-            <View style={styles.singleProductContainer}>
+            <View style={styles.singleProductContainer}>                
                 <View style={(index + 1) % 2 == 0 ? styles.itemRight : styles.itemLeft}>
+                    <Text style={styles.wholeSaleprice}>10+Kg Wholesale Price<Text style={{ color: BKColor.textColor2,fontWeight:'700' }}> Rs.45</Text></Text>
                     {userData != null ?
                         <TouchableOpacity style={styles.wishlistIcon} onPress={() => {
                             userData != null &&
@@ -158,7 +159,7 @@ function SingleProduct({ navigation, index, item }) {
 
                                 <MaterialCommunityIcons name="cart-check" color={BKColor.textColor2} size={fontSize.h1} style={{ alignSelf: "flex-end", marginTop: -15 }} />
                                 :
-                                <AntDesign name="shoppingcart" color={BKColor.textColor2} size={fontSize.h1} style={{ alignSelf: "flex-end", marginTop: -15 }} />
+                                <AntDesign name="pluscircle" color={BKColor.textColor2} size={fontSize.h1} style={{ alignSelf: "flex-end", marginTop: -15 }} />
                             }
 
                         </TouchableOpacity>

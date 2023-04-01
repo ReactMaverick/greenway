@@ -405,7 +405,7 @@ function Cart({ navigation }) {
                                         </TouchableOpacity>
                                     </View>
                                     <View style={styles.cartDecAttriSec}>
-                                        <Text style={{color: 'red'}}>{item.attributes[0].product_option_slug} : </Text>
+                                        <Text style={{color: BKColor.textColor2}}>{item.attributes[0].product_option_slug} : </Text>
                                         <Text>{item.attributes[0].attribute_value}</Text>
                                     </View>
                                     <View style={styles.cartDecSec}>

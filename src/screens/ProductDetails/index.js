@@ -175,7 +175,7 @@ function ProductDetails({ navigation, route }) {
                     <TouchableOpacity onPress={() => navigation.goBack()} >
                         <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
                     </TouchableOpacity>
-                    <Text style={pageHeader.text}>Details Page</Text>
+                    <Text style={pageHeader.text}>Product Details</Text>
                     <View></View>
                 </View>
 
@@ -312,7 +312,7 @@ function ProductDetails({ navigation, route }) {
                             maxStars={5}
                             disabled={true}
                             starSize={20}
-                            fullStarColor={'#C2C71B'}
+                            fullStarColor={BKColor.textColor2}
                             rating={Math.round(productDetails.rating)}
                         />
                     </View>
@@ -329,7 +329,7 @@ function ProductDetails({ navigation, route }) {
                                             maxStars={5}
                                             disabled={true}
                                             starSize={20}
-                                            fullStarColor={'#C2C71B'}
+                                            fullStarColor={BKColor.textColor2}
                                             // halfStarColor={'white'}
                                             changeRating={item.reviews_rating}
                                             rating={item.reviews_rating}
