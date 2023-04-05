@@ -221,5 +221,11 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#DDDDDD',
     paddingVertical: hp('2%')
-  }
+  },
+  
+  wholeSaleprice2: {
+    fontSize: fontSize.regular,
+    fontFamily: fontFamily.regular,
+    color:BKColor.textColor1,
+  },
 });
