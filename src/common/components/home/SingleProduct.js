@@ -17,11 +17,13 @@ import { showMessage, hideMessage } from "react-native-flash-message";
 // import { DOMParser } from "react-native-html-parser";
 
 function SingleProduct({ navigation, index, item }) {
-    const dispatch = useDispatch();
+ 
     const [androidId, setAndroidId] = useState(true);
-    const { userData } = useSelector((state) => state.UserReducer);
-    const { wishlistData } = useSelector((state) => state.WishlistReducer);
-    const { cartData } = useSelector((state) => state.CartReducer);
+    // const userDetails = useSelector(state => state.userReducer.value);
+    const userDetail = useSelector(state => state.UserReducer.value);
+    console.log("userDetails",userDetail)
+    // const { wishlistData } = useSelector((state) => state.WishlistReducer);
+    // const { cartData } = useSelector((state) => state.CartReducer);
     // const { sessionId } = useSelector((state) => state.SessionIdReducer);
     const regex = /(<([^>]+)>)/ig;
     // console.log('item', item);
@@ -47,10 +49,10 @@ function SingleProduct({ navigation, index, item }) {
             <View style={styles.singleProductContainer}>                
                 <View style={(index + 1) % 2 == 0 ? styles.itemRight : styles.itemLeft}>
                     <Text style={styles.wholeSaleprice}>10+Kg Wholesale Price<Text style={{ color: BKColor.textColor2,fontWeight:'700' }}> Rs.45</Text></Text>
-                    {userData != null ?
-                        <TouchableOpacity style={styles.wishlistIcon} onPress={() => {
-                            userData != null &&
-                                addToWishlist(userData.id, item.products_id, item.products_attributes_prices_id).then(([wishlistData]) => {
+                    {/* {userDetails != null ? */}
+                        {/* <TouchableOpacity style={styles.wishlistIcon} onPress={() => {
+                            userDetails != null &&
+                                addToWishlist(userDetails.id, item.products_id, item.products_attributes_prices_id).then(([wishlistData]) => {
 
                                     if (wishlistData.result.success == 1) {
 
@@ -87,8 +89,8 @@ function SingleProduct({ navigation, index, item }) {
                         :
                         <TouchableOpacity style={styles.wishlistIcon} onPress={() => navigation.navigate('Login')}>
                             <AntDesign name="hearto" style={{ fontWeight: 'bold' }} color={BKColor.textColor2} size={fontSize.bh} />
-                        </TouchableOpacity>
-                    }
+                        </TouchableOpacity> */}
+                    {/* } */}
 
                     <Image
                         source={{ uri: item.image_path }}
@@ -106,15 +108,15 @@ function SingleProduct({ navigation, index, item }) {
                             <Text style={styles.itemPrice}>{item.discounted_price}</Text>
                             <Text style={styles.itemOldPrice}>{item.products_price}</Text>
                         </View>
-                        <TouchableOpacity onPress={() => {
+                        {/* <TouchableOpacity onPress={() => {
                             if (item.defaultStock > 0) {
-                                userData != null ?
-                                    addToCart(item.products_id, 1, userData.id, '', '', item.attributes_ids).then(([status, response]) => {
+                                userDetails != null ?
+                                    addToCart(item.products_id, 1, userDetails.id, '', '', item.attributes_ids).then(([status, response]) => {
                                         // console.log('cartData - ', response)
                                         if (status == 200) {
                                             if (response.status === true) {
-                                                dispatch({ type: 'setCartData', payload: response.cart })
-                                                dispatch({ type: 'setCouponDetails', payload: null });
+                                                // dispatch({ type: 'setCartData', payload: response.cart })
+                                                // dispatch({ type: 'setCouponDetails', payload: null });
                                                 // console.log("this product is added")
                                                 showMessage({
                                                     message: "This product is added to cart.",
@@ -131,7 +133,7 @@ function SingleProduct({ navigation, index, item }) {
                                         console.log('cartData - ', response)
                                         if (status == 200) {
                                             if (response.status === true) {
-                                                dispatch({ type: 'setCartData', payload: response.cart })
+                                                // dispatch({ type: 'setCartData', payload: response.cart })
                                                 console.log("this product is added")
 
                                                 showMessage({
@@ -162,7 +164,7 @@ function SingleProduct({ navigation, index, item }) {
                                 <AntDesign name="pluscircle" color={BKColor.textColor2} size={fontSize.h1} style={{ alignSelf: "flex-end", marginTop: -15 }} />
                             }
 
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </View>
             </View>

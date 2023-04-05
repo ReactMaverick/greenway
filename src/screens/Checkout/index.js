@@ -25,7 +25,7 @@ import { showMessage, hideMessage } from "react-native-flash-message";
 function Checkout({ navigation }) {
     const dispatch = useDispatch();
     // const { sessionId } = useSelector((state) => state.SessionIdReducer);
-    const { userData } = useSelector((state) => state.UserReducer);
+    // const userData = useSelector(state => state.userReducer.value);
     const { cartData } = useSelector((state) => state.CartReducer);
     const { couponDetails } = useSelector((state) => state.CouponDetailsReducer);
     const { selectedShippingAddress } = useSelector((state) => state.SelectedShippingAddressReducer);

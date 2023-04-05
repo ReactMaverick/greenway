@@ -22,7 +22,7 @@ function Blogs({ navigation }) {
         let params = '';
         GetApiFetch(GET_BLOG_LIST_API, params)
             .then(([status, response]) => {
-                // console.log(status, response);
+                console.log(status, response);
                 if (status == 200) {
                     setBlogData(response.blogs.news_data)
                     // setCategory(response.news_categories)

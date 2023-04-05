@@ -21,7 +21,7 @@ import HomeIcon from "./src/assets/images/HomeIcon";
 import CartIcon from "./src/assets/images/CartIcon";
 import SlideMenu from "./src/common/components/SlideMenu";
 import { useSelector, useDispatch } from "react-redux";
-
+import {userDetails} from './src/redux/reducers/UserReducer';
 
 // screens
 import List from "./src/screens/List";
@@ -73,8 +73,9 @@ function MyDrawer() {
 }
 const BottomTab = createBottomTabNavigator();
 function MyTabs() {
-  const { userData } = useSelector((state) => state.UserReducer);
-  const { cartData } = useSelector((state) => state.CartReducer);
+  // const userData = useSelector(state => state.userReducer.value);
+  // const userDetails = useSelector(state => state.userReducer);
+  // const { cartData } = useSelector((state) => state.CartReducer);
 
   const dispatch = useDispatch();
   return (
@@ -107,7 +108,7 @@ function MyTabs() {
             ),
         }}
       />
-      {userData != null ?
+      {/* {userData != null ? */}
         <BottomTab.Screen
           name="My Profile"
           component={MyProfile}
@@ -126,7 +127,7 @@ function MyTabs() {
               ),
           }}
         />
-        :
+        {/* :
         <BottomTab.Screen
           name="My Profile"
           component={Login}
@@ -144,8 +145,8 @@ function MyTabs() {
 
               ),
           }}
-        />
-      }
+        /> */}
+      {/* } */}
 
       <BottomTab.Screen
         name="Cart"
@@ -156,7 +157,7 @@ function MyTabs() {
               <>
               <Animated.View style={Styles.activeDiv}>
                 <CartIcon color={color} width={size} height={size} />
-                {cartData != null &&
+                {/* {cartData != null && */}
                 <View style={{
                   position: 'absolute',
                   backgroundColor: 'white',
@@ -173,9 +174,9 @@ function MyTabs() {
                     justifyContent: 'center',
                     color: "black",
                     fontSize: 8,
-                  }}>{cartData.length}</Text>
+                  }}>2</Text>
                 </View>
-              }
+              {/* } */}
               </Animated.View>
               
               </>
@@ -183,10 +184,10 @@ function MyTabs() {
             ) : (
               <>
                 <CartIcon color={color} width={size} height={size} />
-                {cartData != null &&
+                {/* {cartData != null && */}
                 <View style={{
                   position: 'absolute',
-                  backgroundColor: 'red',
+                  backgroundColor: '#42850A',
                   width: 16,
                   height: 16,
                   borderRadius: 15 / 2,
@@ -200,9 +201,9 @@ function MyTabs() {
                     justifyContent: 'center',
                     color: "#ffffff",
                     fontSize: 8,
-                  }}>{cartData.length}</Text>
+                  }}>2</Text>
                 </View>
-              }
+              {/* } */}
                 <Text>Cart</Text>
               </>
 
@@ -218,7 +219,7 @@ function MyTabs() {
           },
         }}
       />
-      {userData != null ?
+      {/* {userData != null ? */}
         <BottomTab.Screen
           name="My Orders"
           component={MyOrders}
@@ -236,7 +237,7 @@ function MyTabs() {
               ),
           }}
         />
-        :
+        {/* :
         <BottomTab.Screen
           name="My Orders"
           component={Login}
@@ -253,8 +254,8 @@ function MyTabs() {
                 </>
               ),
           }}
-        />
-      }
+        /> */}
+      {/* } */}
 
       <BottomTab.Screen
         name="About Us"
@@ -290,8 +291,8 @@ const Styles = StyleSheet.create({
 });
 const Stack = createNativeStackNavigator();
 function Stack1() {
-  const { userData } = useSelector((state) => state.UserReducer);
-
+  // const { userData } = useSelector((state) => state.UserReducer);
+  // const userDetails = useSelector(state => state.userReducer);
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={MyTabs} options={{ headerShown: false }} />
@@ -312,20 +313,20 @@ function Stack1() {
       <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} options={{ headerShown: false }} />
       <Stack.Screen name="TermsAndConditions" component={TermsAndConditions} options={{ headerShown: false }} />
       <Stack.Screen name="Faq" component={Faq} options={{ headerShown: false }} />
-      {userData != null ? <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} /> : <Stack.Screen name="MyProfile" component={Login} options={{ headerShown: false }} />}
-      {userData != null ? <Stack.Screen name="MyAccount" component={MyAccount} options={{ headerShown: false }} /> : <Stack.Screen name="MyAccount" component={Login} options={{ headerShown: false }} />}
+      {/* {userData != null ? <Stack.Screen name="MyProfile" component={MyProfile} options={{ headerShown: false }} /> : <Stack.Screen name="MyProfile" component={Login} options={{ headerShown: false }} />} */}
+      {/* {userData != null ? <Stack.Screen name="MyAccount" component={MyAccount} options={{ headerShown: false }} /> : <Stack.Screen name="MyAccount" component={Login} options={{ headerShown: false }} />} */}
 
 
-      {userData != null ? <Stack.Screen name="MyOrders" component={MyOrders} options={{ headerShown: false }} /> : <Stack.Screen name="MyOrders" component={Login} options={{ headerShown: false }} />}
+      {/* {userData != null ? <Stack.Screen name="MyOrders" component={MyOrders} options={{ headerShown: false }} /> : <Stack.Screen name="MyOrders" component={Login} options={{ headerShown: false }} />} */}
 
       <Stack.Screen name="OrderDetails" component={OrderDetails} options={{ headerShown: false }} />
-      {userData != null ? <Stack.Screen name="MyAddress" component={MyAddress} options={{ headerShown: false }} /> : <Stack.Screen name="MyAddress" component={Login} options={{ headerShown: false }} />}
+      {/* {userData != null ? <Stack.Screen name="MyAddress" component={MyAddress} options={{ headerShown: false }} /> : <Stack.Screen name="MyAddress" component={Login} options={{ headerShown: false }} />} */}
 
-      {userData != null ? <Stack.Screen name="Wishlist" component={Wishlist} options={{ headerShown: false }} /> : <Stack.Screen name="Wishlist" component={Login} options={{ headerShown: false }} />}
+      {/* {userData != null ? <Stack.Screen name="Wishlist" component={Wishlist} options={{ headerShown: false }} /> : <Stack.Screen name="Wishlist" component={Login} options={{ headerShown: false }} />} */}
 
       <Stack.Screen name="Blogs" component={Blogs} options={{ headerShown: false }} />
       <Stack.Screen name="BlogDetails" component={BlogDetails} options={{ headerShown: false }} />
-      {userData != null ? <Stack.Screen name="Checkout" component={Checkout} options={{ headerShown: false }} /> : <Stack.Screen name="Checkout" component={Login} options={{ headerShown: false }} />}
+      {/* {userData != null ? <Stack.Screen name="Checkout" component={Checkout} options={{ headerShown: false }} /> : <Stack.Screen name="Checkout" component={Login} options={{ headerShown: false }} />} */}
 
       <Stack.Screen name="Search" component={Search} options={{ headerShown: false }} />
 

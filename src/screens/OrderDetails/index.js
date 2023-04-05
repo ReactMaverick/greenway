@@ -26,7 +26,7 @@ function OrderDetails({ navigation, route }) {
     const [show, setShow] = useState(false);
     const [changeRating, setChangeRating] = useState(5);
     const [reviewText, setReviewText] = useState("");
-    const { userData } = useSelector((state) => state.UserReducer);
+    // const userData = useSelector(state => state.userReducer.value);
     // console.log('userData =>',userData)
 
     //Return Product

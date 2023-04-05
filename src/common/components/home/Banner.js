@@ -15,7 +15,7 @@ function Banner({ navigation }) {
         GetApiFetch(GET_BANNERS, params)
             .then(([status, response]) => {
                 if (status == 200) {
-                    // console.log('_getBanners', response);
+                    console.log('_getBanners', response);
                     setBanners(response.Banners1)
                 } else {
                     console.log('Something went wrong');

@@ -56,10 +56,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         height: hp('30%'),
         logo: {
-            height: hp('14%'),
-            width: hp('14%'),
-            borderRadius: hp('7%'),
-            backgroundColor: BKColor.iconBackground1,
+            // backgroundColor: BKColor.iconBackground1,
             justifyContent: 'center',
             alignItems: 'center',
         },

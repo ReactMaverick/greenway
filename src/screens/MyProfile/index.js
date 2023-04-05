@@ -20,7 +20,7 @@ import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-si
 function MyProfile({ navigation }) {
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
-    const { userData } = useSelector((state) => state.UserReducer);
+    // const userData = useSelector(state => state.userReducer.value);
 
 
     const socialSignOut = async () =>{
@@ -46,12 +46,13 @@ function MyProfile({ navigation }) {
             </View> */}
             <View style={styles.loginLogoSection}>
                 <View style={styles.loginLogoSection.logo}>
-                    <Image source={require('../../assets/images/header-logo.png')} resizeMode='cover' style={styles.bannerImage} />
+                    <Image source={require('../../assets/images/header-logo.png')} resizeMode='cover' style={{ height: hp('14%'),
+                width: hp('14%'),borderRadius: hp('7%'), }} />
                 </View>
                 <Text style={styles.loginLogoSection.text2}>Kollupaatikadai</Text>
             </View>
             <View style={[styles.regContainer, { paddingTop: hp('6%') }]}>
-                {userData != null ?
+                {/* {userData != null ? */}
                     <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('MyAccount')}>
                         <View style={styles.itemOuter}>
                             <View style={styles.textOuter}>
@@ -61,7 +62,7 @@ function MyProfile({ navigation }) {
                             <Entypo name="chevron-thin-right" color='#000000' size={fontSize.h2} />
                         </View>
                     </TouchableOpacity>
-                    :
+                    {/* :
                     <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('Login')}>
                         <View style={styles.itemOuter}>
                             <View style={styles.textOuter}>
@@ -71,8 +72,8 @@ function MyProfile({ navigation }) {
                             <Entypo name="chevron-thin-right" color='#000000' size={fontSize.h2} />
                         </View>
                     </TouchableOpacity>
-                }
-                {userData != null ?
+                } */}
+                {/* {userData != null ? */}
                     <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('MyAddress')}>
                         <View style={styles.itemOuter}>
                             <View style={styles.textOuter}>
@@ -82,7 +83,7 @@ function MyProfile({ navigation }) {
                             <Entypo name="chevron-thin-right" color='#000000' size={fontSize.h2} />
                         </View>
                     </TouchableOpacity>
-                    :
+                    {/* :
                     <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('Login')}>
                         <View style={styles.itemOuter}>
                             <View style={styles.textOuter}>
@@ -92,8 +93,8 @@ function MyProfile({ navigation }) {
                             <Entypo name="chevron-thin-right" color='#000000' size={fontSize.h2} />
                         </View>
                     </TouchableOpacity>
-                }
-                {userData != null ?
+                } */}
+                {/* {userData != null ? */}
                     <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('MyOrders')}>
                         <View style={styles.itemOuter}>
                             <View style={styles.textOuter}>
@@ -103,7 +104,7 @@ function MyProfile({ navigation }) {
                             <Entypo name="chevron-thin-right" color='#000000' size={fontSize.h2} />
                         </View>
                     </TouchableOpacity>
-                    :
+                    {/* :
                     <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('Login')}>
                         <View style={styles.itemOuter}>
                             <View style={styles.textOuter}>
@@ -113,8 +114,8 @@ function MyProfile({ navigation }) {
                             <Entypo name="chevron-thin-right" color='#000000' size={fontSize.h2} />
                         </View>
                     </TouchableOpacity>
-                }
-                {userData != null ?
+                } */}
+                {/* {userData != null ? */}
 
                     <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('Wishlist')}>
                         <View style={styles.itemOuter}>
@@ -125,7 +126,7 @@ function MyProfile({ navigation }) {
                             <Entypo name="chevron-thin-right" color='#000000' size={fontSize.h2} />
                         </View>
                     </TouchableOpacity>
-                    :
+                    {/* :
                     <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('Login')}>
                         <View style={styles.itemOuter}>
                             <View style={styles.textOuter}>
@@ -135,7 +136,7 @@ function MyProfile({ navigation }) {
                             <Entypo name="chevron-thin-right" color='#000000' size={fontSize.h2} />
                         </View>
                     </TouchableOpacity>
-                }
+                } */}
 
                 <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('Cart')}>
                     <View style={styles.itemOuter}>
@@ -147,10 +148,10 @@ function MyProfile({ navigation }) {
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.regContainer.item} onPress={() => {
-                    dispatch({ type: 'setUserData', payload: null })
-                    dispatch({ type: 'setCartData', payload: null })
-                    dispatch({ type: 'setWishlistData', payload: null })
-                    dispatch({ type: 'setCouponDetails', payload: null })
+                    // dispatch({ type: 'setUserData', payload: null })
+                    // dispatch({ type: 'setCartData', payload: null })
+                    // dispatch({ type: 'setWishlistData', payload: null })
+                    // dispatch({ type: 'setCouponDetails', payload: null })
                     try{
                         socialSignOut()
                       }catch(e){

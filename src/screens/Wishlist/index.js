@@ -20,8 +20,8 @@ function Wishlist({ navigation }) {
     // const [wishlistData, setWishlistData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const dispatch = useDispatch();
-    const { wishlistData } = useSelector((state) => state.WishlistReducer);
-    const { userData } = useSelector((state) => state.UserReducer);
+    // const { wishlistData } = useSelector((state) => state.WishlistReducer);
+    // const userData = useSelector(state => state.userReducer.value);
     // console.log('userData==>', userData)
 
     const _getWishlist = async () => {

@@ -32,11 +32,11 @@ function OtpVerification({ navigation, route }) {
             PostApiFetch(POST_PROCESS_SIGNUP_API, formData)
             .then(([status, response]) => {
                 if (status == 200) {
-                    console.log(status, response.userDetails[0]);
+                    // console.log(status, response.userDetails[0]);
                     if (response.status == false) {
                         setErrorMessage(response.message);
                     } else {
-                        dispatch({ type: 'setUserData', payload: response.userDetails[0] });
+                        // dispatch({ type: 'setUserData', payload: response.userDetails[0] });
                         navigation.navigate('Home')
                     }
                 } else {

@@ -20,8 +20,8 @@ import StarRating from 'react-native-star-rating';
 
 function ProductDetails({ navigation, route }) {
     const dispatch = useDispatch();
-    const { userData } = useSelector((state) => state.UserReducer);
-    const { wishlistData } = useSelector((state) => state.WishlistReducer);
+    // const userData = useSelector(state => state.userReducer.value);
+    // const { wishlistData } = useSelector((state) => state.WishlistReducer);
     const [changeInCart, setChangeInCarts] = useState(false)
     const [productDetails, setProductDetails] = useState([])
     // const { productsSlug } = route.params;

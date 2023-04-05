@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 
 function Home({ navigation }) {
-    const { userData } = useSelector((state) => state.UserReducer);
+    // const userData = useSelector(state => state.userReducer.value);
     // console.log('userData', userData);
 
     //   useEffect(() => {}, [navigation]);
@@ -35,7 +35,7 @@ function Home({ navigation }) {
                 </TouchableOpacity>
             </View>
             <Slider navigation={navigation} />
-            <Banner navigation={navigation} />
+            {/* <Banner navigation={navigation} /> */}
             <PopularProducts navigation={navigation} />
             {/* <Brands navigation={navigation} /> */}
             <PopularCategory navigation={navigation} />

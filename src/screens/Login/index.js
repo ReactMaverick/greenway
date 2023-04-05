@@ -35,6 +35,8 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
+
+import {userDetails} from '../../redux/reducers/UserReducer';
 // import {
 //   GoogleSignin,
 //   statusCodes,
@@ -183,7 +185,8 @@ function Login({ navigation }) {
 
         if (status == 200) {
           // console.log('LogData', status, response);
-          dispatch({ type: 'setUserData', payload: response.userDetails[0] });
+          // dispatch({ type: 'setUserData', payload: response.userDetails[0] });
+          // dispatch(userDetails(response.userDetails[0]));
           navigation.navigate('Home');
         } else {
           if (response.error != undefined) {

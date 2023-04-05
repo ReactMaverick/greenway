@@ -1,7 +1,7 @@
 /** @format */
 import {Platform} from 'react-native';
-export const BASE_URL = 'http://demo203.amrithaa.com/vmasala/public/api/';
-export const IMAGE_BASE_PATH = 'http://demo203.amrithaa.com/vmasala/public/';
+export const BASE_URL = 'http://194.163.131.163/greenway/public/api/';
+export const IMAGE_BASE_PATH = 'http://194.163.131.163/greenway/public/';
 
 export const GET_BLOG_LIST_API = 'getBlogs';
 export const GET_BLOG_DETAILS_API = 'getBlogDetails';

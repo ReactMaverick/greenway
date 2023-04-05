@@ -46,7 +46,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 function MyAddress({ navigation }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
-  const { userData } = useSelector(state => state.UserReducer);
+  // const { userData } = useSelector(state => state.UserReducer);
   // console.log('userData==>', userData)
   const { selectedShippingAddress } = useSelector(
     state => state.SelectedShippingAddressReducer,
