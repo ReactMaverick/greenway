@@ -16,6 +16,7 @@ import { showMessage, hideMessage } from "react-native-flash-message";
 import { useSelector, useDispatch } from "react-redux";
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import {logOut} from '../../redux/reducers/UserReducer';
 
 function MyProfile({ navigation }) {
     const dispatch = useDispatch();
@@ -152,12 +153,13 @@ function MyProfile({ navigation }) {
                     // dispatch({ type: 'setCartData', payload: null })
                     // dispatch({ type: 'setWishlistData', payload: null })
                     // dispatch({ type: 'setCouponDetails', payload: null })
-                    try{
-                        socialSignOut()
-                      }catch(e){
-                        console.log('error',e)
-                      }
-                    navigation.navigate('Login')
+                    // try{
+                    //     socialSignOut()
+                    //   }catch(e){
+                    //     console.log('error',e)
+                    //   }
+                    // navigation.navigate('Login')
+                    dispatch(logOut());
                     showMessage({
                         message: "You are logged out",
                         type: "info",

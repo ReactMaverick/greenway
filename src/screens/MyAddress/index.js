@@ -46,11 +46,11 @@ import { Dropdown } from 'react-native-element-dropdown';
 function MyAddress({ navigation }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
-  // const { userData } = useSelector(state => state.UserReducer);
-  // console.log('userData==>', userData)
-  const { selectedShippingAddress } = useSelector(
-    state => state.SelectedShippingAddressReducer,
-  );
+  const userData = useSelector(state => state.UserReducer.value);
+  // const { selectedShippingAddress } = useSelector(
+  //   state => state.SelectedShippingAddressReducer,
+  // );
+  // const cartData = useSelector(state => state.CartReducer.value);
   const [isModalVisible, setModalVisible] = useState(false);
   const [isEditModalVisible, setEditModalVisible] = useState(false);
 
@@ -121,7 +121,7 @@ function MyAddress({ navigation }) {
   };
 
   const _setModalItem = async item => {
-    console.log("item====>",item);
+    // console.log("item====>",item);
     _getDistrict(item.entry_state)
     _getPincode(item.districts_id)
     searchPincode(item)
@@ -168,9 +168,7 @@ function MyAddress({ navigation }) {
     formData.append('states_id', statesId);
     PostApiFetch(POST_DISTRICT_API, formData)
       .then(([status, response]) => {
-        console.log(status, response);
         if (status == 200) {
-          console.log('responseD', response.cities);
           // setDistrictList(response.cities);
           let arr = [];
           response.cities.forEach(value => {
@@ -180,7 +178,7 @@ function MyAddress({ navigation }) {
 
             arr.push(obj);
           });
-          console.log('Dlist', arr);
+          // console.log('Dlist', arr);
           setDistrictList(arr);
         } else {
           console.log('Something went wrong');
@@ -191,11 +189,10 @@ function MyAddress({ navigation }) {
   };
   const _getPincode = async (districtId) => {
     let params = '?districts_id=' + districtId;
-    // console.log('params', params)
     GetApiFetch(GET_PINCODE_API, params)
       .then(([status, response]) => {
         if (status == 200) {
-          console.log('response', response);
+          // console.log('response', response);
           if (response.status == true) {
             // setPincodeList(response.pincodes);
             // setShowPincodeSuggession(!showPincodeSuggession);
@@ -235,23 +232,18 @@ function MyAddress({ navigation }) {
 
       setAutoSuggestion([...newData]);
 
-
-
-
     }
     else {
       setAutoSuggestion([]);
     }
 
   };
-  
-
 
   const _getAddress = async () => {
     let params = '?user_id=' + userData.id;
     GetApiFetch(GET_MY_ADDRESS_API, params)
       .then(([status, response]) => {
-        console.log("Address==>", response)
+        // console.log("Address==>", response)
 
         if (status == 200) {
           setBillingAddressList(response.userBillingAddress);
@@ -307,7 +299,7 @@ function MyAddress({ navigation }) {
             showMessage({
               message: 'Address Added successfully...',
               type: 'info',
-              backgroundColor: '#EC1F25',
+              backgroundColor: '#42850A',
             });
             // console.log("Address Added successfully...");
           }
@@ -322,7 +314,7 @@ function MyAddress({ navigation }) {
     PostApiFetch(POST_DELETE_MY_ADDRESS_API, formData).then(
       ([status, response]) => {
         if (status == 200) {
-          console.log('POST_DELETE_ADDRESS_API==>', response);
+          // console.log('POST_DELETE_ADDRESS_API==>', response);
           _getAddress();
           showMessage({
             message: 'ShippingAddress deleted from your account successfully.',
@@ -460,7 +452,7 @@ function MyAddress({ navigation }) {
                       }}>
                       <FontAwesome
                         name="edit"
-                        color={BKColor.textColor5}
+                        color={BKColor.textColor2}
                         size={wp('7%')}
                         style={{ alignItems: 'center', marginBottom: hp('1%') }}
                       />
@@ -535,7 +527,7 @@ function MyAddress({ navigation }) {
                           }}>
                           <FontAwesome
                             name="edit"
-                            color={BKColor.textColor5}
+                            color={BKColor.textColor2}
                             size={wp('7%')}
                             style={{
                               alignItems: 'center',
@@ -546,7 +538,7 @@ function MyAddress({ navigation }) {
 
                         <MaterialCommunityIcons
                           name="delete-circle-outline"
-                          color={BKColor.textColor2}
+                          color={BKColor.textColor6}
                           size={wp('8%')}
                           onPress={() => {
                             _deleteAddress(item.address_book_id);

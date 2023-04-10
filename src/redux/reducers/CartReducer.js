@@ -1,11 +1,19 @@
-import {createReducer} from '@reduxjs/toolkit';
-const cartDataState = {
-  cartData: null,
+import {createSlice} from '@reduxjs/toolkit';
+
+const initialState = {
+  value: null,
 };
- const CartReducer = createReducer(cartDataState, {
-  setCartData: (state, action) => {
-    state.cartData = action.payload;
+
+export const CartReducer = createSlice({
+  name: 'cartDetail',
+  initialState,
+  reducers: {
+    cartDetails: (state, action) => {
+      state.value = action.payload;
+    },
   },
-  
-});
-export default CartReducer;
+})
+// Action creators are generated for each case reducer function
+export const {cartDetails} = CartReducer.actions;
+
+export default CartReducer.reducer;

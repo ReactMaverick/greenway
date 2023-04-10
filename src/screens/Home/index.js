@@ -34,7 +34,7 @@ function Home({ navigation }) {
                 <Fontisto name="search" color={BKColor.textColor1} size={fontSize.h3} style={styles.headerIcon.icon} />
                 </TouchableOpacity>
             </View>
-            <Slider navigation={navigation} />
+            {/* <Slider navigation={navigation} /> */}
             {/* <Banner navigation={navigation} /> */}
             <PopularProducts navigation={navigation} />
             {/* <Brands navigation={navigation} /> */}

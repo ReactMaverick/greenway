@@ -1,11 +1,22 @@
-import {createReducer} from '@reduxjs/toolkit';
-const couponDetailsState = {
-  couponDetails: null,
+import {createSlice} from '@reduxjs/toolkit';
+
+const initialState = {
+  value: null,
 };
- const CouponDetailsReducer = createReducer(couponDetailsState, {
-  setCouponDetails: (state, action) => {
-    state.couponDetails = action.payload;
+
+export const CouponDetailsReducer = createSlice({
+  name: 'couponDetail',
+  initialState,
+  reducers: {
+    couponData: (state, action) => {
+      state.value = action.payload;
+    },
+    logOut: state => {
+      state.value = null;
+    },
   },
-  
-});
-export default CouponDetailsReducer;
+})
+// Action creators are generated for each case reducer function
+export const {couponData, logOut} = CouponDetailsReducer.actions;
+
+export default CouponDetailsReducer.reducer;

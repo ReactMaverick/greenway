@@ -16,7 +16,7 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 function MyAccount({ navigation }) {
     const dispatch = useDispatch();
     const [updateData, setUpdateData] = useState([]);
-    // const userData = useSelector(state => state.userReducer.value);
+    const userData = useSelector(state => state.UserReducer.value);
     const [fullName, setFullName] = useState(userData.first_name);
     const [phoneNumber, setPhoneNumber] = useState(userData.phone);
     const [email, setEmail] = useState(userData.email);

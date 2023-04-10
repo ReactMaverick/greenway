@@ -1,11 +1,22 @@
-import {createReducer} from '@reduxjs/toolkit';
-const shopNowDataState = {
-  shopNowData: 0,
+import {createSlice} from '@reduxjs/toolkit';
+
+const initialState = {
+  value: null,
 };
- const ShopNowReducer = createReducer(shopNowDataState, {
-  setShopNowData: (state, action) => {
-    state.shopNowData = action.payload;
+
+export const ShopNowReducer = createSlice({
+  name: 'shopnowDetail',
+  initialState,
+  reducers: {
+    shopnowDetails: (state, action) => {
+      state.value = action.payload;
+    },
+    logOut: state => {
+      state.value = null;
+    },
   },
-  
-});
-export default ShopNowReducer;
+})
+// Action creators are generated for each case reducer function
+export const {shopnowDetails, logOut} = ShopNowReducer.actions;
+
+export default ShopNowReducer.reducer;

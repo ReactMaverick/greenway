@@ -90,9 +90,10 @@ function Login({ navigation }) {
             } else {
               setUsername('');
               setPassword('');
-              // console.log('UserData', response.userDetails[0])
-              dispatch({ type: 'setUserData', payload: response.userDetails[0] });
-              navigation.navigate('Home');
+              console.log('UserData', response.userDetails[0])
+              dispatch(userDetails(response.userDetails[0]));
+              // dispatch({ type: 'setUserData', payload: response.userDetails[0] });
+              // navigation.navigate('Home');
             }
           } else {
             if (response.error != undefined) {

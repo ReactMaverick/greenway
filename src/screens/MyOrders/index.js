@@ -18,7 +18,7 @@ import { useIsFocused } from '@react-navigation/native';
 function MyOrders({ navigation }) {
     const [orderData, setOrderData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    // const userData = useSelector(state => state.userReducer.value);
+    const userData = useSelector(state => state.UserReducer.value);
     // console.log('userData =>',userData)
     const isFocused = useIsFocused();
 

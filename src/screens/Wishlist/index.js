@@ -14,14 +14,15 @@ import { GetApiFetch, PostApiFetch } from "../../config/CommonFunction";
 import { useDispatch, useSelector } from "react-redux";
 import { showMessage, hideMessage } from "react-native-flash-message";
 import { addToCart } from "../../config/CommonFunction";
-
+import {wishlistDetails} from '../../redux/reducers/WishlistReducer';
 
 function Wishlist({ navigation }) {
     // const [wishlistData, setWishlistData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const dispatch = useDispatch();
     // const { wishlistData } = useSelector((state) => state.WishlistReducer);
-    // const userData = useSelector(state => state.userReducer.value);
+    const wishlistData = useSelector(state => state.WishlistReducer.value);
+    const userData = useSelector(state => state.UserReducer.value);
     // console.log('userData==>', userData)
 
     const _getWishlist = async () => {
@@ -38,15 +39,17 @@ function Wishlist({ navigation }) {
                     // console.log('result', response.result)
                     // setWishlistData(response.result);
                     if (response.result.length > 0) {
-                        dispatch({
-                            type: 'setWishlistData',
-                            payload: response.result
-                        });
+                        dispatch(wishlistDetails(response.result));
+                        // dispatch({
+                        //     type: 'setWishlistData',
+                        //     payload: response.result
+                        // });
                     } else {
-                        dispatch({
-                            type: 'setWishlistData',
-                            payload: null
-                        });
+                        dispatch(wishlistDetails());
+                        // dispatch({
+                        //     type: 'setWishlistData',
+                        //     payload: null
+                        // });
                     }
                 } else {
                     console.log('Something went wrong');
@@ -74,10 +77,12 @@ function Wishlist({ navigation }) {
                     if (response.status == true) {
                         if (response.wishlist_data.length > 0) {
 
-                            dispatch({
-                                type: 'setWishlistData',
-                                payload: response.wishlist_data
-                            });
+                            dispatch(wishlistDetails(response.wishlist_data));
+
+                            // dispatch({
+                            //     type: 'setWishlistData',
+                            //     payload: response.wishlist_data
+                            // });
 
                             // showMessage({
                             //     message: "Wishlist item deleted successfully",
@@ -85,10 +90,12 @@ function Wishlist({ navigation }) {
                             //     backgroundColor: "#808080",
                             // })
                         } else {
-                            dispatch({
-                                type: 'setWishlistData',
-                                payload: null
-                            });
+                            dispatch(wishlistDetails(response.wishlist_data));
+
+                            // dispatch({
+                            //     type: 'setWishlistData',
+                            //     payload: null
+                            // });
                         }
 
 
@@ -164,7 +171,7 @@ function Wishlist({ navigation }) {
                                                     // console.log("add to cart ==>>>", response.status, response)
                                                     if (status == 200) {
                                                         if (response.status === true) {
-                                                            dispatch({ type: 'setCartData', payload: response.cart })
+                                                            // dispatch({ type: 'setCartData', payload: response.cart })
                                                             _deleteWishlist(item);
                                                             showMessage({
                                                                 message: "This product is added to cart.",

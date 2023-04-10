@@ -12,19 +12,20 @@ import { addToCart, addToWishlist } from "../../../config/CommonFunction";
 import DeviceInfo from 'react-native-device-info';
 import { useSelector, useDispatch } from 'react-redux';
 import { showMessage, hideMessage } from "react-native-flash-message";
-
+import { wishlistDetails } from '../../../redux/reducers/WishlistReducer';
+import { cartDetails } from '../../../redux/reducers/CartReducer';
 
 // import { DOMParser } from "react-native-html-parser";
 
 function SingleProduct({ navigation, index, item }) {
- 
+    const dispatch = useDispatch();
     const [androidId, setAndroidId] = useState(true);
     // const userDetails = useSelector(state => state.userReducer.value);
-    const userDetail = useSelector(state => state.UserReducer.value);
-    console.log("userDetails",userDetail)
-    // const { wishlistData } = useSelector((state) => state.WishlistReducer);
-    // const { cartData } = useSelector((state) => state.CartReducer);
-    // const { sessionId } = useSelector((state) => state.SessionIdReducer);
+    const userData = useSelector(state => state.UserReducer.value);
+    // console.log("userData", userData)
+    const wishlistData = useSelector(state => state.WishlistReducer.value);
+    const cartData = useSelector(state => state.CartReducer.value);
+    // const sessionId = useSelector(state => state.SessionIdReducer.value);
     const regex = /(<([^>]+)>)/ig;
     // console.log('item', item);
 
@@ -46,13 +47,13 @@ function SingleProduct({ navigation, index, item }) {
             }
             )
         }}>
-            <View style={styles.singleProductContainer}>                
+            <View style={styles.singleProductContainer}>
                 <View style={(index + 1) % 2 == 0 ? styles.itemRight : styles.itemLeft}>
-                    <Text style={styles.wholeSaleprice}>10+Kg Wholesale Price<Text style={{ color: BKColor.textColor2,fontWeight:'700' }}> Rs.45</Text></Text>
-                    {/* {userDetails != null ? */}
-                        {/* <TouchableOpacity style={styles.wishlistIcon} onPress={() => {
-                            userDetails != null &&
-                                addToWishlist(userDetails.id, item.products_id, item.products_attributes_prices_id).then(([wishlistData]) => {
+                    <Text style={styles.wholeSaleprice}>10+Kg Wholesale Price<Text style={{ color: BKColor.textColor2, fontWeight: '700' }}> Rs.45</Text></Text>
+                    {userData != null ?
+                        <TouchableOpacity style={styles.wishlistIcon} onPress={() => {
+                            userData != null &&
+                                addToWishlist(userData.id, item.products_id, item.products_attributes_prices_id).then(([wishlistData]) => {
 
                                     if (wishlistData.result.success == 1) {
 
@@ -73,9 +74,11 @@ function SingleProduct({ navigation, index, item }) {
                                     }
 
                                     if (wishlistData.wishlist_data.length > 0) {
-                                        dispatch({ type: 'setWishlistData', payload: wishlistData.wishlist_data });
+                                        dispatch(wishlistDetails(wishlistData.wishlist_data));
+                                        // dispatch({ type: 'setWishlistData', payload: wishlistData.wishlist_data });
                                     } else {
-                                        dispatch({ type: 'setWishlistData', payload: null });
+                                        dispatch(wishlistDetails());
+                                        // dispatch({ type: 'setWishlistData', payload: null });
                                     }
 
                                 })
@@ -89,8 +92,8 @@ function SingleProduct({ navigation, index, item }) {
                         :
                         <TouchableOpacity style={styles.wishlistIcon} onPress={() => navigation.navigate('Login')}>
                             <AntDesign name="hearto" style={{ fontWeight: 'bold' }} color={BKColor.textColor2} size={fontSize.bh} />
-                        </TouchableOpacity> */}
-                    {/* } */}
+                        </TouchableOpacity>
+                    }
 
                     <Image
                         source={{ uri: item.image_path }}
@@ -108,16 +111,17 @@ function SingleProduct({ navigation, index, item }) {
                             <Text style={styles.itemPrice}>{item.discounted_price}</Text>
                             <Text style={styles.itemOldPrice}>{item.products_price}</Text>
                         </View>
-                        {/* <TouchableOpacity onPress={() => {
+                        <TouchableOpacity onPress={() => {
                             if (item.defaultStock > 0) {
-                                userDetails != null ?
-                                    addToCart(item.products_id, 1, userDetails.id, '', '', item.attributes_ids).then(([status, response]) => {
-                                        // console.log('cartData - ', response)
+                                userData != null ?
+                                    addToCart(item.products_id, 1, userData.id, '', '', item.attributes_ids).then(([status, response]) => {
+                                        console.log('cartData - ', response)
                                         if (status == 200) {
                                             if (response.status === true) {
+                                                dispatch(cartDetails(response.cart));
                                                 // dispatch({ type: 'setCartData', payload: response.cart })
                                                 // dispatch({ type: 'setCouponDetails', payload: null });
-                                                // console.log("this product is added")
+                                                console.log("this product is added")
                                                 showMessage({
                                                     message: "This product is added to cart.",
                                                     type: "info",
@@ -133,6 +137,7 @@ function SingleProduct({ navigation, index, item }) {
                                         console.log('cartData - ', response)
                                         if (status == 200) {
                                             if (response.status === true) {
+                                                dispatch(cartDetails(response.cart));
                                                 // dispatch({ type: 'setCartData', payload: response.cart })
                                                 console.log("this product is added")
 
@@ -164,7 +169,7 @@ function SingleProduct({ navigation, index, item }) {
                                 <AntDesign name="pluscircle" color={BKColor.textColor2} size={fontSize.h1} style={{ alignSelf: "flex-end", marginTop: -15 }} />
                             }
 
-                        </TouchableOpacity> */}
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>

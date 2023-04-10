@@ -1,20 +1,30 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import DeviceInfo from 'react-native-device-info';
 
-const generateId = async() =>  {
+const generateId = async () => {
   sessionId = null;
   DeviceInfo.getAndroidId().then((androidId) => {
     sessionId = androidId;
   });
   return sessionId;
 }
-const sessionIdState = {
-  sessionId: generateId(),
+const initialState = {
+  value: generateId(),
 };
-const SessionIdReducer = createReducer(sessionIdState, {
-  setSessionId: (state, action) => {
-    state.sessionId = action.payload;
-  },
 
-});
-export default SessionIdReducer;
+export const SessionIdReducer = createSlice({
+  name: 'sessionDetail',
+  initialState,
+  reducers: {
+    sessionDetails: (state, action) => {
+      state.value = action.payload;
+    },
+    logOut: state => {
+      state.value = null;
+    },
+  },
+})
+// Action creators are generated for each case reducer function
+export const { sessionDetails, logOut } = SessionIdReducer.actions;
+
+export default SessionIdReducer.reducer;

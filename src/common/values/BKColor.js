@@ -6,6 +6,7 @@ export const BKColor = {
   textColor3: '#C6C4C4',
   textColor4: '#828282',
   textColor5: '#1FAA59',
+  textColor6: '#EC1F25',
 
   iconBackground1: '#F9ECE9',
   btnBackgroundColor1: '#EC1F25',

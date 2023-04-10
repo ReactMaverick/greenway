@@ -12,12 +12,13 @@ import { DrawerActions } from '@react-navigation/native';
 import { useDrawerStatus } from '@react-navigation/drawer';
 import { useSelector, useDispatch } from "react-redux";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
-
+import {logOut} from '../../../redux/reducers/UserReducer';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 function SlideMenu({ navigation }) {
     const dispatch = useDispatch();
     // const userDetails = useSelector(state => state.userReducer.value);
+    const userData = useSelector(state => state.UserReducer.value);
     const isDrawerOpen = useDrawerStatus()
     const [isLogin, setIsLogin] = useState(false);
     useEffect(() => {
@@ -25,14 +26,14 @@ function SlideMenu({ navigation }) {
 
     return (
         <ScrollView style={styles.outerMenu}>
-            {/* {userDetails != null &&
+            {userData != null &&
                 <View style={styles.headerSection}>
                     <Image
                         source={require('../../../assets/images/header-logo.png')} resizeMode='cover'
                         style={styles.headerImage}
 
                     />
-                    <Text style={styles.headerText}>{userDetails.first_name}</Text>
+                    <Text style={styles.headerText}>{userData.first_name}</Text>
                 </View>
             }
             <TouchableOpacity onPress={() => {
@@ -42,7 +43,7 @@ function SlideMenu({ navigation }) {
                 <Entypo name="shop" style={styles.menuIcon} />
                 <Text style={styles.menuText}>Shop</Text>
             </TouchableOpacity>
-            {userDetails != null ?
+            {userData != null ?
                 <TouchableOpacity onPress={() => {
                     navigation.dispatch(DrawerActions.toggleDrawer())
                     navigation.navigate('Wishlist');
@@ -58,7 +59,7 @@ function SlideMenu({ navigation }) {
                     <MaterialCommunityIcons name="heart-plus-outline" style={styles.menuIcon} />
                     <Text style={styles.menuText}>Wishlist</Text>
                 </TouchableOpacity>
-            } */}
+            }
 
 
             <TouchableOpacity onPress={() => {
@@ -101,14 +102,15 @@ function SlideMenu({ navigation }) {
                 <Text style={styles.menuText}>Contact Us</Text>
             </TouchableOpacity>
 
-            {/* {userDetails != null ?
+            {userData != null ?
                 <TouchableOpacity onPress={() => {
                     navigation.dispatch(DrawerActions.toggleDrawer())
                     // dispatch({ type: 'setUserData', payload: null })
                     // dispatch({ type: 'setCartData', payload: null })
                     // dispatch({ type: 'setWishlistData', payload: null })
                     // dispatch({ type: 'setCouponDetails', payload: null })
-                    navigation.navigate('Login')
+                    // navigation.navigate('Login')
+                    dispatch(logOut());
 
                 }} style={styles.menuItem}>
                     <MaterialIcons name="logout" style={styles.menuIcon} />
@@ -122,7 +124,7 @@ function SlideMenu({ navigation }) {
                     <MaterialIcons name="logout" style={styles.menuIcon} />
                     <Text style={styles.menuText}>Log In</Text>
                 </TouchableOpacity>
-            } */}
+            }
 
 
         </ScrollView>

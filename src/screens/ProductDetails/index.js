@@ -16,11 +16,15 @@ import { addToCart, addToWishlist } from "../../config/CommonFunction";
 import { showMessage, hideMessage } from "react-native-flash-message";
 import { useSelector, useDispatch } from 'react-redux';
 import StarRating from 'react-native-star-rating';
-
+import { wishlistDetails } from '../../redux/reducers/WishlistReducer';
+import { cartDetails } from '../../redux/reducers/CartReducer';
+import { shopnowDetails } from '../../redux/reducers/ShopNowReducer';
 
 function ProductDetails({ navigation, route }) {
     const dispatch = useDispatch();
-    // const userData = useSelector(state => state.userReducer.value);
+    const userData = useSelector(state => state.UserReducer.value);
+    // const cartData = useSelector(state => state.CartReducer.value);
+    const wishlistData = useSelector(state => state.WishlistReducer.value);
     // const { wishlistData } = useSelector((state) => state.WishlistReducer);
     const [changeInCart, setChangeInCarts] = useState(false)
     const [productDetails, setProductDetails] = useState([])
@@ -118,8 +122,9 @@ function ProductDetails({ navigation, route }) {
                 // console.log('cartData - ', response)
                 if (status == 200) {
                     if (response.status === true) {
-                        dispatch({ type: 'setCartData', payload: response.cart })
-                        dispatch({ type: 'setShopNowData', payload: 1 });
+                        dispatch(cartDetails(response.cart));
+                        dispatch(shopnowDetails(1));
+                        // dispatch({ type: 'setShopNowData', payload: 1 });
                         showMessage({
                             message: "This product is added to cart.",
                             type: "info",
@@ -218,9 +223,9 @@ function ProductDetails({ navigation, route }) {
                                         }
 
                                         if (wishlistData.wishlist_data.length > 0) {
-                                            dispatch({ type: 'setWishlistData', payload: wishlistData.wishlist_data });
+                                            dispatch(wishlistDetails(wishlistData.wishlist_data));
                                         } else {
-                                            dispatch({ type: 'setWishlistData', payload: null });
+                                            dispatch(wishlistDetails());
                                         }
 
                                     })
@@ -243,7 +248,7 @@ function ProductDetails({ navigation, route }) {
 
                         </View>
                         {productDetails.attributes.map((item, key) => (
-                            <View key={key} style={{ flexDirection: 'row', alignItems: 'center', marginTop: wp('2%'),flexWrap:'wrap' }}>
+                            <View key={key} style={{ flexDirection: 'row', alignItems: 'center', marginTop: wp('2%'), flexWrap: 'wrap' }}>
                                 <Text style={[styles.productAttr, { marginTop: 0, marginRight: wp('2%') }]}>{item.option.name}</Text>
                                 {item.values.map((item2, key2) => (
                                     <TouchableOpacity key={key2} onPress={() => {
@@ -258,10 +263,10 @@ function ProductDetails({ navigation, route }) {
 
 
                         ))}
-                        
+
                     </View>
-                    <Text style={[styles.wholeSaleprice2, {marginTop:'3%'}]}>10+Kg Wholesale Price<Text style={{ color: BKColor.textColor2,fontWeight:'700' }}> Rs.200</Text></Text>
-                    <View style={styles.productPriceQtySec}>                                            
+                    <Text style={[styles.wholeSaleprice2, { marginTop: '3%' }]}>10+Kg Wholesale Price<Text style={{ color: BKColor.textColor2, fontWeight: '700' }}> Rs.200</Text></Text>
+                    <View style={styles.productPriceQtySec}>
                         <View style={styles.productPriceSec}>
                             <Text style={styles.productOldPrice}>Rs.{productDetails.products_price}</Text>
                             <Text style={styles.productPrice}>Rs.{productDetails.discounted_price}</Text>
@@ -372,10 +377,11 @@ function ProductDetails({ navigation, route }) {
                                                     userData != null ?
                                                         addToCart(productDetails.products_id, quantity, userData.id, '', '', productDetails.prod_attributeids).then(([status, response]) => {
                                                             setChangeInCarts(true)
-                                                            // console.log('cartData - ', response)
+                                                            console.log('cartData - ', response)
                                                             if (status == 200) {
                                                                 if (response.status === true) {
-                                                                    dispatch({ type: 'setCartData', payload: response.cart })
+                                                                    dispatch(cartDetails(response.cart));
+                                                                    // dispatch({ type: 'setCartData', payload: response.cart })
                                                                     // console.log("this product is added")
                                                                     showMessage({
                                                                         message: "This product is added to cart.",
@@ -397,7 +403,8 @@ function ProductDetails({ navigation, route }) {
                                                             setChangeInCarts(true)
                                                             if (status == 200) {
                                                                 if (response.status === true) {
-                                                                    dispatch({ type: 'setCartData', payload: response.cart })
+                                                                    dispatch(cartDetails(response.cart));
+                                                                    // dispatch({ type: 'setCartData', payload: response.cart })
                                                                     console.log("this product is added")
 
                                                                     showMessage({
