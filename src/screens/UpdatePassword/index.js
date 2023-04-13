@@ -74,7 +74,7 @@ function UpdatePassword({ navigation, route }) {
                         resizeMode:'cover'
                     }} />
                 </View>
-                <Text style={styles.loginLogoSection.text1}>Forget Password</Text>
+                <Text style={styles.loginLogoSection.text1}>Add New Password</Text>
             </View>
             <Text style={{ textAlign: "center", color: BKColor.textColor2 }} >{loginErrorMessage}</Text>
             <View style={inputContainer}>

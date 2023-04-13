@@ -80,9 +80,12 @@ function Login({ navigation }) {
       formData.append('user_name', username);
       formData.append('password', password);
       formData.append('session_id', androidId);
-
+      formData.append('fcmToken', "test-token");
+      formData.append('device_os', Platform.OS);
+      console.log('formData',formData);
       PostApiFetch(POST_SIGNIN_API, formData)
         .then(([status, response]) => {
+          console.log('response',response);
           if (status == 200) {
             // setIsLoading(true)
             if (response.status == false) {
@@ -92,13 +95,9 @@ function Login({ navigation }) {
               setPassword('');
               console.log('UserData', response.userDetails[0])
               dispatch(userDetails(response.userDetails[0]));
-              // dispatch({ type: 'setUserData', payload: response.userDetails[0] });
-              // navigation.navigate('Home');
             }
           } else {
-            if (response.error != undefined) {
-              setLoginErrorMessage(response.error);
-            }
+             console.log('Something went wrong');
           }
         })
         .catch(error => console.log(error))

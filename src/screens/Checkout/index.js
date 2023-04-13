@@ -26,7 +26,7 @@ function Checkout({ navigation }) {
     const dispatch = useDispatch();
     // const sessionId = useSelector(state => state.SessionIdReducer.value);
     // const { sessionId } = useSelector((state) => state.SessionIdReducer);
-    // const userData = useSelector(state => state.userReducer.value);
+    const userData = useSelector(state => state.UserReducer.value);
     const cartData = useSelector(state => state.CartReducer.value);
     const couponDetails = useSelector(state => state.CouponDetailsReducer.value);
     const selectedShippingAddress = useSelector(state => state.SelectedShippingAddressReducer.value);

@@ -149,7 +149,7 @@ function ProductList({ navigation, route }) {
                         <TouchableOpacity onPress={() => navigation.goBack()} >
                             <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
                         </TouchableOpacity>
-                        <Text style={pageHeader.text}>New Item</Text>
+                        <Text style={pageHeader.text}>Buy Items</Text>
                         <TouchableOpacity onPress={() => setModalVisible(true)} >
                             <Octicons name="filter" color={BKColor.textColor1} size={fontSize.h2} />
                         </TouchableOpacity>

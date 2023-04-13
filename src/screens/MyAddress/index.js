@@ -391,7 +391,7 @@ function MyAddress({ navigation }) {
     return (
       <View style={pageContainerStyle}>
         <View style={pageHeader}>
-          <TouchableOpacity onPress={() => navigation.navigate('MyProfile')}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Fontisto
               name="arrow-left-l"
               color={BKColor.textColor1}

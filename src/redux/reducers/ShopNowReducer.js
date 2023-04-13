@@ -10,13 +10,10 @@ export const ShopNowReducer = createSlice({
   reducers: {
     shopnowDetails: (state, action) => {
       state.value = action.payload;
-    },
-    logOut: state => {
-      state.value = null;
-    },
+    }
   },
 })
 // Action creators are generated for each case reducer function
-export const {shopnowDetails, logOut} = ShopNowReducer.actions;
+export const {shopnowDetails} = ShopNowReducer.actions;
 
 export default ShopNowReducer.reducer;

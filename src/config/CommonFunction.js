@@ -40,7 +40,6 @@ export const PostApiFetch = async (URL, formData) => {
   }
   // ========================================================
   export const addToCart = async (productsid, quantity, customersId, sessionId, shopNow, productAttriId) => {
-
     const formData = new FormData();
     formData.append('products_id', productsid);
     formData.append('quantity', quantity);
