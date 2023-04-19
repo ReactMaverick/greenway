@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, SafeAreaView } from 'react-native';
 import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { pageContainerStyle, pageHeader, inputLevel, inputBottomLevel, textInput, inputContainer, activeButton, fontSize } from "../../common/values/BKStyles";
 import { BKColor } from "../../common/values/BKColor";
+import CustomStatusBar from "../../common/components/statusbar";
 
 
 function ResetPassword({ navigation }) {
     //   useEffect(() => {}, [navigation]);
 
     return (
-        <View style={pageContainerStyle}>
+        <SafeAreaView style={pageContainerStyle}>
+            <CustomStatusBar/>
             <View style={pageHeader}>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
                     <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
@@ -43,7 +45,7 @@ function ResetPassword({ navigation }) {
                 </TouchableOpacity>
             </View>
 
-        </View>
+        </SafeAreaView>
     )
 
 }

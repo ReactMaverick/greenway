@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, TextInput, ScrollView, Image, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ScrollView, Image, SafeAreaView } from 'react-native';
 import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo'
@@ -10,6 +10,7 @@ import { POST_UPDATE_PASSWORD } from "../../config/ApiConfig";
 import { PostApiFetch } from "../../config/CommonFunction";
 import { showMessage, hideMessage } from "react-native-flash-message";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import CustomStatusBar from "../../common/components/statusbar";
 
 
 function UpdatePassword({ navigation, route }) {
@@ -64,7 +65,8 @@ function UpdatePassword({ navigation, route }) {
     // useEffect(() => { }, [navigation]);
 
     return (
-        <View style={pageContainerStyle}>
+        <SafeAreaView style={pageContainerStyle}>
+            <CustomStatusBar/>
             <View style={styles.loginLogoSection}>
                 <View style={styles.loginLogoSection.logo}>
                     <Image source={require('../../assets/images/header-logo.png')} style={{
@@ -132,7 +134,7 @@ function UpdatePassword({ navigation, route }) {
                 </TouchableOpacity>
 
             </View>
-        </View>
+        </SafeAreaView>
     )
 
 }

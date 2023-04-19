@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, TextInput, ScrollView, Image, ImageBackground, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView, ScrollView, Image, ImageBackground, ActivityIndicator } from 'react-native';
 import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -11,6 +11,7 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-nat
 import { inputContainer, textInput } from "../../common/values/BKStyles";
 import { GET_BLOG_LIST_API, IMAGE_BASE_PATH } from "../../config/ApiConfig";
 import { GetApiFetch, TrimString } from "../../config/CommonFunction";
+import CustomStatusBar from "../../common/components/statusbar";
 
 function Blogs({ navigation }) {
     const [blogData, setBlogData] = useState([]);
@@ -42,16 +43,18 @@ function Blogs({ navigation }) {
     if (isLoading) {
         return (
             <>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <CustomStatusBar/>
                     <ActivityIndicator size="large" color={BKColor.textColor2} />
-                </View>
+                </SafeAreaView>
             </>
         )
     } else {
 
         return (
 
-            <View style={pageContainerStyle}>
+            <SafeAreaView style={pageContainerStyle}>
+                <CustomStatusBar/>
                 <View style={pageHeader}>
                     <TouchableOpacity onPress={() => navigation.goBack()} >
                         <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
@@ -83,7 +86,7 @@ function Blogs({ navigation }) {
                     </View>
                 }
 
-            </View>
+            </SafeAreaView>
 
         )
     }

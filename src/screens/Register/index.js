@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  ActivityIndicator,
+  SafeAreaView,
 } from 'react-native';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -29,6 +29,7 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
+import CustomStatusBar from '../../common/components/statusbar';
 
 function Register({navigation}) {
   const [fullName, setFullName] = useState('');
@@ -88,6 +89,8 @@ function Register({navigation}) {
   //   useEffect(() => {}, [navigation]);
 
   return (
+    <SafeAreaView>
+      <CustomStatusBar/>
     <ScrollView style={pageContainerStyle}>
       {/* <View style={pageHeader}>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
@@ -200,6 +203,7 @@ function Register({navigation}) {
         </View>
       </View>
     </ScrollView>
+    </SafeAreaView>
   );
 }
 export default Register;

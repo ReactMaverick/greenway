@@ -7,6 +7,7 @@ import {
   ScrollView,
   Image,
   ActivityIndicator,
+  SafeAreaView
 } from 'react-native';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -36,6 +37,7 @@ import CartIcon from '../../assets/images/CartIcon';
 import {useIsFocused} from '@react-navigation/native';
 import {cartDetails} from '../../redux/reducers/CartReducer';
 import {couponData} from '../../redux/reducers/CouponDetailsReducer';
+import CustomStatusBar from '../../common/components/statusbar';
 
 function Cart({navigation, route}) {
   const routeParams = route.params != undefined ? route.params : "";
@@ -406,14 +408,16 @@ function Cart({navigation, route}) {
   if (isLoading) {
     return (
       <>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <SafeAreaView style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <CustomStatusBar/>
           <ActivityIndicator size="large" color={BKColor.textColor2} />
-        </View>
+        </SafeAreaView>
       </>
     );
   } else {
     return (
-      <View style={pageContainerStyle}>
+      <SafeAreaView style={pageContainerStyle}>
+        <CustomStatusBar/>
         <View style={pageHeader}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Fontisto
@@ -675,7 +679,7 @@ function Cart({navigation, route}) {
             </Text>
           </View>
         )}
-      </View>
+      </SafeAreaView>
     );
   }
 }

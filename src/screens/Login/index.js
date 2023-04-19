@@ -7,6 +7,10 @@ import {
   ScrollView,
   Image,
   ActivityIndicator,
+  SafeAreaView,
+  StatusBar,
+  statusBarStyle,
+  statusBarTransition
 } from 'react-native';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -37,6 +41,7 @@ import {
 } from 'react-native-responsive-screen';
 
 import {userDetails} from '../../redux/reducers/UserReducer';
+import CustomStatusBar from '../../common/components/statusbar';
 // import {
 //   GoogleSignin,
 //   statusCodes,
@@ -216,6 +221,8 @@ function Login({ navigation }) {
     );
   } else {
     return (
+      <SafeAreaView>
+         <CustomStatusBar/>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={pageContainerStyle}>
           <View style={styles.loginLogoSection}>
@@ -348,6 +355,7 @@ function Login({ navigation }) {
           </View>
         </View>
       </ScrollView>
+      </SafeAreaView>
     );
   }
 }

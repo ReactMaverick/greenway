@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, TextInput, ScrollView, Image, ImageBackground, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ScrollView, Image, SafeAreaView, ActivityIndicator } from 'react-native';
 import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -11,6 +11,7 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-nat
 import { inputContainer, textInput } from "../../common/values/BKStyles";
 import { GET_TERMS_AND_CONDITON_API } from "../../config/ApiConfig";
 import { GetApiFetch } from "../../config/CommonFunction";
+import CustomStatusBar from "../../common/components/statusbar";
 
 function TermsAndConditions({ navigation }) {
     const [termsAndConditions, setTermsAndConditions] = useState([]);
@@ -45,15 +46,17 @@ function TermsAndConditions({ navigation }) {
     if (isLoading) {
         return (
             <>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <CustomStatusBar/>
                     <ActivityIndicator size="large" color={BKColor.textColor2} />
-                </View>
+                </SafeAreaView>
             </>
         )
     } else {
         return (
 
-            <View style={pageContainerStyle}>
+            <SafeAreaView style={pageContainerStyle}>
+                <CustomStatusBar/>
                 <View style={pageHeader}>
                     <TouchableOpacity onPress={() => navigation.goBack()} >
                         <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
@@ -71,7 +74,7 @@ function TermsAndConditions({ navigation }) {
                     {/* <Text style={styles.aboutUsHeading}>Terms & Conditions What is Lorem Ipsum?</Text> */}
                     <Text style={styles.aboutUsDesc}>{termsAndConditions.cms_text != null ? (((termsAndConditions.cms_text).replace(regex, '')).replace(secondRegEx, '')).replace(ThirdRegEx, '') : ''}</Text>
                 </View>
-            </View>
+            </SafeAreaView>
 
         )
     }

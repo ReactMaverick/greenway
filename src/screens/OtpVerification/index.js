@@ -3,7 +3,7 @@ import {
   View,
   Text,
   TouchableOpacity,
-  TextInput,
+  SafeAreaView,
   ScrollView,
   Image,
 } from 'react-native';
@@ -26,6 +26,7 @@ import {POST_PROCESS_SIGNUP_API} from '../../config/ApiConfig';
 import {GetApiFetch, PostApiFetch} from '../../config/CommonFunction';
 import {useSelector, useDispatch} from 'react-redux';
 import {userDetails} from '../../redux/reducers/UserReducer';
+import CustomStatusBar from '../../common/components/statusbar';
 function OtpVerification({navigation, route}) {
   const dispatch = useDispatch();
   const [OTP, setOTP] = useState('');
@@ -68,42 +69,45 @@ function OtpVerification({navigation, route}) {
   //   useEffect(() => {}, [navigation]);
 
   return (
-    <ScrollView style={pageContainerStyle}>
-      <View style={styles.regContainer}>
-        <Text style={styles.regContainer.headerText}>
-          Entry Your 4 digit code
-        </Text>
-        <View style={styles.logoSection}>
-          {/* <Text>Phone Number</Text> */}
-
-          <Image
-            style={styles.logoSection.logoImage}
-            source={require('../../assets/images/OtpLogo.png')}
-            borderRadius={5}
-          />
-        </View>
-        <OTPTextInput
-          textInputStyle={styles.otpBoxStyle}
-          tintColor={BKColor.textColor2}
-          // inputCellLength={1}
-          // onChangeText={(value) => setOTP(value)}
-          handleTextChange={otpInput => setOTP(otpInput)}
-        />
-        <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
-          {errorMessage}
-        </Text>
-
-        <View style={styles.loginFooter}>
-          <Text style={styles.loginFooter.textLeft}>
-            Did you don’t get code?{' '}
+    <SafeAreaView>
+      <CustomStatusBar/>
+      <ScrollView style={pageContainerStyle}>
+        <View style={styles.regContainer}>
+          <Text style={styles.regContainer.headerText}>
+            Entry Your 4 digit code
           </Text>
-          <Text style={styles.loginFooter.textRight}>Resend</Text>
+          <View style={styles.logoSection}>
+            {/* <Text>Phone Number</Text> */}
+
+            <Image
+              style={styles.logoSection.logoImage}
+              source={require('../../assets/images/OtpLogo.png')}
+              borderRadius={5}
+            />
+          </View>
+          <OTPTextInput
+            textInputStyle={styles.otpBoxStyle}
+            tintColor={BKColor.textColor2}
+            // inputCellLength={1}
+            // onChangeText={(value) => setOTP(value)}
+            handleTextChange={otpInput => setOTP(otpInput)}
+          />
+          <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
+            {errorMessage}
+          </Text>
+
+          <View style={styles.loginFooter}>
+            <Text style={styles.loginFooter.textLeft}>
+              Did you don’t get code?{' '}
+            </Text>
+            <Text style={styles.loginFooter.textRight}>Resend</Text>
+          </View>
+          <TouchableOpacity style={activeButton.button} onPress={_checkOtp}>
+            <Text style={activeButton.text}>Verify</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={activeButton.button} onPress={_checkOtp}>
-          <Text style={activeButton.text}>Verify</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 export default OtpVerification;

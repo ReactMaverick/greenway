@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, TextInput, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ScrollView, ActivityIndicator,SafeAreaView } from 'react-native';
 import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -11,6 +11,7 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-nat
 import { GET_CONTACT_US_API, POST_CONTACT_US_MESSAGE_API } from "../../config/ApiConfig";
 import { GetApiFetch, PostApiFetch } from "../../config/CommonFunction";
 import { showMessage, hideMessage } from "react-native-flash-message";
+import CustomStatusBar from "../../common/components/statusbar";
 
 function ContactUs({ navigation }) {
     const [contactUs, setContactUs] = useState([]);
@@ -94,14 +95,16 @@ function ContactUs({ navigation }) {
     if (isLoading) {
         return (
             <>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <CustomStatusBar/>
                     <ActivityIndicator size="large" color={BKColor.textColor2} />
-                </View>
+                </SafeAreaView>
             </>
         )
     } else {
         return (
-            <View style={pageContainerStyle}>
+            <SafeAreaView style={pageContainerStyle}>
+                <CustomStatusBar/>
                 <View style={pageHeader}>
                     <TouchableOpacity onPress={() => navigation.goBack()} >
                         <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
@@ -187,7 +190,7 @@ function ContactUs({ navigation }) {
                         <Text style={activeButton.text} >Send</Text>
                     </TouchableOpacity>
                 </ScrollView>
-            </View>
+            </SafeAreaView>
         )
     }
 

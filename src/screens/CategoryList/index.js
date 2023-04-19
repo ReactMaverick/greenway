@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, TextInput, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
 import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -11,6 +11,7 @@ import { GET_ALL_CATEGORY_API, IMAGE_BASE_PATH } from "../../config/ApiConfig";
 import { GetApiFetch } from "../../config/CommonFunction";
 import { BKColor } from "../../common/values/BKColor";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
+import CustomStatusBar from "../../common/components/statusbar";
 
 function CategoryList({ navigation }) {
     const [popularCategory, setPopularCategory] = useState([]);
@@ -40,14 +41,16 @@ function CategoryList({ navigation }) {
     if (isLoading) {
         return (
             <>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <CustomStatusBar/>
                     <ActivityIndicator size="large" color={BKColor.textColor2} />
-                </View>
+                </SafeAreaView>
             </>
         )
     } else {
         return (
-            <View style={pageContainerStyle}>
+            <SafeAreaView style={pageContainerStyle}>
+                <CustomStatusBar/>
                     <View style={pageHeader}>
                         <TouchableOpacity onPress={() => navigation.goBack()} >
                             <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
@@ -65,7 +68,7 @@ function CategoryList({ navigation }) {
                         </View>
                     </ScrollView>
 
-            </View>
+            </SafeAreaView>
         )
     }
 
