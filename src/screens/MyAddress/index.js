@@ -473,7 +473,7 @@ function MyAddress({navigation}) {
             ) : (
               <View>
                 <Text style={{fontWeight: '600'}}>
-                  no billing address added
+                  No billing address added
                 </Text>
               </View>
             )}
@@ -557,7 +557,7 @@ function MyAddress({navigation}) {
             ) : (
               <View>
                 <Text style={{fontWeight: '600'}}>
-                  no shipping address added
+                  No shipping address added
                 </Text>
               </View>
             )}
