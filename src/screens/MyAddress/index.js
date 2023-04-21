@@ -472,7 +472,7 @@ function MyAddress({navigation}) {
             ) : (
               <View>
                 <Text style={{fontWeight: '600'}}>
-                  no billing address added
+                  No billing address added
                 </Text>
               </View>
             )}
@@ -556,7 +556,7 @@ function MyAddress({navigation}) {
             ) : (
               <View>
                 <Text style={{fontWeight: '600'}}>
-                  no shipping address added
+                  No shipping address added
                 </Text>
               </View>
             )}
@@ -593,7 +593,7 @@ function MyAddress({navigation}) {
               <View style={[inputContainer, {marginTop: hp('1%')}]}>
                 <Text style={inputLevel}>Full Name</Text>
                 <TextInput
-                  placeholder={'full name'}
+                  placeholder={'Full name'}
                   style={textInput}
                   key="fullname"
                   onChangeText={value => setAddName(value)}
@@ -614,7 +614,7 @@ function MyAddress({navigation}) {
               <View style={[inputContainer, {marginTop: hp('1%')}]}>
                 <Text style={inputLevel}>Email</Text>
                 <TextInput
-                  placeholder={'email'}
+                  placeholder={'Email'}
                   style={textInput}
                   key="email"
                   onChangeText={value => setAddEmail(value)}
@@ -630,7 +630,7 @@ function MyAddress({navigation}) {
               <View style={[inputContainer, {marginTop: hp('1%')}]}>
                 <Text style={inputLevel}>Mobile No</Text>
                 <TextInput
-                  placeholder={'mobile no'}
+                  placeholder={'Mobile Number'}
                   style={textInput}
                   key="mobileno"
                   onChangeText={value => setAddMobile(value)}
@@ -723,7 +723,7 @@ function MyAddress({navigation}) {
               <View style={[inputContainer, {marginTop: hp('1%')}]}>
                 <Text style={inputLevel}>City</Text>
                 <TextInput
-                  placeholder={'city'}
+                  placeholder={'City'}
                   style={textInput}
                   key="city"
                   onChangeText={value => setAddCity(value)}
