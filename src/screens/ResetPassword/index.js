@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, TextInput, SafeAreaView } from 'react-nat
 import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import { pageContainerStyle, pageHeader, inputLevel, inputBottomLevel, textInput, inputContainer, activeButton, fontSize } from "../../common/values/BKStyles";
+import { pageContainerStyle, pageHeader, inputLevel, inputBottomLevel, textInput, inputContainer, activeButton, fontSize,placeHolderColor } from "../../common/values/BKStyles";
 import { BKColor } from "../../common/values/BKColor";
 import CustomStatusBar from "../../common/components/statusbar";
 
@@ -31,6 +31,7 @@ function ResetPassword({ navigation }) {
                     <Text style={inputLevel}>Phone Number</Text>
                     <TextInput
                         placeholder={'phone number'}
+                        placeholderTextColor={placeHolderColor}
                         style={textInput}
                         key='phonenumber'
                     // secureTextEntry={passwordEye}

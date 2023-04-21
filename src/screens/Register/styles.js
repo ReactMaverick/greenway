@@ -67,5 +67,16 @@ export default StyleSheet.create({
             fontFamily: fontFamily.regular,
         },
     },
+    passwordFieldOuter: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderRadius: 13,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: '#DDDDDD',
+        paddingHorizontal: wp('2%'),
+        paddingVertical: hp('0.5%'),
+    }
 
 });

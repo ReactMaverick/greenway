@@ -4,7 +4,7 @@ import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo'
 import { pageContainerStyle } from "../../common/values/BKStyles";
-import { inputLevel, inputBottomLevel, textInput, inputContainer, activeButton, fontSize } from "../../common/values/BKStyles";
+import { inputLevel, inputBottomLevel, textInput, inputContainer, activeButton, fontSize, placeHolderColor } from "../../common/values/BKStyles";
 import { BKColor } from "../../common/values/BKColor";
 import { POST_UPDATE_PASSWORD } from "../../config/ApiConfig";
 import { PostApiFetch } from "../../config/CommonFunction";
@@ -29,7 +29,7 @@ function UpdatePassword({ navigation, route }) {
             setLoginErrorMessage("Password must be 8 character long");
         } else if (confirmPassword == '') {
             setLoginErrorMessage("Please enter Confirm Password");
-        }else if (newPassword != confirmPassword){
+        } else if (newPassword != confirmPassword) {
             setLoginErrorMessage("New password and Confirm Password must be same");
         } else {
             const formData = new FormData();
@@ -66,14 +66,14 @@ function UpdatePassword({ navigation, route }) {
 
     return (
         <SafeAreaView style={pageContainerStyle}>
-            <CustomStatusBar/>
+            <CustomStatusBar />
             <View style={styles.loginLogoSection}>
                 <View style={styles.loginLogoSection.logo}>
                     <Image source={require('../../assets/images/header-logo.png')} style={{
                         height: hp('14%'),
                         width: hp('14%'),
                         borderRadius: hp('7%'),
-                        resizeMode:'cover'
+                        resizeMode: 'cover'
                     }} />
                 </View>
                 <Text style={styles.loginLogoSection.text1}>Add New Password</Text>
@@ -82,45 +82,63 @@ function UpdatePassword({ navigation, route }) {
             <View style={inputContainer}>
 
                 <Text style={inputLevel}>New Password</Text>
-                <View style={[textInput, { paddingVertical: wp('0.5%'), paddingHorizontal: hp('1.5%') }]}>
+
+                <View style={styles.passwordFieldOuter}>
+
                     <TextInput
                         placeholder={'enter new password'}
-                        // style={textInput}
+                        style={textInput2}
+                        // key="email"
                         onChangeText={(value) => setNewPassword(value)}
                         value={newPassword}
                         secureTextEntry={passwordEye}
+                        placeholderTextColor={placeHolderColor}
+                        // onChangeText={(password) => setPassword(password)}
                         onFocus={() => {
                             setLoginErrorMessage('')
                         }}
                     />
-                    <TouchableOpacity onPress={()=>{
-                        setPasswordEye(!passwordEye); 
-                    }}>
-                        <Entypo name={passwordEye ? 'eye-with-line' : 'eye'} style={{ fontSize: 15 }} />
+                    <TouchableOpacity
+                        onPress={() => {
+                            setPasswordEye(!passwordEye);
+                        }}>
+                        <Entypo
+                            name={passwordEye ? 'eye-with-line' : 'eye'}
+                            style={{ fontSize: 20, marginRight: wp('3%'), color: BKColor.textColor1 }}
+                        />
                     </TouchableOpacity>
-                </View>
+                </View>                
 
             </View>
             <View style={inputContainer}>
 
                 <Text style={inputLevel}>Confirm Password</Text>
-                <View style={[textInput, { paddingVertical: wp('0.5%'), paddingHorizontal: hp('1.5%') }]}>
+                <View style={styles.passwordFieldOuter}>
+
                     <TextInput
                         placeholder={'enter confirm password'}
-                        // style={textInput}
+                        style={textInput2}
+                        // key="email"
                         onChangeText={(value) => setConfirmPassword(value)}
                         value={confirmPassword}
                         secureTextEntry={conPasswordEye}
+                        placeholderTextColor={placeHolderColor}
+                        // onChangeText={(password) => setPassword(password)}
                         onFocus={() => {
                             setLoginErrorMessage('')
                         }}
                     />
-                    <TouchableOpacity onPress={()=>{
-                        setConPasswordEye(!conPasswordEye); 
-                    }}>
-                        <Entypo name={conPasswordEye ? 'eye-with-line' : 'eye'} style={{ fontSize: 15 }} />
+                    <TouchableOpacity
+                        onPress={() => {
+                            setConPasswordEye(!conPasswordEye);
+                        }}>
+                        <Entypo
+                            name={passwordEye ? 'eye-with-line' : 'eye'}
+                            style={{ fontSize: 20, marginRight: wp('3%'), color: BKColor.textColor1 }}
+                        />
                     </TouchableOpacity>
                 </View>
+
 
             </View>
 

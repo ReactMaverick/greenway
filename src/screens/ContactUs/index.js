@@ -4,7 +4,7 @@ import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { pageContainerStyle, pageHeader } from "../../common/values/BKStyles";
+import { pageContainerStyle, pageHeader, placeHolderColor } from "../../common/values/BKStyles";
 import { inputLevel, inputBottomLevel, textInput, inputContainer, activeButton, fontSize } from "../../common/values/BKStyles";
 import { BKColor } from "../../common/values/BKColor";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
@@ -131,6 +131,7 @@ function ContactUs({ navigation }) {
                         <Text style={inputLevel}>Your Name *</Text>
                         <TextInput
                             placeholder={'Name'}
+                            placeholderTextColor={placeHolderColor}
                             style={textInput}
                             onChangeText={(value) => setName(value)}
                             value={name}
@@ -144,6 +145,7 @@ function ContactUs({ navigation }) {
                         <Text style={inputLevel}>Your Email *</Text>
                         <TextInput
                             placeholder={'Email'}
+                            placeholderTextColor={placeHolderColor}
                             style={textInput}
                             onChangeText={(value) => setEmail(value)}
                             value={email}
@@ -156,6 +158,7 @@ function ContactUs({ navigation }) {
                         <Text style={inputLevel}>Your Phone</Text>
                         <TextInput
                             placeholder={'Number'}
+                            placeholderTextColor={placeHolderColor}
                             style={textInput}
                             onChangeText={(value) => setPhone(value)}
                             value={phone}
@@ -168,6 +171,7 @@ function ContactUs({ navigation }) {
                         <Text style={inputLevel}>Subject *</Text>
                         <TextInput
                             placeholder={'Subject'}
+                            placeholderTextColor={placeHolderColor}
                             style={textInput}
                             onChangeText={(value) => setSubject(value)}
                             value={subject}
@@ -181,6 +185,7 @@ function ContactUs({ navigation }) {
                         <TextInput
                             multiline={true}
                             placeholder={'Message'}
+                            placeholderTextColor={placeHolderColor}
                             onChangeText={(value) => setMessage(value)}
                             value={message}
                             numberOfLines={10}

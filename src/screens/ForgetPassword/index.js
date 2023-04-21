@@ -18,6 +18,7 @@ import {
   inputContainer,
   activeButton,
   fontSize,
+  placeHolderColor
 } from '../../common/values/BKStyles';
 import {BKColor} from '../../common/values/BKColor';
 import {POST_SIGNIN_API, POST_FORGET_PASSWORD} from '../../config/ApiConfig';
@@ -95,6 +96,7 @@ function ForgetPassword({navigation}) {
         <Text style={inputLevel}>Email / Phone Number</Text>
         <TextInput
           placeholder={'enter email or phone number'}
+          placeholderTextColor={placeHolderColor}
           style={textInput}
           onChangeText={value => setEmailPhone(value)}
           value={emailPhone}

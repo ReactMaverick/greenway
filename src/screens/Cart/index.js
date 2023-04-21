@@ -21,7 +21,7 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import {inputContainer, textInput} from '../../common/values/BKStyles';
+import {inputContainer, textInput, placeHolderColor} from '../../common/values/BKStyles';
 import {
   GET_CART_API,
   IMAGE_BASE_PATH,
@@ -562,6 +562,7 @@ function Cart({navigation, route}) {
                   <View style={styles.inputContainerWidth}>
                     <TextInput
                       placeholder={'Entry Voucher Code'}
+                      placeholderTextColor={placeHolderColor}
                       style={textInput}
                       onChangeText={value => setCoupon(value)}
                       value={coupon}

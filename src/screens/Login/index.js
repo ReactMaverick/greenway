@@ -24,6 +24,8 @@ import {
   inputContainer,
   activeButton,
   fontSize,
+  placeHolderColor,
+  fontFamily
 } from '../../common/values/BKStyles';
 import { BKColor } from '../../common/values/BKColor';
 import {
@@ -243,6 +245,7 @@ function Login({ navigation }) {
             <Text style={inputLevel}>User Name</Text>
             <TextInput
               placeholder={'Username'}
+              placeholderTextColor={placeHolderColor}
               style={textInput}
               onChangeText={value => setUsername(value)}
               value={username}
@@ -259,11 +262,13 @@ function Login({ navigation }) {
             <View
               style={[
                 textInput,
-                { paddingVertical: wp('0.5%'), paddingHorizontal: hp('1.5%') },
+                { paddingHorizontal: wp('2%'), paddingVertical: hp('0.5%') },
               ]}>
               <TextInput
                 placeholder={'Password'}
-                style={{ width: '90%' }}
+                placeholderTextColor={placeHolderColor}
+                style={{ width: '90%',fontFamily: fontFamily.regular,
+                fontSize: fontSize.h3, }}
                 secureTextEntry={passwordEye}
                 onChangeText={value => setPassword(value)}
                 value={password}
@@ -279,7 +284,7 @@ function Login({ navigation }) {
                 {/* <Text>Show</Text> */}
                 <Entypo
                   name={passwordEye ? 'eye-with-line' : 'eye'}
-                  style={{ fontSize: 15 }}
+                  style={{ fontSize: 20,color:BKColor.textColor1 }}
                 />
               </TouchableOpacity>
             </View>

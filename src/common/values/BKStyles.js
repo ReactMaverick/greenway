@@ -53,6 +53,14 @@ export const pageContainerStyle = {
   backgroundColor: '#FFFFFF',
   height: hp('100%')
 };
+export const pageContainerStyle2 = {
+  // marginHorizontal: wp("3%"),
+  // marginVertical: hp("1%"),
+  // flex: 1,
+  paddingHorizontal: wp('4.5%'),
+  backgroundColor: '#FFFFFF',
+  height: '100%'
+};
 
 //Global padding
 export const gPadding = wp('3.5%');
@@ -105,20 +113,27 @@ export const inputContainer = {
 };
 export const textInput = {
   color: BKColor.textColor1,
-  // placeHolderColor: BKColor.textColor3,
+  // placeHolderColor: BKColor.textColor1,
   fontFamily: fontFamily.regular,
   fontSize: fontSize.h3,
-  width: '100%',
+  // width: '100%',
   // backgroundColor: BKColor.textboxBackground,
   borderRadius: 13,
   borderStyle: 'solid',
   borderWidth: 1,
   borderColor: '#DDDDDD',
   padding: hp('1.5%'),
-
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignItems: 'center'
+};
+export const textInput2 = {
+  color: BKColor.textColor1,
+  // placeHolderColor: BKColor.textColor3,
+  fontFamily: fontFamily.regular,
+  fontSize: fontSize.h3,
+  width: '88%',
+  // backgroundColor: BKColor.textColor2,
 };
 export const inputLevel = {
   marginTop: 10,

@@ -23,6 +23,7 @@ import {
   activeButton,
   fontSize,
   Button,
+  placeHolderColor
 } from '../../common/values/BKStyles';
 import {BKColor} from '../../common/values/BKColor';
 import {
@@ -594,6 +595,7 @@ function MyAddress({navigation}) {
                 <Text style={inputLevel}>Full Name</Text>
                 <TextInput
                   placeholder={'full name'}
+                  placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="fullname"
                   onChangeText={value => setAddName(value)}
@@ -615,6 +617,7 @@ function MyAddress({navigation}) {
                 <Text style={inputLevel}>Email</Text>
                 <TextInput
                   placeholder={'email'}
+                  placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="email"
                   onChangeText={value => setAddEmail(value)}
@@ -631,6 +634,7 @@ function MyAddress({navigation}) {
                 <Text style={inputLevel}>Mobile No</Text>
                 <TextInput
                   placeholder={'mobile no'}
+                  placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="mobileno"
                   onChangeText={value => setAddMobile(value)}
@@ -647,6 +651,7 @@ function MyAddress({navigation}) {
                 <Text style={inputLevel}>Street / Village Name</Text>
                 <TextInput
                   placeholder={'Street name'}
+                  placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="streetname"
                   onChangeText={value => setAddVillageName(value)}
@@ -669,6 +674,7 @@ function MyAddress({navigation}) {
                   ]}
                   // style={textInput}
                   placeholder={!isFocus ? 'Select State' : ''}
+                  placeholderTextColor={placeHolderColor}
                   onFocus={() => setIsFocus(true)}
                   onBlur={() => setIsFocus(false)}
                   value={addState}
@@ -706,6 +712,7 @@ function MyAddress({navigation}) {
                   ]}
                   // style={textInput}
                   placeholder={!isDistrictFocus ? 'Select District' : ''}
+                  placeholderTextColor={placeHolderColor}
                   onFocus={() => setIsDistrictFocus(true)}
                   onBlur={() => setIsDistrictFocus(false)}
                   value={addDistrict}
@@ -724,6 +731,7 @@ function MyAddress({navigation}) {
                 <Text style={inputLevel}>City</Text>
                 <TextInput
                   placeholder={'city'}
+                  placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="city"
                   onChangeText={value => setAddCity(value)}
@@ -741,6 +749,7 @@ function MyAddress({navigation}) {
 
                 <TextInput
                   placeholder={'Search pincode'}
+                  placeholderTextColor={placeHolderColor}
                   style={textInput}
                   onChangeText={value => {
                     // setZipCodeInput(value);
@@ -819,6 +828,7 @@ function MyAddress({navigation}) {
                 <Text style={inputLevel}>Full Name</Text>
                 <TextInput
                   placeholder={'full name'}
+                  placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="fullname"
                   onChangeText={value => setEditName(value)}
@@ -829,6 +839,7 @@ function MyAddress({navigation}) {
                 <Text style={inputLevel}>Email</Text>
                 <TextInput
                   placeholder={'email'}
+                  placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="email"
                   onChangeText={value => setEditEmail(value)}
@@ -839,6 +850,7 @@ function MyAddress({navigation}) {
                 <Text style={inputLevel}>Mobile No</Text>
                 <TextInput
                   placeholder={'mobile no'}
+                  placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="mobileno"
                   onChangeText={value => setEditMobile(value)}
@@ -849,6 +861,7 @@ function MyAddress({navigation}) {
                 <Text style={inputLevel}>Street / Village Name</Text>
                 <TextInput
                   placeholder={'Street name'}
+                  placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="streetname"
                   onChangeText={value => setEditVillageName(value)}
@@ -872,6 +885,7 @@ function MyAddress({navigation}) {
                   ]}
                   // style={textInput}
                   placeholder={!isFocus ? 'Select State' : ''}
+                  placeholderTextColor={placeHolderColor}
                   onFocus={() => setIsFocus(true)}
                   onBlur={() => setIsFocus(false)}
                   value={editState}
@@ -905,6 +919,7 @@ function MyAddress({navigation}) {
                   ]}
                   // style={textInput}
                   placeholder={!isDistrictFocus ? 'Select District' : ''}
+                  placeholderTextColor={placeHolderColor}
                   onFocus={() => setIsDistrictFocus(true)}
                   onBlur={() => setIsDistrictFocus(false)}
                   value={editDistrict}
@@ -923,6 +938,7 @@ function MyAddress({navigation}) {
                 <Text style={inputLevel}>City</Text>
                 <TextInput
                   placeholder={'city'}
+                  placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="city"
                   onChangeText={value => setEditCity(value)}
@@ -959,6 +975,7 @@ function MyAddress({navigation}) {
                 /> */}
                 <TextInput
                   placeholder={'Search pincode'}
+                  placeholderTextColor={placeHolderColor}
                   style={textInput}
                   onChangeText={value => {
                     // setZipCodeInput(value);

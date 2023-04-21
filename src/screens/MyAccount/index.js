@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -20,19 +20,20 @@ import {
   inputContainer,
   activeButton,
   fontSize,
+  placeHolderColor
 } from '../../common/values/BKStyles';
-import {BKColor} from '../../common/values/BKColor';
-import {POST_ACCOUNT_UPDATE_API} from '../../config/ApiConfig';
-import {PostApiFetch} from '../../config/CommonFunction';
-import {showMessage, hideMessage} from 'react-native-flash-message';
-import {useSelector, useDispatch} from 'react-redux';
+import { BKColor } from '../../common/values/BKColor';
+import { POST_ACCOUNT_UPDATE_API } from '../../config/ApiConfig';
+import { PostApiFetch } from '../../config/CommonFunction';
+import { showMessage, hideMessage } from 'react-native-flash-message';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import CustomStatusBar from '../../common/components/statusbar';
 
-function MyAccount({navigation}) {
+function MyAccount({ navigation }) {
   const dispatch = useDispatch();
   const [updateData, setUpdateData] = useState([]);
   const userData = useSelector(state => state.UserReducer.value);
@@ -115,7 +116,7 @@ function MyAccount({navigation}) {
             console.log('response==>', response);
             console.log('profile update successfully');
             if (response.status == true) {
-              dispatch({type: 'setUserData', payload: response.user_details});
+              dispatch({ type: 'setUserData', payload: response.user_details });
 
               showMessage({
                 message: 'profile update successfully',
@@ -149,7 +150,7 @@ function MyAccount({navigation}) {
 
   return (
     <SafeAreaView>
-        <CustomStatusBar/>
+      <CustomStatusBar />
       <ScrollView style={pageContainerStyle}>
         {/* <View style={pageHeader}>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
@@ -174,45 +175,48 @@ function MyAccount({navigation}) {
             <Text style={inputLevel}>Name</Text>
             <TextInput
               placeholder={'full name'}
+              placeholderTextColor={placeHolderColor}
               style={textInput}
               key="fullname"
               onChangeText={value => setFullName(value)}
               value={fullName}
-              // secureTextEntry={passwordEye}
-              // onChangeText={(password) => setPassword(password)}
-              // onFocus={() => {
-              //   setErrorMessage('')
-              // }}
+            // secureTextEntry={passwordEye}
+            // onChangeText={(password) => setPassword(password)}
+            // onFocus={() => {
+            //   setErrorMessage('')
+            // }}
             />
           </View>
           <View style={inputContainer}>
             <Text style={inputLevel}>Email</Text>
             <TextInput
               placeholder={'email'}
+              placeholderTextColor={placeHolderColor}
               style={textInput}
               key="email"
               value={email}
 
-              // secureTextEntry={passwordEye}
-              // onChangeText={(password) => setPassword(password)}
-              // onFocus={() => {
-              //   setErrorMessage('')
-              // }}
+            // secureTextEntry={passwordEye}
+            // onChangeText={(password) => setPassword(password)}
+            // onFocus={() => {
+            //   setErrorMessage('')
+            // }}
             />
           </View>
           <View style={inputContainer}>
             <Text style={inputLevel}>Phone Number</Text>
             <TextInput
               placeholder={'phone number'}
+              placeholderTextColor={placeHolderColor}
               style={textInput}
               key="phonenumber"
               value={phoneNumber}
 
-              // secureTextEntry={passwordEye}
-              // onChangeText={(password) => setPassword(password)}
-              // onFocus={() => {
-              //   setErrorMessage('')
-              // }}
+            // secureTextEntry={passwordEye}
+            // onChangeText={(password) => setPassword(password)}
+            // onFocus={() => {
+            //   setErrorMessage('')
+            // }}
             />
           </View>
           <View style={inputContainer}>
@@ -223,32 +227,30 @@ function MyAccount({navigation}) {
               key="password"
               onChangeText={password => setCurrentPassword(password)}
               value={currentPassword}
-              // secureTextEntry={passwordEye}
-              // onChangeText={(password) => setPassword(password)}
-              // onFocus={() => {
-              //   setErrorMessage('')
-              // }}
+            // secureTextEntry={passwordEye}
+            // onChangeText={(password) => setPassword(password)}
+            // onFocus={() => {
+            //   setErrorMessage('')
+            // }}
             />
           </View>
           <View style={inputContainer}>
             <Text style={inputLevel}>New Password</Text>
-            <View
-              style={[
-                textInput,
-                {paddingVertical: wp('0.5%'), paddingHorizontal: hp('1.5%')},
-              ]}>
+
+            <View style={styles.passwordFieldOuter}>
+
               <TextInput
                 placeholder={'new password'}
-                // style={textInput}
+                style={textInput2}
                 key="password"
                 onChangeText={password => setNewPassword(password)}
                 value={newPassword}
                 secureTextEntry={passwordEye}
-                // secureTextEntry={passwordEye}
-                // onChangeText={(password) => setPassword(password)}
-                // onFocus={() => {
-                //   setErrorMessage('')
-                // }}
+                placeholderTextColor={placeHolderColor}
+              // onChangeText={(password) => setPassword(password)}
+              // onFocus={() => {
+              //   setRegErrorMessage('');
+              // }}
               />
               <TouchableOpacity
                 onPress={() => {
@@ -256,41 +258,42 @@ function MyAccount({navigation}) {
                 }}>
                 <Entypo
                   name={passwordEye ? 'eye-with-line' : 'eye'}
-                  style={{fontSize: 15}}
+                  style={{ fontSize: 20, marginRight: wp('3%'), color: BKColor.textColor1 }}
                 />
               </TouchableOpacity>
             </View>
+
           </View>
           <View style={inputContainer}>
             <Text style={inputLevel}>Confirm Password</Text>
-            <View
-              style={[
-                textInput,
-                {paddingVertical: wp('0.5%'), paddingHorizontal: hp('1.5%')},
-              ]}>
+
+            <View style={styles.passwordFieldOuter}>
+
               <TextInput
                 placeholder={'confirm password'}
-                // style={textInput}
+                style={textInput2}
                 key="password"
                 onChangeText={password => setConfirmPassword(password)}
                 value={confirmPassword}
                 secureTextEntry={conPasswordEye}
-                // secureTextEntry={passwordEye}
-                // onChangeText={(password) => setPassword(password)}
-                // onFocus={() => {
-                //   setErrorMessage('')
-                // }}
+                placeholderTextColor={placeHolderColor}
+              // onChangeText={(password) => setPassword(password)}
+              // onFocus={() => {
+              //   setRegErrorMessage('');
+              // }}
               />
               <TouchableOpacity
                 onPress={() => {
                   setConPasswordEye(!conPasswordEye);
                 }}>
                 <Entypo
-                  name={conPasswordEye ? 'eye-with-line' : 'eye'}
-                  style={{fontSize: 15}}
+                  name={passwordEye ? 'eye-with-line' : 'eye'}
+                  style={{ fontSize: 20, marginRight: wp('3%'), color: BKColor.textColor1 }}
                 />
               </TouchableOpacity>
             </View>
+
+
           </View>
           <View style={styles.regBtmSection}>
             {/* <Text style={styles.regBtmSection.text1}>Update</Text> */}
