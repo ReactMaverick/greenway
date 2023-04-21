@@ -234,7 +234,7 @@ function Login({ navigation }) {
               />
             </View>
             <Text style={styles.loginLogoSection.text1}>Welcome to our</Text>
-            <Text style={styles.loginLogoSection.text2}>Greenway app</Text>
+            <Text style={styles.loginLogoSection.text2}>Greenway shop</Text>
           </View>
           <Text style={{ textAlign: 'center', color: BKColor.textColor2 }}>
             {loginErrorMessage}
@@ -262,7 +262,7 @@ function Login({ navigation }) {
                 { paddingVertical: wp('0.5%'), paddingHorizontal: hp('1.5%') },
               ]}>
               <TextInput
-                placeholder={'password'}
+                placeholder={'Password'}
                 style={{ width: '90%' }}
                 secureTextEntry={passwordEye}
                 onChangeText={value => setPassword(value)}
@@ -286,7 +286,7 @@ function Login({ navigation }) {
 
             <TouchableOpacity
               onPress={() => navigation.navigate('ForgetPassword')}>
-              <Text style={inputBottomLevel}>Forget Password?</Text>
+              <Text style={inputBottomLevel}>Forgot Password?</Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={activeButton.button} onPress={_signIn}>

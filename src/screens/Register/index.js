@@ -111,7 +111,7 @@ function Register({navigation}) {
         <View style={inputContainer}>
           <Text style={inputLevel}>Name</Text>
           <TextInput
-            placeholder={'full name'}
+            placeholder={'Full Name'}
             style={textInput}
             key="fullname"
             onChangeText={value => setFullName(value)}
@@ -126,7 +126,7 @@ function Register({navigation}) {
         <View style={inputContainer}>
           <Text style={inputLevel}>Email</Text>
           <TextInput
-            placeholder={'email'}
+            placeholder={'Email'}
             style={textInput}
             key="email"
             onChangeText={value => setRegEmail(value)}
@@ -141,9 +141,9 @@ function Register({navigation}) {
         <View style={inputContainer}>
           <Text style={inputLevel}>Phone Number</Text>
           <TextInput
-            placeholder={'phone number'}
+            placeholder={'Phone Number'}
             style={textInput}
-            key="phonenumber"
+            key="Phone Number"
             keyboardType="numeric"
             maxLength={10}
             onChangeText={value => setRegPhoneNumber(value)}
@@ -163,7 +163,7 @@ function Register({navigation}) {
               {paddingVertical: wp('0.5%'), paddingHorizontal: hp('1.5%')},
             ]}>
             <TextInput
-              placeholder={'password'}
+              placeholder={'Password'}
               // style={textInput}
               key="password"
               onChangeText={value => setRegPassword(value)}
