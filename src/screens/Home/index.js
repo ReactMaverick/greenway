@@ -66,7 +66,7 @@ function Home({navigation}) {
             />
           </TouchableOpacity>
         </View>
-        {/* <Slider navigation={navigation} /> */}
+        <Slider navigation={navigation} />
         {/* <Banner navigation={navigation} /> */}
         <PopularProducts navigation={navigation} />
         {/* <Brands navigation={navigation} /> */}
