@@ -5,7 +5,7 @@ import { BKColor } from '../../values/BKColor';
 
 export default StyleSheet.create({
     singleCategoryContainer: {
-        width: wp('40%'),
+        width: wp('35%'),
         // height: wp('45.5%'),
         justifyContent: 'center',
         alignItems: 'center',
@@ -14,7 +14,7 @@ export default StyleSheet.create({
         itemImage: {
             width: wp('30%'),
             height: wp('30%'),
-            // borderRadius: wp('12%'),
+            borderRadius: 100,
         },
         itemText: {
             fontSize: fontSize.h3,
@@ -22,14 +22,15 @@ export default StyleSheet.create({
             fontWeight: '700',
             textAlign: 'center',
             marginTop: 10,
+            color: BKColor.textColor2
         },
     },
     categoryContainerSec: {
         width: '100%',
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderColor: '#DDDDDD',
-        borderRadius:20,
+        // borderStyle: 'solid',
+        // borderWidth: 1,
+        // borderColor: '#DDDDDD',
+        // borderRadius:20,
         // marginLeft: '5%',
         justifyContent: 'center',
         alignItems: 'center',
