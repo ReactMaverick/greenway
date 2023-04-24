@@ -95,7 +95,7 @@ function ForgetPassword({navigation}) {
       <View style={inputContainer}>
         <Text style={inputLevel}>Email / Phone Number</Text>
         <TextInput
-          placeholder={'enter email or phone number'}
+          placeholder={'Enter email or phone number'}
           placeholderTextColor={placeHolderColor}
           style={textInput}
           onChangeText={value => setEmailPhone(value)}
