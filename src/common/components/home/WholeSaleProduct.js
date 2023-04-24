@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import DeviceInfo from 'react-native-device-info';
 
 
-function PopularProducts({ navigation }) {
+function WholeSaleProduct({ navigation }) {
     const [allPopularProducts, setAllPopularProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [type, setType] = useState(null);
@@ -25,12 +25,12 @@ function PopularProducts({ navigation }) {
         const formData = new FormData();
         formData.append('session_id', androidId);
         // formData.append('type', 'topseller');
-        formData.append('type', 'popular_product');
+        formData.append('type', 'whole_sale');
 
         PostApiFetch(POST_SHOP_PAGE_API, formData)
             .then(([status, response]) => {
                 if (status == 200) {
-                    // console.log('_getAllPopularProducts', response.products.product_data);
+                    // console.log('_getAllAttractivePrice==>', response.products.product_data);
                     setAllPopularProducts(response.products.product_data)
 
                 } else {
@@ -59,11 +59,11 @@ function PopularProducts({ navigation }) {
                 {allPopularProducts.length > 0 &&
                     <>
                         <View style={boxHeader1}>
-                            <Text style={boxHeader1.text}>Popular products</Text>
+                            <Text style={boxHeader1.text}>Attractive Price</Text>
                             <TouchableOpacity onPress={() =>
                                 navigation.navigate('ProductList',
                                 {
-                                    productType: 'popular_product'
+                                    productType: 'whole_sale'
                                 })
                             }>
                                 <Text style={boxHeader1.text}>View All</Text>
@@ -89,4 +89,4 @@ function PopularProducts({ navigation }) {
 
 
 }
-export default PopularProducts;
+export default WholeSaleProduct;

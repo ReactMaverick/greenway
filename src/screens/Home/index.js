@@ -22,6 +22,7 @@ import {
 import {BKColor} from '../../common/values/BKColor';
 // components
 import PopularProducts from '../../common/components/home/PopularProducts';
+import WholeSaleProduct from '../../common/components/home/WholeSaleProduct';
 import Slider from '../../common/components/home/Slider';
 import Banner from '../../common/components/home/Banner';
 import Brands from '../../common/components/home/Brands';
@@ -68,14 +69,10 @@ function Home({navigation}) {
         </View>
 
 
-<View>
-  <Text style={{ color: BKColor.textColor2 }}>gjgjhg</Text>
-</View>
-
-
         <Slider navigation={navigation} />
         {/* <Banner navigation={navigation} /> */}
         <PopularProducts navigation={navigation} />
+        <WholeSaleProduct navigation={navigation} />
         {/* <Brands navigation={navigation} /> */}
         <PopularCategory navigation={navigation} />
         {/* <ShippingArea navigation={navigation} /> */}
