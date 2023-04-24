@@ -66,6 +66,13 @@ function Home({navigation}) {
             />
           </TouchableOpacity>
         </View>
+
+
+<View>
+  <Text style={{ color: BKColor.textColor2 }}>gjgjhg</Text>
+</View>
+
+
         <Slider navigation={navigation} />
         {/* <Banner navigation={navigation} /> */}
         <PopularProducts navigation={navigation} />
@@ -74,6 +81,10 @@ function Home({navigation}) {
         {/* <ShippingArea navigation={navigation} /> */}
 
         {/* <GiftsArea navigation={navigation} /> */}
+
+
+
+
       </ScrollView>
     </SafeAreaView>
   );

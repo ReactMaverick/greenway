@@ -268,7 +268,7 @@ function Login({ navigation }) {
                 placeholder={'Password'}
                 placeholderTextColor={placeHolderColor}
                 style={{ width: '90%',fontFamily: fontFamily.regular,
-                fontSize: fontSize.h3, }}
+                fontSize: fontSize.h3,color: BKColor.textColor1 }}
                 secureTextEntry={passwordEye}
                 onChangeText={value => setPassword(value)}
                 value={password}
