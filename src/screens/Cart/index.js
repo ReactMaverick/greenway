@@ -463,7 +463,7 @@ function Cart({navigation, route}) {
                   </View>
                   <View style={styles.cartDecAttriSec}>
                     <Text style={{color: BKColor.textColor2}}>
-                      {item.attributes[0].product_option_slug} :{' '}
+                      {/* {item.attributes[0].product_option_slug} :{' '} */}
                     </Text>
                     <Text>{item.attributes[0].attribute_value}</Text>
                   </View>

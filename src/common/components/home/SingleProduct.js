@@ -27,7 +27,7 @@ function SingleProduct({ navigation, index, item }) {
     const cartData = useSelector(state => state.CartReducer.value);
     // const sessionId = useSelector(state => state.SessionIdReducer.value);
     const regex = /(<([^>]+)>)/ig;
-    console.log('item', item);
+    // console.log('item', item);
 
     useEffect(() => {
         DeviceInfo.getAndroidId().then((androidId) => {
@@ -50,7 +50,7 @@ function SingleProduct({ navigation, index, item }) {
             <View style={styles.singleProductContainer}>
                 <View style={(index + 1) % 2 == 0 ? styles.itemRight : styles.itemLeft}>
                     {item.wholesale_check != null ?
-                    <Text style={styles.wholeSaleprice}>10+Kg Wholesale Price<Text style={{ color: BKColor.textColor2, fontWeight: '700' }}> Rs.{item.wholesale_check.attr_selling_price}</Text></Text>
+                    <Text style={styles.wholeSaleprice}>{item.attributes[0].values.map((attributesData,key)=>(attributesData.products_attributes_id == item.wholesale_check.attributes_ids ? attributesData.value +" "+"Wholesale Price" : <></>))}<Text style={{ color: BKColor.textColor2, fontWeight: '700' }}> Rs.{item.wholesale_check.attr_selling_price}</Text></Text>
                     :
                     <></>
                     }

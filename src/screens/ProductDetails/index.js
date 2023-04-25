@@ -55,7 +55,7 @@ function ProductDetails({navigation, route}) {
   const [changeInCart, setChangeInCarts] = useState(false);
   const [productDetails, setProductDetails] = useState([]);
   // const { productsSlug } = route.params;
-
+   
   const [productsSlug, setProductsSlug] = useState(route.params.productsSlug);
   const [productsAttributes, setProductsAttributes] = useState(
     route.params.productsAttributes,
@@ -337,7 +337,7 @@ function ProductDetails({navigation, route}) {
                     styles.productAttr,
                     {marginTop: 0, marginRight: wp('2%')},
                   ]}>
-                  {item.option.name}
+                  {/* {item.option.name} */}
                 </Text>
                 {item.values.map((item2, key2) => (
                   <TouchableOpacity
@@ -365,13 +365,17 @@ function ProductDetails({navigation, route}) {
               </View>
             ))}
           </View>
+          {productDetails.wholesale_check != null ?
           <Text style={[styles.wholeSaleprice2, {marginTop: '3%'}]}>
-            10+Kg Wholesale Price
+            {productDetails.attributes[0].values.map((attributesData,key)=>(attributesData.products_attributes_id == productDetails.wholesale_check.attributes_ids ? attributesData.value +" "+"Wholesale Price" : <></>))}
             <Text style={{color: BKColor.textColor2, fontWeight: '700'}}>
               {' '}
-              Rs.200
+              Rs.{productDetails.wholesale_check.attr_selling_price}
             </Text>
           </Text>
+          :
+          <></>
+          }
           <View style={styles.productPriceQtySec}>
             <View style={styles.productPriceSec}>
               <Text style={styles.productOldPrice}>
