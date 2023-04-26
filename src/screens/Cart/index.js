@@ -505,7 +505,7 @@ function Cart({navigation, route}) {
                       </TouchableOpacity>
                     </View>
                     <Text style={styles.cartPrice}>
-                      Rs{item.afterDiscountPrice}
+                    ₹ {item.afterDiscountPrice*item.customers_basket_quantity}
                     </Text>
                   </View>
                 </View>

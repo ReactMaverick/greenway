@@ -51,7 +51,7 @@ function ProductList({navigation, route}) {
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
   const [priceChange, setPriceChange] = useState(false);
-  const {productType} = route.params;
+  // const {productType} = route.params;
   // Filters
   const [type, setType] = useState(null);
   const [category, setCategory] = useState(

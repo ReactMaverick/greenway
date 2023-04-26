@@ -61,6 +61,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: hp('2%'),
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    flex:1
   },
   // item: {
   //   backgroundColor: 'white',
@@ -71,7 +74,7 @@ export default StyleSheet.create({
   // },
   itemLeft: {
     backgroundColor: 'white',
-    width: '95%',
+    width: '92%',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: '5%',
@@ -80,10 +83,11 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: '#DDDDDD',
     paddingVertical: hp('2%'),
+    paddingHorizontal: wp('0.8%'),
   },
   itemRight: {
     backgroundColor: 'white',
-    width: '95%',
+    width: '92%',
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: '5%',
@@ -92,6 +96,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: '#DDDDDD',
     paddingVertical: hp('2%'),
+    paddingHorizontal: wp('0.8%'),
   },
   itemImage: {
     width: wp('30%'),
@@ -170,7 +175,7 @@ export default StyleSheet.create({
     fontSize: fontSize.h5,
     fontFamily: fontFamily.regular,
     color:BKColor.textColor1,
-    paddingBottom: hp('1.5%')
+   
   }
 
 });

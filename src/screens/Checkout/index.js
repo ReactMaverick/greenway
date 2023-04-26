@@ -46,8 +46,10 @@ import DeviceInfo from 'react-native-device-info';
 // import RazorpayCheckout from 'react-native-razorpay';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 import CustomStatusBar from '../../common/components/statusbar';
+import {useIsFocused} from '@react-navigation/native';
 
 function Checkout({navigation}) {
+  const isFocused = useIsFocused();
   const dispatch = useDispatch();
   // const sessionId = useSelector(state => state.SessionIdReducer.value);
   // const { sessionId } = useSelector((state) => state.SessionIdReducer);
@@ -175,7 +177,7 @@ function Checkout({navigation}) {
             setUserBillingAddress(response.userBillingAddress);
             setUserShippingAddressList(response.userShippingAddressList);
           } else {
-            console.log(response.status, response);
+            // console.log(response.status, response);
           }
         }
       })
@@ -425,9 +427,11 @@ function Checkout({navigation}) {
       setAndroidId(androidId);
       _getCartData(androidId);
     });
-    _getMyAddress();
+    if (isFocused) {
+      _getMyAddress();
+    }
     _getPaymentMethods();
-  }, [navigation]);
+  }, [navigation,isFocused]);
 
   if (isLoading) {
     return <></>;

@@ -62,7 +62,7 @@ function ContactUs({ navigation }) {
                         showMessage({
                             message: "Your Request Submitted",
                             type: "info",
-                            backgroundColor: "#EC1F25",
+                            backgroundColor: "green",
                         })
                     }
                 });

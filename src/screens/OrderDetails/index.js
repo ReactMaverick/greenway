@@ -413,9 +413,6 @@ function OrderDetails({navigation, route}) {
                 </View>
               </View>
             ))}
-            <View style={styles.itemHeadingSec}>
-              <Text style={styles.productItemHeading}>Gifts</Text>
-            </View>
             {orderDetails.allGift.map((item3, key3) => (
               <TouchableOpacity style={styles.contactUsSec} key={key3}>
                 <View style={styles.productImageSec}>

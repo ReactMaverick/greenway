@@ -78,7 +78,7 @@ function MyProfile({navigation}) {
               }}
             />
           </View>
-          <Text style={styles.loginLogoSection.text2}>Kollupaatikadai</Text>
+          <Text style={styles.loginLogoSection.text2}>Greenway</Text>
         </View>
         <View style={[styles.regContainer, {paddingTop: hp('6%')}]}>
           {/* {userData != null ? */}

@@ -44,8 +44,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 import {Dropdown} from 'react-native-element-dropdown';
 import CustomStatusBar from '../../common/components/statusbar';
+import {useIsFocused} from '@react-navigation/native';
 
 function MyAddress({navigation}) {
+  const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const userData = useSelector(state => state.UserReducer.value);
@@ -204,7 +206,7 @@ function MyAddress({navigation}) {
 
               arr.push(obj);
             });
-            console.log('Plist', arr);
+            // console.log('Plist', arr);
             setPincodeList(arr);
           }
         } else {
@@ -374,8 +376,10 @@ function MyAddress({navigation}) {
   };
   useEffect(() => {
     _getState();
-    _getAddress();
-  }, [navigation]);
+    if (isFocused) {
+      _getAddress();
+    }
+  }, [navigation,isFocused]);
   if (isLoading) {
     return (
       <>
@@ -747,7 +751,7 @@ function MyAddress({navigation}) {
               <View style={[inputContainer, {marginTop: hp('1%')}]}>
                 <Text style={inputLevel}>Pincode</Text>
 
-                <TextInput
+                {/* <TextInput
                   placeholder={'Search pincode'}
                   placeholderTextColor={placeHolderColor}
                   style={textInput}
@@ -756,6 +760,26 @@ function MyAddress({navigation}) {
                     searchPincode(value);
                   }}
                   value={zipcodeInput}
+                /> */}
+                <Dropdown
+                  style={[
+                    styles.textInput,
+                    isPincodeFocus && {borderColor: '#DDDDDD'},
+                  ]}
+                  // style={textInput}
+                  placeholder={!isPincodeFocus ? 'Select Pincode' : ''}
+                  placeholderTextColor={placeHolderColor}
+                  onFocus={() => setIsPincodeFocus(true)}
+                  onBlur={() => setIsPincodeFocus(false)}
+                  value={addPincode}
+                  onChange={value => {
+                    setAddPincode(value.value);
+                    setIsPincodeFocus(false);
+                  }}
+                  data={pincodeList}
+                  valueField="value"
+                  labelField="label"
+                  dropdownPosition="top"
                 />
                 <View>
                   {autoSuggestion.map((item, key) => (

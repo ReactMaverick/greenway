@@ -137,7 +137,7 @@ export const textInput2 = {
 };
 export const inputLevel = {
   marginTop: 10,
-  color: BKColor.textColor4,
+  color: BKColor.textColor1,
   fontFamily: fontFamily.regular,
   fontSize: fontSize.h3,
   alignSelf: 'flex-start',
@@ -151,7 +151,7 @@ export const inputBottomLevel = {
   alignSelf: 'flex-end',
   marginBottom: hp('1%')
 };
-export const placeHolderColor = BKColor.textColor1;
+export const placeHolderColor = BKColor.textColor4;
 export const inputIcon = {
   fontSize: 20,
   color: BKColor.textColor1,

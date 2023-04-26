@@ -87,7 +87,7 @@ function UpdatePassword({ navigation, route }) {
 
                     <TextInput
                         placeholder={'enter new password'}
-                        style={textInput2}
+                        style={textInput}
                         // key="email"
                         onChangeText={(value) => setNewPassword(value)}
                         value={newPassword}
@@ -117,7 +117,7 @@ function UpdatePassword({ navigation, route }) {
 
                     <TextInput
                         placeholder={'enter confirm password'}
-                        style={textInput2}
+                        style={textInput}
                         // key="email"
                         onChangeText={(value) => setConfirmPassword(value)}
                         value={confirmPassword}

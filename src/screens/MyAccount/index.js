@@ -241,7 +241,7 @@ function MyAccount({ navigation }) {
 
               <TextInput
                 placeholder={'new password'}
-                style={textInput2}
+                style={textInput}
                 key="password"
                 onChangeText={password => setNewPassword(password)}
                 value={newPassword}
@@ -271,7 +271,7 @@ function MyAccount({ navigation }) {
 
               <TextInput
                 placeholder={'confirm password'}
-                style={textInput2}
+                style={textInput}
                 key="password"
                 onChangeText={password => setConfirmPassword(password)}
                 value={confirmPassword}

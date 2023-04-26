@@ -6,6 +6,7 @@ import {
   TextInput,
   ScrollView,
   Image,
+  SafeAreaView,
 } from 'react-native';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -18,7 +19,6 @@ import {
   textInput,
   inputContainer,
   activeButton,
-  SafeAreaView,
 } from '../../common/values/BKStyles';
 import {BKColor} from '../../common/values/BKColor';
 import OTPTextInput from 'react-native-otp-textinput';
@@ -44,11 +44,11 @@ function FpOtpVerification({navigation, route}) {
       });
     }
   };
-  //   useEffect(() => {}, [navigation]);
+  useEffect(() => {}, [navigation]);
 
   return (
     <SafeAreaView>
-        <CustomStatusBar/>
+      <CustomStatusBar />
       <ScrollView style={pageContainerStyle}>
         <View style={styles.regContainer}>
           <Text style={styles.regContainer.headerText}>

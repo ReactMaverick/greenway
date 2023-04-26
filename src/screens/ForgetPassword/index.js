@@ -44,6 +44,7 @@ function ForgetPassword({navigation}) {
       PostApiFetch(POST_FORGET_PASSWORD, formData)
         .then(([status, response]) => {
           if (status == 200) {
+           // console.log("response",response);
             if (response.status == true) {
               navigation.navigate('FpOtpVerification', {
                 forgetPasswordOtp: response.forget_password_otp,
@@ -65,7 +66,7 @@ function ForgetPassword({navigation}) {
         })
         .catch(error => console.log(error))
         .finally(() => {
-          // setIsLoading(false)
+          setIsLoading(false)
         });
     }
   };

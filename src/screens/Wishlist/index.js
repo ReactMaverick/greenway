@@ -183,6 +183,18 @@ function Wishlist({navigation}) {
                   </TouchableOpacity>
                 </View>
                 <View style={styles.cartDecSec}>
+                <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate(
+                        // console.log('ProductDetailsId',item.products_slug)
+                        'ProductDetails',
+                        {
+                          preUrl: 'SingleProduct',
+                          productsSlug: item.products_slug,
+                          productsAttributes: item.attributes,
+                        },
+                      );
+                    }}>
                   <Text style={styles.cartDecHeading}>
                     {item.products_name}
                   </Text>
@@ -192,6 +204,7 @@ function Wishlist({navigation}) {
                   <Text style={styles.cartPrice}>
                     Rs {item.discounted_price}
                   </Text>
+                  </TouchableOpacity>
                 </View>
                 <View>
                   <TouchableOpacity
