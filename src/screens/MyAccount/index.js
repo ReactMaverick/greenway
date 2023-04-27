@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -20,20 +20,20 @@ import {
   inputContainer,
   activeButton,
   fontSize,
-  placeHolderColor
+  placeHolderColor,
 } from '../../common/values/BKStyles';
-import { BKColor } from '../../common/values/BKColor';
-import { POST_ACCOUNT_UPDATE_API } from '../../config/ApiConfig';
-import { PostApiFetch } from '../../config/CommonFunction';
-import { showMessage, hideMessage } from 'react-native-flash-message';
-import { useSelector, useDispatch } from 'react-redux';
+import {BKColor} from '../../common/values/BKColor';
+import {POST_ACCOUNT_UPDATE_API} from '../../config/ApiConfig';
+import {PostApiFetch} from '../../config/CommonFunction';
+import {showMessage, hideMessage} from 'react-native-flash-message';
+import {useSelector, useDispatch} from 'react-redux';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import CustomStatusBar from '../../common/components/statusbar';
-
-function MyAccount({ navigation }) {
+import {userDetails} from '../../redux/reducers/UserReducer';
+function MyAccount({navigation}) {
   const dispatch = useDispatch();
   const [updateData, setUpdateData] = useState([]);
   const userData = useSelector(state => state.UserReducer.value);
@@ -58,47 +58,36 @@ function MyAccount({ navigation }) {
         backgroundColor: '#EC1F25',
       });
     } else if (
-      currentPassword != '' &&
+      currentPassword == '' &&
       newPassword == '' &&
       confirmPassword == ''
     ) {
       showMessage({
-        message: 'please enter New Password and Confirm Password',
+        message: 'please enter current Password & New Password and Confirm Password',
         type: 'info',
         backgroundColor: '#EC1F25',
       });
-    } else if (
-      currentPassword != '' &&
+    }  else if (
+      currentPassword == '' &&
       newPassword != '' &&
-      confirmPassword == ''
+      confirmPassword !=''
     ) {
       showMessage({
-        message: 'please enter Confirm Password',
+        message: 'please enter current Password',
         type: 'info',
         backgroundColor: '#EC1F25',
       });
     } else if (
       currentPassword != '' &&
-      newPassword == '' &&
-      confirmPassword != ''
+      newPassword != confirmPassword 
     ) {
       showMessage({
-        message: 'please enter New Password',
+        message: 'please enter correct  new Password & confirm Password',
         type: 'info',
         backgroundColor: '#EC1F25',
       });
-    } else if (
-      currentPassword != '' &&
-      newPassword != '' &&
-      confirmPassword != '' &&
-      newPassword != confirmPassword
-    ) {
-      showMessage({
-        message: 'please enter correct Confirm Password',
-        type: 'info',
-        backgroundColor: '#EC1F25',
-      });
-    } else {
+    } 
+    else {
       const formData = new FormData();
       formData.append('user_id', userData.id);
       formData.append('first_name', fullName);
@@ -111,13 +100,11 @@ function MyAccount({ navigation }) {
 
       PostApiFetch(POST_ACCOUNT_UPDATE_API, formData).then(
         ([status, response]) => {
-          console.log(status, response);
+          // console.log(status, response);
           if (status == 200) {
-            console.log('response==>', response);
-            console.log('profile update successfully');
             if (response.status == true) {
-              dispatch({ type: 'setUserData', payload: response.user_details });
-
+              dispatch(userDetails(response.user_details));
+              // dispatch({ type: 'setUserData', payload: response.user_details });
               showMessage({
                 message: 'profile update successfully',
                 type: 'info',
@@ -129,13 +116,6 @@ function MyAccount({ navigation }) {
                 type: 'info',
                 backgroundColor: '#808080',
               });
-              // dispatch({
-              //     type: 'setAlertState', payload: {
-              //         alertStatus: true,
-              //         alertType: "success",
-              //         alertTitle: response.error[0]
-              //     }
-              // })
             }
             setCurrentPassword('');
             setNewPassword('');
@@ -180,11 +160,11 @@ function MyAccount({ navigation }) {
               key="fullname"
               onChangeText={value => setFullName(value)}
               value={fullName}
-            // secureTextEntry={passwordEye}
-            // onChangeText={(password) => setPassword(password)}
-            // onFocus={() => {
-            //   setErrorMessage('')
-            // }}
+              // secureTextEntry={passwordEye}
+              // onChangeText={(password) => setPassword(password)}
+              // onFocus={() => {
+              //   setErrorMessage('')
+              // }}
             />
           </View>
           <View style={inputContainer}>
@@ -196,11 +176,11 @@ function MyAccount({ navigation }) {
               key="email"
               value={email}
 
-            // secureTextEntry={passwordEye}
-            // onChangeText={(password) => setPassword(password)}
-            // onFocus={() => {
-            //   setErrorMessage('')
-            // }}
+              // secureTextEntry={passwordEye}
+              // onChangeText={(password) => setPassword(password)}
+              // onFocus={() => {
+              //   setErrorMessage('')
+              // }}
             />
           </View>
           <View style={inputContainer}>
@@ -212,11 +192,11 @@ function MyAccount({ navigation }) {
               key="phonenumber"
               value={phoneNumber}
 
-            // secureTextEntry={passwordEye}
-            // onChangeText={(password) => setPassword(password)}
-            // onFocus={() => {
-            //   setErrorMessage('')
-            // }}
+              // secureTextEntry={passwordEye}
+              // onChangeText={(password) => setPassword(password)}
+              // onFocus={() => {
+              //   setErrorMessage('')
+              // }}
             />
           </View>
           <View style={inputContainer}>
@@ -227,18 +207,17 @@ function MyAccount({ navigation }) {
               key="password"
               onChangeText={password => setCurrentPassword(password)}
               value={currentPassword}
-            // secureTextEntry={passwordEye}
-            // onChangeText={(password) => setPassword(password)}
-            // onFocus={() => {
-            //   setErrorMessage('')
-            // }}
+              // secureTextEntry={passwordEye}
+              // onChangeText={(password) => setPassword(password)}
+              // onFocus={() => {
+              //   setErrorMessage('')
+              // }}
             />
           </View>
           <View style={inputContainer}>
             <Text style={inputLevel}>New Password</Text>
 
             <View style={styles.passwordFieldOuter}>
-
               <TextInput
                 placeholder={'new password'}
                 style={textInput}
@@ -247,10 +226,10 @@ function MyAccount({ navigation }) {
                 value={newPassword}
                 secureTextEntry={passwordEye}
                 placeholderTextColor={placeHolderColor}
-              // onChangeText={(password) => setPassword(password)}
-              // onFocus={() => {
-              //   setRegErrorMessage('');
-              // }}
+                // onChangeText={(password) => setPassword(password)}
+                // onFocus={() => {
+                //   setRegErrorMessage('');
+                // }}
               />
               <TouchableOpacity
                 onPress={() => {
@@ -258,17 +237,19 @@ function MyAccount({ navigation }) {
                 }}>
                 <Entypo
                   name={passwordEye ? 'eye-with-line' : 'eye'}
-                  style={{ fontSize: 20, marginRight: wp('3%'), color: BKColor.textColor1 }}
+                  style={{
+                    fontSize: 20,
+                    marginRight: wp('3%'),
+                    color: BKColor.textColor1,
+                  }}
                 />
               </TouchableOpacity>
             </View>
-
           </View>
           <View style={inputContainer}>
             <Text style={inputLevel}>Confirm Password</Text>
 
             <View style={styles.passwordFieldOuter}>
-
               <TextInput
                 placeholder={'confirm password'}
                 style={textInput}
@@ -277,10 +258,10 @@ function MyAccount({ navigation }) {
                 value={confirmPassword}
                 secureTextEntry={conPasswordEye}
                 placeholderTextColor={placeHolderColor}
-              // onChangeText={(password) => setPassword(password)}
-              // onFocus={() => {
-              //   setRegErrorMessage('');
-              // }}
+                // onChangeText={(password) => setPassword(password)}
+                // onFocus={() => {
+                //   setRegErrorMessage('');
+                // }}
               />
               <TouchableOpacity
                 onPress={() => {
@@ -288,12 +269,14 @@ function MyAccount({ navigation }) {
                 }}>
                 <Entypo
                   name={passwordEye ? 'eye-with-line' : 'eye'}
-                  style={{ fontSize: 20, marginRight: wp('3%'), color: BKColor.textColor1 }}
+                  style={{
+                    fontSize: 20,
+                    marginRight: wp('3%'),
+                    color: BKColor.textColor1,
+                  }}
                 />
               </TouchableOpacity>
             </View>
-
-
           </View>
           <View style={styles.regBtmSection}>
             {/* <Text style={styles.regBtmSection.text1}>Update</Text> */}

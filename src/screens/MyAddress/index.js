@@ -23,7 +23,7 @@ import {
   activeButton,
   fontSize,
   Button,
-  placeHolderColor
+  placeHolderColor,
 } from '../../common/values/BKStyles';
 import {BKColor} from '../../common/values/BKColor';
 import {
@@ -136,8 +136,8 @@ function MyAddress({navigation}) {
     setEditState(parseInt(item.entry_state));
     // setEditState(item.states_name);
     setEditCity(item.entry_city);
-    // setEditPincode(item.pincodes_val);
     setEditPincode(item.pincodes_val);
+    // setEditPincode(item.entry_postcode);
     setEditDistrict(item.districts_id);
   };
 
@@ -218,14 +218,15 @@ function MyAddress({navigation}) {
   };
   const searchPincode = zipcodeInput => {
     setZipCodeInput(zipcodeInput);
-
+   
     let newData = [];
 
     if (zipcodeInput.length > 0) {
+      console.log("pincodeList",pincodeList);
       let arr = [];
       let temparr = pincodeList;
       newData = temparr.filter(function (item) {
-        // console.log('item ',item.label)
+        console.log('item ',item.label)
         const itemData = item.label.toUpperCase();
         // arr.push(itemData);
         const textData = zipcodeInput.toUpperCase();
@@ -318,7 +319,7 @@ function MyAddress({navigation}) {
           showMessage({
             message: 'ShippingAddress deleted from your account successfully.',
             type: 'info',
-            backgroundColor: '#EC1F25',
+            backgroundColor: 'green',
           });
           // console.log("ShippingAddress deleted from your account successfully.");
         }
@@ -356,7 +357,7 @@ function MyAddress({navigation}) {
       formData.append('entry_postcode', editPincode);
       formData.append('entry_phone', editMobile);
       formData.append('entry_email', editEmail);
-
+      // console.log('updateformData', formData);
       PostApiFetch(POST_UPDATE_MY_ADDRESS_API, formData).then(
         ([status, response]) => {
           if (status == 200) {
@@ -366,7 +367,7 @@ function MyAddress({navigation}) {
             showMessage({
               message: 'Address Updated Successfully...',
               type: 'info',
-              backgroundColor: '#EC1F25',
+              backgroundColor: 'green',
             });
             // console.log("Address Updated Successfully...");
           }
@@ -379,13 +380,13 @@ function MyAddress({navigation}) {
     if (isFocused) {
       _getAddress();
     }
-  }, [navigation,isFocused]);
+  }, [navigation, isFocused]);
   if (isLoading) {
     return (
       <>
         <SafeAreaView
           style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <CustomStatusBar/>
+          <CustomStatusBar />
           <ActivityIndicator size="large" color={BKColor.textColor2} />
         </SafeAreaView>
       </>
@@ -393,7 +394,7 @@ function MyAddress({navigation}) {
   } else {
     return (
       <SafeAreaView style={pageContainerStyle}>
-        <CustomStatusBar/>
+        <CustomStatusBar />
         <View style={pageHeader}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Fontisto
@@ -696,19 +697,6 @@ function MyAddress({navigation}) {
               </View>
               <View style={[inputContainer, {marginTop: hp('1%')}]}>
                 <Text style={inputLevel}>District</Text>
-                {/* <TextInput
-                                    placeholder={'state'}
-                                    style={textInput}
-                                    key='state'
-                                    onChangeText={(value) => setAddState(value)}
-                                    value={addState}
-
-                                // secureTextEntry={passwordEye}
-                                // onChangeText={(password) => setPassword(password)}
-                                // onFocus={() => {
-                                //   setErrorMessage('')
-                                // }}
-                                /> */}
                 <Dropdown
                   style={[
                     styles.textInput,
@@ -750,17 +738,6 @@ function MyAddress({navigation}) {
               </View>
               <View style={[inputContainer, {marginTop: hp('1%')}]}>
                 <Text style={inputLevel}>Pincode</Text>
-
-                {/* <TextInput
-                  placeholder={'Search pincode'}
-                  placeholderTextColor={placeHolderColor}
-                  style={textInput}
-                  onChangeText={value => {
-                    // setZipCodeInput(value);
-                    searchPincode(value);
-                  }}
-                  value={zipcodeInput}
-                /> */}
                 <Dropdown
                   style={[
                     styles.textInput,
@@ -824,7 +801,7 @@ function MyAddress({navigation}) {
             </View>
           </ScrollView>
         </Modal>
-        {/* Edit Modal */}
+        {/* Edit    */}
         <Modal
           isVisible={isEditModalVisible}
           onBackdropPress={toggleEditModal}
@@ -894,14 +871,6 @@ function MyAddress({navigation}) {
               </View>
               <View style={[inputContainer, {marginTop: hp('1%')}]}>
                 <Text style={inputLevel}>State</Text>
-                {/* <TextInput
-                                    placeholder={'state'}
-                                    style={textInput}
-                                    key='state'
-                                    onChangeText={(value) => setEditState(value)}
-                                    value={editState}
-
-                                /> */}
                 <Dropdown
                   style={[
                     styles.textInput,
@@ -928,14 +897,6 @@ function MyAddress({navigation}) {
               </View>
               <View style={[inputContainer, {marginTop: hp('1%')}]}>
                 <Text style={inputLevel}>District</Text>
-                {/* <TextInput
-                                    placeholder={'state'}
-                                    style={textInput}
-                                    key='state'
-                                    onChangeText={(value) => setEditState(value)}
-                                    value={editState}
-
-                                /> */}
                 <Dropdown
                   style={[
                     styles.textInput,
@@ -972,12 +933,12 @@ function MyAddress({navigation}) {
               <View style={[inputContainer, {marginTop: hp('1%')}]}>
                 <Text style={inputLevel}>Pincode</Text>
                 {/* <TextInput
-                                    placeholder={'pincode'}
-                                    style={textInput}
-                                    key='pincode'
-                                    onChangeText={(value) => setEditPincode(value)}
-                                    value={editPincode}
-                                /> */}
+                  placeholder={'pincode'}
+                  style={textInput}
+                  key="pincode"
+                  onChangeText={value => setEditPincode(value)}
+                  value={editPincode}
+                /> */}
                 {/* <Dropdown
                   style={[
                     styles.textInput,
@@ -985,9 +946,10 @@ function MyAddress({navigation}) {
                   ]}
                   // style={textInput}
                   placeholder={!isPincodeFocus ? 'Select Pincode' : ''}
+                  placeholderTextColor={placeHolderColor}
                   onFocus={() => setIsPincodeFocus(true)}
                   onBlur={() => setIsPincodeFocus(false)}
-                  value={addPincode}
+                  value={editPincode}
                   onChange={value => {
                     setEditPincode(value.value);
                     setIsPincodeFocus(false);
@@ -997,11 +959,12 @@ function MyAddress({navigation}) {
                   labelField="label"
                   dropdownPosition="top"
                 /> */}
+
                 <TextInput
                   placeholder={'Search pincode'}
                   placeholderTextColor={placeHolderColor}
                   style={textInput}
-                  onChangeText={value => {
+                  onChange={ value => {
                     // setZipCodeInput(value);
                     // setEditPincode(value);
                     searchPincode(value);

@@ -43,7 +43,7 @@ import {
 import {useSelector, useDispatch} from 'react-redux';
 import {GetApiFetch, PostApiFetch} from '../../config/CommonFunction';
 import DeviceInfo from 'react-native-device-info';
-// import RazorpayCheckout from 'react-native-razorpay';
+import RazorpayCheckout from 'react-native-razorpay';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 import CustomStatusBar from '../../common/components/statusbar';
 import {useIsFocused} from '@react-navigation/native';
@@ -134,34 +134,34 @@ function Checkout({navigation}) {
   //     rzr.open();
   // }
   const _makeOnlinePayment = () => {
-    // var options = {
-    //     description: 'Payment to Vmasala',
-    //     image: 'http://demo203.amrithaa.com/vmasalaWeb/static/media/Logo-removebg-preview.17b9305b410df14eb25d.png',
-    //     currency: 'INR',
-    //     key: razorPay.RAZORPAY_KEY,
-    //     amount: totalPrice * 100,
-    //     name: 'Vmasala',
-    //     // order_id: response.order_id,//Replace this with an order_id created using Orders API.
-    //     //order_id: 5,
-    //     prefill: {
-    //         email: userData.email,
-    //         contact: userData.phone,
-    //         name: userData.first_name
-    //     },
-    //     theme: { color: BKColor.textColor2 }
-    // }
-    // RazorpayCheckout.open(options).then((data) => {
-    //     // navigation.navigate('Thankyou');
-    //     // handle success
-    //     // alert(`Success: ${data.razorpay_payment_id}`);
-    //     _placeOrderCashOnDelivery(data.razorpay_payment_id)
-    // }).catch((error) => {
-    //     //  navigation.navigate('Thankyou');
-    //     console.log(error.code, error.description);
-    //     // handle failure
-    //     // alert(`Error: ${error.code} | ${error.description}`);
-    // });
-    console.log('_makeOnlinePayment');
+    var options = {
+        description: 'Payment to Greenway',
+        image: 'http://demo203.amrithaa.com/vmasalaWeb/static/media/Logo-removebg-preview.17b9305b410df14eb25d.png',
+        currency: 'INR',
+        key: 'rzp_test_pGu27P88qj5UWo',
+        amount: totalPrice * 100,
+        name: 'Greenway',
+        // order_id: response.order_id,//Replace this with an order_id created using Orders API.
+        //order_id: 5,
+        prefill: {
+            email: userData.email,
+            contact: userData.phone,
+            name: userData.first_name
+        },
+        theme: { color: BKColor.textColor2 }
+    }
+    RazorpayCheckout.open(options).then((data) => {
+        // navigation.navigate('Thankyou');
+        // handle success
+        // alert(`Success: ${data.razorpay_payment_id}`);
+        _placeOrderCashOnDelivery(data.razorpay_payment_id)
+    }).catch((error) => {
+        //  navigation.navigate('Thankyou');
+        console.log(error.code, error.description);
+        // handle failure
+        // alert(`Error: ${error.code} | ${error.description}`);
+    });
+    // console.log('_makeOnlinePayment');
   };
 
   const _getMyAddress = () => {
