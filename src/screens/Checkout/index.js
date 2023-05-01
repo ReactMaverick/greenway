@@ -133,12 +133,12 @@ function Checkout({navigation}) {
   //     });
   //     rzr.open();
   // }
-  const _makeOnlinePayment = () => {
+  const _makeOnlinePayment = (key) => {
     var options = {
         description: 'Payment to Greenway',
         image: 'http://demo203.amrithaa.com/vmasalaWeb/static/media/Logo-removebg-preview.17b9305b410df14eb25d.png',
         currency: 'INR',
-        key: 'rzp_test_pGu27P88qj5UWo',
+        key: key, 
         amount: totalPrice * 100,
         name: 'Greenway',
         // order_id: response.order_id,//Replace this with an order_id created using Orders API.
@@ -802,7 +802,7 @@ function Checkout({navigation}) {
                 onPress={() => {
                   // _generateOrderId()
                   if (razorPay != null) {
-                    _makeOnlinePayment();
+                    _makeOnlinePayment(razorPay.RAZORPAY_KEY);
                   }
                 }}>
                 <Text style={activeButton.text}>Proceed to Razorpay</Text>

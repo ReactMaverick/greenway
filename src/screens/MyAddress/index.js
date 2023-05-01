@@ -123,22 +123,22 @@ function MyAddress({navigation}) {
   };
 
   const _setModalItem = async item => {
-    // console.log("item====>",item);
-    _getDistrict(item.entry_state);
-    _getPincode(item.districts_id);
-    searchPincode(item);
-    setModalItem(item);
-    setEditAddressBookId(item.address_book_id);
-    setEditName(item.entry_firstname);
-    setEditEmail(item.entry_email);
-    setEditMobile(item.entry_phone);
-    setEditVillageName(item.entry_street_address);
-    setEditState(parseInt(item.entry_state));
-    // setEditState(item.states_name);
-    setEditCity(item.entry_city);
-    setEditPincode(item.pincodes_val);
-    // setEditPincode(item.entry_postcode);
-    setEditDistrict(item.districts_id);
+    //  console.log("item====>",item);
+     _getDistrict(item.entry_state);
+     _getPincode(item.districts_id);
+     searchPincode(item.pincodes_val);
+     setModalItem(item);
+     setEditAddressBookId(item.address_book_id);
+     setEditName(item.entry_firstname);
+     setEditEmail(item.entry_email);
+     setEditMobile(item.entry_phone);
+     setEditVillageName(item.entry_street_address);
+     setEditState(parseInt(item.entry_state));
+     // setEditState(item.states_name);
+     setEditCity(item.entry_city);
+     setEditPincode(item.pincodes_val);
+     // setEditPincode(item.entry_postcode);
+     setEditDistrict(item.districts_id);
   };
 
   const _getState = async () => {
@@ -206,7 +206,7 @@ function MyAddress({navigation}) {
 
               arr.push(obj);
             });
-            // console.log('Plist', arr);
+
             setPincodeList(arr);
           }
         } else {
@@ -216,22 +216,25 @@ function MyAddress({navigation}) {
       .catch(error => console.log(error))
       .finally(() => {});
   };
-  const searchPincode = zipcodeInput => {
-    setZipCodeInput(zipcodeInput);
+  
+
+  const searchPincode = zipcodeInputText => {
+   
+    
+    setZipCodeInput(zipcodeInputText);
    
     let newData = [];
-
-    if (zipcodeInput.length > 0) {
-      console.log("pincodeList",pincodeList);
+    if (zipcodeInputText!=null) {
       let arr = [];
       let temparr = pincodeList;
       newData = temparr.filter(function (item) {
-        console.log('item ',item.label)
+        // console.log('item ',item.label)
         const itemData = item.label.toUpperCase();
         // arr.push(itemData);
-        const textData = zipcodeInput.toUpperCase();
+        const textData = zipcodeInputText.toUpperCase();
         return itemData.includes(textData);
       });
+      
 
       setAutoSuggestion([...newData]);
     } else {
@@ -964,13 +967,13 @@ function MyAddress({navigation}) {
                   placeholder={'Search pincode'}
                   placeholderTextColor={placeHolderColor}
                   style={textInput}
-                  onChange={ value => {
+                  onChangeText={ value => {
                     // setZipCodeInput(value);
                     // setEditPincode(value);
                     searchPincode(value);
                   }}
                   value={zipcodeInput}
-                  defaultValue={editPincode}
+                  defaultValue={editPincode.toString()}
                 />
                 <View>
                   {autoSuggestion.map((item, key) => (

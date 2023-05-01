@@ -40,7 +40,7 @@ function Home({navigation}) {
 
   return (
     <SafeAreaView>
-        <CustomStatusBar/>
+      <CustomStatusBar />
       <ScrollView style={pageContainerStyle}>
         <View style={pageHeader}>
           <TouchableOpacity
@@ -68,7 +68,6 @@ function Home({navigation}) {
           </TouchableOpacity>
         </View>
 
-
         <Slider navigation={navigation} />
         {/* <Banner navigation={navigation} /> */}
         <PopularProducts navigation={navigation} />
@@ -78,10 +77,6 @@ function Home({navigation}) {
         {/* <ShippingArea navigation={navigation} /> */}
 
         {/* <GiftsArea navigation={navigation} /> */}
-
-
-
-
       </ScrollView>
     </SafeAreaView>
   );
