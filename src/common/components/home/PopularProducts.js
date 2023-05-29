@@ -29,7 +29,7 @@ function PopularProducts({ navigation }) {
 
         PostApiFetch(POST_SHOP_PAGE_API, formData)
             .then(([status, response]) => {
-                console.log("response",response.products.product_data);
+                // console.log("response",response.products.product_data);
                 if (status == 200) {
                     // console.log('_getAllPopularProducts', response.products.product_data);
                     setAllPopularProducts(response.products.product_data)

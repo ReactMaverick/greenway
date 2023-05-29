@@ -89,10 +89,10 @@ function Login({ navigation }) {
       formData.append('session_id', androidId);
       formData.append('fcmToken', "test-token");
       formData.append('device_os', Platform.OS);
-      console.log('formData',formData);
+      // console.log('formData',formData);
       PostApiFetch(POST_SIGNIN_API, formData)
         .then(([status, response]) => {
-          console.log('response',response);
+          // console.log('response',response);
           if (status == 200) {
             // setIsLoading(true)
             if (response.status == false) {
@@ -100,7 +100,7 @@ function Login({ navigation }) {
             } else {
               setUsername('');
               setPassword('');
-              console.log('UserData', response.userDetails[0])
+              // console.log('UserData', response.userDetails[0])
               dispatch(userDetails(response.userDetails[0]));
             }
           } else {

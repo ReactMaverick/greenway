@@ -517,7 +517,7 @@ function ProductDetails({navigation, route}) {
                                   productDetails.prod_attributeids,
                                 ).then(([status, response]) => {
                                   setChangeInCarts(true);
-                                  console.log('cartData - ', response);
+                                  // console.log('cartData - ', response);
                                   if (status == 200) {
                                     if (response.status === true) {
                                       dispatch(cartDetails(response.cart));
