@@ -59,7 +59,7 @@ function PopularCategory({ navigation }) {
                     <TouchableOpacity onPress={() => 
                         navigation.navigate('CategoryList')
                     }>
-                    <Text style={boxHeader1.text}>View All</Text>
+                    <Text style={boxHeader1.text2}>View All</Text>
                     </TouchableOpacity>
                     
                 </View>

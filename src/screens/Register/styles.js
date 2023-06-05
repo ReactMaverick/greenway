@@ -4,20 +4,45 @@ import { BKColor } from '../../common/values/BKColor';
 import { fontSize, fontFamily } from '../../common/values/BKStyles';
 
 export default StyleSheet.create({
-    regTopSection: {
-        height: hp('20%'),
-        // alignItems: 'center',
+
+    loginLogoSection: {
         justifyContent: 'center',
-        text1: {
-            color: BKColor.textColor1,
-            fontSize: fontSize.h1,
-            fontWeight: '700',
-            // textAlign: 'center',
-            fontFamily: fontFamily.regular,
-            marginBottom: hp('1%'),
-            marginLeft: wp('3%'),
+        alignItems: 'center',
+        height: hp('38%'),
+        logo: {
+            justifyContent: 'center',
+            alignItems: 'center',
+            resizeMode:'cover'
         },
+        text1: {
+            marginTop: hp('2%'),
+            color: BKColor.textColor1,
+            fontSize: fontSize.h2,
+            // fontWeight: '700',
+            textAlign: 'center',
+            fontFamily: fontFamily.medium,
+        },
+        text2: {
+            color: BKColor.textColor2,
+            fontSize: fontSize.h1,
+            // fontWeight: '700',
+            textAlign: 'center',
+            fontFamily: fontFamily.bold,
+        }
     },
+
+    // regTopSection: {
+    //     height: hp('20%'),
+    //     justifyContent: 'center',
+    //     text1: {
+    //         color: BKColor.textColor1,
+    //         fontSize: fontSize.h1,
+    //         fontWeight: '700',
+    //         fontFamily: fontFamily.regular,
+    //         marginBottom: hp('1%'),
+    //         marginLeft: wp('3%'),
+    //     },
+    // },
     regContainer: {
         borderRadius: 20,
         borderStyle: 'solid',
@@ -51,32 +76,31 @@ export default StyleSheet.create({
     loginFooter: {
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',
+        marginTop: hp('4%'),
+        // alignItems: 'center',
         textLeft: {
-            color: BKColor.textColor4,
-            fontSize: fontSize.h3,
-            fontWeight: '300',
+            color: BKColor.textColor1,
+            fontSize: fontSize.h4,
             textAlign: 'center',
-            fontFamily: fontFamily.regular,
+            fontFamily: fontFamily.medium,
         },
         textRight: {
             color: BKColor.textColor2,
-            fontSize: fontSize.h3,
-            fontWeight: '700',
+            fontSize: fontSize.h4,
             textAlign: 'center',
-            fontFamily: fontFamily.regular,
+            fontFamily: fontFamily.bold,
         },
     },
-    passwordFieldOuter: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        borderRadius: 13,
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderColor: '#DDDDDD',
-        paddingHorizontal: wp('2%'),
-        paddingVertical: hp('0.5%'),
-    }
+    // passwordFieldOuter: {
+    //     flexDirection: 'row',
+    //     alignItems: 'center',
+    //     justifyContent: 'space-between',
+    //     borderRadius: 13,
+    //     borderStyle: 'solid',
+    //     borderWidth: 1,
+    //     borderColor: '#DDDDDD',
+    //     paddingHorizontal: wp('2%'),
+    //     paddingVertical: hp('0.5%'),
+    // }
 
 });

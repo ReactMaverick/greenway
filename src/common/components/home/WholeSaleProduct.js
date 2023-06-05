@@ -66,11 +66,11 @@ function WholeSaleProduct({ navigation }) {
                                     productType: 'whole_sale'
                                 })
                             }>
-                                <Text style={boxHeader1.text}>View All</Text>
+                                <Text style={boxHeader1.text2}>View All</Text>
                             </TouchableOpacity>
 
                         </View>
-                        <ScrollView>
+                        <ScrollView horizontal={true}>
                             
                             <View style={styles.productContainer}>
                                 {allPopularProducts.map((item, key) => (

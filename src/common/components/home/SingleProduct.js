@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,17 +11,17 @@ import {
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {FlatListSlider} from 'react-native-flatlist-slider';
-import {BKColor} from '../../values/BKColor';
-import {fontSize} from '../../values/BKStyles';
-import {TrimString} from '../../../config/CommonFunction';
-import {IMAGE_BASE_PATH} from '../../../config/ApiConfig';
-import {addToCart, addToWishlist} from '../../../config/CommonFunction';
+import { FlatListSlider } from 'react-native-flatlist-slider';
+import { BKColor } from '../../values/BKColor';
+import { fontSize } from '../../values/BKStyles';
+import { TrimString } from '../../../config/CommonFunction';
+import { IMAGE_BASE_PATH } from '../../../config/ApiConfig';
+import { addToCart, addToWishlist } from '../../../config/CommonFunction';
 import DeviceInfo from 'react-native-device-info';
-import {useSelector, useDispatch} from 'react-redux';
-import {showMessage, hideMessage} from 'react-native-flash-message';
-import {wishlistDetails} from '../../../redux/reducers/WishlistReducer';
-import {cartDetails} from '../../../redux/reducers/CartReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { showMessage, hideMessage } from 'react-native-flash-message';
+import { wishlistDetails } from '../../../redux/reducers/WishlistReducer';
+import { cartDetails } from '../../../redux/reducers/CartReducer';
 
 import {
   widthPercentageToDP as wp,
@@ -30,7 +30,7 @@ import {
 
 // import { DOMParser } from "react-native-html-parser";
 
-function SingleProduct({navigation, index, item}) {
+function SingleProduct({ navigation, index, item }) {
   const dispatch = useDispatch();
   const [androidId, setAndroidId] = useState(true);
   // const userDetails = useSelector(state => state.userReducer.value);
@@ -62,20 +62,22 @@ function SingleProduct({navigation, index, item}) {
           },
         );
       }}>
+
+
       <View style={styles.singleProductContainer}>
         <View style={(index + 1) % 2 == 0 ? styles.itemRight : styles.itemLeft}>
           {item.wholesale_check != null && (
-            <View style={{paddingHorizontal: wp('5%')}}>
+            <View style={{ paddingHorizontal: wp('5%') }}>
               {item.attributes[0].values.map(
                 (attributesData, key) =>
                   attributesData.products_attributes_id ==
-                    item.wholesale_check.attributes_ids && (
+                  item.wholesale_check.attributes_ids && (
                     <Text style={styles.wholeSaleprice} key={key}>
                       {attributesData.value + ' ' + 'Wholesale Price'}
                     </Text>
                   ),
               )}
-              <Text style={{color: BKColor.textColor2, fontWeight: '700'}}>
+              <Text style={{ color: BKColor.textColor2, fontWeight: '700' }}>
                 Rs.{item.wholesale_check.attr_selling_price}
               </Text>
             </View>
@@ -115,12 +117,12 @@ function SingleProduct({navigation, index, item}) {
                   });
               }}>
               {wishlistData != null &&
-              wishlistData.some(
-                value =>
-                  value.products_id == item.products_id &&
-                  value.products_attributes_prices_id ==
+                wishlistData.some(
+                  value =>
+                    value.products_id == item.products_id &&
+                    value.products_attributes_prices_id ==
                     item.products_attributes_prices_id,
-              ) ? (
+                ) ? (
                 <AntDesign
                   name="heart"
                   color={BKColor.textColor2}
@@ -140,19 +142,21 @@ function SingleProduct({navigation, index, item}) {
               onPress={() => navigation.navigate('Login')}>
               <AntDesign
                 name="hearto"
-                style={{fontWeight: 'bold'}}
+                style={{ fontWeight: 'bold' }}
                 color={BKColor.textColor2}
                 size={fontSize.bh}
               />
             </TouchableOpacity>
           )}
 
-          <Image
-            source={{uri: item.image_path}}
-            style={styles.itemImage}
-            borderRadius={5}
-          />
-          <View style={{width: '85%', marginTop: 10}}>
+          <View style={{ marginTop: hp('-10%') }}>
+            <Image
+              source={{ uri: item.image_path }}
+              style={styles.itemImage}
+              borderRadius={5}
+            />
+          </View>
+          <View style={{ width: '85%', marginTop: 10 }}>
             <Text style={styles.itemName}>{item.products_name}</Text>
             {/* <Text style={styles.itemDetails}>{TrimString(item.products_description.replace(regex, ''), 15)}</Text> */}
             <Text style={styles.itemDetails}>
@@ -161,7 +165,7 @@ function SingleProduct({navigation, index, item}) {
                 : ''}
             </Text>
 
-            <View style={{flexDirection: 'row', alignItems: 'baseline'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
               <Text style={styles.itemPrice}>{item.discounted_price}</Text>
               <Text style={styles.itemOldPrice}>{item.products_price}</Text>
             </View>
@@ -170,55 +174,55 @@ function SingleProduct({navigation, index, item}) {
                 if (item.defaultStock > 0) {
                   userData != null
                     ? addToCart(
-                        item.products_id,
-                        1,
-                        userData.id,
-                        '',
-                        '',
-                        item.attributes_ids,
-                      ).then(([status, response]) => {
-                        console.log('cartData - ', response);
-                        if (status == 200) {
-                          if (response.status === true) {
-                            dispatch(cartDetails(response.cart));
-                            // dispatch({ type: 'setCartData', payload: response.cart })
-                            // dispatch({ type: 'setCouponDetails', payload: null });
-                            console.log('this product is added');
-                            showMessage({
-                              message: 'This product is added to cart.',
-                              type: 'info',
-                              backgroundColor: '#808080',
-                            });
-                          } else {
-                            console.log(response.status, response);
-                          }
+                      item.products_id,
+                      1,
+                      userData.id,
+                      '',
+                      '',
+                      item.attributes_ids,
+                    ).then(([status, response]) => {
+                      console.log('cartData - ', response);
+                      if (status == 200) {
+                        if (response.status === true) {
+                          dispatch(cartDetails(response.cart));
+                          // dispatch({ type: 'setCartData', payload: response.cart })
+                          // dispatch({ type: 'setCouponDetails', payload: null });
+                          console.log('this product is added');
+                          showMessage({
+                            message: 'This product is added to cart.',
+                            type: 'info',
+                            backgroundColor: '#808080',
+                          });
+                        } else {
+                          console.log(response.status, response);
                         }
-                      })
+                      }
+                    })
                     : addToCart(
-                        item.products_id,
-                        1,
-                        '',
-                        androidId,
-                        '',
-                        item.attributes_ids,
-                      ).then(([status, response]) => {
-                        console.log('cartData - ', response);
-                        if (status == 200) {
-                          if (response.status === true) {
-                            dispatch(cartDetails(response.cart));
-                            // dispatch({ type: 'setCartData', payload: response.cart })
-                            console.log('this product is added');
+                      item.products_id,
+                      1,
+                      '',
+                      androidId,
+                      '',
+                      item.attributes_ids,
+                    ).then(([status, response]) => {
+                      console.log('cartData - ', response);
+                      if (status == 200) {
+                        if (response.status === true) {
+                          dispatch(cartDetails(response.cart));
+                          // dispatch({ type: 'setCartData', payload: response.cart })
+                          console.log('this product is added');
 
-                            showMessage({
-                              message: 'This product is added to cart.',
-                              type: 'info',
-                              backgroundColor: '#808080',
-                            });
-                          } else {
-                            console.log(response.status, response);
-                          }
+                          showMessage({
+                            message: 'This product is added to cart.',
+                            type: 'info',
+                            backgroundColor: '#808080',
+                          });
+                        } else {
+                          console.log(response.status, response);
                         }
-                      });
+                      }
+                    });
                 } else {
                   showMessage({
                     message: 'this product is out of stock.',
@@ -229,29 +233,31 @@ function SingleProduct({navigation, index, item}) {
                 }
               }}>
               {cartData != null &&
-              cartData.some(
-                value =>
-                  value.products_id == item.products_id &&
-                  value.attributes_id.toString() == item.attributes_ids,
-              ) ? (
+                cartData.some(
+                  value =>
+                    value.products_id == item.products_id &&
+                    value.attributes_id.toString() == item.attributes_ids,
+                ) ? (
                 <MaterialCommunityIcons
                   name="cart-check"
                   color={BKColor.textColor2}
                   size={fontSize.h1}
-                  style={{alignSelf: 'flex-end', marginTop: -15}}
+                  style={{ alignSelf: 'flex-end', marginTop: -15 }}
                 />
               ) : (
                 <AntDesign
                   name="pluscircle"
                   color={BKColor.textColor2}
                   size={fontSize.h1}
-                  style={{alignSelf: 'flex-end', marginTop: -15}}
+                  style={{ alignSelf: 'flex-end', marginTop: -15 }}
                 />
               )}
             </TouchableOpacity>
           </View>
+
         </View>
       </View>
+
     </TouchableOpacity>
   );
 }

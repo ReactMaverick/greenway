@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,8 +9,10 @@ import {
 } from 'react-native';
 import styles from './styles';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {
   pageContainerStyle,
+  pageContainerStyle2,
   pageHeader,
   inputLevel,
   inputBottomLevel,
@@ -19,7 +21,7 @@ import {
   activeButton,
   fontSize,
 } from '../../common/values/BKStyles';
-import {BKColor} from '../../common/values/BKColor';
+import { BKColor } from '../../common/values/BKColor';
 // components
 import PopularProducts from '../../common/components/home/PopularProducts';
 import WholeSaleProduct from '../../common/components/home/WholeSaleProduct';
@@ -29,10 +31,10 @@ import Brands from '../../common/components/home/Brands';
 import ShippingArea from '../../common/components/home/ShippingArea';
 import GiftsArea from '../../common/components/home/GiftsArea';
 import PopularCategory from '../../common/components/home/PopularCategory';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CustomStatusBar from '../../common/components/statusbar';
 
-function Home({navigation}) {
+function Home({ navigation }) {
   // const userData = useSelector(state => state.userReducer.value);
   // console.log('userData', userData);
 
@@ -41,19 +43,29 @@ function Home({navigation}) {
   return (
     <SafeAreaView>
       <CustomStatusBar />
-      <ScrollView style={pageContainerStyle}>
+      <ScrollView style={pageContainerStyle2}>
         <View style={pageHeader}>
           <TouchableOpacity
             style={styles.headerIcon}
             onPress={() => {
               navigation.toggleDrawer();
             }}>
-            <Image
+            <FontAwesome5
+              name="map"
+              color={BKColor.textColor1}
+              size={fontSize.h3}
+              style={styles.headerIcon.icon}
+            />
+            {/* <Image
               source={require('../../assets/images/menu_alt_03.png')}
               resizeMode="cover"
-            />
+            /> */}
           </TouchableOpacity>
-          <Text style={pageHeader.text}>Greenway</Text>
+          <Image
+            source={require('../../assets/images/homeHeaderLogo.png')}
+            resizeMode="cover"
+          />
+          {/* <Text style={pageHeader.text}>Greenway</Text> */}
           <TouchableOpacity
             style={styles.headerIcon}
             onPress={() => {

@@ -49,8 +49,8 @@ export const pageContainerStyle = {
   // marginHorizontal: wp("3%"),
   // marginVertical: hp("1%"),
   // flex: 1,
-  paddingHorizontal: wp('4.5%'),
-  backgroundColor: '#FFFFFF',
+  paddingHorizontal: wp('8%'),
+  backgroundColor: BKColor.bgColor,
   height: hp('100%')
 };
 export const pageContainerStyle2 = {
@@ -58,7 +58,7 @@ export const pageContainerStyle2 = {
   // marginVertical: hp("1%"),
   // flex: 1,
   paddingHorizontal: wp('4.5%'),
-  backgroundColor: '#FFFFFF',
+  backgroundColor: BKColor.white,
   height: '100%'
 };
 
@@ -89,7 +89,9 @@ export const cardStyle = Object.assign({}, shadowStyle, {
 });
 
 export const fontFamily = {
-  regular: 'Manrope-Regular',
+     bold: 'Poppins-Bold',
+     medium: 'Poppins-Medium',
+     regular: 'Poppins-Regular',
 };
 
 export const TextboxWrapper = {
@@ -118,14 +120,15 @@ export const textInput = {
   fontSize: fontSize.h3,
   // width: '100%',
   // backgroundColor: BKColor.textboxBackground,
-  borderRadius: 13,
+  borderRadius: 30,
   borderStyle: 'solid',
   borderWidth: 1,
-  borderColor: '#DDDDDD',
+  borderColor: BKColor.inputBorder,
   padding: hp('1.5%'),
   flexDirection: 'row',
   justifyContent: 'space-between',
-  alignItems: 'center'
+  alignItems: 'center',
+  height: hp('6.5%')
 };
 export const textInput2 = {
   color: BKColor.textColor1,
@@ -151,7 +154,7 @@ export const inputBottomLevel = {
   alignSelf: 'flex-end',
   marginBottom: hp('1%')
 };
-export const placeHolderColor = BKColor.textColor4;
+export const placeHolderColor = '#cbded2';
 export const inputIcon = {
   fontSize: 20,
   color: BKColor.textColor1,
@@ -172,8 +175,8 @@ export const activeButton = {
     marginTop: hp('4%'),
     width: '100%',
     justifyContent: 'center',
-    borderRadius: 13,
-    backgroundColor: BKColor.textColor2
+    borderRadius: 30,
+    backgroundColor: BKColor.textColor1
   },
   text: {
     color: '#FFFFFF',
@@ -257,13 +260,18 @@ export const buttonStyle = {
 export const boxHeader1 = {
   flexDirection: 'row',
   justifyContent: 'space-between',
-  marginTop: fontSize.h1,
+  marginTop: hp('2%'),
   text: {
-    fontSize: hp('2%'),
-    fontWeight: '700',
+    fontSize: fontSize.h2,
+    fontFamily: fontFamily.medium,
+    fontStyle: 'normal',
+    color: BKColor.textColor1,
+  },
+  text2: {
+    fontSize: fontSize.h4,
     fontFamily: fontFamily.regular,
     fontStyle: 'normal',
-    color: BKColor.textColor2,
+    color: BKColor.textColor1,
   },
 };
 

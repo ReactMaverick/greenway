@@ -60,18 +60,18 @@ function PopularProducts({ navigation }) {
                 {allPopularProducts.length > 0 &&
                     <>
                         <View style={boxHeader1}>
-                            <Text style={boxHeader1.text}>Popular products</Text>
+                            <Text style={boxHeader1.text}>Popular Now</Text>
                             <TouchableOpacity onPress={() =>
                                 navigation.navigate('ProductList',
                                 {
                                     productType: 'popular_product'
                                 })
                             }>
-                                <Text style={boxHeader1.text}>View All</Text>
+                                <Text style={boxHeader1.text2}>View All</Text>
                             </TouchableOpacity>
 
                         </View>
-                        <ScrollView>
+                        <ScrollView horizontal={true}>
                             
                             <View style={styles.productContainer}>
                                 {allPopularProducts.map((item, key) => (

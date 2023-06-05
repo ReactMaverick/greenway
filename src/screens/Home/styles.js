@@ -8,7 +8,7 @@ export default StyleSheet.create({
         height: wp('10%'),
         width: wp('10%'),
         borderRadius: wp('5%'),
-        backgroundColor: BKColor.iconBackground1,
+        backgroundColor: '#E1EFE5',
         justifyContent: 'center',
         alignItems: 'center',
         icon: {

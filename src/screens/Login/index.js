@@ -230,21 +230,19 @@ function Login({ navigation }) {
           <View style={styles.loginLogoSection}>
             <View style={styles.loginLogoSection.logo}>
               <Image
-                source={require('../../assets/images/header-logo.png')} style={{ height: hp('14%'),
-                width: hp('14%'),borderRadius: hp('7%'), }}
-                resizeMode="cover"
+                source={require('../../assets/images/header-logo.png')} style={{ height: hp('18%'),width: wp('26%'),resizeMode:"cover" }} 
               />
             </View>
-            <Text style={styles.loginLogoSection.text1}>Welcome to our</Text>
-            <Text style={styles.loginLogoSection.text2}>Greenway shop</Text>
+            <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
+            <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
           </View>
           <Text style={{ textAlign: 'center', color: BKColor.textColor2 }}>
             {loginErrorMessage}
           </Text>
-          <View style={inputContainer}>
-            <Text style={inputLevel}>User Name</Text>
+          <View>
+            {/* <Text style={inputLevel}>User Name</Text> */}
             <TextInput
-              placeholder={'Username'}
+              placeholder={'Enter email address'}
               placeholderTextColor={placeHolderColor}
               style={textInput}
               onChangeText={value => setUsername(value)}
@@ -258,7 +256,7 @@ function Login({ navigation }) {
           </View>
 
           <View style={inputContainer}>
-            <Text style={inputLevel}>Password</Text>
+            {/* <Text style={inputLevel}>Password</Text> */}
             <View
               style={[
                 textInput,
@@ -268,7 +266,7 @@ function Login({ navigation }) {
                 placeholder={'Password'}
                 placeholderTextColor={placeHolderColor}
                 style={{ width: '90%',fontFamily: fontFamily.regular,
-                fontSize: fontSize.h3,color: BKColor.textColor1 }}
+                fontSize: fontSize.h3,color: BKColor.textColor1}}
                 secureTextEntry={passwordEye}
                 onChangeText={value => setPassword(value)}
                 value={password}
@@ -277,7 +275,7 @@ function Login({ navigation }) {
                   setLoginErrorMessage('');
                 }}
               />
-              <TouchableOpacity
+              <TouchableOpacity style={{ width: '10%', }}
                 onPress={() => {
                   setPasswordEye(!passwordEye);
                 }}>
@@ -297,23 +295,23 @@ function Login({ navigation }) {
           <TouchableOpacity style={activeButton.button} onPress={_signIn}>
             <Text style={activeButton.text}>Login</Text>
           </TouchableOpacity>
-          <View style={styles.socialLoginContainer}>
+          {/* <View style={styles.socialLoginContainer}>
             <TouchableOpacity
               style={styles.socialLoginButton.button}
               onPress={() => {
-                // onGoogleButtonPress().then(result => {
-                //   console.log('google login!', result);
-                //   _socialLogin(
-                //     result.user.id,
-                //     'google',
-                //     result.user.email,
-                //     result.user.name,
-                //   );
-                //   setSocialId(result.user.id);
-                //   setEmail(result.user.email);
-                //   setName(result.user.name);
-                //   setSocial('google');
-                // });
+                onGoogleButtonPress().then(result => {
+                  console.log('google login!', result);
+                  _socialLogin(
+                    result.user.id,
+                    'google',
+                    result.user.email,
+                    result.user.name,
+                  );
+                  setSocialId(result.user.id);
+                  setEmail(result.user.email);
+                  setName(result.user.name);
+                  setSocial('google');
+                });
               }}>
               <AntDesign
                 name="google"
@@ -326,20 +324,20 @@ function Login({ navigation }) {
             <TouchableOpacity
               style={styles.socialLoginButton.button}
               onPress={() => {
-                // navigation.navigate('HomeScreen');
-                // onFacebookButtonPress().then(result => {
-                //   console.log('Signed in with Facebook!', result);
-                //   _socialLogin(
-                //     result.additionalUserInfo.profile.id,
-                //     'facebook',
-                //     result.additionalUserInfo.profile.email,
-                //     result.user.displayName,
-                //   );
-                //   setSocialId(result.additionalUserInfo.profile.id);
-                //   setEmail(result.additionalUserInfo.profile.email);
-                //   setName(result.user.displayName);
-                //   setSocial('facebook');
-                // });
+                navigation.navigate('HomeScreen');
+                onFacebookButtonPress().then(result => {
+                  console.log('Signed in with Facebook!', result);
+                  _socialLogin(
+                    result.additionalUserInfo.profile.id,
+                    'facebook',
+                    result.additionalUserInfo.profile.email,
+                    result.user.displayName,
+                  );
+                  setSocialId(result.additionalUserInfo.profile.id);
+                  setEmail(result.additionalUserInfo.profile.email);
+                  setName(result.user.displayName);
+                  setSocial('facebook');
+                });
               }}>
               <FontAwesome
                 name="facebook"
@@ -349,7 +347,7 @@ function Login({ navigation }) {
               />
               <Text style={styles.socialLoginButton.text2}>Facebook</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
           <View style={styles.loginFooter}>
             <Text style={styles.loginFooter.textLeft}>
               Don’t have account?{' '}

@@ -80,12 +80,7 @@ function ForgetPassword({navigation}) {
         <View style={styles.loginLogoSection.logo}>
           <Image
             source={require('../../assets/images/header-logo.png')}
-            style={{
-              height: hp('14%'),
-              width: hp('14%'),
-              borderRadius: hp('7%'),
-              resizeMode: 'cover',
-            }}
+            style={{height: hp('18%'),width: wp('26%'),resizeMode:"cover" }}
           />
         </View>
         <Text style={styles.loginLogoSection.text1}>Forget Password</Text>
