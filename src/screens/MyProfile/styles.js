@@ -22,7 +22,7 @@ export default StyleSheet.create({
         borderRadius: 20,
         borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: BKColor.boxBorder,
+        borderColor: BKColor.inputBorder,
         paddingVertical: hp('4%'),
         paddingHorizontal: hp('2%'),
         marginBottom: hp('4%'),
@@ -30,7 +30,6 @@ export default StyleSheet.create({
         text1: {
             color: BKColor.textColor1,
             fontSize: fontSize.h3,
-            fontWeight: '300',
             // textAlign: 'center',
             fontFamily: fontFamily.regular,
             // marginBottom: hp('2%'),
@@ -42,7 +41,7 @@ export default StyleSheet.create({
         justifyContent:"space-between",
         alignItems:"center",
         marginBottom: hp('2%'),
-        backgroundColor: BKColor.iconBackground1,
+        backgroundColor: BKColor.bgColor,
         padding: wp('5%'),
         borderRadius: 10
     },

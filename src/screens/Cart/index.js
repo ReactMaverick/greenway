@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -14,14 +14,14 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {pageContainerStyle} from '../../common/values/BKStyles';
-import {pageHeader, fontSize, activeButton} from '../../common/values/BKStyles';
-import {BKColor} from '../../common/values/BKColor';
+import { pageContainerStyle, pageContainerStyle2 } from '../../common/values/BKStyles';
+import { pageHeader, fontSize, activeButton } from '../../common/values/BKStyles';
+import { BKColor } from '../../common/values/BKColor';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import {inputContainer, textInput, placeHolderColor} from '../../common/values/BKStyles';
+import { inputContainer, textInput, placeHolderColor } from '../../common/values/BKStyles';
 import {
   GET_CART_API,
   IMAGE_BASE_PATH,
@@ -29,27 +29,29 @@ import {
   APPLY_COUPON,
   UPDATE_CART_QUANTITY,
 } from '../../config/ApiConfig';
-import {useSelector, useDispatch} from 'react-redux';
-import {GetApiFetch, PostApiFetch} from '../../config/CommonFunction';
+import { useSelector, useDispatch } from 'react-redux';
+import { GetApiFetch, PostApiFetch } from '../../config/CommonFunction';
 import DeviceInfo from 'react-native-device-info';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+import { showMessage, hideMessage } from 'react-native-flash-message';
 import CartIcon from '../../assets/images/CartIcon';
-import {useIsFocused} from '@react-navigation/native';
-import {cartDetails} from '../../redux/reducers/CartReducer';
-import {couponData} from '../../redux/reducers/CouponDetailsReducer';
+import { useIsFocused } from '@react-navigation/native';
+import { cartDetails } from '../../redux/reducers/CartReducer';
+import { couponData } from '../../redux/reducers/CouponDetailsReducer';
 import CustomStatusBar from '../../common/components/statusbar';
 
-function Cart({navigation, route}) {
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+
+function Cart({ navigation, route }) {
   const routeParams = route.params != undefined ? route.params : "";
-//    console.log("params ", routeParams);
+  //    console.log("params ", routeParams);
   const dispatch = useDispatch();
   const userData = useSelector(state => state.UserReducer.value);
   const cartData = useSelector(state => state.CartReducer.value);
   const couponDetails = useSelector(state => state.CouponDetailsReducer.value);
   const shopNowData = useSelector(state => state.ShopNowReducer.value);
-//   console.log('shopNowData',shopNowData)
+  //   console.log('shopNowData',shopNowData)
   const [productCartData, setProductCartData] = useState([]);
-//   console.log('productCartData', productCartData)
+  //   console.log('productCartData', productCartData)
   const [giftArea, setGiftArea] = useState([]);
   const [androidId, setAndroidId] = useState(true);
 
@@ -93,10 +95,10 @@ function Cart({navigation, route}) {
             setGiftArea(response.giftArray);
             // console.log('cart - ', response.cart)
             if (response.cart.length > 0) {
-                dispatch(cartDetails(response.cart));
-                _calculateAmounts(response.cart, response.shipping_detail, couponDetails, 0)
+              dispatch(cartDetails(response.cart));
+              _calculateAmounts(response.cart, response.shipping_detail, couponDetails, 0)
             } else {
-                dispatch(cartDetails());
+              dispatch(cartDetails());
             }
             _calculateAmounts(
               response.cart,
@@ -408,16 +410,16 @@ function Cart({navigation, route}) {
   if (isLoading) {
     return (
       <>
-        <SafeAreaView style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <CustomStatusBar/>
+        <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <CustomStatusBar />
           <ActivityIndicator size="large" color={BKColor.textColor2} />
         </SafeAreaView>
       </>
     );
   } else {
     return (
-      <SafeAreaView style={pageContainerStyle}>
-        <CustomStatusBar/>
+      <SafeAreaView style={[pageContainerStyle2, { height: hp('100%') }]}>
+        <CustomStatusBar />
         <View style={pageHeader}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Fontisto
@@ -427,93 +429,119 @@ function Cart({navigation, route}) {
             />
           </TouchableOpacity>
           <Text style={pageHeader.text}>Cart Page</Text>
-          <View style={{width: wp('10%')}}></View>
+          <View style={{ width: wp('10%') }}></View>
         </View>
         {cartData != null ? (
           <ScrollView
-            style={{marginBottom: hp('17%')}}
+            style={{ marginBottom: hp('17%') }}
             showsVerticalScrollIndicator={false}>
             {cartData.map((item, key) => (
-              <View style={styles.cartDetailsSec} key={key}>
-                <View style={styles.cartImgSec}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      _goDetailsPage(item);
-                    }}>
-                    <Image
-                      source={{uri: item.image_path}}
-                      style={styles.itemImage}
-                    />
-                  </TouchableOpacity>
-                </View>
-                <View style={{width: wp('68%')}}>
-                  <View style={styles.cartDecSec}>
+
+
+              <View>
+
+                <View style={styles.cartDetailsSec} key={key}>
+                  <View style={styles.cartImgSec}>
                     <TouchableOpacity
                       onPress={() => {
                         _goDetailsPage(item);
                       }}>
-                      <Text style={styles.cartDecHeading}>
-                        {item.products_name}
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => _deleteCart(item.customers_basket_id)}>
-                      <Feather name="trash" style={styles.cartDltIcon} />
+                      {/* <Image
+                      source={{ uri: item.image_path }}
+                      style={styles.itemImage}
+                    /> */}
+
+                      <View style={styles.itemOuter}>
+                        <Image
+                          source={{ uri: item.image_path }}
+                          style={styles.itemImage}
+                          borderRadius={wp('12.5%')}
+                        />
+                      </View>
                     </TouchableOpacity>
                   </View>
-                  <View style={styles.cartDecAttriSec}>
-                    <Text style={{color: BKColor.textColor2}}>
-                      {/* {item.attributes[0].product_option_slug} :{' '} */}
-                    </Text>
-                    <Text>{item.attributes[0].attribute_value}</Text>
-                  </View>
-                  <View style={styles.cartDecSec}>
-                    <View style={styles.cartQtySec}>
+                  <View style={{ flex: 2, paddingVertical: hp('1.5%'), paddingHorizontal: wp('2%') }}>
+                    <View style={styles.cartDecSec}>
                       <TouchableOpacity
                         onPress={() => {
-                          _minusQuantity(
-                            key,
-                            item.customers_basket_id,
-                            item.products_id,
-                            item.attributesString,
-                          );
+                          _goDetailsPage(item);
                         }}>
-                        <AntDesign name="minus" style={styles.cartMinus} />
+                        <Text style={styles.cartDecHeading}>
+                          {item.products_name}
+                        </Text>
                       </TouchableOpacity>
-                      <Text style={styles.cartQty}>
-                        {item.customers_basket_quantity}
+                    </View>
+                    <View style={styles.cartDecAttriSec}>
+                      <Text style={{ color: BKColor.textColor2 }}>
+                        {/* {item.attributes[0].product_option_slug} :{' '} */}
                       </Text>
-                      <TouchableOpacity
-                        onPress={() => {
-                          if (item.customers_basket_quantity < item.max_order) {
-                            _plusQuantity(
+                      <Text style={styles.itemAttrValue}>{item.attributes[0].attribute_value}</Text>
+                    </View>
+
+                    <Text style={styles.cartPrice}>
+                      Rs. {item.afterDiscountPrice * item.customers_basket_quantity}
+                      {/* ₹ {item.afterDiscountPrice * item.customers_basket_quantity} */}
+                    </Text>
+                  </View>
+
+
+                  <View style={styles.cartQtyOuter}>
+
+                    <View style={styles.cartDecSec}>
+                      <View style={styles.cartQtySec}>
+
+
+                        <TouchableOpacity
+                          onPress={() => {
+                            if (item.customers_basket_quantity < item.max_order) {
+                              _plusQuantity(
+                                key,
+                                item.customers_basket_id,
+                                item.products_id,
+                                item.attributesString,
+                              );
+                              // console.log("Product increased")
+                            } else {
+                              showMessage({
+                                message: 'Product out of stock!!',
+                                type: 'info',
+                                backgroundColor: '#EC1F25',
+                              });
+                            }
+                          }}>
+                          <AntDesign name="plus" style={styles.cartPlus} />
+                        </TouchableOpacity>
+
+
+                        <Text style={styles.cartQty}>
+                          {item.customers_basket_quantity}
+                        </Text>
+                        <TouchableOpacity
+                          onPress={() => {
+                            _minusQuantity(
                               key,
                               item.customers_basket_id,
                               item.products_id,
                               item.attributesString,
                             );
-                            // console.log("Product increased")
-                          } else {
-                            showMessage({
-                              message: 'Product out of stock!!',
-                              type: 'info',
-                              backgroundColor: '#EC1F25',
-                            });
-                          }
-                        }}>
-                        <AntDesign name="plus" style={styles.cartPlus} />
-                      </TouchableOpacity>
+                          }}>
+                          <AntDesign name="minus" style={styles.cartMinus} />
+                        </TouchableOpacity>
+                      </View>
                     </View>
-                    <Text style={styles.cartPrice}>
-                    ₹ {item.afterDiscountPrice*item.customers_basket_quantity}
-                    </Text>
                   </View>
+
                 </View>
+
+                {/* <TouchableOpacity
+                  onPress={() => _deleteCart(item.customers_basket_id)}>
+                  <Feather name="trash" style={styles.cartDltIcon} />
+                </TouchableOpacity> */}
               </View>
             ))}
 
             {giftArea.length > 0 && (
-              <View style={{paddingTop: hp('3%')}}>
+              <View style={{ paddingTop: hp('3%') }}>
                 <Text style={styles.cartCouponHeading}>Gifts</Text>
                 <View style={styles.cartGiftsSec}>
                   {giftArea.map((item2, key2) => (
@@ -521,7 +549,7 @@ function Cart({navigation, route}) {
                       <View style={styles.giftsSec} key={key2}>
                         <View>
                           <Image
-                            source={{uri: IMAGE_BASE_PATH + item2.image_path}}
+                            source={{ uri: IMAGE_BASE_PATH + item2.image_path }}
                             style={styles.itemImage}
                           />
                         </View>
@@ -554,7 +582,7 @@ function Cart({navigation, route}) {
               </View>
             )}
 
-            <View style={{paddingVertical: hp('3%')}}>
+            <View style={{ paddingVertical: hp('3%') }}>
               <Text style={styles.cartCouponHeading}>Add coupon</Text>
 
               <View style={inputContainer}>
@@ -563,12 +591,13 @@ function Cart({navigation, route}) {
                     <TextInput
                       placeholder={'Entry Voucher Code'}
                       placeholderTextColor={placeHolderColor}
-                      style={textInput}
+                      // style={textInput}
+                      style={styles.inputText}
                       onChangeText={value => setCoupon(value)}
                       value={coupon}
-                      // onFocus={() => {
-                      //   setErrorMessage('')
-                      // }}
+                    // onFocus={() => {
+                    //   setErrorMessage('')
+                    // }}
                     />
                   </View>
                   <TouchableOpacity
@@ -578,81 +607,121 @@ function Cart({navigation, route}) {
                         _applyCoupon(coupon);
                       }
                     }}>
-                    <Text style={styles.couponApplyText}>Apply</Text>
+                    <AntDesign
+                      name="arrowright"
+                      color={BKColor.textColor2}
+                      size={fontSize.h2}
+                    />
+                    {/* <Text style={styles.couponApplyText}>Apply</Text> */}
                   </TouchableOpacity>
                 </View>
               </View>
             </View>
-            <View
-              style={{
-                borderBottomWidth: 2,
-                borderStyle: 'dashed',
-                borderBottomColor: '#dddddd',
-                paddingBottom: hp('1%'),
-              }}>
-              <View style={styles.cartItemSec}>
-                <Text style={styles.totalItemHeading}>Subtotal</Text>
-                <Text style={styles.totalItem}>₹ {subTotal}</Text>
-              </View>
-              <View style={styles.cartItemSec}>
-                <Text style={styles.totalItemHeading}>Tax Amount</Text>
-                <Text style={styles.totalItem}>₹ {totalTax}</Text>
-              </View>
-              {giftArea.length > 0 ? (
+
+            <View style={{ backgroundColor: BKColor.bgColor, padding: wp('3%'), borderRadius: 10 }}>
+
+              <View
+                style={{
+                  borderBottomWidth: 2,
+                  borderStyle: 'solid',
+                  borderBottomColor: BKColor.inputBorder,
+                  paddingBottom: hp('1%'),
+                }}>
                 <View style={styles.cartItemSec}>
-                  <Text style={styles.totalItemHeading}>Gift</Text>
-                  <View style={{flexDirection: 'row'}}>
-                    <Text style={styles.totalItem}>
-                      free gift with this order:{' '}
-                    </Text>
-                    <Text style={{color: '#EC1F25', fontWeight: '700'}}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.totalItemHeading}>Subtotal</Text>
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.totalItem}>Rs. {subTotal}</Text>
+                    {/* <Text style={styles.totalItem}>₹ {subTotal}</Text> */}
+                  </View>
+                </View>
+                <View style={styles.cartItemSec}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.totalItemHeading}>Tax Amount</Text>
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.totalItem}>Rs. {totalTax}</Text>
+                    {/* <Text style={styles.totalItem}>₹ {totalTax}</Text> */}
+                  </View>
+                </View>
+                {giftArea.length > 0 ? (
+                  <View style={styles.cartItemSec}>
+                    <Text style={styles.totalItemHeading}>Gift</Text>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Text style={styles.totalItem}>
+                        free gift with this order:{' '}
+                      </Text>
+                      <Text style={{ color: '#EC1F25', fontWeight: '700' }}>
+                        Rs. 0
+                      </Text>
+                      {/* <Text style={{ color: '#EC1F25', fontWeight: '700' }}>
                       ₹ 0
+                    </Text> */}
+                    </View>
+                  </View>
+                ) : (
+                  <></>
+                )}
+
+                <View style={styles.cartItemSec}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.totalItemHeading}>Shipping</Text>
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.totalItem}>
+                      Flat Rate: Rs. {deliveryCharges}
+                      {/* Flat Rate: ₹ {deliveryCharges} */}
                     </Text>
                   </View>
                 </View>
-              ) : (
-                <></>
-              )}
-
-              <View style={styles.cartItemSec}>
-                <Text style={styles.totalItemHeading}>Shipping</Text>
-                <Text style={styles.totalItem}>
-                  Flat Rate: ₹ {deliveryCharges}
-                </Text>
-              </View>
-              <View style={styles.cartItemSec}>
-                <Text style={styles.totalItemHeading}>Coupon applied</Text>
-                {couponDetails != null ? (
-                  <TouchableOpacity
-                    style={{flexDirection: 'row', alignItems: 'center'}}
-                    onPress={() => {
-                      dispatch(couponData());
-                      // dispatch({ type: 'setCouponDetails', payload: null });
-                    }}>
-                    <Entypo
-                      name="circle-with-cross"
-                      style={[
-                        styles.totalItem,
-                        {marginRight: wp('1%'), fontSize: wp('5%')},
-                      ]}
-                    />
-                    <Text style={styles.totalItem}>
-                      {couponDetails.coupon[0].code}: ₹ {couponDiscount}
-                    </Text>
-                  </TouchableOpacity>
-                ) : (
-                  <Text style={styles.totalItem}>no coupon applied</Text>
-                )}
-              </View>
-              {/* <View style={styles.cartItemSec}>
+                <View style={styles.cartItemSec}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.totalItemHeading}>Coupon applied</Text>
+                  </View>
+                  {couponDetails != null ? (
+                    <View style={{ flex: 1 }}>
+                      <TouchableOpacity
+                        style={{ flexDirection: 'row', alignItems: 'center' }}
+                        onPress={() => {
+                          dispatch(couponData());
+                          // dispatch({ type: 'setCouponDetails', payload: null });
+                        }}>
+                        <Entypo
+                          name="circle-with-cross"
+                          style={[
+                            styles.totalItem,
+                            { marginRight: wp('1%'), fontSize: wp('5%') },
+                          ]}
+                        />
+                        <Text style={styles.totalItem}>
+                          {couponDetails.coupon[0].code}: Rs. {couponDiscount}
+                          {/* {couponDetails.coupon[0].code}: ₹ {couponDiscount} */}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  ) : (
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.totalItem}>no coupon applied</Text>
+                    </View>
+                  )}
+                </View>
+                {/* <View style={styles.cartItemSec}>
                             <Text style={styles.totalItemHeading}>Total</Text>
                             <Text style={styles.totalItem}>Rs. 12.25</Text>
                         </View> */}
+              </View>
+              <View style={styles.cartTotalPrice}>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.totalItemHeading}>Total Price</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.totalItem}>Rs. {totalPrice}</Text>
+                  {/* <Text style={styles.totalItem}>₹ {totalPrice}</Text> */}
+                </View>
+              </View>
             </View>
-            <View style={styles.cartTotalPrice}>
-              <Text style={styles.totalItemHeading}>Total Price</Text>
-              <Text style={styles.totalItem}>₹ {totalPrice}</Text>
-            </View>
+
             <TouchableOpacity
               style={activeButton.button}
               onPress={() => navigation.navigate('Checkout')}>
@@ -672,14 +741,15 @@ function Cart({navigation, route}) {
               width={wp('30%')}
               height={wp('30%')}
             />
-            <Text style={[styles.totalItemHeading, {fontWeight: '700'}]}>
+            <Text style={[styles.totalItemHeading, { fontWeight: '700' }]}>
               Your cart is empty
             </Text>
-            <Text style={[styles.totalItemHeading, {textAlign: 'center'}]}>
+            <Text style={[styles.totalItemHeading, { textAlign: 'center' }]}>
               Looks like you haven't added anything to your cart yet
             </Text>
           </View>
         )}
+
       </SafeAreaView>
     );
   }

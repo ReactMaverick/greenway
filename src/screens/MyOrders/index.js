@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {pageContainerStyle, pageHeader} from '../../common/values/BKStyles';
+import { pageContainerStyle,pageContainerStyle2, pageHeader } from '../../common/values/BKStyles';
 import {
   inputLevel,
   inputBottomLevel,
@@ -21,18 +21,18 @@ import {
   activeButton,
   fontSize,
 } from '../../common/values/BKStyles';
-import {BKColor} from '../../common/values/BKColor';
+import { BKColor } from '../../common/values/BKColor';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import {POST_MY_ORDER_API} from '../../config/ApiConfig';
-import {PostApiFetch} from '../../config/CommonFunction';
-import {useSelector, useDispatch} from 'react-redux';
-import {useIsFocused} from '@react-navigation/native';
+import { POST_MY_ORDER_API } from '../../config/ApiConfig';
+import { PostApiFetch } from '../../config/CommonFunction';
+import { useSelector, useDispatch } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 import CustomStatusBar from '../../common/components/statusbar';
 
-function MyOrders({navigation}) {
+function MyOrders({ navigation }) {
   const [orderData, setOrderData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const userData = useSelector(state => state.UserReducer.value);
@@ -68,16 +68,16 @@ function MyOrders({navigation}) {
     return (
       <>
         <SafeAreaView
-          style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <CustomStatusBar/>
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <CustomStatusBar />
           <ActivityIndicator size="large" color={BKColor.textColor2} />
         </SafeAreaView>
       </>
     );
   } else {
     return (
-      <SafeAreaView style={pageContainerStyle}>
-        <CustomStatusBar/>
+      <SafeAreaView style={pageContainerStyle2}>
+        <CustomStatusBar />
         <View style={pageHeader}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Fontisto
@@ -87,10 +87,10 @@ function MyOrders({navigation}) {
             />
           </TouchableOpacity>
           <Text style={pageHeader.text}>My Order</Text>
-          <View style={{width: '10%'}}></View>
+          <View style={{ width: '10%' }}></View>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={{marginBottom: hp('5%')}}>
+          <View style={{ marginBottom: hp('5%') }}>
             {orderData.map((item, key) => (
               <TouchableOpacity
                 style={styles.contactUsSec}
@@ -102,23 +102,26 @@ function MyOrders({navigation}) {
                   });
                 }}>
                 <View style={styles.orderLeftSec}>
-                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={styles.myOrderLabel}>Order Id : </Text>
                     <Text style={styles.myOrderText}>
                       {' '}
                       {item.invoice_number}
                     </Text>
                   </View>
-                  <Text style={styles.contactUsText}>
-                    Order Date : {item.date_purchased}
-                  </Text>
+                  <View style={{ flexDirection: 'row', alignItems: 'center',marginTop: hp('1%') }}>
+                    <Text style={styles.contactUsText}>
+                      Order Date :
+                    </Text>
+                    <Text style={styles.myOrderText}> {item.date_purchased}</Text>
+                  </View>
                   <Text style={styles.orderStatus}>{item.orders_status}</Text>
                   {/* <Text style={styles.orderStatusActive}>Delivered</Text> */}
                 </View>
                 <View style={styles.orderRightSec}>
                   <Entypo
                     name="chevron-thin-right"
-                    color="#000000"
+                    color={BKColor.textColor1}
                     size={fontSize.h2}
                   />
                 </View>

@@ -19,25 +19,26 @@ export default StyleSheet.create({
 
     contactUsText:{
         fontSize: fontSize.h3,
-        fontWeight: '500',
+        fontFamily: fontFamily.medium,
         color: BKColor. textColor1,
-        marginTop: hp('1%')
+        // marginTop: hp('1%')
     },
     orderLeftSec: {
-        width: wp('69%')
+        width: wp('63%'),
     },
     myOrderLabel: {
-        fontSize: fontSize.h2,
-        fontWeight: '500',
+        fontSize: fontSize.h3,
+        fontFamily: fontFamily.medium,
         color: BKColor.textColor2
     },
     myOrderText: {
         fontSize: fontSize.h3,
-        fontWeight: '500',
+        fontFamily: fontFamily.regular,
         color: BKColor.textColor1
     },
     orderStatus: {
         fontSize: fontSize.h3,
+        fontFamily: fontFamily.regular,
         color: BKColor.textColor2,
         marginTop: hp('1%')
     },
@@ -47,9 +48,9 @@ export default StyleSheet.create({
         marginTop: hp('1%')
     },
     orderRightSec: {
-        width: wp('14%'),
+        width: wp('20%'),
         flexDirection:'row',
-        justifyContent:'flex-end',        
+        justifyContent:'flex-end', 
     },
     socialLoginContainer: {
         flexDirection: 'row',

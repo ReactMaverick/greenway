@@ -14,7 +14,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Modal from 'react-native-modal';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {pageContainerStyle, pageHeader} from '../../common/values/BKStyles';
+import {pageContainerStyle,pageContainerStyle2, pageHeader} from '../../common/values/BKStyles';
 import {
   inputLevel,
   inputBottomLevel,
@@ -396,7 +396,7 @@ function MyAddress({navigation}) {
     );
   } else {
     return (
-      <SafeAreaView style={pageContainerStyle}>
+      <SafeAreaView style={pageContainerStyle2}>
         <CustomStatusBar />
         <View style={pageHeader}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -420,7 +420,7 @@ function MyAddress({navigation}) {
                     setAddAddressType('billing');
                     toggleModal();
                   }}>
-                  <Text style={{color: '#ffffff', fontWeight: '600'}}>
+                  <Text style={styles.addAddressText}>
                     Add+
                   </Text>
                 </TouchableOpacity>
@@ -496,7 +496,7 @@ function MyAddress({navigation}) {
                   setAddAddressType('shipping');
                   toggleModal();
                 }}>
-                <Text style={{color: '#ffffff', fontWeight: '600'}}>Add+</Text>
+                <Text style={styles.addAddressText}>Add+</Text>
               </TouchableOpacity>
             </View>
             {shippingAddressList.length > 0 ? (

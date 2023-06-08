@@ -13,6 +13,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {
   pageContainerStyle,
+  pageContainerStyle2,
   pageHeader,
   inputLevel,
   inputBottomLevel,
@@ -131,7 +132,7 @@ function MyAccount({navigation}) {
   return (
     <SafeAreaView>
       <CustomStatusBar />
-      <ScrollView style={pageContainerStyle}>
+      <ScrollView style={pageContainerStyle2}>
         {/* <View style={pageHeader}>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
                     <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
@@ -220,7 +221,7 @@ function MyAccount({navigation}) {
             <View style={styles.passwordFieldOuter}>
               <TextInput
                 placeholder={'new password'}
-                style={textInput}
+                style={styles.inputText}
                 key="password"
                 onChangeText={password => setNewPassword(password)}
                 value={newPassword}
@@ -252,7 +253,7 @@ function MyAccount({navigation}) {
             <View style={styles.passwordFieldOuter}>
               <TextInput
                 placeholder={'confirm password'}
-                style={textInput}
+                style={styles.inputText}
                 key="password"
                 onChangeText={password => setConfirmPassword(password)}
                 value={confirmPassword}

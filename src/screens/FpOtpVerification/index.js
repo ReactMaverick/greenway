@@ -51,18 +51,19 @@ function FpOtpVerification({navigation, route}) {
       <CustomStatusBar />
       <ScrollView style={pageContainerStyle}>
         <View style={styles.regContainer}>
-          <Text style={styles.regContainer.headerText}>
-            Entry Your 4 digit code
-          </Text>
-          <View style={styles.logoSection}>
+        <View style={styles.logoSection}>
             {/* <Text>Phone Number</Text> */}
 
             <Image
               style={styles.logoSection.logoImage}
               source={require('../../assets/images/OtpLogo.png')}
-              borderRadius={5}
+              // borderRadius={5}
             />
           </View>
+          <Text style={styles.regContainer.headerText}>
+            Entry Your 4 digit code
+          </Text>
+          
           <OTPTextInput
             textInputStyle={styles.otpBoxStyle}
             tintColor={BKColor.textColor2}

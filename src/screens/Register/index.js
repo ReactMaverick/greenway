@@ -125,22 +125,22 @@ function Register({ navigation }) {
               {regErrorMsg}
             </Text>
 
-            {/* <View style={inputContainer}>
-              <Text style={inputLevel}>Name</Text>
+            <View style={inputContainer}>
+              {/* <Text style={inputLevel}>Name</Text> */}
               <TextInput
-                placeholder={'Enter email address'}
+                placeholder={'Full Name'}
                 placeholderTextColor={placeHolderColor}
                 style={textInput}
                 key="fullname"
                 onChangeText={value => setFullName(value)}
                 value={fullName}
-                secureTextEntry={passwordEye}
-                onChangeText={(password) => setPassword(password)}
+                // secureTextEntry={passwordEye}
+                // onChangeText={(password) => setPassword(password)}
                 onFocus={() => {
                   setRegErrorMessage('');
                 }}
               />
-            </View> */}
+            </View>
             <View style={inputContainer}>
               {/* <Text style={inputLevel}>Email</Text> */}
               <TextInput
@@ -157,8 +157,8 @@ function Register({ navigation }) {
                 }}
               />
             </View>
-            {/* <View style={inputContainer}>
-              <Text style={inputLevel}>Phone Number</Text>
+            <View style={inputContainer}>
+              {/* <Text style={inputLevel}>Phone Number</Text> */}
               <TextInput
                 placeholder={'Phone Number'}
                 placeholderTextColor={placeHolderColor}
@@ -168,13 +168,13 @@ function Register({ navigation }) {
                 maxLength={10}
                 onChangeText={value => setRegPhoneNumber(value)}
                 value={regPhoneNumber}
-                secureTextEntry={passwordEye}
-                onChangeText={(password) => setPassword(password)}
+                // secureTextEntry={passwordEye}
+                // onChangeText={(password) => setPassword(password)}
                 onFocus={() => {
                   setRegErrorMessage('');
                 }}
               />
-            </View> */}
+            </View>
 
 
 

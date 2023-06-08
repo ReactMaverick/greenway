@@ -7,9 +7,9 @@ export default StyleSheet.create({
     
     regContainer: {
         borderRadius: 20,
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderColor: '#DDDDDD',
+        // borderStyle: 'solid',
+        // borderWidth: 1,
+        // borderColor: '#DDDDDD',
         paddingVertical: hp('7%'),
         paddingHorizontal: hp('2%'),
         marginTop: hp('8%'),
@@ -35,40 +35,39 @@ export default StyleSheet.create({
         textLeft: {
             color: BKColor.textColor4,
             fontSize: fontSize.h3,
-            fontWeight: '300',
             textAlign: 'center',
             fontFamily: fontFamily.regular,
         },
         textRight: {
             color: BKColor.textColor2,
-            fontSize: fontSize.h3,
-            fontWeight: '700',
+            fontSize: fontSize.h4,
             textAlign: 'center',
-            fontFamily: fontFamily.regular,
+            fontFamily: fontFamily.bold,
         },
     },
     otpBoxStyle:{ 
         borderRadius: 20,
         borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: '#DDDDDD',
+        borderColor: BKColor.inputBorder,
         width: hp('8%'),
         height: hp('8%'),
         fontSize: fontSize.h2,
         marginHorizontal: wp('3%')
     },
     logoSection: {
-        height: hp('18%'),
-        width: wp('54%'),
-        borderRadius: hp('3%'),
-        backgroundColor: BKColor.iconBackground1,
-        alignSelf: 'center',
+        height: hp('38%'),
+        // width: wp('54%'),
+        // borderRadius: hp('3%'),
+        // backgroundColor: BKColor.iconBackground1,
+        // alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: hp('4%'),
+        // marginBottom: hp('4%'),
         logoImage: {
-            height: hp('12%'),
-            width: hp('11%')
+            height: hp('18%'),
+            width: wp('26%'),
+            resizeMode: "cover"
         }
     },
 

@@ -26,6 +26,7 @@ import {
   activeButton,
   fontSize,
   passiveButton,
+  pageContainerStyle2
 } from '../../common/values/BKStyles';
 import {BKColor} from '../../common/values/BKColor';
 import {FlatListSlider} from 'react-native-flatlist-slider';
@@ -230,7 +231,7 @@ function ProductDetails({navigation, route}) {
     );
   } else {
     return (
-      <SafeAreaView style={pageContainerStyle}>
+      <SafeAreaView style={pageContainerStyle2}>
         <CustomStatusBar/>
         <View style={pageHeader}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -244,7 +245,7 @@ function ProductDetails({navigation, route}) {
           <View></View>
         </View>
 
-        <ScrollView style={{marginVertical: hp('3%')}}>
+        <ScrollView style={{marginVertical: hp('1%')}}>
           {productImages.length > 0 && (
             <ScrollView style={styles.productImageSection}>
               <FlatListSlider
@@ -335,10 +336,13 @@ function ProductDetails({navigation, route}) {
                 <Text
                   style={[
                     styles.productAttr,
-                    {marginTop: 0, marginRight: wp('2%')},
+                    {marginTop: 0},
+                    // {marginTop: 0, marginRight: wp('2%')},
                   ]}>
                   {/* {item.option.name} */}
                 </Text>
+                
+                <Text style={styles.attrName}>Weight : </Text>
                 {item.values.map((item2, key2) => (
                   <TouchableOpacity
                     key={key2}

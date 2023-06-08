@@ -9,6 +9,7 @@ export const BKColor = {
   textColor6: '#EC1F25',
   bgColor: '#F6FFF7',
   inputBorder: '#A4C0B1',
+  descText: '#80a193',
 
   iconBackground1: '#F9ECE9',
   btnBackgroundColor1: '#EC1F25',

@@ -28,17 +28,17 @@ export default StyleSheet.create({
     },
     myOrderLabel: {
         fontSize: fontSize.h2,
-        fontWeight: '500',
+        fontFamily: fontFamily.medium,
         color: BKColor.textColor2
     },
     myAddHeading: {
         fontSize: fontSize.h2,
-        fontWeight: '500',
+        fontFamily: fontFamily.medium,
         color: BKColor.textColor1
     },
     myOrderText: {
-        fontSize: fontSize.h2,
-        fontWeight: '500',
+        fontSize: fontSize.h3,
+        fontFamily: fontFamily.medium,
         color: BKColor.textColor2
     },
     orderStatus: {
@@ -162,7 +162,7 @@ export default StyleSheet.create({
         button: {
             alignItems: 'center',
             padding: hp('2%'),
-            width: '20%',
+            width: '25%',
             justifyContent: 'center',
             borderRadius: 13,
             backgroundColor: BKColor.textColor2
@@ -183,5 +183,10 @@ export default StyleSheet.create({
         // flexDirection: 'row',
         // justifyContent: 'space-between',
         // alignItems: 'center'
+    },
+    addAddressText: {
+        fontSize: fontSize.h4,
+        fontFamily: fontFamily.medium,
+        color: BKColor.white,
     }
 });

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,32 +12,32 @@ import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
-import {pageContainerStyle} from '../../common/values/BKStyles';
+import { pageContainerStyle, pageContainerStyle2 } from '../../common/values/BKStyles';
 import {
   pageHeader,
   fontSize,
   activeButton,
   passiveButton,
 } from '../../common/values/BKStyles';
-import {BKColor} from '../../common/values/BKColor';
+import { BKColor } from '../../common/values/BKColor';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import {inputContainer, textInput} from '../../common/values/BKStyles';
+import { inputContainer, textInput } from '../../common/values/BKStyles';
 import {
   GET_WISHLIST_API,
   IMAGE_BASE_PATH,
   POST_DELETE_WISHLIST_API,
 } from '../../config/ApiConfig';
-import {GetApiFetch, PostApiFetch} from '../../config/CommonFunction';
-import {useDispatch, useSelector} from 'react-redux';
-import {showMessage, hideMessage} from 'react-native-flash-message';
-import {addToCart} from '../../config/CommonFunction';
-import {wishlistDetails} from '../../redux/reducers/WishlistReducer';
+import { GetApiFetch, PostApiFetch } from '../../config/CommonFunction';
+import { useDispatch, useSelector } from 'react-redux';
+import { showMessage, hideMessage } from 'react-native-flash-message';
+import { addToCart } from '../../config/CommonFunction';
+import { wishlistDetails } from '../../redux/reducers/WishlistReducer';
 import CustomStatusBar from '../../common/components/statusbar';
 
-function Wishlist({navigation}) {
+function Wishlist({ navigation }) {
   // const [wishlistData, setWishlistData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
@@ -126,7 +126,7 @@ function Wishlist({navigation}) {
         }
       })
       .catch(error => console.log(error))
-      .finally(() => {});
+      .finally(() => { });
   };
   useEffect(() => {
     _getWishlist();
@@ -136,16 +136,16 @@ function Wishlist({navigation}) {
     return (
       <>
         <SafeAreaView
-          style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <CustomStatusBar/>
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <CustomStatusBar />
           <ActivityIndicator size="large" color={BKColor.textColor2} />
         </SafeAreaView>
       </>
     );
   } else {
     return (
-      <SafeAreaView style={pageContainerStyle}>
-        <CustomStatusBar/>
+      <SafeAreaView style={pageContainerStyle2}>
+        <CustomStatusBar />
         <View style={pageHeader}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Fontisto
@@ -155,11 +155,11 @@ function Wishlist({navigation}) {
             />
           </TouchableOpacity>
           <Text style={pageHeader.text}>Wishlist</Text>
-          <View style={{width: wp('10%')}}></View>
+          <View style={{ width: wp('10%') }}></View>
         </View>
         {wishlistData != null ? (
           <ScrollView
-            style={{marginBottom: hp('10%')}}
+            style={{ marginBottom: hp('10%') }}
             showsVerticalScrollIndicator={false}>
             {wishlistData.map((item, key) => (
               <View style={styles.cartDetailsSec} key={key}>
@@ -176,14 +176,17 @@ function Wishlist({navigation}) {
                         },
                       );
                     }}>
-                    <Image
-                      source={{uri: IMAGE_BASE_PATH + item.image_path}}
-                      style={styles.itemImage}
-                    />
+                    <View style={styles.productImageSec}>
+                      <Image
+                        source={{ uri: IMAGE_BASE_PATH + item.image_path }}
+                        style={styles.itemImage}
+                        borderRadius={wp('12.5%')}
+                      />
+                    </View>
                   </TouchableOpacity>
                 </View>
                 <View style={styles.cartDecSec}>
-                <TouchableOpacity
+                  <TouchableOpacity
                     onPress={() => {
                       navigation.navigate(
                         // console.log('ProductDetailsId',item.products_slug)
@@ -195,15 +198,15 @@ function Wishlist({navigation}) {
                         },
                       );
                     }}>
-                  <Text style={styles.cartDecHeading}>
-                    {item.products_name}
-                  </Text>
-                  <Text style={styles.cartAttr}>
-                    {item.attributes[0].values1[0].value}
-                  </Text>
-                  <Text style={styles.cartPrice}>
-                    Rs {item.discounted_price}
-                  </Text>
+                    <Text style={styles.cartDecHeading}>
+                      {item.products_name}
+                    </Text>
+                    <Text style={styles.cartAttr}>
+                      {item.attributes[0].values1[0].value}
+                    </Text>
+                    <Text style={styles.cartPrice}>
+                      Rs {item.discounted_price}
+                    </Text>
                   </TouchableOpacity>
                 </View>
                 <View>
@@ -253,7 +256,7 @@ function Wishlist({navigation}) {
                       <AntDesign
                         name="shoppingcart"
                         style={styles.cartDltIcon}
-                        color={BKColor.textColor2}
+                        color={BKColor.textColor1}
                       />
                     </View>
                   </TouchableOpacity>
@@ -266,7 +269,7 @@ function Wishlist({navigation}) {
                       <Feather
                         name="trash"
                         style={styles.cartDltIcon}
-                        color={BKColor.textColor2}
+                        color={BKColor.textColor6}
                       />
                     </View>
                   </TouchableOpacity>
@@ -282,10 +285,10 @@ function Wishlist({navigation}) {
               justifyContent: 'center',
               marginBottom: hp('15%'),
             }}>
-            <Text style={[styles.totalItemHeading, {fontWeight: '700'}]}>
+            <Text style={[styles.totalItemHeading, { fontWeight: '700' }]}>
               Your wishlist is empty
             </Text>
-            <Text style={[styles.totalItemHeading, {textAlign: 'center'}]}>
+            <Text style={[styles.totalItemHeading, { textAlign: 'center' }]}>
               Looks like you haven't added anything to your wishlist yet
             </Text>
           </View>

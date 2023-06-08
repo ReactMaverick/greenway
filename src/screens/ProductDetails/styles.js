@@ -3,15 +3,23 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-nat
 import { fontSize, fontFamily } from '../../common/values/BKStyles';
 import { BKColor } from '../../common/values/BKColor';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { color } from 'react-native-reanimated';
 
 export default StyleSheet.create({
   productImageSection: {
     borderRadius: 20,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#DDDDDD',
+    // borderStyle: 'solid',
+    // borderWidth: 1,
+    // borderColor: '#DDDDDD',
     paddingVertical: hp('5%'),
     marginBottom: hp('4%'),
+    backgroundColor: BKColor.bgColor,
+    shadowColor: 'rgba(23, 149, 94, 0.80)',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 1,
+    shadowRadius: 30,
+    elevation: 5,
+    margin: 5,
     // justifyContent: 'center',
     // alignItems: 'center',
     itemImage: {
@@ -24,21 +32,21 @@ export default StyleSheet.create({
     // marginTop: hp('3%'),
     marginRight: wp('9%'),
     // marginLeft: wp('5%'),
-    height: hp('20%'),
+    height: hp('10%'),
     // paddingHorizontal: wp('10%'),
     // paddingVertical: hp('1%'),
     // justifyContent: 'flex-end',
   },
   productNameAttrSec: {
-    borderStyle: 'solid',
-    borderBottomWidth: 1,
-    borderColor: '#DDDDDD',
+    // borderStyle: 'solid',
+    // borderBottomWidth: 1,
+    // borderColor: '#DDDDDD',
     paddingBottom: hp('2%')
   },
   productName: {
     fontSize: fontSize.h3,
-    fontWeight: '700',
-    color: BKColor.textColor2
+    fontFamily: fontFamily.bold,
+    color: BKColor.textColor1
   },
   productAttr: {
     fontSize: fontSize.h4,
@@ -55,7 +63,7 @@ export default StyleSheet.create({
     backgroundColor: BKColor.white,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: '#dddddd',
+    borderColor: BKColor.inputBorder,
   },
   productAttrItemActive: {
     alignItems: 'center',
@@ -64,7 +72,7 @@ export default StyleSheet.create({
     marginRight: wp('2%'),
     justifyContent: 'center',
     borderRadius: 13,
-    backgroundColor: BKColor.textColor2,
+    backgroundColor: BKColor.textColor1,
   },
   productPriceSec: {
     flexDirection: 'row',
@@ -72,24 +80,28 @@ export default StyleSheet.create({
   },
   productOldPrice: {
     fontSize: fontSize.h4,
-    fontWeight: '700',
+    fontFamily: fontFamily.bold,
+    color: BKColor.textColor2,
     marginRight: wp('3%'),
     textDecorationLine: 'line-through'
   },
   productPrice: {
     fontSize: fontSize.h3,
-    fontWeight: '700',
-    color: BKColor.textColor2,
+    fontFamily: fontFamily.bold,
+    color: BKColor.textColor1,
   },
   productPriceQtySec: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: hp('2%'),
-    borderStyle: 'solid',
-    borderBottomWidth: 1,
-    borderColor: '#DDDDDD',
-    paddingBottom: hp('2%')
+    // marginTop: hp('2%'),
+    // borderStyle: 'solid',
+    // borderBottomWidth: 1,
+    // borderColor: '#DDDDDD',
+    paddingVertical: hp('2%'),
+    paddingHorizontal: wp('4%'),
+    backgroundColor: BKColor.bgColor,
+    borderRadius: 10
   },
   productQtySec: {
     flexDirection: 'row',
@@ -100,7 +112,7 @@ export default StyleSheet.create({
     color: BKColor.textColor2,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: '#DDDDDD',
+    borderColor: BKColor.inputBorder,
     borderRadius: 5,
     paddingVertical: wp('1%'),
     paddingHorizontal: wp('1%'),
@@ -108,7 +120,7 @@ export default StyleSheet.create({
   },
   productQty: {
     fontSize: fontSize.h4,
-    fontWeight: '700',
+    fontFamily: fontFamily.bold,
     color: BKColor.textColor1
   },
   productPlus: {
@@ -116,7 +128,7 @@ export default StyleSheet.create({
     color: BKColor.textColor2,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: '#DDDDDD',
+    borderColor: BKColor.inputBorder,
     borderRadius: 5,
     paddingVertical: wp('1%'),
     paddingHorizontal: wp('1%'),
@@ -130,14 +142,14 @@ export default StyleSheet.create({
   },
   productDecHeading: {
     fontSize: fontSize.h3,
-    fontWeight: '700',
-    color: BKColor.textColor2,
+    fontFamily: fontFamily.bold,
+    color: BKColor.textColor1,
     marginTop: hp('2%')
   },
   productDec: {
     fontSize: fontSize.h4,
     fontWeight: '400',
-    color: BKColor.textColor1,
+    color: BKColor.descText,
     lineHeight: 22
   },
   productReviewSec: {
@@ -151,8 +163,8 @@ export default StyleSheet.create({
   },
   productReview: {
     fontSize: fontSize.h4,
-    fontWeight: '700',
-    color: BKColor.textColor2,
+    fontFamily: fontFamily.bold,
+    color: BKColor.textColor1,
   },
   productStar: {
     color: BKColor.textColor2
@@ -222,10 +234,15 @@ export default StyleSheet.create({
     borderColor: '#DDDDDD',
     paddingVertical: hp('2%')
   },
-  
+
   wholeSaleprice2: {
     fontSize: fontSize.regular,
     fontFamily: fontFamily.regular,
-    color:BKColor.textColor1,
+    color: BKColor.textColor1,
   },
+  attrName: {
+    fontSize: fontSize.regular,
+    fontFamily: fontFamily.regular,
+    color: BKColor.descText,
+  }
 });

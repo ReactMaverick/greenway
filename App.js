@@ -1,21 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, Animated, Text, View} from 'react-native';
-import {fontSize} from './src/common/values/BKStyles';
-import {BKColor} from './src/common/values/BKColor';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Animated, Text, View } from 'react-native';
+import { fontSize } from './src/common/values/BKStyles';
+import { BKColor } from './src/common/values/BKColor';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import FlashMessage from 'react-native-flash-message';
 import SplashScreen from 'react-native-splash-screen';
-import {Provider} from 'react-redux';
-import {store, persistor} from './src/redux/store';
-import {PersistGate} from 'reduxjs-toolkit-persist/integration/react';
+import { Provider } from 'react-redux';
+import { store, persistor } from './src/redux/store';
+import { PersistGate } from 'reduxjs-toolkit-persist/integration/react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -23,8 +23,8 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import HomeIcon from './src/assets/images/HomeIcon';
 import CartIcon from './src/assets/images/CartIcon';
 import SlideMenu from './src/common/components/SlideMenu';
-import {useSelector, useDispatch} from 'react-redux';
-import {userDetails} from './src/redux/reducers/UserReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { userDetails } from './src/redux/reducers/UserReducer';
 
 // screens
 import List from './src/screens/List';
@@ -70,7 +70,7 @@ function MyDrawer() {
       <Drawer.Screen
         name="Home"
         component={Home}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Drawer.Navigator>
   );
@@ -85,29 +85,31 @@ function MyTabs() {
   const dispatch = useDispatch();
   return (
     <BottomTab.Navigator
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: BKColor.white,
-          height: hp('8%'),
+          backgroundColor: BKColor.bgColor,
+          height: hp('12%'),
         },
         tabBarActiveTintColor: BKColor.white,
-        tabBarInactiveTintColor: BKColor.textColor4,
+        tabBarInactiveTintColor: BKColor.textColor1,
       })}>
       <BottomTab.Screen
         name="HomeTab"
         component={MyDrawer}
         options={{
-          tabBarIcon: ({color, size, focused}) =>
+          tabBarIcon: ({ color, size, focused }) =>
             focused ? (
               <Animated.View style={Styles.activeDiv}>
                 <HomeIcon color={color} width={size} height={size} />
               </Animated.View>
             ) : (
               <>
-                <HomeIcon color={color} width={size} height={size} />
-                <Text>Home</Text>
+                <View style={Styles.inActiveDiv}>
+                  <HomeIcon color={color} width={size} height={size} />
+                </View>
+                <Text style={{ color: BKColor.textColor1, textAlign: 'center' }}>Home</Text>
               </>
             ),
         }}
@@ -117,15 +119,17 @@ function MyTabs() {
           name="My Profile"
           component={MyProfile}
           options={{
-            tabBarIcon: ({color, size, focused}) =>
+            tabBarIcon: ({ color, size, focused }) =>
               focused ? (
                 <Animated.View style={Styles.activeDiv}>
                   <FontAwesome name="user" size={size} color={color} />
                 </Animated.View>
               ) : (
                 <>
-                  <FontAwesome name="user" size={size} color={color} />
-                  <Text>My Profile</Text>
+                  <View style={Styles.inActiveDiv}>
+                    <FontAwesome name="user" size={size} color={color} />
+                  </View>
+                  <Text style={{ color: BKColor.textColor1, textAlign: 'center' }}>My Profile</Text>
                 </>
               ),
           }}
@@ -135,7 +139,7 @@ function MyTabs() {
           name="My Profile"
           component={Login}
           options={{
-            tabBarIcon: ({color, size, focused}) =>
+            tabBarIcon: ({ color, size, focused }) =>
               focused ? (
                 <Animated.View style={Styles.activeDiv}>
                   <FontAwesome name="user" size={size} color={color} />
@@ -154,7 +158,7 @@ function MyTabs() {
         name="Cart"
         component={Cart}
         options={{
-          tabBarIcon: ({color, size, focused}) =>
+          tabBarIcon: ({ color, size, focused }) =>
             focused ? (
               <>
                 <Animated.View style={Styles.activeDiv}>
@@ -187,32 +191,34 @@ function MyTabs() {
               </>
             ) : (
               <>
-                <CartIcon color={color} width={size} height={size} />
-                {cartData != null && (
-                  <View
-                    style={{
-                      position: 'absolute',
-                      backgroundColor: '#42850A',
-                      width: 16,
-                      height: 16,
-                      borderRadius: 15 / 2,
-                      right: 20,
-                      top: +5,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                    <Text
+                <View style={Styles.inActiveDiv}>
+                  <CartIcon color={color} width={size} height={size} />
+                  {cartData != null && (
+                    <View
                       style={{
+                        position: 'absolute',
+                        backgroundColor: BKColor.textColor1,
+                        width: 16,
+                        height: 16,
+                        borderRadius: 15 / 2,
+                        right: 20,
+                        top: 10,
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: '#ffffff',
-                        fontSize: 8,
                       }}>
-                      {cartData.length}
-                    </Text>
-                  </View>
-                )}
-                <Text>Cart</Text>
+                      <Text
+                        style={{
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: '#ffffff',
+                          fontSize: 8,
+                        }}>
+                        {cartData.length}
+                      </Text>
+                    </View>
+                  )}
+                </View>
+                <Text style={{ color: BKColor.textColor1, textAlign: 'center' }}>Cart</Text>
               </>
             ),
         }}
@@ -231,16 +237,18 @@ function MyTabs() {
           name="My Orders"
           component={MyOrders}
           options={{
-            tabBarIcon: ({color, size, focused}) =>
+            tabBarIcon: ({ color, size, focused }) =>
               focused ? (
                 <Animated.View style={Styles.activeDiv}>
                   <MaterialIcons name="verified" size={size} color={color} />
                 </Animated.View>
               ) : (
-                <>
-                  <MaterialIcons name="verified" size={size} color={color} />
-                  <Text>My Order</Text>
-                </>
+                <View>
+                  <View style={Styles.inActiveDiv}>
+                    <MaterialIcons name="verified" size={size} color={color} />
+                  </View>
+                  <Text style={{ color: BKColor.textColor1, textAlign: 'center' }}>My Order</Text>
+                </View>
               ),
           }}
         />
@@ -249,7 +257,7 @@ function MyTabs() {
           name="My Orders"
           component={Login}
           options={{
-            tabBarIcon: ({color, size, focused}) =>
+            tabBarIcon: ({ color, size, focused }) =>
               focused ? (
                 <Animated.View style={Styles.activeDiv}>
                   <MaterialIcons name="verified" size={size} color={color} />
@@ -257,7 +265,7 @@ function MyTabs() {
               ) : (
                 <>
                   <MaterialIcons name="verified" size={size} color={color} />
-                  <Text>My Order</Text>
+                  <Text style={{ color: BKColor.textColor1, textAlign: 'center' }}>My Order</Text>
                 </>
               ),
           }}
@@ -268,16 +276,18 @@ function MyTabs() {
         name="About Us"
         component={AboutUs}
         options={{
-          tabBarIcon: ({color, size, focused}) =>
+          tabBarIcon: ({ color, size, focused }) =>
             focused ? (
               <Animated.View style={Styles.activeDiv}>
                 <Octicons name="checklist" size={size} color={color} />
               </Animated.View>
             ) : (
-              <>
-                <Octicons name="checklist" size={size} color={color} />
-                <Text>About Us</Text>
-              </>
+              <View>
+                <View style={Styles.inActiveDiv}>
+                  <Octicons name="checklist" size={size} color={color} />
+                </View>
+                <Text style={{ color: BKColor.textColor1, textAlign: 'center' }}>About Us</Text>
+              </View>
             ),
         }}
       />
@@ -286,7 +296,7 @@ function MyTabs() {
 }
 const Styles = StyleSheet.create({
   activeDiv: {
-    backgroundColor: BKColor.textColor2,
+    backgroundColor: BKColor.textColor1,
     justifyContent: 'center',
     alignItems: 'center',
     height: hp('8%'),
@@ -294,6 +304,18 @@ const Styles = StyleSheet.create({
     borderRadius: hp('4%'),
     marginBottom: hp('8%'),
   },
+  inActiveDiv: {
+    borderWidth: 1,
+    borderColor: BKColor.textColor1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: hp('4%'),
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: hp('8%'),
+    width: hp('8%'),
+    backgroundColor: BKColor.white
+  }
 });
 const Stack = createNativeStackNavigator();
 function Stack1() {
@@ -305,40 +327,40 @@ function Stack1() {
         <Stack.Screen
           name="Login"
           component={Login}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="ForgetPassword"
           component={ForgetPassword}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="FpOtpVerification"
           component={FpOtpVerification}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="Register"
           component={Register}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="OtpVerification"
           component={OtpVerification}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="ResetPassword"
           component={ResetPassword}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="UpdatePassword"
           component={UpdatePassword}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     );
@@ -348,108 +370,108 @@ function Stack1() {
         <Stack.Screen
           name="Home"
           component={MyTabs}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="ProductList"
           component={ProductList}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="ProductDetails"
           component={ProductDetails}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="CategoryList"
           component={CategoryList}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Cart"
           component={Cart}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="AboutUs"
           component={AboutUs}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="ContactUs"
           component={ContactUs}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="PrivacyPolicy"
           component={PrivacyPolicy}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="TermsAndConditions"
           component={TermsAndConditions}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Faq"
           component={Faq}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="MyProfile"
           component={MyProfile}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="MyAccount"
           component={MyAccount}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="MyOrders"
           component={MyOrders}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="OrderDetails"
           component={OrderDetails}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="MyAddress"
           component={MyAddress}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="Wishlist"
           component={Wishlist}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="Blogs"
           component={Blogs}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="BlogDetails"
           component={BlogDetails}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Checkout"
           component={Checkout}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="Search"
           component={Search}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     );

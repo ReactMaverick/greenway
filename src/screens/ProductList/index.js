@@ -22,6 +22,7 @@ import {
 import styles from './styles';
 import {
   pageContainerStyle,
+  pageContainerStyle2,
   pageHeader,
   inputLevel,
   inputBottomLevel,
@@ -164,7 +165,7 @@ function ProductList({navigation, route}) {
     return (
       <SafeAreaView>
         <CustomStatusBar/>
-        <View style={pageContainerStyle}>
+        <View style={pageContainerStyle2}>
           <View style={pageHeader}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Fontisto

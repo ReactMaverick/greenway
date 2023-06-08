@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatListSlider } from 'react-native-flatlist-slider';
 import { BKColor } from '../../values/BKColor';
@@ -149,11 +150,11 @@ function SingleProduct({ navigation, index, item }) {
             </TouchableOpacity>
           )}
 
-          <View style={{ marginTop: hp('-10%') }}>
+          <View style={styles.itemOuter}>
             <Image
               source={{ uri: item.image_path }}
               style={styles.itemImage}
-              borderRadius={5}
+              borderRadius={wp('12.5%')}
             />
           </View>
           <View style={{ width: '85%', marginTop: 10 }}>
@@ -165,9 +166,9 @@ function SingleProduct({ navigation, index, item }) {
                 : ''}
             </Text>
 
-            <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
-              <Text style={styles.itemPrice}>{item.discounted_price}</Text>
+            <View>
               <Text style={styles.itemOldPrice}>{item.products_price}</Text>
+              <Text style={styles.itemPrice}>{item.discounted_price}</Text>
             </View>
             <TouchableOpacity
               onPress={() => {
@@ -232,26 +233,33 @@ function SingleProduct({ navigation, index, item }) {
                   console.log('this product is out of stock.');
                 }
               }}>
-              {cartData != null &&
-                cartData.some(
-                  value =>
-                    value.products_id == item.products_id &&
-                    value.attributes_id.toString() == item.attributes_ids,
-                ) ? (
-                <MaterialCommunityIcons
-                  name="cart-check"
-                  color={BKColor.textColor2}
-                  size={fontSize.h1}
-                  style={{ alignSelf: 'flex-end', marginTop: -15 }}
-                />
-              ) : (
-                <AntDesign
-                  name="pluscircle"
-                  color={BKColor.textColor2}
-                  size={fontSize.h1}
-                  style={{ alignSelf: 'flex-end', marginTop: -15 }}
-                />
-              )}
+              <View style={{ position: 'absolute', bottom: -20, right: -18 }}>
+                {cartData != null &&
+                  cartData.some(
+                    value =>
+                      value.products_id == item.products_id &&
+                      value.attributes_id.toString() == item.attributes_ids,
+                  ) ? (
+                  <View style={styles.cartIconBg}>
+                    <MaterialCommunityIcons
+                      name="cart-check"
+                      color={BKColor.white}
+                      size={fontSize.bh}
+                      // style={{ alignSelf: 'flex-end', marginTop: -15 }}
+                    />
+                  </View>
+                ) : (
+                  <View style={styles.cartIconBg}>
+                    <Feather
+                      name="plus"
+                      color={BKColor.white}
+                      size={fontSize.bh}
+                      // style={{ alignSelf: 'flex-end', marginTop: -15 }}
+
+                    />
+                  </View>
+                )}
+              </View>
             </TouchableOpacity>
           </View>
 

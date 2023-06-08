@@ -181,7 +181,6 @@ export const activeButton = {
   text: {
     color: '#FFFFFF',
     fontSize: fontSize.h3,
-    fontWeight: '200',
     textAlign: 'center',
     fontFamily: fontFamily.regular,
   },
@@ -195,9 +194,9 @@ export const activeButton = {
   cancelButton:{
     padding: hp('1%'),
     marginTop: hp('2%'),
-    width: '20%',
+    width: '25%',
     borderRadius: 10,
-    backgroundColor: BKColor.btnBackgroundColor1
+    backgroundColor: BKColor.textColor2
 }
 };
 
@@ -208,16 +207,15 @@ export const passiveButton = {
     marginTop: hp('4%'),
     width: '100%',
     justifyContent: 'center',
-    borderRadius: 13,
+    borderRadius: 30,
     backgroundColor: BKColor.white,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: '#dddddd',
+    borderColor: BKColor.inputBorder,
   },
   text: {
     color: BKColor.textColor2,
     fontSize: fontSize.h3,
-    fontWeight: '200',
     textAlign: 'center',
     fontFamily: fontFamily.regular,
   },
@@ -282,8 +280,7 @@ export const pageHeader = {
   height: hp('10%'),
   text: {
     fontSize: fontSize.h2,
-    fontWeight: '700',
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.bold,
     fontStyle: 'normal',
     color: BKColor.textColor1,
   },

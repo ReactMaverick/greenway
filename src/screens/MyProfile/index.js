@@ -19,6 +19,7 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import {
   pageContainerStyle,
+  pageContainerStyle2,
   pageHeader,
   inputLevel,
   inputBottomLevel,
@@ -27,7 +28,7 @@ import {
   activeButton,
   fontSize,
 } from '../../common/values/BKStyles';
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {widthPercentageToDP as wp,heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {BKColor} from '../../common/values/BKColor';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 import {useSelector, useDispatch} from 'react-redux';
@@ -58,7 +59,7 @@ function MyProfile({navigation}) {
   return (
     <SafeAreaView>
         <CustomStatusBar/>
-      <ScrollView style={pageContainerStyle}>
+      <ScrollView style={pageContainerStyle2}>
         {/* <View style={pageHeader}>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
                     <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
@@ -72,13 +73,11 @@ function MyProfile({navigation}) {
               source={require('../../assets/images/header-logo.png')}
               resizeMode="cover"
               style={{
-                height: hp('14%'),
-                width: hp('14%'),
-                borderRadius: hp('7%'),
+                height: hp('18%'), width: wp('26%'), resizeMode: "cover"
               }}
             />
           </View>
-          <Text style={styles.loginLogoSection.text2}>Greenway</Text>
+          <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
         </View>
         <View style={[styles.regContainer, {paddingTop: hp('6%')}]}>
           {/* {userData != null ? */}
@@ -89,14 +88,14 @@ function MyProfile({navigation}) {
               <View style={styles.textOuter}>
                 <SimpleLineIcons
                   name="user"
-                  color="#000000"
+                  style={{ color: BKColor.textColor1 }}
                   size={fontSize.h2}
                 />
                 <Text style={styles.regContainer.text1}>My Account</Text>
               </View>
               <Entypo
                 name="chevron-thin-right"
-                color="#000000"
+                style={{ color: BKColor.textColor1 }}
                 size={fontSize.h2}
               />
             </View>
@@ -120,14 +119,14 @@ function MyProfile({navigation}) {
               <View style={styles.textOuter}>
                 <MaterialCommunityIcons
                   name="format-list-checkbox"
-                  color="#000000"
+                  style={{ color: BKColor.textColor1 }}
                   size={fontSize.h2}
                 />
                 <Text style={styles.regContainer.text1}>My Address</Text>
               </View>
               <Entypo
                 name="chevron-thin-right"
-                color="#000000"
+                style={{ color: BKColor.textColor1 }}
                 size={fontSize.h2}
               />
             </View>
@@ -149,12 +148,14 @@ function MyProfile({navigation}) {
             onPress={() => navigation.navigate('MyOrders')}>
             <View style={styles.itemOuter}>
               <View style={styles.textOuter}>
-                <Feather name="package" color="#000000" size={fontSize.bh} />
+                <Feather name="package" 
+                style={{ color: BKColor.textColor1 }} 
+                size={fontSize.bh} />
                 <Text style={styles.regContainer.text1}>My Orders</Text>
               </View>
               <Entypo
                 name="chevron-thin-right"
-                color="#000000"
+                style={{ color: BKColor.textColor1 }}
                 size={fontSize.h2}
               />
             </View>
@@ -177,12 +178,14 @@ function MyProfile({navigation}) {
             onPress={() => navigation.navigate('Wishlist')}>
             <View style={styles.itemOuter}>
               <View style={styles.textOuter}>
-                <EvilIcons name="heart" color="#000000" size={fontSize.bh} />
+                <EvilIcons name="heart" 
+                style={{ color: BKColor.textColor1 }}
+                size={fontSize.bh} />
                 <Text style={styles.regContainer.text1}>WishList</Text>
               </View>
               <Entypo
                 name="chevron-thin-right"
-                color="#000000"
+                style={{ color: BKColor.textColor1 }}
                 size={fontSize.h2}
               />
             </View>
@@ -206,14 +209,14 @@ function MyProfile({navigation}) {
               <View style={styles.textOuter}>
                 <MaterialCommunityIcons
                   name="cart-heart"
-                  color="#000000"
+                  style={{ color: BKColor.textColor1 }}
                   size={fontSize.h2}
                 />
                 <Text style={styles.regContainer.text1}>Cart</Text>
               </View>
               <Entypo
                 name="chevron-thin-right"
-                color="#000000"
+                style={{ color: BKColor.textColor1 }}
                 size={fontSize.h2}
               />
             </View>
@@ -242,14 +245,14 @@ function MyProfile({navigation}) {
               <View style={styles.textOuter}>
                 <MaterialIcons
                   name="logout"
-                  color="#000000"
+                  style={{ color: BKColor.textColor1 }}
                   size={fontSize.h2}
                 />
                 <Text style={styles.regContainer.text1}>Log Out</Text>
               </View>
               <Entypo
                 name="chevron-thin-right"
-                color="#000000"
+                style={{ color: BKColor.textColor1 }}
                 size={fontSize.h2}
               />
             </View>

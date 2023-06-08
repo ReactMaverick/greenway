@@ -10,6 +10,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
+    marginTop: hp('3%')
   },
   singleProductContainer: {
     width: wp('45.5%'),

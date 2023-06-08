@@ -7,7 +7,7 @@ export default StyleSheet.create({
     headText: { color: '#2E2E2E', fontSize: 16, margin: 5 },
     orderDetailsHeadSec: {
         flex: 1,
-        marginVertical: hp('5%')
+        // marginVertical: hp('5%')
     },
     orderDetailsSec: {
         flex: 1,
@@ -16,41 +16,43 @@ export default StyleSheet.create({
         marginBottom: hp('2%')
     },
     orderTopHeading: {
-        fontSize: fontSize.h3,
-        fontWeight: '700',
+        fontSize: fontSize.h4,
+        fontFamily: fontFamily.bold,
+        color: BKColor.textColor1,
         textTransform: 'uppercase'
     },
     orderTextLeft: {
-        fontSize: fontSize.h3,
-        fontWeight: '400',
-        color: BKColor.textColor1,
+        fontSize: fontSize.h4,
+        fontFamily: fontFamily.regular,
+        color: BKColor.textColor2,
     },
     orderText: {
-        fontSize: fontSize.h3,
-        fontWeight: '400',
-        color: BKColor.textColor1,
+        fontSize: fontSize.h4,
+        fontFamily: fontFamily.regular,
+        color: BKColor.textColor2,
         // textAlign: 'right'
     },
     itemHeadingSec: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: hp('2%')
+        marginBottom: hp('2%'),
+        marginTop: hp('3%')
     },
     productItemHeading: {
         fontSize: fontSize.h3,
-        fontWeight: '700',
-        color: BKColor.textColor2,
+        fontFamily: fontFamily.bold,
+        color: BKColor.textColor1,
         textTransform: 'uppercase'
     },
     productItemText: {
         fontSize: fontSize.h3,
-        fontWeight: '400',
-        // color: BKColor.textColor1,
+        fontFamily: fontFamily.regular,
+        color: BKColor.textColor1,
     },
     itemImage: {
-        width: wp('20%'),
-        height: wp('20%'),
+        width: wp('18%'),
+        height: wp('18%'),
     },
     itemReviewImage: {
         width: wp('50%'),
@@ -62,21 +64,40 @@ export default StyleSheet.create({
         flexDirection: "row",
         alignItems: 'center',
         marginVertical: hp('1%'),
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: BKColor.boxBorder,
+        shadowColor: 'rgba(23, 149, 94, 0.90)',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 1,
+        shadowRadius: 4,
+        margin: 5,
+        elevation: 10,
+        // borderWidth: 1,
+        // borderStyle: 'solid',
+        // borderColor: BKColor.inputBorder,
         borderRadius: 15,
         padding: wp('4%'),
-        marginBottom: hp('2%')
+        marginBottom: hp('3%'),
+        backgroundColor: BKColor.bgColor
     },
     productImageSec: {
-        width: wp('25%')
+        // width: wp('25%')
+        shadowColor: 'rgba(23, 149, 94, 0.90)',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 1,
+        shadowRadius: 4,
+        margin: 5,
+        elevation: 10,
+        backgroundColor: BKColor.white,
+        borderRadius: wp('12.5%'),
+        // paddingVertical:hp('1%'),
+        width: wp('18%'),
+        height: wp('18%'),        
     },
     productDetailsSec: {
         width: wp('58%')
     },
     productName: {
         fontSize: fontSize.h3,
+        fontFamily: fontFamily.bold,
         color: BKColor.textColor1,
         // marginBottom: hp('1%')
     },
@@ -86,22 +107,26 @@ export default StyleSheet.create({
         marginBottom: hp('1%')
     },
     productQtyText: {
-        fontSize: fontSize.h3,
+        fontSize: fontSize.h4,
+        fontFamily: fontFamily.regular,
         color: BKColor.textColor2
 
     },
     productQty: {
-        fontSize: fontSize.h3,
+        fontSize: fontSize.h4,
+        fontFamily: fontFamily.regular,
         color: BKColor.textColor1
     },
     productPrice: {
         fontSize: fontSize.h3,
-        color: BKColor.textColor1
+        fontFamily: fontFamily.medium,
+        color: BKColor.textColor2,
+        textAlign:'right'
     },
 
     contactUsText: {
         fontSize: fontSize.h3,
-        fontWeight: '500',
+        fontFamily: fontFamily.regular,
         color: BKColor.textColor1,
         marginTop: hp('1%')
     },
