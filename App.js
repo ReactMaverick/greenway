@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Animated, Text, View } from 'react-native';
+import { StyleSheet, Animated, Text, View,TouchableOpacity } from 'react-native';
 import { fontSize } from './src/common/values/BKStyles';
 import { BKColor } from './src/common/values/BKColor';
 import {
@@ -75,6 +75,75 @@ function MyDrawer() {
     </Drawer.Navigator>
   );
 }
+
+
+
+function MyTabBar({ state, descriptors, navigation }) {
+
+  const icons = [
+    'home', // Icon name for Home tab
+    'user', // Icon name for Profile tab
+    'cart', // Icon name for Cart tab
+    'list', // Icon name for Orders tab
+    'cog',  // Icon name for Settings tab
+  ];
+  return (
+    <View style={{ flexDirection: 'row' }}>
+      {state.routes.map((route, index) => {
+        const { options } = descriptors[route.key];
+        const label =
+          options.tabBarLabel !== undefined
+            ? options.tabBarLabel
+            : options.title !== undefined
+            ? options.title
+            : route.name;
+
+        const isFocused = state.index === index;
+
+        const icon = isFocused ? (
+          
+          <FontAwesome name={icons[index]} size={24} color={'#673ab7'} />// Active icon
+        ) : (
+          <FontAwesome name={icons[index]} size={24} color={'#222'} /> // Inactive icon
+        );
+
+        const onPress = () => {
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+          });
+
+          if (!isFocused && !event.defaultPrevented) {
+            navigation.navigate(route.name);
+          }
+        };
+
+        const onLongPress = () => {
+          navigation.emit({
+            type: 'tabLongPress',
+            target: route.key,
+          });
+        };
+
+        return (
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityState={isFocused ? { selected: true } : {}}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+            testID={options.tabBarTestID}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            style={{ flex: 1 }}
+          >
+            {icon}
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
+
+
 const BottomTab = createBottomTabNavigator();
 function MyTabs() {
   const userData = useSelector(state => state.UserReducer.value);
@@ -90,11 +159,18 @@ function MyTabs() {
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: BKColor.bgColor,
+       
           height: hp('12%'),
+
+          
+         
         },
         tabBarActiveTintColor: BKColor.white,
         tabBarInactiveTintColor: BKColor.textColor1,
-      })}>
+      })}
+
+      tabBar={(props) => <MyTabBar {...props} />}
+      >
       <BottomTab.Screen
         name="HomeTab"
         component={MyDrawer}
@@ -122,12 +198,12 @@ function MyTabs() {
             tabBarIcon: ({ color, size, focused }) =>
               focused ? (
                 <Animated.View style={Styles.activeDiv}>
-                  <FontAwesome name="user" size={size} color={color} />
+                  <FontAwesome name={icons[index]} size={size} color={color} />
                 </Animated.View>
               ) : (
                 <>
                   <View style={Styles.inActiveDiv}>
-                    <FontAwesome name="user" size={size} color={color} />
+                    <FontAwesome name={icons[index]} size={size} color={color} />
                   </View>
                   <Text style={{ color: BKColor.textColor1, textAlign: 'center' }}>My Profile</Text>
                 </>
@@ -142,11 +218,11 @@ function MyTabs() {
             tabBarIcon: ({ color, size, focused }) =>
               focused ? (
                 <Animated.View style={Styles.activeDiv}>
-                  <FontAwesome name="user" size={size} color={color} />
+                  <FontAwesome name={icons[index]} size={size} color={color} />
                 </Animated.View>
               ) : (
                 <>
-                  <FontAwesome name="user" size={size} color={color} />
+                  <FontAwesome name={icons[index]} size={size} color={color} />
                   <Text>My Profile</Text>
                 </>
               ),
