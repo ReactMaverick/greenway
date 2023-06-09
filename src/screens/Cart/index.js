@@ -438,9 +438,9 @@ function Cart({ navigation, route }) {
             {cartData.map((item, key) => (
 
 
-              <View>
+              <View key={key}>
 
-                <View style={styles.cartDetailsSec} key={key}>
+                <View style={styles.cartDetailsSec}>
                   <View style={styles.cartImgSec}>
                     <TouchableOpacity
                       onPress={() => {

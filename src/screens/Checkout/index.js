@@ -367,9 +367,17 @@ function Checkout({navigation}) {
   };
   const _placeOrderCashOnDelivery = (razorpay_payment_id = '') => {
     if (userBillingAddress == null) {
-      console.log('Add a billing address');
+      showMessage({
+        message: 'Please Add a Billing Address !',
+        type: 'info',
+        backgroundColor: '#EC1F25',
+      });
     } else if (sameAsBilling === 0 && selectedShippingAddress == null) {
-      console.log('Select a Shipping address');
+      showMessage({
+        message: 'Select a Shipping address !',
+        type: 'info',
+        backgroundColor: '#EC1F25',
+      });
     } else {
       setIsLoading(true);
       const formData = new FormData();
