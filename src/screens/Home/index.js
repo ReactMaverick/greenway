@@ -22,6 +22,7 @@ import {
   fontSize,
 } from '../../common/values/BKStyles';
 import { BKColor } from '../../common/values/BKColor';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 // components
 import PopularProducts from '../../common/components/home/PopularProducts';
 import WholeSaleProduct from '../../common/components/home/WholeSaleProduct';
@@ -43,53 +44,56 @@ function Home({ navigation }) {
   return (
     <SafeAreaView>
       <CustomStatusBar />
-      <ScrollView style={pageContainerStyle2}>
-        <View style={pageHeader}>
-          <TouchableOpacity
-            style={styles.headerIcon}
-            onPress={() => {
-              navigation.toggleDrawer();
-            }}>
-            <FontAwesome5
-              name="map"
-              color={BKColor.textColor1}
-              size={fontSize.h3}
-              style={styles.headerIcon.icon}
-            />
-            {/* <Image
+      <View style={pageContainerStyle2}>
+        <ScrollView style={ { marginBottom: hp('11%') }}>
+          <View style={pageHeader}>
+            <TouchableOpacity
+              style={styles.headerIcon}
+              onPress={() => {
+                navigation.toggleDrawer();
+              }}>
+              <FontAwesome5
+                name="map"
+                color={BKColor.textColor1}
+                size={fontSize.h3}
+                style={styles.headerIcon.icon}
+              />
+              {/* <Image
               source={require('../../assets/images/menu_alt_03.png')}
               resizeMode="cover"
             /> */}
-          </TouchableOpacity>
-          <Image
-            source={require('../../assets/images/homeHeaderLogo.png')}
-            resizeMode="cover"
-          />
-          {/* <Text style={pageHeader.text}>Greenway</Text> */}
-          <TouchableOpacity
-            style={styles.headerIcon}
-            onPress={() => {
-              navigation.navigate('Search');
-            }}>
-            <Fontisto
-              name="search"
-              color={BKColor.textColor1}
-              size={fontSize.h3}
-              style={styles.headerIcon.icon}
+            </TouchableOpacity>
+            <Image
+              source={require('../../assets/images/homeHeaderLogo.png')}
+              resizeMode="cover"
             />
-          </TouchableOpacity>
-        </View>
+            {/* <Text style={pageHeader.text}>Greenway</Text> */}
+            <TouchableOpacity
+              style={styles.headerIcon}
+              onPress={() => {
+                navigation.navigate('Search');
+              }}>
+              <Fontisto
+                name="search"
+                color={BKColor.textColor1}
+                size={fontSize.h3}
+                style={styles.headerIcon.icon}
+              />
+            </TouchableOpacity>
+          </View>
 
-        <Slider navigation={navigation} />
-        {/* <Banner navigation={navigation} /> */}
-        <PopularProducts navigation={navigation} />
-        <WholeSaleProduct navigation={navigation} />
-        {/* <Brands navigation={navigation} /> */}
-        <PopularCategory navigation={navigation} />
-        {/* <ShippingArea navigation={navigation} /> */}
+          <Slider navigation={navigation} />
+          {/* <Banner navigation={navigation} /> */}
+          <PopularProducts navigation={navigation} />
+          <WholeSaleProduct navigation={navigation} />
+          {/* <Brands navigation={navigation} /> */}
+          <PopularCategory navigation={navigation} />
+          {/* <ShippingArea navigation={navigation} /> */}
 
-        {/* <GiftsArea navigation={navigation} /> */}
-      </ScrollView>
+          {/* <GiftsArea navigation={navigation} /> */}
+
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Animated, Text, View,TouchableOpacity } from 'react-native';
+import { StyleSheet, Animated, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import { fontSize } from './src/common/values/BKStyles';
 import { BKColor } from './src/common/values/BKColor';
 import {
@@ -55,6 +55,7 @@ import ForgetPassword from './src/screens/ForgetPassword';
 import FpOtpVerification from './src/screens/FpOtpVerification';
 import UpdatePassword from './src/screens/UpdatePassword';
 import Search from './src/screens/Search';
+import styles from './src/screens/Home/styles';
 
 const Drawer = createDrawerNavigator();
 
@@ -83,62 +84,79 @@ function MyTabBar({ state, descriptors, navigation }) {
   const icons = [
     'home', // Icon name for Home tab
     'user', // Icon name for Profile tab
-    'cart', // Icon name for Cart tab
+    'shopping-cart', // Icon name for Cart tab
     'list', // Icon name for Orders tab
     'cog',  // Icon name for Settings tab
   ];
+  const customMargin = [
+    '-1%', // Icon name for Home tab
+    '0%', // Icon name for Profile tab
+    '1%', // Icon name for Cart tab
+    '0%', // Icon name for Orders tab
+    '-1%',  // Icon name for Settings tab
+  ];
   return (
-    <View style={{ flexDirection: 'row' }}>
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
+    <View style={{ marginTop: hp('-8%') }}>
+      <ImageBackground source={require('../greenway/src/assets/images/tabBackground.png')}
+        style={Styles.backgroundImg}
+      >
 
-        const isFocused = state.index === index;
+        {state.routes.map((route, index) => {
+          const { options } = descriptors[route.key];
+          const label =
+            options.tabBarLabel !== undefined
+              ? options.tabBarLabel
+              : options.title !== undefined
+                ? options.title
+                : route.name;
 
-        const icon = isFocused ? (
-          
-          <FontAwesome name={icons[index]} size={24} color={'#673ab7'} />// Active icon
-        ) : (
-          <FontAwesome name={icons[index]} size={24} color={'#222'} /> // Inactive icon
-        );
+          const isFocused = state.index === index;
 
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-          });
+          const icon = isFocused ? (
 
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
-          }
-        };
+            <View style={[Styles.TabActiveIcon,{marginTop: hp(customMargin[index])}]}>
+              <FontAwesome name={icons[index]} size={hp('4%')} color={BKColor.white} />
+            </View>
+          ) : (
+            <View style={[Styles.TabInActiveIcon,{marginTop: hp(customMargin[index])}]}>
+              <FontAwesome name={icons[index]} size={hp('4%')} color={BKColor.textColor1} />
+            </View>
+          );
 
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          });
-        };
+          const onPress = () => {
+            const event = navigation.emit({
+              type: 'tabPress',
+              target: route.key,
+            });
 
-        return (
-          <TouchableOpacity
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={{ flex: 1 }}
-          >
-            {icon}
-          </TouchableOpacity>
-        );
-      })}
+            if (!isFocused && !event.defaultPrevented) {
+              navigation.navigate(route.name);
+            }
+          };
+
+          const onLongPress = () => {
+            navigation.emit({
+              type: 'tabLongPress',
+              target: route.key,
+            });
+          };
+
+          return (
+            <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityState={isFocused ? { selected: true } : {}}
+              accessibilityLabel={options.tabBarAccessibilityLabel}
+              testID={options.tabBarTestID}
+              onPress={onPress}
+              onLongPress={onLongPress}
+              style={{ flex: 1 }}
+            >
+              {icon}
+            </TouchableOpacity>
+          );
+        })}
+
+      </ImageBackground>
     </View>
   );
 }
@@ -157,20 +175,20 @@ function MyTabs() {
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: {
-          backgroundColor: BKColor.bgColor,
-       
-          height: hp('12%'),
+        // tabBarStyle: {
+        //   //backgroundColor: BKColor.bgColor,
 
-          
-         
-        },
-        tabBarActiveTintColor: BKColor.white,
-        tabBarInactiveTintColor: BKColor.textColor1,
+        //   height: hp('12%'),
+
+
+
+        // },
+        // tabBarActiveTintColor: BKColor.white,
+        // tabBarInactiveTintColor: BKColor.textColor1,
       })}
 
       tabBar={(props) => <MyTabBar {...props} />}
-      >
+    >
       <BottomTab.Screen
         name="HomeTab"
         component={MyDrawer}
@@ -391,7 +409,34 @@ const Styles = StyleSheet.create({
     height: hp('8%'),
     width: hp('8%'),
     backgroundColor: BKColor.white
-  }
+  },
+  backgroundImg: {
+    height: hp('12%'),
+    flexDirection: 'row',
+    justifyContent:'space-between',
+  },
+  TabActiveIcon: {
+    borderWidth:1,
+    borderColor: BKColor.textColor1,
+    backgroundColor: BKColor.textColor1,
+    borderRadius: wp('12.5%'),
+    width: wp('15%'),
+    height: wp('15%'),
+    alignItems:'center',
+    justifyContent: 'center',
+    marginHorizontal: wp('2.5%')
+  },
+  TabInActiveIcon: {
+    borderWidth:1,
+    borderColor: BKColor.textColor1,
+    backgroundColor: BKColor.white,
+    borderRadius: wp('12.5%'),
+    width: wp('15%'),
+    height: wp('15%'),
+    alignItems:'center',
+    justifyContent: 'center',
+    marginHorizontal: wp('2.5%')
+  },
 });
 const Stack = createNativeStackNavigator();
 function Stack1() {
