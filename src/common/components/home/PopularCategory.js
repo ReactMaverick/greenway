@@ -5,13 +5,12 @@ import { boxHeader1, shadowStyle } from "../../values/BKStyles";
 import { GET_ALL_CATEGORY_API, IMAGE_BASE_PATH } from "../../../config/ApiConfig";
 import { GetApiFetch } from "../../../config/CommonFunction";
 
-function PopularCategory({ navigation }) {
+function PopularCategory({ navigation, refreshing, stopRefreshing }) {
     const [popularCategory, setPopularCategory] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const _getPopularCategory = async () => {
         let params = '';
-
         GetApiFetch(GET_ALL_CATEGORY_API, params)
             .then(([status, response]) => {
                 if (status == 200) {
@@ -24,11 +23,14 @@ function PopularCategory({ navigation }) {
             .catch(error => console.log(error))
             .finally(() => {
                 setIsLoading(false)
+                stopRefreshing()
             });
     };
     useEffect(() => {
-        _getPopularCategory();
-    }, [navigation]);
+        if(refreshing){
+            _getPopularCategory();
+        }
+    }, [navigation, refreshing]);
 
     const SliderItem = ({ item, navigation }) => {
         return (

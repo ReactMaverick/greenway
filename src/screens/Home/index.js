@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   ScrollView,
   Image,
+  RefreshControl,
 } from 'react-native';
 import styles from './styles';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -21,8 +22,11 @@ import {
   activeButton,
   fontSize,
 } from '../../common/values/BKStyles';
-import { BKColor } from '../../common/values/BKColor';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {BKColor} from '../../common/values/BKColor';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 // components
 import PopularProducts from '../../common/components/home/PopularProducts';
 import WholeSaleProduct from '../../common/components/home/WholeSaleProduct';
@@ -32,20 +36,28 @@ import Brands from '../../common/components/home/Brands';
 import ShippingArea from '../../common/components/home/ShippingArea';
 import GiftsArea from '../../common/components/home/GiftsArea';
 import PopularCategory from '../../common/components/home/PopularCategory';
-import { useSelector, useDispatch } from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import CustomStatusBar from '../../common/components/statusbar';
 
-function Home({ navigation }) {
+function Home({navigation}) {
+  const [refreshing, setRefreshing] = useState(true);
   // const userData = useSelector(state => state.userReducer.value);
   // console.log('userData', userData);
 
-  //   useEffect(() => {}, [navigation]);
-
+  // useEffect(() => {}, [navigation]);
+  const onRefresh = () => {
+    setRefreshing(true);
+  };
   return (
     <SafeAreaView>
       <CustomStatusBar />
       <View style={pageContainerStyle2}>
-        <ScrollView style={ { marginBottom: hp('11%') }}>
+        <ScrollView
+          style={{marginBottom: hp('11%')}}
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
           <View style={pageHeader}>
             <TouchableOpacity
               style={styles.headerIcon}
@@ -82,16 +94,21 @@ function Home({ navigation }) {
             </TouchableOpacity>
           </View>
 
-          <Slider navigation={navigation} />
+          <Slider navigation={navigation}/>
           {/* <Banner navigation={navigation} /> */}
-          <PopularProducts navigation={navigation} />
-          <WholeSaleProduct navigation={navigation} />
+          <PopularProducts navigation={navigation} refreshing={refreshing} stopRefreshing={()=>{
+            setRefreshing(false);
+          }} />
+          <WholeSaleProduct navigation={navigation}  refreshing={refreshing} stopRefreshing={()=>{
+            setRefreshing(false);
+          }} />
           {/* <Brands navigation={navigation} /> */}
-          <PopularCategory navigation={navigation} />
+          <PopularCategory navigation={navigation}  refreshing={refreshing}  stopRefreshing={()=>{
+            setRefreshing(false);
+          }} />
           {/* <ShippingArea navigation={navigation} /> */}
 
           {/* <GiftsArea navigation={navigation} /> */}
-
         </ScrollView>
       </View>
     </SafeAreaView>
