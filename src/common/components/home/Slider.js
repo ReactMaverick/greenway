@@ -32,7 +32,7 @@ function Slider({ navigation }) {
     }
     useEffect(() => {
 
-        _getSliders();
+        // _getSliders();
     }, [navigation]);
     
     const SliderItem = ({ item, key, navigation }) => {

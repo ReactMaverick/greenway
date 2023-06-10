@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import DeviceInfo from 'react-native-device-info';
 
 
-function PopularProducts({ navigation }) {
+function PopularProducts({ navigation, refreshing, stopRefreshing }) {
     const [allPopularProducts, setAllPopularProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [type, setType] = useState(null);
@@ -41,14 +41,17 @@ function PopularProducts({ navigation }) {
             .catch(error => console.log(error))
             .finally(() => {
                 setIsLoading(false)
+                stopRefreshing()
             });
     };
     useEffect(() => {
-        DeviceInfo.getAndroidId().then((androidId) => {
-            setAndroidId(androidId)
-            _getPopularProducts(androidId)
-        });
-    }, [navigation]);
+        if(refreshing){
+            DeviceInfo.getAndroidId().then((androidId) => {
+                setAndroidId(androidId)
+                _getPopularProducts(androidId)
+            });
+        } 
+    }, [navigation, refreshing]);
 
     if (isLoading) {
         return (
