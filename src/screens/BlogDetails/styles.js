@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
-import { fontSize } from '../../common/values/BKStyles';
+import { fontFamily, fontSize } from '../../common/values/BKStyles';
 import { BKColor } from '../../common/values/BKColor';
 
 export default StyleSheet.create({
@@ -12,13 +12,13 @@ export default StyleSheet.create({
     },
     aboutUsHeading: {
       fontSize: fontSize.h2,
-      fontWeight: '700',
+      fontFamily: fontFamily.bold,
       color: BKColor.textColor1,
       marginTop: hp('3%')
     },
     aboutUsDesc: {
-      fontSize: fontSize.h3,
-      fontWeight: '400',
+      fontSize: fontSize.h4,
+      fontFamily: fontFamily.regular,
       color: BKColor.textColor1,
       marginTop: hp('2%'),
       textAlign:'justify'
