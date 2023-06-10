@@ -26,9 +26,9 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
   },
   brandsContainer: {
-    borderStyle: 'solid',
-    borderBottomWidth: 1,
-    borderColor: '#DDDDDD',
+    // borderStyle: 'solid',
+    // borderBottomWidth: 1,
+    // borderColor: '#DDDDDD',
     paddingBottom: hp('2%'),
     // marginBottom: hp('3%'),
   },

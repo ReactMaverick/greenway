@@ -114,11 +114,11 @@ function MyTabBar({ state, descriptors, navigation }) {
 
           const icon = isFocused ? (
 
-            <View style={[Styles.TabActiveIcon,{marginTop: hp(customMargin[index])}]}>
+            <View style={[Styles.TabActiveIcon, { marginTop: hp(customMargin[index]) }]}>
               <FontAwesome name={icons[index]} size={hp('4%')} color={BKColor.white} />
             </View>
           ) : (
-            <View style={[Styles.TabInActiveIcon,{marginTop: hp(customMargin[index])}]}>
+            <View style={[Styles.TabInActiveIcon, { marginTop: hp(customMargin[index]) }]}>
               <FontAwesome name={icons[index]} size={hp('4%')} color={BKColor.textColor1} />
             </View>
           );
@@ -143,6 +143,7 @@ function MyTabBar({ state, descriptors, navigation }) {
 
           return (
             <TouchableOpacity
+              key={route.key}
               accessibilityRole="button"
               accessibilityState={isFocused ? { selected: true } : {}}
               accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -413,27 +414,27 @@ const Styles = StyleSheet.create({
   backgroundImg: {
     height: hp('12%'),
     flexDirection: 'row',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
   },
   TabActiveIcon: {
-    borderWidth:1,
+    borderWidth: 1,
     borderColor: BKColor.textColor1,
     backgroundColor: BKColor.textColor1,
     borderRadius: wp('12.5%'),
     width: wp('15%'),
     height: wp('15%'),
-    alignItems:'center',
+    alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: wp('2.5%')
   },
   TabInActiveIcon: {
-    borderWidth:1,
+    borderWidth: 1,
     borderColor: BKColor.textColor1,
     backgroundColor: BKColor.white,
     borderRadius: wp('12.5%'),
     width: wp('15%'),
     height: wp('15%'),
-    alignItems:'center',
+    alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: wp('2.5%')
   },
