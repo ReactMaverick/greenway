@@ -4,7 +4,7 @@ import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
-import { pageContainerStyle,pageContainerStyle2 } from "../../common/values/BKStyles";
+import { pageContainerStyle, pageContainerStyle2 } from "../../common/values/BKStyles";
 import { pageHeader, fontSize, activeButton } from "../../common/values/BKStyles";
 import { BKColor } from "../../common/values/BKColor";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
@@ -44,7 +44,7 @@ function Blogs({ navigation }) {
         return (
             <>
                 <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <CustomStatusBar/>
+                    <CustomStatusBar />
                     <ActivityIndicator size="large" color={BKColor.textColor2} />
                 </SafeAreaView>
             </>
@@ -54,7 +54,7 @@ function Blogs({ navigation }) {
         return (
 
             <SafeAreaView style={pageContainerStyle2}>
-                <CustomStatusBar/>
+                <CustomStatusBar />
                 <View style={pageHeader}>
                     <TouchableOpacity onPress={() => navigation.goBack()} >
                         <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
@@ -70,9 +70,13 @@ function Blogs({ navigation }) {
                                     blogDetailsId: item.news_id
                                 })
                             }}>
-                                <Image source={{ uri: IMAGE_BASE_PATH + item.image_path }} resizeMode='cover' style={styles.bannerImage} />
+                                <View style={{ position: 'relative' }}>
+                                    <Image source={{ uri: IMAGE_BASE_PATH + item.image_path }} resizeMode='cover' style={styles.bannerImage} />
+                                    <View style={styles.tagOuter}>
+                                        <Text style={styles.tagText}>2 min read</Text>
+                                    </View>
+                                </View>
                                 <View style={{ padding: wp('4%'), }}>
-
                                     <Text style={styles.aboutUsHeading}>{item.news_name}</Text>
                                     <Text style={styles.aboutUsDesc}>{item.news_description = ! null ? TrimString(((item.news_description).replace(regex, '')).replace(secondRegEx, ''), 100) : ''}</Text>
                                 </View>

@@ -40,5 +40,19 @@ export default StyleSheet.create({
       color: BKColor.textColor1,
       marginTop: hp('1%'),
       textAlign:'justify'
+    },
+    tagOuter: {
+      position: 'absolute',
+      bottom: wp('4%'),
+      right: wp('4%'),
+      backgroundColor: BKColor.white,
+      paddingHorizontal:wp('3%'),
+      paddingVertical: hp('0.5%'),
+      borderRadius: 15
+    },
+    tagText: {
+      fontSize: fontSize.h5,
+      fontFamily: fontFamily.regular,
+      color: BKColor.textColor1
     }
 });

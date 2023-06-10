@@ -9,12 +9,30 @@ export default StyleSheet.create({
     contactUsSec: {
         flexDirection: "row",
         alignItems: 'center',
-        marginTop: hp('2%')
+        marginBottom: hp('1.5%')
+    },
+    contactUsOuterSec: {
+        // flexDirection: 'row',
+        // alignItems: 'center',
+        // paddingVertical: hp('1%'),
+        // borderBottomWidth: 1,
+        // borderStyle: 'solid',
+        // borderBottomColor: '#dddddd',
+        backgroundColor: BKColor.bgColor,
+        borderRadius: 11,
+        shadowColor: 'rgba(23, 149, 94, 0.90)',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 1,
+        shadowRadius: 4,
+        margin: 5,
+        elevation: 10,
+        padding: wp('5%')
     },
 
-    contactUsText:{
-        fontSize: fontSize.h3,
-        fontWeight: '500',
+    contactUsText: {
+        fontSize: fontSize.h4,
+        fontFamily: fontFamily.medium,
+        color: BKColor.textColor1,
         marginLeft: wp('3%'),
         flex: 1, flexWrap: 'wrap'
     },

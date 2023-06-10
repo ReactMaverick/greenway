@@ -9,17 +9,26 @@ export default StyleSheet.create({
     contactUsSec: {
         // flexDirection: "row",
         // alignItems: 'center',
-        marginVertical: hp('1%'),
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: BKColor.boxBorder,
+        // marginVertical: hp('1%'),
+        // borderWidth: 1,
+        // borderStyle: 'solid',
+        // borderColor: BKColor.boxBorder,
+        backgroundColor: BKColor.bgColor,
+        borderRadius: 11,
+        shadowColor: 'rgba(23, 149, 94, 0.90)',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 1,
+        shadowRadius: 4,
+        margin: 5,
+        elevation: 10,
         borderRadius: 15,
-        padding: wp('4%')
+        padding: wp('4%'),
+        marginBottom:hp('2%')
     },
 
     contactUsText:{
-        fontSize: fontSize.h3,
-        fontWeight: '500',
+        fontSize: fontSize.h4,
+        fontFamily: fontFamily.regular,
         color: BKColor. textColor1,
         marginTop: hp('0.5%')
     },
@@ -37,9 +46,9 @@ export default StyleSheet.create({
         color: BKColor.textColor1
     },
     myOrderText: {
-        fontSize: fontSize.h3,
+        fontSize: fontSize.h2,
         fontFamily: fontFamily.medium,
-        color: BKColor.textColor2
+        color: BKColor.textColor1
     },
     orderStatus: {
         fontSize: fontSize.h3,
@@ -158,14 +167,16 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingVertical: hp('2%'),
-       
         button: {
             alignItems: 'center',
             padding: hp('2%'),
-            width: '25%',
+            // width: '25%',
             justifyContent: 'center',
             borderRadius: 13,
-            backgroundColor: BKColor.textColor2
+            borderWidth:1,
+            borderColor: BKColor.inputBorder,
+            marginVertical:hp('4%')
+            // backgroundColor: BKColor.textColor2
         }
     },
     textInput: {
@@ -188,5 +199,24 @@ export default StyleSheet.create({
         fontSize: fontSize.h4,
         fontFamily: fontFamily.medium,
         color: BKColor.white,
+    },
+    addressEditIcon: {
+        backgroundColor: BKColor.textColor1,
+        alignItems: 'center', 
+        marginBottom: hp('1%'),
+        color:BKColor.white,
+        fontSize: fontSize.heading,
+        borderRadius:wp('12.5%'),
+        padding: wp('1%')
+    },
+    addAddressIcon: {
+        color: BKColor.textColor1,
+        fontSize: fontSize.heading,
+        marginRight: wp('2%')
+    },
+    addShippingBtn: {
+        fontSize: fontSize.h4,
+        fontFamily: fontFamily.medium,
+        color:BKColor.textColor1
     }
 });
