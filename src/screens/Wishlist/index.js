@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
 import { pageContainerStyle, pageContainerStyle2 } from '../../common/values/BKStyles';
@@ -185,6 +186,7 @@ function Wishlist({ navigation }) {
                     </View>
                   </TouchableOpacity>
                 </View>
+                <View style={{ flex: 2, paddingVertical: hp('1.5%'), paddingHorizontal: wp('2%') }}>
                 <View style={styles.cartDecSec}>
                   <TouchableOpacity
                     onPress={() => {
@@ -209,7 +211,8 @@ function Wishlist({ navigation }) {
                     </Text>
                   </TouchableOpacity>
                 </View>
-                <View>
+                </View>
+                <View style={styles.cartQtyOuter}>
                   <TouchableOpacity
                     onPress={() => {
                       // _deleteWishlist(item);
@@ -253,15 +256,16 @@ function Wishlist({ navigation }) {
                       }
                     }}>
                     <View style={styles.cartDltSec}>
-                      <AntDesign
-                        name="shoppingcart"
-                        style={styles.cartDltIcon}
-                        color={BKColor.textColor1}
+                      <FontAwesome5
+                        name="shopping-cart"
+                        // style={styles.cartDltIcon}
+                        color={BKColor.white}
+                        size={fontSize.bh}
                       />
                     </View>
                   </TouchableOpacity>
 
-                  <TouchableOpacity
+                  {/* <TouchableOpacity
                     onPress={() => {
                       _deleteWishlist(item);
                     }}>
@@ -272,7 +276,7 @@ function Wishlist({ navigation }) {
                         color={BKColor.textColor6}
                       />
                     </View>
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
                 </View>
               </View>
             ))}

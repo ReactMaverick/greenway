@@ -8,10 +8,10 @@ export default StyleSheet.create({
 
   cartDetailsSec: {
     flexDirection: 'row',
-    alignItems: 'center',
+    // alignItems: 'center',
     // paddingVertical: hp('2%'),
     backgroundColor: BKColor.bgColor,
-    padding: wp('2%'),
+    // paddingH: wp('2%'),
     borderRadius:10,
     shadowColor: 'rgba(23, 149, 94, 0.90)',
     shadowOffset: { width: 0, height: 0 },
@@ -19,14 +19,16 @@ export default StyleSheet.create({
     shadowRadius: 10,
     margin: 5,
     elevation: 10,
-    marginTop: hp('3%')
+    // marginTop: hp('3%')
     // borderBottomWidth: 1,
     // borderStyle: 'solid',
     // borderBottomColor: '#dddddd'
   },
 
   cartImgSec: {
-    flex: 1,
+    flex: 1.4,
+    alignItems:'center',
+    paddingVertical: hp('1.5%')
   },
   productImageSec: {
     // width: wp('25%')
@@ -48,9 +50,8 @@ export default StyleSheet.create({
   },
 
   cartDecSec: {
-    flex: 2,
-    paddingHorizontal: wp('2%'),
-    lineHeight: 27
+    width: '100%',
+    // lineHeight: 27
   },
 
   cartDecHeading: {
@@ -116,9 +117,16 @@ export default StyleSheet.create({
   },
   cartPrice: {
     fontSize: fontSize.h3,
-    fontWeight: '500',
+    fontFamily:fontFamily.bold,
     color: BKColor.textColor2,
-    marginTop: hp('1%')
+    marginTop: hp('2%')
+  },
+  cartQtyOuter: {
+    flex: 0.9,
+    backgroundColor:BKColor.textColor2,
+    justifyContent:'center',
+    borderBottomRightRadius:11,
+    borderTopRightRadius:11
   },
 
 });

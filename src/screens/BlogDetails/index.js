@@ -4,7 +4,7 @@ import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
-import { pageContainerStyle } from "../../common/values/BKStyles";
+import { pageContainerStyle, pageContainerStyle2 } from "../../common/values/BKStyles";
 import { pageHeader, fontSize, activeButton } from "../../common/values/BKStyles";
 import { BKColor } from "../../common/values/BKColor";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
@@ -45,14 +45,14 @@ function BlogDetails({ navigation, route }) {
     if (isLoading) {
         return (
             <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                 <CustomStatusBar/>
+                <CustomStatusBar />
                 <ActivityIndicator size="large" color={BKColor.textColor2} />
             </SafeAreaView>
         )
     } else {
         return (
-            <SafeAreaView style={pageContainerStyle}>
-                 <CustomStatusBar/>
+            <SafeAreaView style={pageContainerStyle2}>
+                <CustomStatusBar />
                 <View style={pageHeader}>
                     <TouchableOpacity onPress={() => navigation.goBack()} >
                         <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
@@ -64,11 +64,16 @@ function BlogDetails({ navigation, route }) {
                     source={require('../../assets/images/about-us-banner-img.jpg')}
                     style={styles.itemImage}
                 /> */}
-                <ImageBackground source={{ uri: IMAGE_BASE_PATH + blogDetails.image }} resizeMode='cover' style={styles.bannerImage} />
+                <View style={{ position: 'relative' }}>
+                    <ImageBackground source={{ uri: IMAGE_BASE_PATH + blogDetails.image }} resizeMode='cover' style={styles.bannerImage} />
+                    
+                </View>
                 <View style={{ paddingHorizontal: wp('3%') }}>
-
                     <Text style={styles.aboutUsHeading}>{blogDetails.news_name}</Text>
                     <Text style={styles.aboutUsDesc}>{blogDetails.news_description != null ? ((blogDetails.news_description).replace(regex, '')).replace(secondRegEx, '') : ''}</Text>
+                    <View style={{ position: 'absolute',bottom:0,right:0 }}>
+                        <Text style={{ color:BKColor.textColor1 }}>2 min read</Text>
+                    </View>
                 </View>
             </SafeAreaView>
 

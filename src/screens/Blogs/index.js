@@ -4,7 +4,7 @@ import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
-import { pageContainerStyle } from "../../common/values/BKStyles";
+import { pageContainerStyle,pageContainerStyle2 } from "../../common/values/BKStyles";
 import { pageHeader, fontSize, activeButton } from "../../common/values/BKStyles";
 import { BKColor } from "../../common/values/BKColor";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
@@ -53,7 +53,7 @@ function Blogs({ navigation }) {
 
         return (
 
-            <SafeAreaView style={pageContainerStyle}>
+            <SafeAreaView style={pageContainerStyle2}>
                 <CustomStatusBar/>
                 <View style={pageHeader}>
                     <TouchableOpacity onPress={() => navigation.goBack()} >
@@ -70,8 +70,8 @@ function Blogs({ navigation }) {
                                     blogDetailsId: item.news_id
                                 })
                             }}>
-                                <ImageBackground source={{ uri: IMAGE_BASE_PATH + item.image_path }} resizeMode='cover' style={styles.bannerImage} />
-                                <View>
+                                <Image source={{ uri: IMAGE_BASE_PATH + item.image_path }} resizeMode='cover' style={styles.bannerImage} />
+                                <View style={{ padding: wp('4%'), }}>
 
                                     <Text style={styles.aboutUsHeading}>{item.news_name}</Text>
                                     <Text style={styles.aboutUsDesc}>{item.news_description = ! null ? TrimString(((item.news_description).replace(regex, '')).replace(secondRegEx, ''), 100) : ''}</Text>
