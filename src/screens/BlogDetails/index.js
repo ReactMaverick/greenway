@@ -64,16 +64,11 @@ function BlogDetails({ navigation, route }) {
                     source={require('../../assets/images/about-us-banner-img.jpg')}
                     style={styles.itemImage}
                 /> */}
-                <View style={{ position: 'relative' }}>
+                
                     <ImageBackground source={{ uri: IMAGE_BASE_PATH + blogDetails.image }} resizeMode='cover' style={styles.bannerImage} />
-                    
-                </View>
                 <View style={{ paddingHorizontal: wp('3%') }}>
                     <Text style={styles.aboutUsHeading}>{blogDetails.news_name}</Text>
                     <Text style={styles.aboutUsDesc}>{blogDetails.news_description != null ? ((blogDetails.news_description).replace(regex, '')).replace(secondRegEx, '') : ''}</Text>
-                    <View style={{ position: 'absolute',bottom:0,right:0 }}>
-                        <Text style={{ color:BKColor.textColor1 }}>2 min read</Text>
-                    </View>
                 </View>
             </SafeAreaView>
 

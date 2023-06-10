@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, TextInput, ScrollView, ActivityIndicator,SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ScrollView, ActivityIndicator, SafeAreaView } from 'react-native';
 import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { pageContainerStyle, pageHeader, placeHolderColor } from "../../common/values/BKStyles";
+import { pageContainerStyle, pageContainerStyle2, pageHeader, placeHolderColor } from "../../common/values/BKStyles";
 import { inputLevel, inputBottomLevel, textInput, inputContainer, activeButton, fontSize } from "../../common/values/BKStyles";
 import { BKColor } from "../../common/values/BKColor";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
@@ -96,15 +96,15 @@ function ContactUs({ navigation }) {
         return (
             <>
                 <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <CustomStatusBar/>
+                    <CustomStatusBar />
                     <ActivityIndicator size="large" color={BKColor.textColor2} />
                 </SafeAreaView>
             </>
         )
     } else {
         return (
-            <SafeAreaView style={pageContainerStyle}>
-                <CustomStatusBar/>
+            <SafeAreaView style={pageContainerStyle2}>
+                <CustomStatusBar />
                 <View style={pageHeader}>
                     <TouchableOpacity onPress={() => navigation.goBack()} >
                         <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
@@ -114,21 +114,24 @@ function ContactUs({ navigation }) {
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false} >
 
+                    <View style={styles.contactUsOuterSec}>
 
-                    <View style={styles.contactUsSec}>
-                        <FontAwesome name="fax" color={BKColor.textColor1} size={fontSize.h2} />
-                        <Text style={styles.contactUsText}>Address : {contactUs.contact_us_address}</Text>
+                        <View style={styles.contactUsSec}>
+                            <FontAwesome name="map" color={BKColor.textColor1} size={fontSize.h2} />
+                            <Text style={styles.contactUsText}>Address : {contactUs.contact_us_address}</Text>
+                        </View>
+                        <TouchableOpacity style={styles.contactUsSec}>
+                            <FontAwesome name="phone" color={BKColor.textColor1} size={fontSize.h2} />
+                            <Text style={styles.contactUsText}> {contactUs.contact_us_phone}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.contactUsSec}>
+                            <FontAwesome name="envelope-o" color={BKColor.textColor1} size={fontSize.h2} />
+                            <Text style={styles.contactUsText}> {contactUs.contact_us_email}</Text>
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.contactUsSec}>
-                        <FontAwesome name="phone" color={BKColor.textColor1} size={fontSize.h2} />
-                        <Text style={styles.contactUsText}> {contactUs.contact_us_phone}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.contactUsSec}>
-                        <FontAwesome name="envelope-o" color={BKColor.textColor1} size={fontSize.h2} />
-                        <Text style={styles.contactUsText}> {contactUs.contact_us_email}</Text>
-                    </TouchableOpacity>
+
                     <View style={inputContainer}>
-                        <Text style={inputLevel}>Your Name *</Text>
+                        {/* <Text style={inputLevel}>Your Name *</Text> */}
                         <TextInput
                             placeholder={'Name'}
                             placeholderTextColor={placeHolderColor}
@@ -142,7 +145,7 @@ function ContactUs({ navigation }) {
                     </View>
 
                     <View style={inputContainer}>
-                        <Text style={inputLevel}>Your Email *</Text>
+                        {/* <Text style={inputLevel}>Your Email *</Text> */}
                         <TextInput
                             placeholder={'Email'}
                             placeholderTextColor={placeHolderColor}
@@ -155,7 +158,7 @@ function ContactUs({ navigation }) {
                         />
                     </View>
                     <View style={inputContainer}>
-                        <Text style={inputLevel}>Your Phone</Text>
+                        {/* <Text style={inputLevel}>Your Phone</Text> */}
                         <TextInput
                             placeholder={'Number'}
                             placeholderTextColor={placeHolderColor}
@@ -168,7 +171,7 @@ function ContactUs({ navigation }) {
                         />
                     </View>
                     <View style={inputContainer}>
-                        <Text style={inputLevel}>Subject *</Text>
+                        {/* <Text style={inputLevel}>Subject *</Text> */}
                         <TextInput
                             placeholder={'Subject'}
                             placeholderTextColor={placeHolderColor}
@@ -181,7 +184,7 @@ function ContactUs({ navigation }) {
                         />
                     </View>
                     <View style={inputContainer}>
-                        <Text style={inputLevel}>Your Message *</Text>
+                        {/* <Text style={inputLevel}>Your Message *</Text> */}
                         <TextInput
                             multiline={true}
                             placeholder={'Message'}

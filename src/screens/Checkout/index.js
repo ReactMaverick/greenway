@@ -20,6 +20,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
   pageContainerStyle,
+  pageContainerStyle2,
   pageHeader,
   inputLevel,
   inputBottomLevel,
@@ -447,7 +448,7 @@ function Checkout({navigation}) {
     return (
       <SafeAreaView>
         <CustomStatusBar/>
-        <ScrollView style={pageContainerStyle}>
+        <ScrollView style={pageContainerStyle2}>
           <View style={pageHeader}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Fontisto

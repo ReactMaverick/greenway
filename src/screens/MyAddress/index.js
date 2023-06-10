@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,11 +10,13 @@ import {
 } from 'react-native';
 import styles from './styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Modal from 'react-native-modal';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {pageContainerStyle,pageContainerStyle2, pageHeader} from '../../common/values/BKStyles';
+import { pageContainerStyle, pageContainerStyle2, pageHeader } from '../../common/values/BKStyles';
 import {
   inputLevel,
   inputBottomLevel,
@@ -25,7 +27,7 @@ import {
   Button,
   placeHolderColor,
 } from '../../common/values/BKStyles';
-import {BKColor} from '../../common/values/BKColor';
+import { BKColor } from '../../common/values/BKColor';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -39,14 +41,14 @@ import {
   POST_DISTRICT_API,
   GET_PINCODE_API,
 } from '../../config/ApiConfig';
-import {GetApiFetch, PostApiFetch} from '../../config/CommonFunction';
-import {useSelector, useDispatch} from 'react-redux';
-import {showMessage, hideMessage} from 'react-native-flash-message';
-import {Dropdown} from 'react-native-element-dropdown';
+import { GetApiFetch, PostApiFetch } from '../../config/CommonFunction';
+import { useSelector, useDispatch } from 'react-redux';
+import { showMessage, hideMessage } from 'react-native-flash-message';
+import { Dropdown } from 'react-native-element-dropdown';
 import CustomStatusBar from '../../common/components/statusbar';
-import {useIsFocused} from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 
-function MyAddress({navigation}) {
+function MyAddress({ navigation }) {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
@@ -124,21 +126,21 @@ function MyAddress({navigation}) {
 
   const _setModalItem = async item => {
     //  console.log("item====>",item);
-     _getDistrict(item.entry_state);
-     _getPincode(item.districts_id);
-     searchPincode(item.pincodes_val);
-     setModalItem(item);
-     setEditAddressBookId(item.address_book_id);
-     setEditName(item.entry_firstname);
-     setEditEmail(item.entry_email);
-     setEditMobile(item.entry_phone);
-     setEditVillageName(item.entry_street_address);
-     setEditState(parseInt(item.entry_state));
-     // setEditState(item.states_name);
-     setEditCity(item.entry_city);
-     setEditPincode(item.pincodes_val);
-     // setEditPincode(item.entry_postcode);
-     setEditDistrict(item.districts_id);
+    _getDistrict(item.entry_state);
+    _getPincode(item.districts_id);
+    searchPincode(item.pincodes_val);
+    setModalItem(item);
+    setEditAddressBookId(item.address_book_id);
+    setEditName(item.entry_firstname);
+    setEditEmail(item.entry_email);
+    setEditMobile(item.entry_phone);
+    setEditVillageName(item.entry_street_address);
+    setEditState(parseInt(item.entry_state));
+    // setEditState(item.states_name);
+    setEditCity(item.entry_city);
+    setEditPincode(item.pincodes_val);
+    // setEditPincode(item.entry_postcode);
+    setEditDistrict(item.districts_id);
   };
 
   const _getState = async () => {
@@ -163,7 +165,7 @@ function MyAddress({navigation}) {
         }
       })
       .catch(error => console.log(error))
-      .finally(() => {});
+      .finally(() => { });
   };
   const _getDistrict = async statesId => {
     const formData = new FormData();
@@ -187,7 +189,7 @@ function MyAddress({navigation}) {
         }
       })
       .catch(error => console.log('_getDistrictError - ', error))
-      .finally(() => {});
+      .finally(() => { });
   };
   const _getPincode = async districtId => {
     let params = '?districts_id=' + districtId;
@@ -214,17 +216,17 @@ function MyAddress({navigation}) {
         }
       })
       .catch(error => console.log(error))
-      .finally(() => {});
+      .finally(() => { });
   };
-  
+
 
   const searchPincode = zipcodeInputText => {
-   
-    
+
+
     setZipCodeInput(zipcodeInputText);
-   
+
     let newData = [];
-    if (zipcodeInputText!=null) {
+    if (zipcodeInputText != null) {
       let arr = [];
       let temparr = pincodeList;
       newData = temparr.filter(function (item) {
@@ -234,7 +236,7 @@ function MyAddress({navigation}) {
         const textData = zipcodeInputText.toUpperCase();
         return itemData.includes(textData);
       });
-      
+
 
       setAutoSuggestion([...newData]);
     } else {
@@ -388,7 +390,7 @@ function MyAddress({navigation}) {
     return (
       <>
         <SafeAreaView
-          style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <CustomStatusBar />
           <ActivityIndicator size="large" color={BKColor.textColor2} />
         </SafeAreaView>
@@ -410,7 +412,7 @@ function MyAddress({navigation}) {
           <View></View>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={{marginTop: hp('3%')}}>
+          <View>
             <View style={styles.addAddress}>
               <Text style={styles.myAddHeading}>Billing Address</Text>
               {billingAddressList == null && (
@@ -420,9 +422,16 @@ function MyAddress({navigation}) {
                     setAddAddressType('billing');
                     toggleModal();
                   }}>
-                  <Text style={styles.addAddressText}>
+                  {/* <Text style={styles.addAddressText}>
                     Add+
-                  </Text>
+                  </Text> */}
+                  <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <Feather
+                  name="plus"
+                  style={styles.addAddressIcon}
+                />
+                <Text style={styles.addShippingBtn}>Add New Billing Address</Text>
+              </View>
                 </TouchableOpacity>
               )}
             </View>
@@ -434,7 +443,7 @@ function MyAddress({navigation}) {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                   }}>
-                  <View style={{width: wp('75%')}}>
+                  <View style={{ width: wp('75%') }}>
                     <Text style={styles.myOrderText}>
                       {billingAddressList.entry_firstname}
                     </Text>
@@ -452,17 +461,15 @@ function MyAddress({navigation}) {
                     </Text>
                   </View>
 
-                  <View style={{alignItems: 'center'}}>
+                  <View style={{ alignItems: 'center' }}>
                     <TouchableOpacity
                       onPress={() => {
                         _setModalItem(billingAddressList).then(toggleEditModal);
                         _getPincode();
                       }}>
-                      <FontAwesome
+                      <MaterialIcons
                         name="edit"
-                        color={BKColor.textColor2}
-                        size={wp('7%')}
-                        style={{alignItems: 'center', marginBottom: hp('1%')}}
+                        style={styles.addressEditIcon}
                       />
                     </TouchableOpacity>
 
@@ -480,25 +487,21 @@ function MyAddress({navigation}) {
               </View>
             ) : (
               <View>
-                <Text style={{fontWeight: '600'}}>
+                <Text style={{ fontWeight: '600' }}>
                   No billing address added
                 </Text>
               </View>
             )}
           </View>
 
-          <View style={{marginTop: hp('3%')}}>
+          <View style={{ marginTop: hp('3%') }}>
             <View style={styles.addAddress}>
               <Text style={styles.myAddHeading}>Shipping Address</Text>
-              <TouchableOpacity
-                style={styles.addAddress.button}
-                onPress={() => {
-                  setAddAddressType('shipping');
-                  toggleModal();
-                }}>
-                <Text style={styles.addAddressText}>Add+</Text>
-              </TouchableOpacity>
+
             </View>
+
+
+
             {shippingAddressList.length > 0 ? (
               <View>
                 {shippingAddressList.map((item, key) => (
@@ -509,7 +512,7 @@ function MyAddress({navigation}) {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                       }}>
-                      <View style={{width: wp('75%')}}>
+                      <View style={{ width: wp('75%') }}>
                         <Text style={styles.myOrderText}>
                           {item.entry_firstname}
                         </Text>
@@ -527,19 +530,14 @@ function MyAddress({navigation}) {
                         </Text>
                       </View>
 
-                      <View style={{alignItems: 'center'}}>
+                      <View style={{ alignItems: 'center' }}>
                         <TouchableOpacity
                           onPress={() => {
                             _setModalItem(item).then(toggleEditModal);
                           }}>
-                          <FontAwesome
+                          <MaterialIcons
                             name="edit"
-                            color={BKColor.textColor2}
-                            size={wp('7%')}
-                            style={{
-                              alignItems: 'center',
-                              marginBottom: hp('1%'),
-                            }}
+                            style={styles.addressEditIcon}
                           />
                         </TouchableOpacity>
 
@@ -564,11 +562,29 @@ function MyAddress({navigation}) {
               </View>
             ) : (
               <View>
-                <Text style={{fontWeight: '600'}}>
+                <Text style={{ fontWeight: '600' }}>
                   No shipping address added
                 </Text>
               </View>
             )}
+
+
+            <TouchableOpacity
+              style={styles.addAddress.button}
+              onPress={() => {
+                setAddAddressType('shipping');
+                toggleModal();
+              }}>
+              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <Feather
+                  name="plus"
+                  style={styles.addAddressIcon}
+                />
+                <Text style={styles.addShippingBtn}>Add New Shipping Address</Text>
+              </View>
+              {/* <Text style={styles.addAddressText}>Add+</Text> */}
+            </TouchableOpacity>
+
           </View>
         </ScrollView>
         <Modal
@@ -594,12 +610,12 @@ function MyAddress({navigation}) {
               </TouchableOpacity>
             </View>
             <View>
-              <Text style={{textAlign: 'center', color: '#EC1F25'}}>
+              <Text style={{ textAlign: 'center', color: '#EC1F25' }}>
                 {fieldError}
               </Text>
             </View>
             <View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>Full Name</Text>
                 <TextInput
                   placeholder={'full name'}
@@ -621,7 +637,7 @@ function MyAddress({navigation}) {
                   }}
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>Email</Text>
                 <TextInput
                   placeholder={'email'}
@@ -631,14 +647,14 @@ function MyAddress({navigation}) {
                   onChangeText={value => setAddEmail(value)}
                   value={addEmail}
 
-                  // secureTextEntry={passwordEye}
-                  // onChangeText={(password) => setPassword(password)}
-                  // onFocus={() => {
-                  //   setErrorMessage('')
-                  // }}
+                // secureTextEntry={passwordEye}
+                // onChangeText={(password) => setPassword(password)}
+                // onFocus={() => {
+                //   setErrorMessage('')
+                // }}
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>Mobile No</Text>
                 <TextInput
                   placeholder={'mobile no'}
@@ -648,14 +664,14 @@ function MyAddress({navigation}) {
                   onChangeText={value => setAddMobile(value)}
                   value={addMobile}
 
-                  // secureTextEntry={passwordEye}
-                  // onChangeText={(password) => setPassword(password)}
-                  // onFocus={() => {
-                  //   setErrorMessage('')
-                  // }}
+                // secureTextEntry={passwordEye}
+                // onChangeText={(password) => setPassword(password)}
+                // onFocus={() => {
+                //   setErrorMessage('')
+                // }}
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>Street / Village Name</Text>
                 <TextInput
                   placeholder={'Street name'}
@@ -665,20 +681,20 @@ function MyAddress({navigation}) {
                   onChangeText={value => setAddVillageName(value)}
                   value={addVillageName}
 
-                  // secureTextEntry={passwordEye}
-                  // onChangeText={(password) => setPassword(password)}
-                  // onFocus={() => {
-                  //   setErrorMessage('')
-                  // }}
+                // secureTextEntry={passwordEye}
+                // onChangeText={(password) => setPassword(password)}
+                // onFocus={() => {
+                //   setErrorMessage('')
+                // }}
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>State</Text>
 
                 <Dropdown
                   style={[
                     styles.textInput,
-                    isFocus && {borderColor: '#DDDDDD'},
+                    isFocus && { borderColor: '#DDDDDD' },
                   ]}
                   // style={textInput}
                   placeholder={!isFocus ? 'Select State' : ''}
@@ -698,12 +714,12 @@ function MyAddress({navigation}) {
                   dropdownPosition="top"
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>District</Text>
                 <Dropdown
                   style={[
                     styles.textInput,
-                    isDistrictFocus && {borderColor: '#DDDDDD'},
+                    isDistrictFocus && { borderColor: '#DDDDDD' },
                   ]}
                   // style={textInput}
                   placeholder={!isDistrictFocus ? 'Select District' : ''}
@@ -722,7 +738,7 @@ function MyAddress({navigation}) {
                   dropdownPosition="top"
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>City</Text>
                 <TextInput
                   placeholder={'city'}
@@ -732,19 +748,19 @@ function MyAddress({navigation}) {
                   onChangeText={value => setAddCity(value)}
                   value={addCity}
 
-                  // secureTextEntry={passwordEye}
-                  // onChangeText={(password) => setPassword(password)}
-                  // onFocus={() => {
-                  //   setErrorMessage('')
-                  // }}
+                // secureTextEntry={passwordEye}
+                // onChangeText={(password) => setPassword(password)}
+                // onFocus={() => {
+                //   setErrorMessage('')
+                // }}
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>Pincode</Text>
                 <Dropdown
                   style={[
                     styles.textInput,
-                    isPincodeFocus && {borderColor: '#DDDDDD'},
+                    isPincodeFocus && { borderColor: '#DDDDDD' },
                   ]}
                   // style={textInput}
                   placeholder={!isPincodeFocus ? 'Select Pincode' : ''}
@@ -771,7 +787,7 @@ function MyAddress({navigation}) {
                       }}
                       key={key}>
                       <Text
-                        style={{backgroundColor: '#eeeeee', padding: wp('2%')}}>
+                        style={{ backgroundColor: '#eeeeee', padding: wp('2%') }}>
                         {item.label}
                       </Text>
                     </TouchableOpacity>
@@ -823,12 +839,12 @@ function MyAddress({navigation}) {
               </TouchableOpacity>
             </View>
             <View>
-              <Text style={{textAlign: 'center', color: '#EC1F25'}}>
+              <Text style={{ textAlign: 'center', color: '#EC1F25' }}>
                 {editFieldError}
               </Text>
             </View>
             <View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>Full Name</Text>
                 <TextInput
                   placeholder={'full name'}
@@ -839,7 +855,7 @@ function MyAddress({navigation}) {
                   value={editName}
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>Email</Text>
                 <TextInput
                   placeholder={'email'}
@@ -850,7 +866,7 @@ function MyAddress({navigation}) {
                   value={editEmail}
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>Mobile No</Text>
                 <TextInput
                   placeholder={'mobile no'}
@@ -861,7 +877,7 @@ function MyAddress({navigation}) {
                   value={editMobile}
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>Street / Village Name</Text>
                 <TextInput
                   placeholder={'Street name'}
@@ -872,12 +888,12 @@ function MyAddress({navigation}) {
                   value={editVillageName}
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>State</Text>
                 <Dropdown
                   style={[
                     styles.textInput,
-                    isFocus && {borderColor: '#DDDDDD'},
+                    isFocus && { borderColor: '#DDDDDD' },
                   ]}
                   // style={textInput}
                   placeholder={!isFocus ? 'Select State' : ''}
@@ -898,12 +914,12 @@ function MyAddress({navigation}) {
                   dropdownPosition="top"
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>District</Text>
                 <Dropdown
                   style={[
                     styles.textInput,
-                    isDistrictFocus && {borderColor: '#DDDDDD'},
+                    isDistrictFocus && { borderColor: '#DDDDDD' },
                   ]}
                   // style={textInput}
                   placeholder={!isDistrictFocus ? 'Select District' : ''}
@@ -922,7 +938,7 @@ function MyAddress({navigation}) {
                   dropdownPosition="top"
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>City</Text>
                 <TextInput
                   placeholder={'city'}
@@ -933,7 +949,7 @@ function MyAddress({navigation}) {
                   value={editCity}
                 />
               </View>
-              <View style={[inputContainer, {marginTop: hp('1%')}]}>
+              <View style={[inputContainer, { marginTop: hp('1%') }]}>
                 <Text style={inputLevel}>Pincode</Text>
                 {/* <TextInput
                   placeholder={'pincode'}
@@ -967,7 +983,7 @@ function MyAddress({navigation}) {
                   placeholder={'Search pincode'}
                   placeholderTextColor={placeHolderColor}
                   style={textInput}
-                  onChangeText={ value => {
+                  onChangeText={value => {
                     // setZipCodeInput(value);
                     // setEditPincode(value);
                     searchPincode(value);
@@ -985,7 +1001,7 @@ function MyAddress({navigation}) {
                       }}
                       key={key}>
                       <Text
-                        style={{backgroundColor: '#eeeeee', padding: wp('2%')}}>
+                        style={{ backgroundColor: '#eeeeee', padding: wp('2%') }}>
                         {item.label}
                       </Text>
                     </TouchableOpacity>

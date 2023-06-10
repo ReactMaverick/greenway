@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -20,18 +20,21 @@ import {
   activeButton,
   fontSize,
 } from '../../common/values/BKStyles';
-import {BKColor} from '../../common/values/BKColor';
+
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
+import { BKColor } from '../../common/values/BKColor';
 import OTPTextInput from 'react-native-otp-textinput';
-import {POST_PROCESS_SIGNUP_API} from '../../config/ApiConfig';
-import {GetApiFetch, PostApiFetch} from '../../config/CommonFunction';
-import {useSelector, useDispatch} from 'react-redux';
-import {userDetails} from '../../redux/reducers/UserReducer';
+import { POST_PROCESS_SIGNUP_API } from '../../config/ApiConfig';
+import { GetApiFetch, PostApiFetch } from '../../config/CommonFunction';
+import { useSelector, useDispatch } from 'react-redux';
+import { userDetails } from '../../redux/reducers/UserReducer';
 import CustomStatusBar from '../../common/components/statusbar';
-function OtpVerification({navigation, route}) {
+function OtpVerification({ navigation, route }) {
   const dispatch = useDispatch();
   const [OTP, setOTP] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const {response} = route.params;
+  const { response } = route.params;
 
   const _checkOtp = () => {
     if (OTP == '') {
@@ -70,21 +73,24 @@ function OtpVerification({navigation, route}) {
 
   return (
     <SafeAreaView>
-      <CustomStatusBar/>
+      <CustomStatusBar />
       <ScrollView style={pageContainerStyle}>
         <View style={styles.regContainer}>
-          <Text style={styles.regContainer.headerText}>
-            Entry Your 4 digit code
-          </Text>
+          
           <View style={styles.logoSection}>
             {/* <Text>Phone Number</Text> */}
 
-            <Image
-              style={styles.logoSection.logoImage}
-              source={require('../../assets/images/OtpLogo.png')}
-              borderRadius={5}
-            />
+            <View style={styles.loginLogoSection.logo}>
+              <Image
+                source={require('../../assets/images/header-logo.png')} style={{ height: hp('18%'), width: wp('26%'), resizeMode: "cover" }}
+              />
+              <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
+              <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
+            </View>
           </View>
+          <Text style={styles.regContainer.headerText}>
+            Entry Your 4 digit code
+          </Text>
           <OTPTextInput
             textInputStyle={styles.otpBoxStyle}
             tintColor={BKColor.textColor2}
@@ -92,9 +98,14 @@ function OtpVerification({navigation, route}) {
             // onChangeText={(value) => setOTP(value)}
             handleTextChange={otpInput => setOTP(otpInput)}
           />
-          <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
+          <Text style={{ textAlign: 'center', color: BKColor.textColor2 }}>
             {errorMessage}
           </Text>
+
+          
+          <TouchableOpacity style={activeButton.button} onPress={_checkOtp}>
+            <Text style={activeButton.text}>Verify</Text>
+          </TouchableOpacity>
 
           <View style={styles.loginFooter}>
             <Text style={styles.loginFooter.textLeft}>
@@ -102,9 +113,7 @@ function OtpVerification({navigation, route}) {
             </Text>
             <Text style={styles.loginFooter.textRight}>Resend</Text>
           </View>
-          <TouchableOpacity style={activeButton.button} onPress={_checkOtp}>
-            <Text style={activeButton.text}>Verify</Text>
-          </TouchableOpacity>
+
         </View>
       </ScrollView>
     </SafeAreaView>
