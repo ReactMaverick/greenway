@@ -811,7 +811,7 @@ function Checkout({navigation}) {
                 onPress={() => {
                   // _generateOrderId()
                   if (razorPay != null) {
-                    _makeOnlinePayment(razorPay.RAZORPAY_KEY);
+                    _makeOnlinePayment('rzp_test_pGu27P88qj5UWo');
                   }
                 }}>
                 <Text style={activeButton.text}>Proceed to Razorpay</Text>

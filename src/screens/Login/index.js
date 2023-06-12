@@ -230,7 +230,7 @@ function Login({ navigation }) {
           <View style={styles.loginLogoSection}>
             <View style={styles.loginLogoSection.logo}>
               <Image
-                source={require('../../assets/images/header-logo.png')} style={{ height: hp('18%'),width: wp('26%'),resizeMode:"cover" }} 
+                source={require('../../assets/images/header-logo.png')} style={{ height: wp('38.8%'),width: wp('27.1%') }} 
               />
             </View>
             <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
@@ -244,9 +244,11 @@ function Login({ navigation }) {
             <TextInput
               placeholder={'Enter email address'}
               placeholderTextColor={placeHolderColor}
+              keyboardType='email-address'
               style={textInput}
               onChangeText={value => setUsername(value)}
               value={username}
+              
               // secureTextEntry={passwordEye}
               // onChangeText={(password) => setPassword(password)}
               onFocus={() => {
@@ -260,7 +262,7 @@ function Login({ navigation }) {
             <View
               style={[
                 textInput,
-                { paddingHorizontal: wp('2%'), paddingVertical: hp('0.5%') },
+                { paddingHorizontal: wp('2%'), paddingVertical: hp('-2%') },
               ]}>
               <TextInput
                 placeholder={'Password'}

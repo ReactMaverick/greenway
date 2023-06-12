@@ -1,4 +1,4 @@
-package com.greenway.newarchitecture.components;
+package com.websadroit.freshfruits.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

@@ -1,4 +1,4 @@
-package com.greenway.newarchitecture;
+package com.websadroit.freshfruits.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.greenway.BuildConfig;
-import com.greenway.newarchitecture.components.MainComponentsRegistry;
-import com.greenway.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.websadroit.freshfruits.BuildConfig;
+import com.websadroit.freshfruits.newarchitecture.components.MainComponentsRegistry;
+import com.websadroit.freshfruits.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

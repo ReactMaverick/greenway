@@ -163,9 +163,9 @@ export default StyleSheet.create({
     },
     addAddress: {
         
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        // flexDirection: 'row',
+        // alignItems: 'center',
+        // justifyContent: 'space-between',
         paddingVertical: hp('2%'),
         button: {
             alignItems: 'center',

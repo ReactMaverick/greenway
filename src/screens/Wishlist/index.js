@@ -420,24 +420,23 @@ function Wishlist({navigation}) {
                 </View>
               )}
               renderHiddenItem={(data, rowMap) => (
-                <View style={{backgroundColor: "red", height: wp('35%')}}>
+                <View style={styles.cartSlideOuter}>
                   <TouchableOpacity
                     onPress={() => {
                       _deleteWishlist(data.item);
                     }}>
-                    <View style={styles.cartDltSec}>
-                      <Feather
-                        name="trash"
-                        style={styles.cartDltIcon}
-                        color={BKColor.textColor6}
-                      />
-                    </View>
+                    <Feather
+                      name="trash"
+                      style={styles.cartDltIcon}
+                      color={BKColor.textColor6}
+                    />
                   </TouchableOpacity>
                 </View>
               )}
               leftOpenValue={75}
               rightOpenValue={-75}
-              disableRightSwipe={true}
+              // disableRightSwipe={true}
+              disableLeftSwipe={true}
             />
           </ScrollView>
         ) : (
