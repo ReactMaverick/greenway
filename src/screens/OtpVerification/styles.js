@@ -12,7 +12,7 @@ export default StyleSheet.create({
         // borderColor: '#DDDDDD',
         paddingVertical: hp('7%'),
         paddingHorizontal: hp('2%'),
-        marginTop: hp('8%'),
+        // marginTop: hp('8%'),
         marginBottom: hp('4%'),
         // height: hp('90%'),
         flexDirection: 'column',
