@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -10,13 +10,13 @@ import {
   SafeAreaView,
   StatusBar,
   statusBarStyle,
-  statusBarTransition
+  statusBarTransition,
 } from 'react-native';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { pageContainerStyle } from '../../common/values/BKStyles';
+import {pageContainerStyle} from '../../common/values/BKStyles';
 import {
   inputLevel,
   inputBottomLevel,
@@ -25,17 +25,17 @@ import {
   activeButton,
   fontSize,
   placeHolderColor,
-  fontFamily
+  fontFamily,
 } from '../../common/values/BKStyles';
-import { BKColor } from '../../common/values/BKColor';
+import {BKColor} from '../../common/values/BKColor';
 import {
   POST_SIGNIN_API,
   GOOGLE_LOGINKEY,
   FBAppId,
   POST_SOCIAL_LOGIN,
 } from '../../config/ApiConfig';
-import { PostApiFetch } from '../../config/CommonFunction';
-import { useSelector, useDispatch } from 'react-redux';
+import {PostApiFetch} from '../../config/CommonFunction';
+import {useSelector, useDispatch} from 'react-redux';
 import DeviceInfo from 'react-native-device-info';
 import {
   heightPercentageToDP as hp,
@@ -58,7 +58,7 @@ import CustomStatusBar from '../../common/components/statusbar';
 //   webClientId: GOOGLE_LOGINKEY,
 // });
 
-function Login({ navigation }) {
+function Login({navigation}) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [androidId, setAndroidId] = useState(true);
@@ -66,7 +66,7 @@ function Login({ navigation }) {
   const [password, setPassword] = useState('');
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
   const [passwordEye, setPasswordEye] = useState(true);
-
+  const [errorArr, setErrorArr] = useState({});
   const [socialId, setSocialId] = useState('');
   const [social, setSocial] = useState('');
   const [email, setEmail] = useState('');
@@ -76,18 +76,18 @@ function Login({ navigation }) {
   const _signIn = async () => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (username == '') {
-      setLoginErrorMessage('Enter Email/Phone');
-    } else if (password == '') {
-      setLoginErrorMessage('Enter Password');
-    } else if (reg.test(username) === false && username.length != 10) {
-      setLoginErrorMessage('Please Enter Valid Email/Phone');
+      setErrorArr({id: 1, message: 'Enter Email/Phone'});
+    }else if (reg.test(username) === false && username.length != 10) {
+      setErrorArr({id: 1, message: 'Please Enter Valid Email/Phone'});
+    }else if (password == '') {
+      setErrorArr({id: 2, message: 'Enter Password'});
     } else {
       setIsLoading(true);
       const formData = new FormData();
       formData.append('user_name', username);
       formData.append('password', password);
       formData.append('session_id', androidId);
-      formData.append('fcmToken', "test-token");
+      formData.append('fcmToken', 'test-token');
       formData.append('device_os', Platform.OS);
       // console.log('formData',formData);
       PostApiFetch(POST_SIGNIN_API, formData)
@@ -104,7 +104,7 @@ function Login({ navigation }) {
               dispatch(userDetails(response.userDetails[0]));
             }
           } else {
-             console.log('Something went wrong');
+            console.log('Something went wrong');
           }
         })
         .catch(error => console.log(error))
@@ -171,7 +171,7 @@ function Login({ navigation }) {
     formData.append('name', name);
     // formData.append('session_id', deviceToken);
     formData.append('session_id', androidId);
-    formData.append('fcmToken', "test");
+    formData.append('fcmToken', 'test');
     formData.append('device_os', Platform.OS);
     console.log('formData==>', formData);
 
@@ -183,17 +183,12 @@ function Login({ navigation }) {
       body: formData,
     })
       .then(response => {
-
         const statusCode = response.status;
         const data = response.json();
         return Promise.all([statusCode, data]);
       })
       .then(([status, response]) => {
-
         if (status == 200) {
-          // console.log('LogData', status, response);
-          // dispatch({ type: 'setUserData', payload: response.userDetails[0] });
-          // dispatch(userDetails(response.userDetails[0]));
           navigation.navigate('Home');
         } else {
           if (response.error != undefined) {
@@ -216,7 +211,7 @@ function Login({ navigation }) {
   if (isLoading) {
     return (
       <>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <ActivityIndicator size="large" color={BKColor.textColor2} />
         </View>
       </>
@@ -224,80 +219,88 @@ function Login({ navigation }) {
   } else {
     return (
       <SafeAreaView>
-         <CustomStatusBar/>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={pageContainerStyle}>
-          <View style={styles.loginLogoSection}>
-            <View style={styles.loginLogoSection.logo}>
-              <Image
-                source={require('../../assets/images/header-logo.png')} style={{ height: wp('38.8%'),width: wp('27.1%') }} 
-              />
+        <CustomStatusBar />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={pageContainerStyle}>
+            <View style={styles.loginLogoSection}>
+              <View style={styles.loginLogoSection.logo}>
+                <Image
+                  source={require('../../assets/images/header-logo.png')}
+                  style={{height: wp('38.8%'), width: wp('27.1%')}}
+                />
+              </View>
+              <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
+              <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
             </View>
-            <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
-            <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
-          </View>
-          <Text style={{ textAlign: 'center', color: BKColor.textColor2 }}>
-            {loginErrorMessage}
-          </Text>
-          <View>
-            {/* <Text style={inputLevel}>User Name</Text> */}
-            <TextInput
-              placeholder={'Enter email address'}
-              placeholderTextColor={placeHolderColor}
-              keyboardType='email-address'
-              style={textInput}
-              onChangeText={value => setUsername(value)}
-              value={username}
-              
-              // secureTextEntry={passwordEye}
-              // onChangeText={(password) => setPassword(password)}
-              onFocus={() => {
-                setLoginErrorMessage('');
-              }}
-            />
-          </View>
-
-          <View style={inputContainer}>
-            {/* <Text style={inputLevel}>Password</Text> */}
-            <View
-              style={[
-                textInput,
-                { paddingHorizontal: wp('2%'), paddingVertical: hp('-2%') },
-              ]}>
+            <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
+              {loginErrorMessage}
+            </Text>
+            <View>
               <TextInput
-                placeholder={'Password'}
+                placeholder={'Enter email address'}
                 placeholderTextColor={placeHolderColor}
-                style={{ width: '90%',fontFamily: fontFamily.regular,
-                fontSize: fontSize.h3,color: BKColor.textColor1}}
-                secureTextEntry={passwordEye}
-                onChangeText={value => setPassword(value)}
-                value={password}
-                // onChangeText={(password) => setPassword(password)}
+                keyboardType="email-address"
+                style={[
+                  styles.textInput,
+                  errorArr.id == 1 && styles.errorInput,
+                ]}
+                onChangeText={value => setUsername(value)}
+                value={username}
                 onFocus={() => {
-                  setLoginErrorMessage('');
+                  setErrorArr(0);
                 }}
               />
-              <TouchableOpacity style={{ width: '10%', }}
-                onPress={() => {
-                  setPasswordEye(!passwordEye);
-                }}>
-                {/* <Text>Show</Text> */}
-                <Entypo
-                  name={passwordEye ? 'eye-with-line' : 'eye'}
-                  style={{ fontSize: 20,color:BKColor.textColor1 }}
-                />
-              </TouchableOpacity>
+              {errorArr.id == 1 && (
+                <Text style={styles.errorText}>* {errorArr.message}</Text>
+              )}
             </View>
 
-            <TouchableOpacity
-              onPress={() => navigation.navigate('ForgetPassword')}>
-              <Text style={inputBottomLevel}>Forgot Password?</Text>
+            <View style={inputContainer}>
+              <View
+                style={[
+                  textInput,
+                  {paddingHorizontal: wp('2%'), paddingVertical: hp('-2%')},errorArr.id == 2 && styles.errorInput,
+                ]}>
+                <TextInput
+                  placeholder={'Password'}
+                  placeholderTextColor={placeHolderColor}
+                  style={{
+                    width: '90%',
+                    fontFamily: fontFamily.regular,
+                    fontSize: fontSize.h3,
+                    color: BKColor.textColor1,
+                  }}
+                  secureTextEntry={passwordEye}
+                  onChangeText={value => setPassword(value)}
+                  value={password}
+                  onFocus={() => {
+                    setErrorArr(0);
+                  }}
+                />
+                <TouchableOpacity
+                  style={{width: '10%'}}
+                  onPress={() => {
+                    setPasswordEye(!passwordEye);
+                  }}>
+                  {/* <Text>Show</Text> */}
+                  <Entypo
+                    name={passwordEye ? 'eye-with-line' : 'eye'}
+                    style={{fontSize: 20, color: BKColor.textColor1}}
+                  />
+                </TouchableOpacity>
+              </View>
+              {errorArr.id == 2 && (
+                <Text style={styles.errorText}>* {errorArr.message}</Text>
+              )}
+              <TouchableOpacity
+                onPress={() => navigation.navigate('ForgetPassword')}>
+                <Text style={inputBottomLevel}>Forgot Password?</Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={activeButton.button} onPress={_signIn}>
+              <Text style={activeButton.text}>Login</Text>
             </TouchableOpacity>
-          </View>
-          <TouchableOpacity style={activeButton.button} onPress={_signIn}>
-            <Text style={activeButton.text}>Login</Text>
-          </TouchableOpacity>
-          {/* <View style={styles.socialLoginContainer}>
+            {/* <View style={styles.socialLoginContainer}>
             <TouchableOpacity
               style={styles.socialLoginButton.button}
               onPress={() => {
@@ -350,16 +353,16 @@ function Login({ navigation }) {
               <Text style={styles.socialLoginButton.text2}>Facebook</Text>
             </TouchableOpacity>
           </View> */}
-          <View style={styles.loginFooter}>
-            <Text style={styles.loginFooter.textLeft}>
-              Don’t have account?{' '}
-            </Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-              <Text style={styles.loginFooter.textRight}>Sign up</Text>
-            </TouchableOpacity>
+            <View style={styles.loginFooter}>
+              <Text style={styles.loginFooter.textLeft}>
+                Don’t have account?{' '}
+              </Text>
+              <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                <Text style={styles.loginFooter.textRight}>Sign up</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
       </SafeAreaView>
     );
   }

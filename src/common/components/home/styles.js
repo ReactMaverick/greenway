@@ -1,10 +1,13 @@
-import { Dimensions, StyleSheet } from 'react-native';
-import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
-import { fontSize, fontFamily } from '../../values/BKStyles';
-import { BKColor } from '../../values/BKColor';
+import {Dimensions, StyleSheet} from 'react-native';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
+import {fontSize, fontFamily} from '../../values/BKStyles';
+import {BKColor} from '../../values/BKColor';
 
 export default StyleSheet.create({
-  headText: { color: '#2E2E2E', fontSize: 16, margin: 5 },
+  headText: {color: '#2E2E2E', fontSize: 16, margin: 5},
   imageSlider: {
     width: wp('91%'),
     // marginTop: hp('3%'),
@@ -40,7 +43,22 @@ export default StyleSheet.create({
     height: hp('14%'),
     // paddingHorizontal: wp('10%'),
     paddingVertical: hp('1%'),
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+  },
+  popularCategoryOuter: {
+    width: wp('42%'),
+    // backgroundColor:'red',
+    alignItems: 'center',
+    padding: wp('4%'),
+    marginVertical: hp('2%'),
+  },
+  categorySlider: {
+    width: wp('27%'),
+    // marginTop: hp('3%'),
+    height: wp('26%'),
+    borderRadius: wp('12.5%'),
+    paddingVertical: hp('1%'),
+    justifyContent: 'flex-end',
   },
   brandsSliderText: {
     alignItems: 'center',
@@ -64,7 +82,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     flex: 1,
-    position: 'relative'
+    position: 'relative',
   },
   // item: {
   //   backgroundColor: 'white',
@@ -86,7 +104,7 @@ export default StyleSheet.create({
     paddingVertical: hp('2%'),
     paddingHorizontal: wp('0.8%'),
     shadowColor: 'rgba(23, 149, 94, 0.80)',
-    shadowOffset: { width: 0, height: 0 },
+    shadowOffset: {width: 0, height: 0},
     shadowOpacity: 1,
     shadowRadius: 30,
     elevation: 5,
@@ -105,7 +123,7 @@ export default StyleSheet.create({
     paddingVertical: hp('2%'),
     paddingHorizontal: wp('0.8%'),
     shadowColor: 'rgba(23, 149, 94, 0.80)',
-    shadowOffset: { width: 0, height: 0 },
+    shadowOffset: {width: 0, height: 0},
     shadowOpacity: 1,
     shadowRadius: 30,
     elevation: 5,
@@ -114,7 +132,7 @@ export default StyleSheet.create({
   itemOuter: {
     marginTop: hp('-10%'),
     shadowColor: 'rgba(23, 149, 94, 0.90)',
-    shadowOffset: { width: 0, height: 0 },
+    shadowOffset: {width: 0, height: 0},
     shadowOpacity: 1,
     shadowRadius: 4,
     margin: 5,
@@ -139,24 +157,24 @@ export default StyleSheet.create({
   itemName: {
     fontSize: fontSize.h3,
     fontFamily: fontFamily.bold,
-    color: BKColor.textColor1
+    color: BKColor.textColor1,
   },
   itemDetails: {
     fontSize: fontSize.h3,
     fontFamily: fontFamily.regular,
-    color: '#7ca18f'
+    color: '#7ca18f',
   },
   itemPrice: {
     fontSize: fontSize.h3,
     fontFamily: fontFamily.bold,
-    color: BKColor.textColor1
+    color: BKColor.textColor1,
   },
   itemOldPrice: {
     // marginLeft: 3,
     fontSize: fontSize.h3,
     fontFamily: fontFamily.regular,
     color: '#7ca18f',
-    textDecorationLine: 'line-through'
+    textDecorationLine: 'line-through',
   },
   wishlistIcon: {
     // alignSelf: "flex-end",
@@ -176,13 +194,13 @@ export default StyleSheet.create({
     borderStyle: 'solid',
     borderBottomWidth: 1,
     borderColor: '#DDDDDD',
-    paddingBottom: hp('2%')
+    paddingBottom: hp('2%'),
   },
   shipping_content: {
     letterSpacing: 2,
     fontWeight: '700',
     alignItems: 'flex-start',
-    width: wp('75%')
+    width: wp('75%'),
   },
   shippingAreaContent: {
     flexDirection: 'row',
@@ -193,7 +211,7 @@ export default StyleSheet.create({
   shippingAreaImg: {
     // height: wp('20%'),
     width: wp('20%'),
-    alignItems: 'center'
+    alignItems: 'center',
   },
   wholeSaleprice: {
     fontSize: fontSize.h5,
@@ -208,7 +226,12 @@ export default StyleSheet.create({
     width: wp('14%'),
     height: wp('14%'),
     borderTopLeftRadius: 50,
-    borderBottomRightRadius: 15
-  }
-
+    borderBottomRightRadius: 15,
+  },
+  categoryText: {
+    fontSize: fontSize.h3,
+    fontFamily: fontFamily.bold,
+    color: BKColor.textColor1,
+    textAlign: 'center',
+  },
 });

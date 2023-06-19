@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,7 +6,7 @@ import {
   TextInput,
   ScrollView,
   SafeAreaView,
-  Image
+  Image,
 } from 'react-native';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -24,44 +24,51 @@ import {
   activeButton,
   fontSize,
   placeHolderColor,
-  fontFamily
+  fontFamily,
 } from '../../common/values/BKStyles';
-import { BKColor } from '../../common/values/BKColor';
-import { POST_SIGNUP_API } from '../../config/ApiConfig';
-import { GetApiFetch, PostApiFetch } from '../../config/CommonFunction';
-import { useSelector, useDispatch } from 'react-redux';
+import {BKColor} from '../../common/values/BKColor';
+import {POST_SIGNUP_API} from '../../config/ApiConfig';
+import {GetApiFetch, PostApiFetch} from '../../config/CommonFunction';
+import {useSelector, useDispatch} from 'react-redux';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import CustomStatusBar from '../../common/components/statusbar';
 
-function Register({ navigation }) {
+function Register({navigation}) {
   const [fullName, setFullName] = useState('');
   const [regEmail, setRegEmail] = useState('');
   const [regPhoneNumber, setRegPhoneNumber] = useState('');
   const [regPassword, setRegPassword] = useState('');
-
-  const [regErrorMsg, setRegErrorMessage] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  // const [regErrorMsg, setRegErrorMessage] = useState('');
   const [passwordEye, setPasswordEye] = useState(true);
+  const [confirmPasswordEye, setConfirmPasswordEye] = useState(true);
+  const [errorArr, setErrorArr] = useState({});
 
   const _signUpCheck = () => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
     if (fullName == '') {
-      setRegErrorMessage('Please enter full name');
+      setErrorArr({id: 1, message: 'Please enter full name'});
     } else if (regEmail == '') {
-      setRegErrorMessage('Please enter email');
+      setErrorArr({id: 2, message: 'Please enter email'});
     } else if (reg.test(regEmail) === false) {
-      setRegErrorMessage('Please enter valid email');
+      setErrorArr({id: 2, message: 'Please enter valid email'});
     } else if (regPhoneNumber == '') {
-      setRegErrorMessage('Please enter phone number');
+      setErrorArr({id: 3, message: 'Please enter phone number'});
     } else if (regPhoneNumber.length != 10) {
-      setRegErrorMessage('Please enter valid phone number');
+      setErrorArr({id: 3, message: 'Please enter valid phone number'});
     } else if (regPassword == '') {
-      setRegErrorMessage('Please enter password');
+      setErrorArr({id: 4, message: 'Please enter password'});
     } else if (regPassword.length < 8) {
-      setRegErrorMessage('Password must be 8 character long');
+      setErrorArr({id: 4, message: 'Password must be 8 character long'});
+    } else if (regPassword != confirmPassword) {
+      setErrorArr({
+        id: 5,
+        message: 'please check password and confirm password',
+      });
     } else {
       const formData = new FormData();
 
@@ -87,7 +94,7 @@ function Register({ navigation }) {
           }
         })
         .catch(error => console.log(error))
-        .finally(() => { });
+        .finally(() => {});
     }
   };
 
@@ -97,179 +104,167 @@ function Register({ navigation }) {
     <SafeAreaView>
       <CustomStatusBar />
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* <View style={pageHeader}>
-                <TouchableOpacity onPress={() => navigation.goBack()} >
-                    <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
-                </TouchableOpacity>
-                <Text style={pageHeader.text}>Signup</Text>
-                <View></View>
-            </View> */}
         <View style={pageContainerStyle}>
-
           <View style={styles.loginLogoSection}>
             <View style={styles.loginLogoSection.logo}>
               <Image
-                source={require('../../assets/images/header-logo.png')} style={{ height: hp('18%'), width: wp('26%'), resizeMode: "cover" }}
+                source={require('../../assets/images/header-logo.png')}
+                style={{
+                  height: hp('18%'),
+                  width: wp('26%'),
+                  resizeMode: 'cover',
+                }}
               />
             </View>
             <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
             <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
           </View>
-
-          {/* <View style={styles.regTopSection}>
-            <Text style={styles.regTopSection.text1}>Welcome to our</Text>
-            <Text style={styles.regTopSection.text1}>Greenway shop</Text>
-          </View> */}
           <View>
-            <Text style={{ textAlign: 'center', color: BKColor.textColor2 }}>
+            {/* <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
               {regErrorMsg}
-            </Text>
-
+            </Text> */}
             <View style={inputContainer}>
-              {/* <Text style={inputLevel}>Name</Text> */}
               <TextInput
                 placeholder={'Full Name'}
                 placeholderTextColor={placeHolderColor}
-                style={textInput}
+                style={[
+                  styles.textInput,
+                  errorArr.id == 1 && styles.errorInput,
+                ]}
                 key="fullname"
                 onChangeText={value => setFullName(value)}
                 value={fullName}
-                // secureTextEntry={passwordEye}
-                // onChangeText={(password) => setPassword(password)}
                 onFocus={() => {
-                  setRegErrorMessage('');
+                  setErrorArr(0);
                 }}
               />
+              {errorArr.id == 1 && (
+                <Text style={styles.errorText}>* {errorArr.message}</Text>
+              )}
             </View>
             <View style={inputContainer}>
-              {/* <Text style={inputLevel}>Email</Text> */}
               <TextInput
                 placeholder={'Enter email address'}
                 placeholderTextColor={placeHolderColor}
-                style={textInput}
+                style={[
+                  styles.textInput,
+                  errorArr.id == 2 && styles.errorInput,
+                ]}
                 key="email"
                 onChangeText={value => setRegEmail(value)}
                 value={regEmail}
-                // secureTextEntry={passwordEye}
-                // onChangeText={(password) => setPassword(password)}
                 onFocus={() => {
-                  setRegErrorMessage('');
+                  setErrorArr(0);
                 }}
               />
+              {errorArr.id == 2 && (
+                <Text style={styles.errorText}>* {errorArr.message}</Text>
+              )}
             </View>
             <View style={inputContainer}>
-              {/* <Text style={inputLevel}>Phone Number</Text> */}
               <TextInput
                 placeholder={'Phone Number'}
                 placeholderTextColor={placeHolderColor}
-                style={textInput}
+                style={[
+                  styles.textInput,
+                  errorArr.id == 3 && styles.errorInput,
+                ]}
                 key="Phone Number"
                 keyboardType="numeric"
                 maxLength={10}
                 onChangeText={value => setRegPhoneNumber(value)}
                 value={regPhoneNumber}
-                // secureTextEntry={passwordEye}
-                // onChangeText={(password) => setPassword(password)}
                 onFocus={() => {
-                  setRegErrorMessage('');
+                  setErrorArr(0);
                 }}
               />
+              {errorArr.id == 3 && (
+                <Text style={styles.errorText}>* {errorArr.message}</Text>
+              )}
             </View>
 
-
-
             <View style={inputContainer}>
-              {/* <Text style={inputLevel}>Password</Text> */}
-              <View style={[
-                textInput,
-                { paddingHorizontal: wp('2%'), paddingVertical: hp('0.5%') },
-              ]}>
-
+              <View
+                style={[
+                  textInput,
+                  {paddingHorizontal: wp('2%'), paddingVertical: hp('0.5%')},
+                  errorArr.id == 4 && styles.errorInput,
+                ]}>
                 <TextInput
                   placeholder={'Enter Password'}
-                  // style={textInput2}
                   key="email"
                   onChangeText={value => setRegPassword(value)}
                   value={regPassword}
                   secureTextEntry={passwordEye}
                   placeholderTextColor={placeHolderColor}
-                  style={{
-                    width: '90%', fontFamily: fontFamily.regular,
-                    fontSize: fontSize.h3, color: BKColor.textColor1
-                  }}
-                  // onChangeText={(password) => setPassword(password)}
+                  style={styles.passwordInput}
                   onFocus={() => {
-                    setRegErrorMessage('');
+                    setErrorArr(0);
                   }}
                 />
-                <TouchableOpacity style={{ width: '10%', }}
+                <TouchableOpacity
+                  style={{width: '10%'}}
                   onPress={() => {
                     setPasswordEye(!passwordEye);
                   }}>
                   <Entypo
                     name={passwordEye ? 'eye-with-line' : 'eye'}
-                    style={{ fontSize: 20, marginRight: wp('3%'), color: BKColor.textColor1 }}
+                    style={{
+                      fontSize: 20,
+                      marginRight: wp('3%'),
+                      color: BKColor.textColor1,
+                    }}
                   />
                 </TouchableOpacity>
               </View>
+              {errorArr.id == 4 && (
+                <Text style={styles.errorText}>* {errorArr.message}</Text>
+              )}
             </View>
 
             <View style={inputContainer}>
-              {/* <Text style={inputLevel}>Password</Text> */}
-              <View style={[
-                textInput,
-                { paddingHorizontal: wp('2%'), paddingVertical: hp('0.5%') },
-              ]}>
-
+              <View
+                style={[
+                  textInput,
+                  {paddingHorizontal: wp('2%'), paddingVertical: hp('0.5%')},
+                  errorArr.id == 5 && styles.errorInput,
+                ]}>
                 <TextInput
-                  placeholder={'Confirm Password'}
-                  // style={textInput2}
+                  placeholder={'confirm Password'}
                   key="email"
-                  onChangeText={value => setRegPassword(value)}
-                  value={regPassword}
-                  secureTextEntry={passwordEye}
+                  onChangeText={value => setConfirmPassword(value)}
+                  value={confirmPassword}
+                  secureTextEntry={confirmPasswordEye}
                   placeholderTextColor={placeHolderColor}
-                  style={{
-                    width: '90%', fontFamily: fontFamily.regular,
-                    fontSize: fontSize.h3, color: BKColor.textColor1
-                  }}
-                  // onChangeText={(password) => setPassword(password)}
+                  style={styles.passwordInput}
                   onFocus={() => {
-                    setRegErrorMessage('');
+                    setErrorArr(0);
                   }}
                 />
-                <TouchableOpacity style={{ width: '10%', }}
+                <TouchableOpacity
+                  style={{width: '10%'}}
                   onPress={() => {
-                    setPasswordEye(!passwordEye);
+                    setConfirmPasswordEye(!confirmPasswordEye);
                   }}>
                   <Entypo
-                    name={passwordEye ? 'eye-with-line' : 'eye'}
-                    style={{ fontSize: 20, marginRight: wp('3%'), color: BKColor.textColor1 }}
+                    name={confirmPasswordEye ? 'eye-with-line' : 'eye'}
+                    style={{
+                      fontSize: 20,
+                      marginRight: wp('3%'),
+                      color: BKColor.textColor1,
+                    }}
                   />
                 </TouchableOpacity>
               </View>
+              {errorArr.id == 5 && (
+                <Text style={styles.errorText}>* {errorArr.message}</Text>
+              )}
             </View>
-
-            {/* <View style={styles.regBtmSection}>
-              <Text style={styles.regBtmSection.text1}>Sign up</Text>
-              <TouchableOpacity
-                style={styles.regBtmSection.button}
-                onPress={_signUpCheck}>
-                <Fontisto name="arrow-right-l" color="#FFFFFF" size={fontSize.h1} />
-              </TouchableOpacity>
-            </View> */}
-            <TouchableOpacity style={activeButton.button} onPress={_signUpCheck}>
+            <TouchableOpacity
+              style={activeButton.button}
+              onPress={_signUpCheck}>
               <Text style={activeButton.text}>Sign Up</Text>
             </TouchableOpacity>
-            {/* <View style={styles.loginFooter}>
-              <Text style={styles.loginFooter.textLeft}>
-                Already Have Account?{' '}
-              </Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                <Text style={styles.loginFooter.textRight}>Login</Text>
-              </TouchableOpacity>
-            </View> */}
-
             <View style={styles.loginFooter}>
               <Text style={styles.loginFooter.textLeft}>
                 Already Have Account?{' '}
@@ -278,7 +273,6 @@ function Register({ navigation }) {
                 <Text style={styles.loginFooter.textRight}>Login</Text>
               </TouchableOpacity>
             </View>
-
           </View>
         </View>
       </ScrollView>
