@@ -60,7 +60,7 @@ function MyProfile({ navigation }) {
     <SafeAreaView>
       <CustomStatusBar />
       <View style={pageContainerStyle2}>
-        <ScrollView>
+        <ScrollView style={{ marginBottom: hp('7%') }}>
           {/* <View style={pageHeader}>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
                     <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
@@ -74,7 +74,7 @@ function MyProfile({ navigation }) {
                 source={require('../../assets/images/header-logo.png')}
                 resizeMode="cover"
                 style={{
-                  height: hp('18%'), width: wp('26%'), resizeMode: "cover"
+                  height: wp('38.8%'), width: wp('27.1%'), resizeMode: "cover"
                 }}
               />
             </View>

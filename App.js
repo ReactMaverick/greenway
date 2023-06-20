@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
-import { fontSize } from './src/common/values/BKStyles';
+import { fontFamily, fontSize } from './src/common/values/BKStyles';
 import { BKColor } from './src/common/values/BKColor';
 import {
   heightPercentageToDP as hp,
@@ -93,7 +93,7 @@ function MyTabBar({ state, descriptors, navigation }) {
     'home', // Icon name for Home tab
     'user', // Icon name for Profile tab
     'shopping-cart', // Icon name for Cart tab
-    'list', // Icon name for Orders tab
+    'cube', // Icon name for Orders tab
     'heart', // Icon name for Settings tab
   ];
   const customMargin = [
@@ -175,8 +175,20 @@ function MyTabBar({ state, descriptors, navigation }) {
               style={{ flex: 1, position: 'relative' }}>
               {icon}
               {index == 2 && cartData != null ? (
-                <View style={{  position: 'absolute',backgroundColor: BKColor.white,borderRadius:wp('12.5%'),width: wp('8%'),height: wp('8%'),justifyContent:'center',alignItems:'center',borderWidth:1,borderColor: BKColor.textColor2,right:2,top:-5}}>
-                  <Text style={{ color: BKColor.textColor1 }}>{cartData.length}</Text>
+                <View style={{ 
+                  position: 'absolute',
+                  backgroundColor: BKColor.white,
+                  borderRadius:wp('12.5%'),
+                  width: wp('8%'),
+                  height: wp('8%'),
+                  justifyContent:'center',
+                  alignItems:'center',
+                  borderWidth:1,
+                  borderColor: BKColor.textColor2,
+                  right:2,
+                  top:-5
+                  }}>
+                  <Text style={{paddingTop: 5, fontSize: fontSize.h4,fontFamily: fontFamily.regular, color: BKColor.textColor1 }}>{cartData.length}</Text>
                 </View>
               ) : (
                 <></>

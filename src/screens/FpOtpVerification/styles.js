@@ -93,7 +93,31 @@ export default StyleSheet.create({
         alignItems: 'center',
         height: hp('6.5%'),
       },
-    
+      loginLogoSection: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: hp('38%'),
+        logo: {
+          justifyContent: 'center',
+          alignItems: 'center',
+          resizeMode: 'cover',
+        },
+        text1: {
+          marginTop: hp('2%'),
+          color: BKColor.textColor1,
+          fontSize: fontSize.h2,
+          // fontWeight: '700',
+          textAlign: 'center',
+          fontFamily: fontFamily.medium,
+        },
+        text2: {
+          color: BKColor.textColor2,
+          fontSize: fontSize.h1,
+          // fontWeight: '700',
+          textAlign: 'center',
+          fontFamily: fontFamily.bold,
+        },
+      },
 
 });
  

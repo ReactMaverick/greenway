@@ -110,8 +110,7 @@ function Register({navigation}) {
               <Image
                 source={require('../../assets/images/header-logo.png')}
                 style={{
-                  height: hp('18%'),
-                  width: wp('26%'),
+                  height: wp('38.8%'), width: wp('27.1%'),
                   resizeMode: 'cover',
                 }}
               />

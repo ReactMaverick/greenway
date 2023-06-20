@@ -90,7 +90,7 @@ function MyOrders({ navigation }) {
           <View style={{ width: '10%' }}></View>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={{ marginBottom: hp('5%') }}>
+          <View style={{ marginBottom: hp('12%') }}>
             {orderData.map((item, key) => (
               <TouchableOpacity
                 style={styles.contactUsSec}

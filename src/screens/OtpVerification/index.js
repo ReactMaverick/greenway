@@ -82,7 +82,7 @@ function OtpVerification({ navigation, route }) {
 
             <View style={styles.loginLogoSection.logo}>
               <Image
-                source={require('../../assets/images/header-logo.png')} style={{ height: hp('18%'), width: wp('26%'), resizeMode: "cover" }}
+                source={require('../../assets/images/header-logo.png')} style={{ height: wp('38.8%'), width: wp('27.1%'), resizeMode: "cover" }}
               />
               <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
               <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
