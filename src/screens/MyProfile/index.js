@@ -173,7 +173,7 @@ function MyProfile({navigation}) {
                 } */}
           {/* {userData != null ? */}
 
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.regContainer.item}
             onPress={() => navigation.navigate('Wishlist')}>
             <View style={styles.itemOuter}>
@@ -189,7 +189,7 @@ function MyProfile({navigation}) {
                 size={fontSize.h2}
               />
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           {/* :
                     <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('Login')}>
                         <View style={styles.itemOuter}>

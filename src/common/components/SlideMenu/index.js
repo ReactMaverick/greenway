@@ -38,13 +38,12 @@ function SlideMenu({ navigation }) {
                 </View>
             }
 
-             <TouchableOpacity onPress={() => {
+            <TouchableOpacity onPress={() => {
                 navigation.dispatch(DrawerActions.toggleDrawer())
                 navigation.navigate('ProductList');
             }} style={[styles.menuItem, { marginTop: hp('1.5%'), }]}>
                 <Entypo name="shop" style={styles.menuIcon} />
                 <Text style={styles.menuText}>Shop</Text>
-
             </TouchableOpacity>
             {userData != null ?
                 <TouchableOpacity onPress={() => {
@@ -112,7 +111,7 @@ function SlideMenu({ navigation }) {
                 <Text style={styles.menuText}>About Us</Text>
             </TouchableOpacity> */}
 
-            
+
 
             <TouchableOpacity onPress={() => {
                 navigation.dispatch(DrawerActions.toggleDrawer())

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -22,7 +22,7 @@ import {
   activeButton,
   fontSize,
 } from '../../common/values/BKStyles';
-import {BKColor} from '../../common/values/BKColor';
+import { BKColor } from '../../common/values/BKColor';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -36,10 +36,10 @@ import Brands from '../../common/components/home/Brands';
 import ShippingArea from '../../common/components/home/ShippingArea';
 import GiftsArea from '../../common/components/home/GiftsArea';
 import PopularCategory from '../../common/components/home/PopularCategory';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CustomStatusBar from '../../common/components/statusbar';
 
-function Home({navigation}) {
+function Home({ navigation }) {
   const [refreshing, setRefreshing] = useState(true);
   // const userData = useSelector(state => state.userReducer.value);
   // console.log('userData', userData);
@@ -52,58 +52,59 @@ function Home({navigation}) {
     <SafeAreaView>
       <CustomStatusBar />
       <View style={pageContainerStyle2}>
+        <View style={pageHeader}>
+          <TouchableOpacity
+            style={styles.headerIcon}
+            onPress={() => {
+              navigation.toggleDrawer();
+            }}>
+            <FontAwesome5
+              name="map"
+              color={BKColor.textColor1}
+              size={fontSize.h3}
+              style={styles.headerIcon.icon}
+            />
+            {/* <Image
+              source={require('../../assets/images/menu_alt_03.png')}
+              resizeMode="cover"
+            /> */}
+          </TouchableOpacity>
+          <Image
+            source={require('../../assets/images/homeHeaderLogo.png')}
+            resizeMode="cover"
+          />
+          {/* <Text style={pageHeader.text}>Greenway</Text> */}
+          <TouchableOpacity
+            style={styles.headerIcon}
+            onPress={() => {
+              navigation.navigate('Search');
+            }}>
+            <Fontisto
+              name="search"
+              color={BKColor.textColor1}
+              size={fontSize.h3}
+              style={styles.headerIcon.icon}
+            />
+          </TouchableOpacity>
+        </View>
         <ScrollView
-          style={{marginBottom: hp('11%')}}
+          style={{ marginBottom: hp('11%') }}
           showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }>
-          <View style={pageHeader}>
-            <TouchableOpacity
-              style={styles.headerIcon}
-              onPress={() => {
-                navigation.toggleDrawer();
-              }}>
-              <FontAwesome5
-                name="map"
-                color={BKColor.textColor1}
-                size={fontSize.h3}
-                style={styles.headerIcon.icon}
-              />
-              {/* <Image
-              source={require('../../assets/images/menu_alt_03.png')}
-              resizeMode="cover"
-            /> */}
-            </TouchableOpacity>
-            <Image
-              source={require('../../assets/images/homeHeaderLogo.png')}
-              resizeMode="cover"
-            />
-            {/* <Text style={pageHeader.text}>Greenway</Text> */}
-            <TouchableOpacity
-              style={styles.headerIcon}
-              onPress={() => {
-                navigation.navigate('Search');
-              }}>
-              <Fontisto
-                name="search"
-                color={BKColor.textColor1}
-                size={fontSize.h3}
-                style={styles.headerIcon.icon}
-              />
-            </TouchableOpacity>
-          </View>
 
-          <Slider navigation={navigation}/>
+
+          <Slider navigation={navigation} />
           {/* <Banner navigation={navigation} /> */}
-          <PopularProducts navigation={navigation} refreshing={refreshing} stopRefreshing={()=>{
+          <PopularProducts navigation={navigation} refreshing={refreshing} stopRefreshing={() => {
             setRefreshing(false);
           }} />
-          <WholeSaleProduct navigation={navigation}  refreshing={refreshing} stopRefreshing={()=>{
+          <WholeSaleProduct navigation={navigation} refreshing={refreshing} stopRefreshing={() => {
             setRefreshing(false);
           }} />
           {/* <Brands navigation={navigation} /> */}
-          <PopularCategory navigation={navigation}  refreshing={refreshing}  stopRefreshing={()=>{
+          <PopularCategory navigation={navigation} refreshing={refreshing} stopRefreshing={() => {
             setRefreshing(false);
           }} />
           {/* <ShippingArea navigation={navigation} /> */}

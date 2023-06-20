@@ -52,8 +52,8 @@ function SingleProduct({ navigation, index, item }) {
   }, [navigation]);
 
   return (
-    <TouchableHighlight
-    underlayColor="transparent"
+    <Pressable
+    // underlayColor="transparent"
       key={index}
       onPress={() => {
         navigation.navigate(
@@ -269,7 +269,7 @@ function SingleProduct({ navigation, index, item }) {
         </View>
       </View>
 
-    </TouchableHighlight>
+    </Pressable>
   );
 }
 export default SingleProduct;

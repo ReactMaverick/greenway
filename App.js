@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Animated,
@@ -7,22 +7,22 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
-import {fontSize} from './src/common/values/BKStyles';
-import {BKColor} from './src/common/values/BKColor';
+import { fontSize } from './src/common/values/BKStyles';
+import { BKColor } from './src/common/values/BKColor';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import FlashMessage from 'react-native-flash-message';
 import SplashScreen from 'react-native-splash-screen';
-import {Provider} from 'react-redux';
-import {store, persistor} from './src/redux/store';
-import {PersistGate} from 'reduxjs-toolkit-persist/integration/react';
+import { Provider } from 'react-redux';
+import { store, persistor } from './src/redux/store';
+import { PersistGate } from 'reduxjs-toolkit-persist/integration/react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -31,8 +31,8 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import HomeIcon from './src/assets/images/HomeIcon';
 import CartIcon from './src/assets/images/CartIcon';
 import SlideMenu from './src/common/components/SlideMenu';
-import {useSelector, useDispatch} from 'react-redux';
-import {userDetails} from './src/redux/reducers/UserReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { userDetails } from './src/redux/reducers/UserReducer';
 
 // screens
 import List from './src/screens/List';
@@ -80,13 +80,13 @@ function MyDrawer() {
       <Drawer.Screen
         name="Home"
         component={Home}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Drawer.Navigator>
   );
 }
 
-function MyTabBar({state, descriptors, navigation}) {
+function MyTabBar({ state, descriptors, navigation }) {
   const cartData = useSelector(state => state.CartReducer.value);
   //  console.log("cartData",cartData.length);
   const icons = [
@@ -94,7 +94,7 @@ function MyTabBar({state, descriptors, navigation}) {
     'user', // Icon name for Profile tab
     'shopping-cart', // Icon name for Cart tab
     'list', // Icon name for Orders tab
-    'power-off', // Icon name for Settings tab
+    'heart', // Icon name for Settings tab
   ];
   const customMargin = [
     '-1%', // Icon name for Home tab
@@ -104,18 +104,18 @@ function MyTabBar({state, descriptors, navigation}) {
     '-1%', // Icon name for Settings tab
   ];
   return (
-    <View style={{marginTop: hp('-8%')}}>
+    <View style={{ marginTop: hp('-8%') }}>
       <ImageBackground
         source={require('../greenway/src/assets/images/tabBackground.png')}
         style={Styles.backgroundImg}>
         {state.routes.map((route, index) => {
-          const {options} = descriptors[route.key];
+          const { options } = descriptors[route.key];
           const label =
             options.tabBarLabel !== undefined
               ? options.tabBarLabel
               : options.title !== undefined
-              ? options.title
-              : route.name;
+                ? options.title
+                : route.name;
 
           const isFocused = state.index === index;
 
@@ -123,7 +123,7 @@ function MyTabBar({state, descriptors, navigation}) {
             <View
               style={[
                 Styles.TabActiveIcon,
-                {marginTop: hp(customMargin[index])},
+                { marginTop: hp(customMargin[index]) },
               ]}>
               <FontAwesome
                 name={icons[index]}
@@ -135,7 +135,7 @@ function MyTabBar({state, descriptors, navigation}) {
             <View
               style={[
                 Styles.TabInActiveIcon,
-                {marginTop: hp(customMargin[index])},
+                { marginTop: hp(customMargin[index]) },
               ]}>
               <FontAwesome
                 name={icons[index]}
@@ -167,15 +167,17 @@ function MyTabBar({state, descriptors, navigation}) {
             <TouchableOpacity
               key={route.key}
               accessibilityRole="button"
-              accessibilityState={isFocused ? {selected: true} : {}}
+              accessibilityState={isFocused ? { selected: true } : {}}
               accessibilityLabel={options.tabBarAccessibilityLabel}
               testID={options.tabBarTestID}
               onPress={onPress}
               onLongPress={onLongPress}
-              style={{flex: 1}}>
+              style={{ flex: 1, position: 'relative' }}>
               {icon}
               {index == 2 && cartData != null ? (
-                <Text>{cartData.length}</Text>
+                <View style={{  position: 'absolute',backgroundColor: BKColor.white,borderRadius:wp('12.5%'),width: wp('8%'),height: wp('8%'),justifyContent:'center',alignItems:'center',borderWidth:1,borderColor: BKColor.textColor2,right:2,top:-5}}>
+                  <Text style={{ color: BKColor.textColor1 }}>{cartData.length}</Text>
+                </View>
               ) : (
                 <></>
               )}
@@ -194,7 +196,7 @@ function MyTabs() {
   const dispatch = useDispatch();
   return (
     <BottomTab.Navigator
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
         // tabBarStyle: {
@@ -211,7 +213,7 @@ function MyTabs() {
         name="HomeTab"
         component={MyDrawer}
         options={{
-          tabBarIcon: ({color, size, focused}) =>
+          tabBarIcon: ({ color, size, focused }) =>
             focused ? (
               <Animated.View style={Styles.activeDiv}>
                 <HomeIcon color={color} width={size} height={size} />
@@ -221,7 +223,7 @@ function MyTabs() {
                 <View style={Styles.inActiveDiv}>
                   <HomeIcon color={color} width={size} height={size} />
                 </View>
-                <Text style={{color: BKColor.textColor1, textAlign: 'center'}}>
+                <Text style={{ color: BKColor.textColor1, textAlign: 'center' }}>
                   Home
                 </Text>
               </>
@@ -233,7 +235,7 @@ function MyTabs() {
           name="My Profile"
           component={MyProfile}
           options={{
-            tabBarIcon: ({color, size, focused}) =>
+            tabBarIcon: ({ color, size, focused }) =>
               focused ? (
                 <Animated.View style={Styles.activeDiv}>
                   <FontAwesome name={icons[index]} size={size} color={color} />
@@ -248,7 +250,7 @@ function MyTabs() {
                     />
                   </View>
                   <Text
-                    style={{color: BKColor.textColor1, textAlign: 'center'}}>
+                    style={{ color: BKColor.textColor1, textAlign: 'center' }}>
                     My Profile
                   </Text>
                 </>
@@ -260,7 +262,7 @@ function MyTabs() {
           name="My Profile"
           component={Login}
           options={{
-            tabBarIcon: ({color, size, focused}) =>
+            tabBarIcon: ({ color, size, focused }) =>
               focused ? (
                 <Animated.View style={Styles.activeDiv}>
                   <FontAwesome name={icons[index]} size={size} color={color} />
@@ -279,7 +281,7 @@ function MyTabs() {
         name="Cart"
         component={Cart}
         options={{
-          tabBarIcon: ({color, size, focused}) =>
+          tabBarIcon: ({ color, size, focused }) =>
             focused ? (
               <>
                 <Animated.View style={Styles.activeDiv}>
@@ -340,7 +342,7 @@ function MyTabs() {
                     </View>
                   )}
                 </View>
-                <Text style={{color: BKColor.textColor1, textAlign: 'center'}}>
+                <Text style={{ color: BKColor.textColor1, textAlign: 'center' }}>
                   Cart
                 </Text>
               </>
@@ -361,7 +363,7 @@ function MyTabs() {
           name="My Orders"
           component={MyOrders}
           options={{
-            tabBarIcon: ({color, size, focused}) =>
+            tabBarIcon: ({ color, size, focused }) =>
               focused ? (
                 <Animated.View style={Styles.activeDiv}>
                   <MaterialIcons name="verified" size={size} color={color} />
@@ -372,7 +374,7 @@ function MyTabs() {
                     <MaterialIcons name="verified" size={size} color={color} />
                   </View>
                   <Text
-                    style={{color: BKColor.textColor1, textAlign: 'center'}}>
+                    style={{ color: BKColor.textColor1, textAlign: 'center' }}>
                     My Order
                   </Text>
                 </View>
@@ -384,7 +386,7 @@ function MyTabs() {
           name="My Orders"
           component={Login}
           options={{
-            tabBarIcon: ({color, size, focused}) =>
+            tabBarIcon: ({ color, size, focused }) =>
               focused ? (
                 <Animated.View style={Styles.activeDiv}>
                   <MaterialIcons name="verified" size={size} color={color} />
@@ -393,7 +395,7 @@ function MyTabs() {
                 <>
                   <MaterialIcons name="verified" size={size} color={color} />
                   <Text
-                    style={{color: BKColor.textColor1, textAlign: 'center'}}>
+                    style={{ color: BKColor.textColor1, textAlign: 'center' }}>
                     My Order
                   </Text>
                 </>
@@ -403,10 +405,10 @@ function MyTabs() {
       )}
 
       <BottomTab.Screen
-        name="About Us"
-        component={AboutUs}
+        name="Wishlist"
+        component={Wishlist}
         options={{
-          tabBarIcon: ({color, size, focused}) =>
+          tabBarIcon: ({ color, size, focused }) =>
             focused ? (
               <Animated.View style={Styles.activeDiv}>
                 <Octicons name="checklist" size={size} color={color} />
@@ -416,8 +418,8 @@ function MyTabs() {
                 <View style={Styles.inActiveDiv}>
                   <Octicons name="checklist" size={size} color={color} />
                 </View>
-                <Text style={{color: BKColor.textColor1, textAlign: 'center'}}>
-                  About Us
+                <Text style={{ color: BKColor.textColor1, textAlign: 'center' }}>
+                Wishlist
                 </Text>
               </View>
             ),
@@ -486,40 +488,40 @@ function Stack1() {
         <Stack.Screen
           name="Login"
           component={Login}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="ForgetPassword"
           component={ForgetPassword}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="FpOtpVerification"
           component={FpOtpVerification}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="Register"
           component={Register}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="OtpVerification"
           component={OtpVerification}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="ResetPassword"
           component={ResetPassword}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="UpdatePassword"
           component={UpdatePassword}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     );
@@ -529,114 +531,114 @@ function Stack1() {
         <Stack.Screen
           name="Home"
           component={MyTabs}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="ProductList"
           component={ProductList}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="ProductDetails"
           component={ProductDetails}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="CategoryList"
           component={CategoryList}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Cart"
           component={Cart}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="AboutUs"
           component={AboutUs}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="ContactUs"
           component={ContactUs}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="PrivacyPolicy"
           component={PrivacyPolicy}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="TermsAndConditions"
           component={TermsAndConditions}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Faq"
           component={Faq}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="MyProfile"
           component={MyProfile}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="MyAccount"
           component={MyAccount}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="MyOrders"
           component={MyOrders}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="OrderDetails"
           component={OrderDetails}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="MyAddress"
           component={MyAddress}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="Wishlist"
           component={Wishlist}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="Blogs"
           component={Blogs}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="BlogDetails"
           component={BlogDetails}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Checkout"
           component={Checkout}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="Search"
           component={Search}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="CongratulationPage"
           component={CongratulationPage}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     );
