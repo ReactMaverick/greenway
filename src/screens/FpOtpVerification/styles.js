@@ -70,6 +70,29 @@ export default StyleSheet.create({
             resizeMode: "cover"
         }
     },
+    errorText: {
+        color: 'red',
+        fontSize: fontSize.regular,
+        fontFamily: fontFamily.regular,
+        marginTop: 5,
+      },
+      errorInput: {
+        borderColor: 'red',
+      },
+      textInput: {
+        color: BKColor.textColor1,
+        fontFamily: fontFamily.regular,
+        fontSize: fontSize.h3,
+        borderRadius: 30,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: BKColor.inputBorder,
+        padding: hp('1.5%'),
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: hp('6.5%'),
+      },
     
 
 });

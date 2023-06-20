@@ -18,7 +18,7 @@ import {
   inputContainer,
   activeButton,
   fontSize,
-  placeHolderColor
+  placeHolderColor,
 } from '../../common/values/BKStyles';
 import {BKColor} from '../../common/values/BKColor';
 import {POST_SIGNIN_API, POST_FORGET_PASSWORD} from '../../config/ApiConfig';
@@ -33,18 +33,18 @@ import CustomStatusBar from '../../common/components/statusbar';
 function ForgetPassword({navigation}) {
   const [isLoading, setIsLoading] = useState(false);
   const [emailPhone, setEmailPhone] = useState('');
-  const [loginErrorMessage, setLoginErrorMessage] = useState('');
+  const [errorArr, setErrorArr] = useState({});
 
   const _submitEmailPhone = async () => {
     if (emailPhone == '') {
-      setLoginErrorMessage('Please enter Email/Phone');
+      setErrorArr({id: 1, message: 'Please enter Email/Phone'});
     } else {
       const formData = new FormData();
       formData.append('email_phone', emailPhone);
       PostApiFetch(POST_FORGET_PASSWORD, formData)
         .then(([status, response]) => {
           if (status == 200) {
-           // console.log("response",response);
+            // console.log("response",response);
             if (response.status == true) {
               navigation.navigate('FpOtpVerification', {
                 forgetPasswordOtp: response.forget_password_otp,
@@ -56,17 +56,25 @@ function ForgetPassword({navigation}) {
                 backgroundColor: '#808080',
               });
             } else {
-              setLoginErrorMessage(response.massage);
+              showMessage({
+                message: response.massage,
+                type: 'info',
+                backgroundColor: '#808080',
+              });
             }
           } else {
             if (response.error != undefined) {
-              setLoginErrorMessage(response.error);
+              showMessage({
+                message: response.error,
+                type: 'info',
+                backgroundColor: '#808080',
+              });
             }
           }
         })
         .catch(error => console.log(error))
         .finally(() => {
-          setIsLoading(false)
+          setIsLoading(false);
         });
     }
   };
@@ -75,33 +83,31 @@ function ForgetPassword({navigation}) {
 
   return (
     <SafeAreaView style={pageContainerStyle}>
-        <CustomStatusBar/>
+      <CustomStatusBar />
       <View style={styles.loginLogoSection}>
         <View style={styles.loginLogoSection.logo}>
           <Image
             source={require('../../assets/images/header-logo.png')}
-            style={{height: hp('18%'),width: wp('26%'),resizeMode:"cover" }}
+            style={{height: hp('18%'), width: wp('26%'), resizeMode: 'cover'}}
           />
         </View>
         <Text style={styles.loginLogoSection.text1}>Forget Password</Text>
       </View>
-      <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
-        {loginErrorMessage}
-      </Text>
       <View style={inputContainer}>
         <Text style={inputLevel}>Email / Phone Number</Text>
         <TextInput
           placeholder={'Enter email or phone number'}
           placeholderTextColor={placeHolderColor}
-          style={textInput}
+          style={[styles.textInput, errorArr.id == 1 && styles.errorInput]}
           onChangeText={value => setEmailPhone(value)}
           value={emailPhone}
-          // secureTextEntry={passwordEye}
-          // onChangeText={(password) => setPassword(password)}
           onFocus={() => {
-            setLoginErrorMessage('');
+            setErrorArr(0);
           }}
         />
+        {errorArr.id == 1 && (
+          <Text style={styles.errorText}>* {errorArr.message}</Text>
+        )}
       </View>
       <TouchableOpacity style={activeButton.button} onPress={_submitEmailPhone}>
         <Text style={activeButton.text}>Submit</Text>

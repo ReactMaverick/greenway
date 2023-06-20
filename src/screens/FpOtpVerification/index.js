@@ -33,11 +33,14 @@ function FpOtpVerification({navigation, route}) {
   const [errorMessage, setErrorMessage] = useState('');
   const {forgetPasswordOtp, userId} = route.params;
   console.log(forgetPasswordOtp, userId);
+  const [errorArr, setErrorArr] = useState({});
   const _checkOtp = () => {
     if (OTP == '') {
-      setErrorMessage('Please enter otp');
+      // setErrorMessage('Please enter otp');
+      setErrorArr({id: 1, message: 'Please enter otp'});
     } else if (OTP != forgetPasswordOtp) {
-      setErrorMessage('Wrong otp');
+      // setErrorMessage('Wrong otp');
+      setErrorArr({id: 1, message: 'Wrong otp'});
     } else {
       navigation.navigate('UpdatePassword', {
         userId: userId,
@@ -65,15 +68,19 @@ function FpOtpVerification({navigation, route}) {
           </Text>
           
           <OTPTextInput
-            textInputStyle={styles.otpBoxStyle}
+            textInputStyle={[styles.otpBoxStyle ,errorArr.id == 1 && styles.errorInput]}
             tintColor={BKColor.textColor2}
-            // inputCellLength={1}
-            // onChangeText={(value) => setOTP(value)}
             handleTextChange={otpInput => setOTP(otpInput)}
+            onFocus={() => {
+              setErrorArr(0);
+            }}
           />
-          <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
+           {errorArr.id == 1 && (
+                <Text style={styles.errorText}>* {errorArr.message}</Text>
+              )}
+          {/* <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
             {errorMessage}
-          </Text>
+          </Text> */}
 
           <View style={styles.loginFooter}>
             <Text style={styles.loginFooter.textLeft}>
