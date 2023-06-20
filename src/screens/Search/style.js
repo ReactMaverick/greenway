@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet, Platform } from 'react-native';
-
-
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
+import { BKColor } from '../../common/values/BKColor';
 export default StyleSheet.create({
 
     searchSection: {
@@ -49,5 +49,24 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: "#E0E0E0",
         paddingBottom: 10,
-    }
+    },
+    headText: { color: '#2E2E2E', fontSize: 16, margin: 5 },
+    headerIcon: {
+        height: wp('10%'),
+        width: wp('10%'),
+        borderRadius: wp('5%'),
+        backgroundColor: '#E1EFE5',
+        justifyContent: 'center',
+        alignItems: 'center',
+        icon: {
+        }
+    },
+    pageContainerStyle2 : {
+        // marginHorizontal: wp("3%"),
+        // marginVertical: hp("1%"),
+        // flex: 1,
+        paddingHorizontal: wp('4.5%'),
+        backgroundColor: BKColor.white,
+        height: '100%'
+      },
 });

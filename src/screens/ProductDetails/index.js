@@ -245,7 +245,7 @@ function ProductDetails({navigation, route}) {
           <View></View>
         </View>
 
-        <ScrollView style={{marginVertical: hp('1%')}}>
+        <ScrollView style={{marginVertical: hp('1%')}} showsVerticalScrollIndicator={false}>
           {productImages.length > 0 && (
             <ScrollView style={styles.productImageSection}>
               <FlatListSlider
