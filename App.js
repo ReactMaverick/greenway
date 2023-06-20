@@ -19,6 +19,7 @@ import { PersistGate } from 'reduxjs-toolkit-persist/integration/react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import Octicons from 'react-native-vector-icons/Octicons';
 import HomeIcon from './src/assets/images/HomeIcon';
 import CartIcon from './src/assets/images/CartIcon';
@@ -56,6 +57,7 @@ import FpOtpVerification from './src/screens/FpOtpVerification';
 import UpdatePassword from './src/screens/UpdatePassword';
 import Search from './src/screens/Search';
 import styles from './src/screens/Home/styles';
+import CongratulationPage from './src/screens/CongratulationPage';
 
 const Drawer = createDrawerNavigator();
 
@@ -86,7 +88,7 @@ function MyTabBar({ state, descriptors, navigation }) {
     'user', // Icon name for Profile tab
     'shopping-cart', // Icon name for Cart tab
     'list', // Icon name for Orders tab
-    'cog',  // Icon name for Settings tab
+    'power-off',  // Icon name for Settings tab
   ];
   const customMargin = [
     '-1%', // Icon name for Home tab
@@ -143,7 +145,7 @@ function MyTabBar({ state, descriptors, navigation }) {
 
           return (
             <TouchableOpacity
-            key={route.key}
+              key={route.key}
               accessibilityRole="button"
               accessibilityState={isFocused ? { selected: true } : {}}
               accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -595,6 +597,13 @@ function Stack1() {
           component={Search}
           options={{ headerShown: false }}
         />
+
+        <Stack.Screen
+          name="CongratulationPage"
+          component={CongratulationPage}
+          options={{ headerShown: false }}
+        />
+
       </Stack.Navigator>
     );
   }

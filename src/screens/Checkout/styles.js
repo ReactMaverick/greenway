@@ -136,7 +136,7 @@ export default StyleSheet.create({
         fontWeight: '400',
         textAlign: 'center',
         fontFamily: fontFamily.regular,
-        marginBottom: hp('0.5%'),
+        // marginBottom: hp('0.5%'),
         marginLeft: wp('2%')
     }
 
