@@ -1,34 +1,35 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import BKColor from '../../values/BKColor'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
+import { fontFamily, fontSize } from '../../values/BKStyles';
 
 export default StyleSheet.create({
   headerSection: {
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderColor: "#ddd",
+    borderColor: "#17955E",
     paddingBottom: hp('1.5%'),
   },
 
   headerImage: {
-    height: wp('12%'),
-    width: wp('12%'),
+    height: wp('18%'),
+    width: wp('12.5%'),
     marginRight: wp('4%'),
-    borderRadius: wp('6%'),
-    backgroundColor: '#F9ECE9'
+    // borderRadius: wp('6%'),
+    // backgroundColor: '#F9ECE9'
   },
   headerText: {
-    fontFamily: 'Poppins-Medium',
-    color: '#292825',
-    fontSize: 18,
-    fontWeight: '700',
+    fontFamily: fontFamily.bold,
+    color: '#0B4A2F',
+    fontSize: fontSize.h3,
+    // fontWeight: '700',
   },
 
   outerMenu: {
     flex: 1,
     paddingTop: 10,
-    paddingLeft: 10
+    paddingHorizontal: 10
   },
   menuItem: {
     flexDirection: 'row',
@@ -38,15 +39,15 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   menuIcon: {
-    fontSize: 25,
+    fontSize: fontSize.h2,
     marginRight: 10,
-    color: '#828282',
+    color: '#0B4A2F',
   },
   menuText: {
-    fontFamily: 'Poppins-Medium',
-    color: '#292825',
-    fontWeight: '400',
-    fontSize: 16
+    fontFamily: fontFamily.medium,
+    color: '#0B4A2F',
+    // fontWeight: '400',
+    fontSize: fontSize.h4
   }
 
 

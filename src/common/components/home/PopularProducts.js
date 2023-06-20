@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, TextInput, ScrollView, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ScrollView, ImageBackground, Pressable } from 'react-native';
 import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { FlatListSlider } from "react-native-flatlist-slider";

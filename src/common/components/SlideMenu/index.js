@@ -3,6 +3,7 @@ import { View, ScrollView, SafeAreaView, Image, Text, TouchableOpacity, BackHand
 import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -36,14 +37,6 @@ function SlideMenu({ navigation }) {
                     <Text style={styles.headerText}>{userData.first_name}</Text>
                 </View>
             }
-
-            <TouchableOpacity onPress={() => {
-                navigation.dispatch(DrawerActions.toggleDrawer())
-                navigation.navigate('ProductList');
-            }} style={[styles.menuItem, { marginTop: hp('1.5%'), }]}>
-                <Entypo name="shop" style={styles.menuIcon} />
-                <Text style={styles.menuText}>Shop</Text>
-            </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
                 navigation.dispatch(DrawerActions.toggleDrawer())
@@ -109,6 +102,16 @@ function SlideMenu({ navigation }) {
             }} style={styles.menuItem}>
                 <Ionicons name="call-outline" style={styles.menuIcon} />
                 <Text style={styles.menuText}>Contact Us</Text>
+            </TouchableOpacity>
+
+            
+
+            <TouchableOpacity onPress={() => {
+                navigation.dispatch(DrawerActions.toggleDrawer())
+                navigation.navigate('AboutUs');
+            }} style={[styles.menuItem, { marginTop: 0, }]}>
+                <FontAwesome name="users" style={styles.menuIcon} />
+                <Text style={styles.menuText}>About Us</Text>
             </TouchableOpacity>
 
             {userData != null ?

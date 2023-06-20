@@ -7,6 +7,7 @@ import {
   ScrollView,
   ImageBackground,
   Image,
+  Pressable,
 } from 'react-native';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -28,6 +29,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
 // import { DOMParser } from "react-native-html-parser";
 
@@ -50,7 +52,8 @@ function SingleProduct({ navigation, index, item }) {
   }, [navigation]);
 
   return (
-    <TouchableOpacity
+    <TouchableHighlight
+    underlayColor="transparent"
       key={index}
       onPress={() => {
         navigation.navigate(
@@ -266,7 +269,7 @@ function SingleProduct({ navigation, index, item }) {
         </View>
       </View>
 
-    </TouchableOpacity>
+    </TouchableHighlight>
   );
 }
 export default SingleProduct;
