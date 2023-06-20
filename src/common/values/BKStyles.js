@@ -7,6 +7,7 @@ import {
 export const fontSize = {
   maxHeading: hp('14%'),
   heading1: hp('5.5%'),
+  heading2: hp('4.5%'),
   h1: hp('3.2%'),
   bh: hp('3%'),
   heading: hp(2.6),
@@ -171,7 +172,7 @@ export const borderStyle = {
 export const activeButton = {
   button: {
     alignItems: 'center',
-    padding: hp('2%'),
+    padding: wp('3.5%'),
     marginTop: hp('4%'),
     width: '100%',
     justifyContent: 'center',
@@ -179,10 +180,10 @@ export const activeButton = {
     backgroundColor: BKColor.textColor1
   },
   text: {
-    color: '#FFFFFF',
-    fontSize: fontSize.h3,
-    textAlign: 'center',
-    fontFamily: fontFamily.regular,
+    color: BKColor.white,
+    fontSize: fontSize.h2,
+    // textAlign: 'center',
+    fontFamily: fontFamily.medium,
   },
   reviewButton: {
     padding: hp('1%'),
@@ -203,7 +204,7 @@ export const activeButton = {
 export const passiveButton = {
   button: {
     alignItems: 'center',
-    padding: hp('2%'),
+    padding: wp('3.5%'),
     marginTop: hp('4%'),
     width: '100%',
     justifyContent: 'center',
@@ -215,9 +216,9 @@ export const passiveButton = {
   },
   text: {
     color: BKColor.textColor2,
-    fontSize: fontSize.h3,
+    fontSize: fontSize.h2,
     textAlign: 'center',
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.medium,
   },
   icon: {
     color: BKColor.textColor2,

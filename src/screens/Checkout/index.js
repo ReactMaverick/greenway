@@ -421,7 +421,7 @@ function Checkout({navigation}) {
           console.log(status, response);
           if (status == 200) {
             dispatch({type: 'setCouponDetails', payload: null});
-            navigation.navigate('MyOrders');
+            navigation.navigate('CongratulationPage');
           }
         })
         .catch(error => console.log(error))

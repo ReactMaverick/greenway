@@ -12,7 +12,7 @@ import { DrawerActions } from '@react-navigation/native';
 import { useDrawerStatus } from '@react-navigation/drawer';
 import { useSelector, useDispatch } from "react-redux";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
-import {logOut} from '../../../redux/reducers/UserReducer';
+import { logOut } from '../../../redux/reducers/UserReducer';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 function SlideMenu({ navigation }) {
@@ -36,6 +36,15 @@ function SlideMenu({ navigation }) {
                     <Text style={styles.headerText}>{userData.first_name}</Text>
                 </View>
             }
+
+            <TouchableOpacity onPress={() => {
+                navigation.dispatch(DrawerActions.toggleDrawer())
+                navigation.navigate('ProductList');
+            }} style={[styles.menuItem, { marginTop: hp('1.5%'), }]}>
+                <Entypo name="shop" style={styles.menuIcon} />
+                <Text style={styles.menuText}>Shop</Text>
+            </TouchableOpacity>
+
             <TouchableOpacity onPress={() => {
                 navigation.dispatch(DrawerActions.toggleDrawer())
                 navigation.navigate('ProductList');
