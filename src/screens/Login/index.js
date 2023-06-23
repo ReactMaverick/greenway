@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -16,7 +16,7 @@ import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {pageContainerStyle} from '../../common/values/BKStyles';
+import { pageContainerStyle } from '../../common/values/BKStyles';
 import {
   inputLevel,
   inputBottomLevel,
@@ -27,22 +27,22 @@ import {
   placeHolderColor,
   fontFamily,
 } from '../../common/values/BKStyles';
-import {BKColor} from '../../common/values/BKColor';
+import { BKColor } from '../../common/values/BKColor';
 import {
   POST_SIGNIN_API,
   GOOGLE_LOGINKEY,
   FBAppId,
   POST_SOCIAL_LOGIN,
 } from '../../config/ApiConfig';
-import {PostApiFetch} from '../../config/CommonFunction';
-import {useSelector, useDispatch} from 'react-redux';
+import { PostApiFetch } from '../../config/CommonFunction';
+import { useSelector, useDispatch } from 'react-redux';
 import DeviceInfo from 'react-native-device-info';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
-import {userDetails} from '../../redux/reducers/UserReducer';
+import { userDetails } from '../../redux/reducers/UserReducer';
 import CustomStatusBar from '../../common/components/statusbar';
 // import {
 //   GoogleSignin,
@@ -58,7 +58,7 @@ import CustomStatusBar from '../../common/components/statusbar';
 //   webClientId: GOOGLE_LOGINKEY,
 // });
 
-function Login({navigation}) {
+function Login({ navigation }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [androidId, setAndroidId] = useState(true);
@@ -76,11 +76,11 @@ function Login({navigation}) {
   const _signIn = async () => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (username == '') {
-      setErrorArr({id: 1, message: 'Enter Email/Phone'});
-    }else if (reg.test(username) === false && username.length != 10) {
-      setErrorArr({id: 1, message: 'Please Enter Valid Email/Phone'});
-    }else if (password == '') {
-      setErrorArr({id: 2, message: 'Enter Password'});
+      setErrorArr({ id: 1, message: 'Enter Email/Phone' });
+    } else if (reg.test(username) === false && username.length != 10) {
+      setErrorArr({ id: 1, message: 'Please Enter Valid Email/Phone' });
+    } else if (password == '') {
+      setErrorArr({ id: 2, message: 'Enter Password' });
     } else {
       setIsLoading(true);
       const formData = new FormData();
@@ -211,7 +211,7 @@ function Login({navigation}) {
   if (isLoading) {
     return (
       <>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <ActivityIndicator size="large" color={BKColor.textColor2} />
         </View>
       </>
@@ -226,13 +226,13 @@ function Login({navigation}) {
               <View style={styles.loginLogoSection.logo}>
                 <Image
                   source={require('../../assets/images/header-logo.png')}
-                  style={{height: wp('38.8%'), width: wp('27.1%')}}
+                  style={{ height: wp('38.8%'), width: wp('27.1%') }}
                 />
               </View>
               <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
               <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
             </View>
-            <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
+            <Text style={{ textAlign: 'center', color: BKColor.textColor2 }}>
               {loginErrorMessage}
             </Text>
             <View>
@@ -258,14 +258,13 @@ function Login({navigation}) {
             <View style={inputContainer}>
               <View
                 style={[
-                  textInput,
-                  {paddingHorizontal: wp('2%'), paddingVertical: hp('-2%')},errorArr.id == 2 && styles.errorInput,
+                  textInput, errorArr.id == 2 && styles.errorInput,
                 ]}>
                 <TextInput
                   placeholder={'Password'}
                   placeholderTextColor={placeHolderColor}
                   style={{
-                    width: '90%',
+                    width: '92%',
                     fontFamily: fontFamily.regular,
                     fontSize: fontSize.h3,
                     color: BKColor.textColor1,
@@ -277,26 +276,29 @@ function Login({navigation}) {
                     setErrorArr(0);
                   }}
                 />
-                <TouchableOpacity
-                  style={{width: '10%'}}
-                  onPress={() => {
-                    setPasswordEye(!passwordEye);
-                  }}>
-                  {/* <Text>Show</Text> */}
-                  <Entypo
-                    name={passwordEye ? 'eye-with-line' : 'eye'}
-                    style={{fontSize: 20, color: BKColor.textColor1}}
-                  />
-                </TouchableOpacity>
+                <View style={{ width: '8%',justifyContent:'center',alignItems:'flex-end' }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setPasswordEye(!passwordEye);
+                    }}>
+                    {/* <Text>Show</Text> */}
+                    <Entypo
+                      name={passwordEye ? 'eye-with-line' : 'eye'}
+                      style={{ fontSize: 20, color: BKColor.textColor1 }}
+                    />
+
+                  </TouchableOpacity>
+                </View>
               </View>
               {errorArr.id == 2 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
               )}
-              <TouchableOpacity
-                onPress={() => navigation.navigate('ForgetPassword')}>
-                <Text style={inputBottomLevel}>Forgot Password?</Text>
-              </TouchableOpacity>
             </View>
+
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ForgetPassword')}>
+              <Text style={inputBottomLevel}>Forgot Password?</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={activeButton.button} onPress={_signIn}>
               <Text style={activeButton.text}>Login</Text>
             </TouchableOpacity>

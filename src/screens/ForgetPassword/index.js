@@ -94,7 +94,7 @@ function ForgetPassword({navigation}) {
         <Text style={styles.loginLogoSection.text1}>Forget Password</Text>
       </View>
       <View style={inputContainer}>
-        <Text style={inputLevel}>Email / Phone Number</Text>
+        {/* <Text style={inputLevel}>Email / Phone Number</Text> */}
         <TextInput
           placeholder={'Enter email or phone number'}
           placeholderTextColor={placeHolderColor}

@@ -78,7 +78,7 @@ export default StyleSheet.create({
   loginFooter: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: hp('4%'),
+    marginVertical: hp('4%'),
     // alignItems: 'center',
     textLeft: {
       color: BKColor.textColor1,
@@ -121,14 +121,14 @@ export default StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: BKColor.inputBorder,
-    padding: hp('1.5%'),
+    paddingHorizontal: wp('3%'),
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     height: hp('6.5%'),
   },
   passwordInput: {
-    width: '90%',
+    width: '92%',
     fontFamily: fontFamily.regular,
     fontSize: fontSize.h3,
     color: BKColor.textColor1,

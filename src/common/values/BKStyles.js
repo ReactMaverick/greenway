@@ -125,10 +125,10 @@ export const textInput = {
   borderStyle: 'solid',
   borderWidth: 1,
   borderColor: BKColor.inputBorder,
-  padding: hp('1.5%'),
+  paddingHorizontal: wp('3%'),
   flexDirection: 'row',
   justifyContent: 'space-between',
-  alignItems: 'center',
+  // alignItems: 'center',
   height: hp('6.5%')
 };
 export const textInput2 = {

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -26,17 +26,17 @@ import {
   placeHolderColor,
   fontFamily,
 } from '../../common/values/BKStyles';
-import {BKColor} from '../../common/values/BKColor';
-import {POST_SIGNUP_API} from '../../config/ApiConfig';
-import {GetApiFetch, PostApiFetch} from '../../config/CommonFunction';
-import {useSelector, useDispatch} from 'react-redux';
+import { BKColor } from '../../common/values/BKColor';
+import { POST_SIGNUP_API } from '../../config/ApiConfig';
+import { GetApiFetch, PostApiFetch } from '../../config/CommonFunction';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import CustomStatusBar from '../../common/components/statusbar';
 
-function Register({navigation}) {
+function Register({ navigation }) {
   const [fullName, setFullName] = useState('');
   const [regEmail, setRegEmail] = useState('');
   const [regPhoneNumber, setRegPhoneNumber] = useState('');
@@ -51,19 +51,19 @@ function Register({navigation}) {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
 
     if (fullName == '') {
-      setErrorArr({id: 1, message: 'Please enter full name'});
+      setErrorArr({ id: 1, message: 'Please enter full name' });
     } else if (regEmail == '') {
-      setErrorArr({id: 2, message: 'Please enter email'});
+      setErrorArr({ id: 2, message: 'Please enter email' });
     } else if (reg.test(regEmail) === false) {
-      setErrorArr({id: 2, message: 'Please enter valid email'});
+      setErrorArr({ id: 2, message: 'Please enter valid email' });
     } else if (regPhoneNumber == '') {
-      setErrorArr({id: 3, message: 'Please enter phone number'});
+      setErrorArr({ id: 3, message: 'Please enter phone number' });
     } else if (regPhoneNumber.length != 10) {
-      setErrorArr({id: 3, message: 'Please enter valid phone number'});
+      setErrorArr({ id: 3, message: 'Please enter valid phone number' });
     } else if (regPassword == '') {
-      setErrorArr({id: 4, message: 'Please enter password'});
+      setErrorArr({ id: 4, message: 'Please enter password' });
     } else if (regPassword.length < 8) {
-      setErrorArr({id: 4, message: 'Password must be 8 character long'});
+      setErrorArr({ id: 4, message: 'Password must be 8 character long' });
     } else if (regPassword != confirmPassword) {
       setErrorArr({
         id: 5,
@@ -94,7 +94,7 @@ function Register({navigation}) {
           }
         })
         .catch(error => console.log(error))
-        .finally(() => {});
+        .finally(() => { });
     }
   };
 
@@ -103,8 +103,9 @@ function Register({navigation}) {
   return (
     <SafeAreaView>
       <CustomStatusBar />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={pageContainerStyle}>
+      <View style={pageContainerStyle}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+
           <View style={styles.loginLogoSection}>
             <View style={styles.loginLogoSection.logo}>
               <Image
@@ -186,7 +187,6 @@ function Register({navigation}) {
               <View
                 style={[
                   textInput,
-                  {paddingHorizontal: wp('2%'), paddingVertical: hp('0.5%')},
                   errorArr.id == 4 && styles.errorInput,
                 ]}>
                 <TextInput
@@ -201,20 +201,21 @@ function Register({navigation}) {
                     setErrorArr(0);
                   }}
                 />
-                <TouchableOpacity
-                  style={{width: '10%'}}
-                  onPress={() => {
-                    setPasswordEye(!passwordEye);
-                  }}>
-                  <Entypo
-                    name={passwordEye ? 'eye-with-line' : 'eye'}
-                    style={{
-                      fontSize: 20,
-                      marginRight: wp('3%'),
-                      color: BKColor.textColor1,
-                    }}
-                  />
-                </TouchableOpacity>
+                <View style={{ width: '8%', alignItems: 'flex-end', justifyContent: 'center' }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setPasswordEye(!passwordEye);
+                    }}>
+                    <Entypo
+                      name={passwordEye ? 'eye-with-line' : 'eye'}
+                      style={{
+                        fontSize: 20,
+                        // marginRight: wp('3%'),
+                        color: BKColor.textColor1,
+                      }}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
               {errorArr.id == 4 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
@@ -225,11 +226,11 @@ function Register({navigation}) {
               <View
                 style={[
                   textInput,
-                  {paddingHorizontal: wp('2%'), paddingVertical: hp('0.5%')},
+                  { paddingHorizontal: wp('3%'), paddingVertical: hp('0.5%') },
                   errorArr.id == 5 && styles.errorInput,
                 ]}>
                 <TextInput
-                  placeholder={'confirm Password'}
+                  placeholder={'Confirm Password'}
                   key="email"
                   onChangeText={value => setConfirmPassword(value)}
                   value={confirmPassword}
@@ -240,20 +241,21 @@ function Register({navigation}) {
                     setErrorArr(0);
                   }}
                 />
-                <TouchableOpacity
-                  style={{width: '10%'}}
-                  onPress={() => {
-                    setConfirmPasswordEye(!confirmPasswordEye);
-                  }}>
-                  <Entypo
-                    name={confirmPasswordEye ? 'eye-with-line' : 'eye'}
-                    style={{
-                      fontSize: 20,
-                      marginRight: wp('3%'),
-                      color: BKColor.textColor1,
-                    }}
-                  />
-                </TouchableOpacity>
+                <View style={{ width: '8%', alignItems: 'flex-end', justifyContent: 'center' }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setConfirmPasswordEye(!confirmPasswordEye);
+                    }}>
+                    <Entypo
+                      name={confirmPasswordEye ? 'eye-with-line' : 'eye'}
+                      style={{
+                        fontSize: 20,
+                        // marginRight: wp('3%'),
+                        color: BKColor.textColor1,
+                      }}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
               {errorArr.id == 5 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
@@ -273,8 +275,8 @@ function Register({navigation}) {
               </TouchableOpacity>
             </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
