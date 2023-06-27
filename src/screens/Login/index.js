@@ -276,7 +276,7 @@ function Login({ navigation }) {
                     setErrorArr(0);
                   }}
                 />
-                <View style={{ width: '8%',justifyContent:'center',alignItems:'flex-end' }}>
+                <View style={{ width: '8%', justifyContent: 'center', alignItems: 'flex-end' }}>
                   <TouchableOpacity
                     onPress={() => {
                       setPasswordEye(!passwordEye);
@@ -302,6 +302,27 @@ function Login({ navigation }) {
             <TouchableOpacity style={activeButton.button} onPress={_signIn}>
               <Text style={activeButton.text}>Login</Text>
             </TouchableOpacity>
+
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: hp('3%') }}>
+              <View style={{ width: wp('35%'), borderTopWidth: 1, borderColor: BKColor.textColor1 }}></View>
+
+              <View style={{ marginHorizontal: wp('5%') }}>
+                <Text style={{ fontSize: fontSize.h3, fontFamily: fontFamily.medium, color: BKColor.textColor1 }}>Or</Text>
+              </View>
+
+              <View style={{ width: wp('35%'), borderTopWidth: 1, borderColor: BKColor.textColor1 }}></View>
+            </View>
+
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                <TouchableOpacity style={{ marginHorizontal: wp('4%') }}>
+                  <Image source={require('../../assets/images/google-logo.png')} style={ styles.otherLoginIcon } />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ marginHorizontal: wp('4%') }}>
+                  <Image source={require('../../assets/images/facebook-logo.png')} style={ styles.otherLoginIcon } />
+                </TouchableOpacity>
+            </View>
+
+
             {/* <View style={styles.socialLoginContainer}>
             <TouchableOpacity
               style={styles.socialLoginButton.button}

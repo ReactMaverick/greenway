@@ -50,12 +50,23 @@ export default StyleSheet.create({
         alignItems:"center",
     },
 
+
+
     loginLogoSection: {
+        alignItems:'center',
+        // marginTop:hp('5%'),
+        marginBottom:hp('2%'),
+        padding: wp('2%'),
+        borderRadius: 100,
+        backgroundColor: BKColor.textColor2,
+        width: wp('35%'),
+        height: wp('35%'),
+        borderRadius:100,
         justifyContent: 'center',
-        alignItems: 'center',
-        height: hp('30%'),
+        // alignItems: 'center',
+        // height: hp('30%'),
         logo: {
-            // backgroundColor: BKColor.iconBackground1,
+            backgroundColor: BKColor.textColor1,
             justifyContent: 'center',
             alignItems: 'center',
         },

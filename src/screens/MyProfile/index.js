@@ -15,6 +15,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import {
@@ -60,7 +61,20 @@ function MyProfile({ navigation }) {
     <SafeAreaView>
       <CustomStatusBar />
       <View style={pageContainerStyle2}>
-        <ScrollView style={{ marginBottom: hp('7%') }}>
+
+      <View style={pageHeader}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Fontisto
+              name="arrow-left"
+              color={BKColor.textColor1}
+              size={fontSize.h2}
+            />
+          </TouchableOpacity>
+          <Text style={pageHeader.text}>Profile</Text>
+          <View style={{ width: '10%' }}></View>
+        </View>
+        
+        <ScrollView showsVerticalScrollIndicator={false} style={{ marginBottom: hp('7%') }}>
           {/* <View style={pageHeader}>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
                     <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
@@ -68,13 +82,15 @@ function MyProfile({ navigation }) {
                 <Text style={pageHeader.text}>Signup</Text>
                 <View></View>
             </View> */}
+            
           <View style={styles.loginLogoSection}>
             <View style={styles.loginLogoSection.logo}>
               <Image
-                source={require('../../assets/images/header-logo.png')}
+                source={require('../../assets/images/user.png')}
                 resizeMode="cover"
                 style={{
-                  height: wp('38.8%'), width: wp('27.1%'), resizeMode: "cover"
+                  height: wp('20%'), width: wp('20%'), resizeMode: "cover",
+                  backgroundColor:'red'
                 }}
               />
             </View>

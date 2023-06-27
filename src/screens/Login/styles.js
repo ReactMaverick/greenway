@@ -111,5 +111,9 @@ export default StyleSheet.create({
         alignItems: 'center',
         height: hp('6.5%'),
       },
+      otherLoginIcon: {
+        width: wp('7%'),
+        height: wp('7%'),
+      }
 
 });

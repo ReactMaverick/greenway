@@ -263,8 +263,8 @@ function OrderDetails({ navigation, route }) {
         <CustomStatusBar />
         <View style={pageHeader}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Fontisto
-              name="arrow-left-l"
+          <Fontisto
+              name="arrow-left"
               color={BKColor.textColor1}
               size={fontSize.h2}
             />

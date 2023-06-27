@@ -451,11 +451,11 @@ function Checkout({ navigation }) {
         <View style={pageContainerStyle2}>
           <View style={pageHeader}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Fontisto
-                name="arrow-left-l"
-                color={BKColor.textColor1}
-                size={fontSize.h2}
-              />
+            <Fontisto
+              name="arrow-left"
+              color={BKColor.textColor1}
+              size={fontSize.h2}
+            />
             </TouchableOpacity>
             <Text style={pageHeader.text}>Checkout</Text>
             <View style={{ width: wp('10%') }}></View>
