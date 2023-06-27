@@ -11,6 +11,7 @@ import {
 import styles from './styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -47,6 +48,7 @@ import { showMessage, hideMessage } from 'react-native-flash-message';
 import { Dropdown } from 'react-native-element-dropdown';
 import CustomStatusBar from '../../common/components/statusbar';
 import { useIsFocused } from '@react-navigation/native';
+import { color } from 'react-native-reanimated';
 
 function MyAddress({ navigation }) {
   const isFocused = useIsFocused();
@@ -167,6 +169,7 @@ function MyAddress({ navigation }) {
       .catch(error => console.log(error))
       .finally(() => { });
   };
+  console.log(addState);
   const _getDistrict = async statesId => {
     const formData = new FormData();
     formData.append('states_id', statesId);
@@ -426,12 +429,12 @@ function MyAddress({ navigation }) {
                     Add+
                   </Text> */}
                   <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <Feather
-                  name="plus"
-                  style={styles.addAddressIcon}
-                />
-                <Text style={styles.addShippingBtn}>Add New Billing Address</Text>
-              </View>
+                    <Feather
+                      name="plus"
+                      style={styles.addAddressIcon}
+                    />
+                    <Text style={styles.addShippingBtn}>Add New Billing Address</Text>
+                  </View>
                 </TouchableOpacity>
               )}
             </View>
@@ -596,17 +599,20 @@ function MyAddress({ navigation }) {
             padding: wp('3%'),
             borderRadius: 15,
           }}>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.headerPopup}>
-              {addAddressType === 'shipping' && (
-                <Text style={styles.modalText}>Add Shipping Address</Text>
-              )}
-              {addAddressType === 'billing' && (
-                <Text style={styles.modalText}>Add Billing Address</Text>
-              )}
-
-              <TouchableOpacity onPress={closeModal}>
-                <AntDesign name="close" style={styles.modalText} />
+              <View style={{ flex: 4, alignItems: 'center' }}>
+                {addAddressType === 'shipping' && (
+                  <Text style={styles.addressModalText}>Add Shipping Address</Text>
+                )}
+                {addAddressType === 'billing' && (
+                  <Text style={styles.addressModalText}>Add Billing Address</Text>
+                )}
+              </View>
+              <TouchableOpacity onPress={closeModal}
+                style={{ flex: 0.5, alignItems: 'flex-end' }}
+              >
+                <Entypo name="circle-with-cross" style={styles.cancelBtnIcon} />
               </TouchableOpacity>
             </View>
             <View>
@@ -615,10 +621,24 @@ function MyAddress({ navigation }) {
               </Text>
             </View>
             <View>
-              <View style={[inputContainer, { marginTop: hp('1%') }]}>
-                <Text style={inputLevel}>Full Name</Text>
+
+              {/* <View style={{ flexDirection: 'row' }}>
+                <View style={{ flex: 4, alignItems: 'center' }}>
+                  <Text style={styles.addressModalText}>Add New Address</Text>
+                </View>
+
+                <TouchableOpacity
+                  onPress={() => closeModal()}
+                  style={{ flex: 0.5, alignItems: 'flex-end' }}>
+                  <Entypo name="circle-with-cross" style={styles.cancelBtnIcon} />
+                  <Text style={styles.socialLoginButton.text}>Close</Text>
+                </TouchableOpacity>
+              </View> */}
+
+              <View style={inputContainer}>
+                {/* <Text style={inputLevel}>Full Name</Text> */}
                 <TextInput
-                  placeholder={'full name'}
+                  placeholder={'Full Name'}
                   placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="fullname"
@@ -637,16 +657,15 @@ function MyAddress({ navigation }) {
                   }}
                 />
               </View>
-              <View style={[inputContainer, { marginTop: hp('1%') }]}>
-                <Text style={inputLevel}>Email</Text>
+              <View style={inputContainer}>
+                {/* <Text style={inputLevel}>Email</Text> */}
                 <TextInput
-                  placeholder={'email'}
+                  placeholder={'Email'}
                   placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="email"
                   onChangeText={value => setAddEmail(value)}
                   value={addEmail}
-
                 // secureTextEntry={passwordEye}
                 // onChangeText={(password) => setPassword(password)}
                 // onFocus={() => {
@@ -654,10 +673,10 @@ function MyAddress({ navigation }) {
                 // }}
                 />
               </View>
-              <View style={[inputContainer, { marginTop: hp('1%') }]}>
-                <Text style={inputLevel}>Mobile No</Text>
+              <View style={inputContainer}>
+                {/* <Text style={inputLevel}>Mobile No</Text> */}
                 <TextInput
-                  placeholder={'mobile no'}
+                  placeholder={'Mobile Number'}
                   placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="mobileno"
@@ -671,10 +690,10 @@ function MyAddress({ navigation }) {
                 // }}
                 />
               </View>
-              <View style={[inputContainer, { marginTop: hp('1%') }]}>
-                <Text style={inputLevel}>Street / Village Name</Text>
+              <View style={inputContainer}>
+                {/* <Text style={inputLevel}>Street / Village Name</Text> */}
                 <TextInput
-                  placeholder={'Street name'}
+                  placeholder={'Street Name'}
                   placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="streetname"
@@ -688,8 +707,8 @@ function MyAddress({ navigation }) {
                 // }}
                 />
               </View>
-              <View style={[inputContainer, { marginTop: hp('1%') }]}>
-                <Text style={inputLevel}>State</Text>
+              <View style={inputContainer}>
+                {/* <Text style={inputLevel}>State</Text> */}
 
                 <Dropdown
                   style={[
@@ -699,6 +718,11 @@ function MyAddress({ navigation }) {
                   // style={textInput}
                   placeholder={!isFocus ? 'Select State' : ''}
                   placeholderTextColor={placeHolderColor}
+                  inputSearchStyle={styles.inputSearchStyle}
+                  placeholderStyle={styles.placeholderStyle}
+                  selectedTextStyle={styles.selectedTextStyle}
+                  search
+                  searchPlaceholder="Search..."
                   onFocus={() => setIsFocus(true)}
                   onBlur={() => setIsFocus(false)}
                   value={addState}
@@ -712,10 +736,13 @@ function MyAddress({ navigation }) {
                   valueField="value"
                   labelField="label"
                   dropdownPosition="top"
+                  containerStyle={styles.bgPlaceholderColor}
+                  iconColor={BKColor.textColor1}
+                  itemTextStyle={styles.itemTextStyle}
                 />
               </View>
-              <View style={[inputContainer, { marginTop: hp('1%') }]}>
-                <Text style={inputLevel}>District</Text>
+              <View style={inputContainer}>
+                {/* <Text style={inputLevel}>District</Text> */}
                 <Dropdown
                   style={[
                     styles.textInput,
@@ -724,6 +751,9 @@ function MyAddress({ navigation }) {
                   // style={textInput}
                   placeholder={!isDistrictFocus ? 'Select District' : ''}
                   placeholderTextColor={placeHolderColor}
+                  inputSearchStyle={styles.inputSearchStyle}
+                  placeholderStyle={styles.placeholderStyle}
+                  selectedTextStyle={styles.selectedTextStyle}
                   onFocus={() => setIsDistrictFocus(true)}
                   onBlur={() => setIsDistrictFocus(false)}
                   value={addDistrict}
@@ -736,12 +766,15 @@ function MyAddress({ navigation }) {
                   valueField="value"
                   labelField="label"
                   dropdownPosition="top"
+                  containerStyle={styles.bgPlaceholderColor}
+                  iconColor={BKColor.textColor1}
+                  itemTextStyle={styles.itemTextStyle}
                 />
               </View>
-              <View style={[inputContainer, { marginTop: hp('1%') }]}>
-                <Text style={inputLevel}>City</Text>
+              <View style={inputContainer}>
+                {/* <Text style={inputLevel}>City</Text> */}
                 <TextInput
-                  placeholder={'city'}
+                  placeholder={'City'}
                   placeholderTextColor={placeHolderColor}
                   style={textInput}
                   key="city"
@@ -755,8 +788,8 @@ function MyAddress({ navigation }) {
                 // }}
                 />
               </View>
-              <View style={[inputContainer, { marginTop: hp('1%') }]}>
-                <Text style={inputLevel}>Pincode</Text>
+              <View style={inputContainer}>
+                {/* <Text style={inputLevel}>Pincode</Text> */}
                 <Dropdown
                   style={[
                     styles.textInput,
@@ -765,6 +798,9 @@ function MyAddress({ navigation }) {
                   // style={textInput}
                   placeholder={!isPincodeFocus ? 'Select Pincode' : ''}
                   placeholderTextColor={placeHolderColor}
+                  inputSearchStyle={styles.inputSearchStyle}
+                  placeholderStyle={styles.placeholderStyle}
+                  selectedTextStyle={styles.selectedTextStyle}
                   onFocus={() => setIsPincodeFocus(true)}
                   onBlur={() => setIsPincodeFocus(false)}
                   value={addPincode}
@@ -776,6 +812,10 @@ function MyAddress({ navigation }) {
                   valueField="value"
                   labelField="label"
                   dropdownPosition="top"
+                  containerStyle={styles.bgPlaceholderColor}
+                  iconColor={BKColor.textColor1}
+                  itemTextStyle={styles.itemTextStyle}
+
                 />
                 <View>
                   {autoSuggestion.map((item, key) => (
@@ -812,11 +852,7 @@ function MyAddress({ navigation }) {
                 onPress={_insertAddress}>
                 <Text style={activeButton.text}>Add</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => closeModal()}
-                style={styles.socialLoginButton.button}>
-                <Text style={styles.socialLoginButton.text}>Close</Text>
-              </TouchableOpacity>
+
             </View>
           </ScrollView>
         </Modal>

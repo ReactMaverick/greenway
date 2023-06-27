@@ -23,13 +23,13 @@ export default StyleSheet.create({
         elevation: 10,
         borderRadius: 15,
         padding: wp('4%'),
-        marginBottom:hp('2%')
+        marginBottom: hp('2%')
     },
 
-    contactUsText:{
+    contactUsText: {
         fontSize: fontSize.h4,
         fontFamily: fontFamily.regular,
-        color: BKColor. textColor1,
+        color: BKColor.textColor1,
         marginTop: hp('0.5%')
     },
     orderLeftSec: {
@@ -141,28 +141,28 @@ export default StyleSheet.create({
             fontFamily: fontFamily.regular,
         },
     },
-    headerPopup:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        paddingBottom:10
+    headerPopup: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingBottom: 10
     },
-    headText:{
+    headText: {
         color: BKColor.primaryColor,
         fontFamily: fontFamily.medium,
         fontSize: fontSize.hx,
     },
-    modalText:{
-        fontFamily: fontFamily.regular,
-        fontSize: fontSize.hx,
-        color: BKColor.primaryColor,
-    },
-    popupBody:{
-        alignItems:'center',
-        paddingBottom:10
+    // modalText: {
+    //     fontFamily: fontFamily.regular,
+    //     fontSize: fontSize.hx,
+    //     color: BKColor.primaryColor,
+    // },
+    popupBody: {
+        alignItems: 'center',
+        paddingBottom: 10
     },
     addAddress: {
-        
+
         // flexDirection: 'row',
         // alignItems: 'center',
         // justifyContent: 'space-between',
@@ -173,27 +173,25 @@ export default StyleSheet.create({
             // width: '25%',
             justifyContent: 'center',
             borderRadius: 13,
-            borderWidth:1,
+            borderWidth: 1,
             borderColor: BKColor.inputBorder,
-            marginVertical:hp('4%')
+            marginVertical: hp('4%')
             // backgroundColor: BKColor.textColor2
         }
     },
     textInput: {
-        // color: BKColor.textColor4,
-        // placeHolderStyle: BKColor.textColor2,
+        // color: BKColor.textColor1,
         fontFamily: fontFamily.regular,
         fontSize: fontSize.h3,
-        width: '100%',
-        // backgroundColor: BKColor.textboxBackground,
-        borderRadius: 13,
+        borderRadius: 30,
         borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: '#DDDDDD',
-        padding: hp('1.5%'),
+        borderColor: BKColor.inputBorder,
+        paddingHorizontal: wp('3%'),
         // flexDirection: 'row',
-        // justifyContent: 'space-between',
-        // alignItems: 'center'
+        // justifyContent: 'flex-end',
+        height: hp('6.5%'),
+        alignItems: 'center',
     },
     addAddressText: {
         fontSize: fontSize.h4,
@@ -202,11 +200,11 @@ export default StyleSheet.create({
     },
     addressEditIcon: {
         backgroundColor: BKColor.textColor1,
-        alignItems: 'center', 
+        alignItems: 'center',
         marginBottom: hp('1%'),
-        color:BKColor.white,
+        color: BKColor.white,
         fontSize: fontSize.heading,
-        borderRadius:wp('12.5%'),
+        borderRadius: wp('12.5%'),
         padding: wp('1%')
     },
     addAddressIcon: {
@@ -217,6 +215,36 @@ export default StyleSheet.create({
     addShippingBtn: {
         fontSize: fontSize.h4,
         fontFamily: fontFamily.medium,
-        color:BKColor.textColor1
-    }
+        color: BKColor.textColor1
+    },
+    bgPlaceholderColor: {
+        // borderWidth:1,
+        // borderColor: BKColor.textColor1,
+        borderRadius:20,
+    },
+    itemTextStyle: {
+        fontSize: fontSize.h4,
+        fontFamily: fontFamily.regular,
+        color: BKColor.textColor1,
+    },
+    addressModalText: {
+        fontSize: fontSize.h2,
+        fontFamily: fontFamily.bold,
+        color: BKColor.textColor1
+    },
+    cancelBtnIcon: {
+        fontSize: fontSize.heading,
+        color: BKColor.textColor1,
+        // borderRadius: wp('12.5%')
+    },
+    selectedTextStyle: {
+        fontSize: fontSize.h3,
+        fontFamily: fontFamily.regular,
+        color: BKColor.textColor1,
+      },
+      placeholderStyle: {
+        fontSize: fontSize.h3,
+        fontFamily: fontFamily.regular,
+        color: '#cbded2'
+      }
 });

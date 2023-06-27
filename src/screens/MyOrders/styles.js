@@ -6,20 +6,29 @@ import { fontSize, fontFamily } from '../../common/values/BKStyles';
 export default StyleSheet.create({
     headText: { color: '#2E2E2E', fontSize: 16, margin: 5 },
 
+    orderItemOuter: {
+        shadowColor: 'rgba(23, 149, 94, 0.90)',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 1,
+        shadowRadius: 4,
+        margin: 2,
+        elevation: 10,
+        backgroundColor: BKColor.bgColor,
+        borderRadius: 15,
+        marginBottom: hp('3%')
+    },
+
     contactUsSec: {
         flexDirection: "row",
         alignItems: 'center',
         marginVertical: hp('1%'),
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: BKColor.boxBorder,
-        borderRadius: 15,
+        // borderRadius: wp('12.5%'),
         padding: wp('4%')
     },
 
     contactUsText:{
         fontSize: fontSize.h3,
-        fontFamily: fontFamily.medium,
+        fontFamily: fontFamily.bold,
         color: BKColor. textColor1,
         // marginTop: hp('1%')
     },
@@ -27,20 +36,25 @@ export default StyleSheet.create({
         width: wp('63%'),
     },
     myOrderLabel: {
-        fontSize: fontSize.h3,
-        fontFamily: fontFamily.medium,
-        color: BKColor.textColor2
+        fontSize: fontSize.h2,
+        fontFamily: fontFamily.bold,
+        color: BKColor.textColor1
     },
     myOrderText: {
+        fontSize: fontSize.h2,
+        fontFamily: fontFamily.bold,
+        color: BKColor.textColor1
+    },
+    myOrderDateText: {
         fontSize: fontSize.h3,
-        fontFamily: fontFamily.regular,
+        fontFamily: fontFamily.bold,
         color: BKColor.textColor1
     },
     orderStatus: {
         fontSize: fontSize.h3,
-        fontFamily: fontFamily.regular,
-        color: BKColor.textColor2,
-        marginTop: hp('1%')
+        fontFamily: fontFamily.bold,
+        color: '#1ab800',
+        marginTop: hp('0.5%')
     },
     orderStatusActive: {
         fontSize: fontSize.h3,
@@ -132,6 +146,27 @@ export default StyleSheet.create({
             textAlign: 'center',
             fontFamily: fontFamily.regular,
         }
+    },
+    viewDetailsBtn: {
+        fontSize: fontSize.h3,
+        fontFamily: fontFamily.medium,
+        color: BKColor.textColor2,
+        textAlign:'center',
+        marginVertical:hp('1.5%')
+    },
+    orderCancelBtn: {
+        fontSize: fontSize.h3,
+        fontFamily: fontFamily.medium,
+        color: '#f20000',
+        textAlign:'center',
+        marginVertical:hp('1.5%')
+    },
+    orderReviewlBtn: {
+        fontSize: fontSize.h3,
+        fontFamily: fontFamily.medium,
+        color: '#7d7d7d ',
+        textAlign:'center',
+        marginVertical:hp('1.5%')
     }
 
 });

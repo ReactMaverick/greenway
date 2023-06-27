@@ -176,7 +176,7 @@ export const activeButton = {
     marginTop: hp('4%'),
     width: '100%',
     justifyContent: 'center',
-    borderRadius: 30,
+    borderRadius: wp('12.5%'),
     backgroundColor: BKColor.textColor1
   },
   text: {
@@ -208,7 +208,7 @@ export const passiveButton = {
     marginTop: hp('4%'),
     width: '100%',
     justifyContent: 'center',
-    borderRadius: 30,
+    borderRadius: wp('12.5%'),
     backgroundColor: BKColor.white,
     borderStyle: 'solid',
     borderWidth: 1,

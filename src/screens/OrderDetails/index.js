@@ -276,16 +276,16 @@ function OrderDetails({ navigation, route }) {
           <View style={styles.orderDetailsHeadSec}>
 
 
-            <View style={styles.itemHeadingSec}>
+            {/* <View style={styles.itemHeadingSec}>
               <Text style={styles.productItemHeading}>Items</Text>
-              {/* <Text style={styles.productItemText}>Items with ID proof (2)</Text> */}
+              <Text style={styles.productItemText}>Items with ID proof (2)</Text>
               {orderDetails.orders_status != 'Return' ? (
                 <>
                   {orderDetails.statusess[0].cancellable == 1 && (
                     <TouchableOpacity
                       style={activeButton.cancelButton}
                       onPress={() => {
-                        // console.log("Cancel")
+                        console.log("Cancel")
                         _cancelOrder();
                       }}>
                       <Text style={activeButton.text}>Cancel</Text>
@@ -295,7 +295,7 @@ function OrderDetails({ navigation, route }) {
               ) : (
                 <></>
               )}
-            </View>
+            </View> */}
 
             {orderDetails.products.map((item2, key) => (
               <View style={styles.contactUsSec} key={key}>

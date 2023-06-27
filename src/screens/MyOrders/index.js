@@ -12,7 +12,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { pageContainerStyle,pageContainerStyle2, pageHeader } from '../../common/values/BKStyles';
+import { pageContainerStyle, pageContainerStyle2, pageHeader } from '../../common/values/BKStyles';
 import {
   inputLevel,
   inputBottomLevel,
@@ -92,40 +92,79 @@ function MyOrders({ navigation }) {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={{ marginBottom: hp('12%') }}>
             {orderData.map((item, key) => (
-              <TouchableOpacity
-                style={styles.contactUsSec}
-                key={key}
-                onPress={() => {
-                  // console.log('item ', item)
-                  navigation.navigate('OrderDetails', {
-                    orderId: item.orders_status_history[0].orders_id,
-                  });
-                }}>
-                <View style={styles.orderLeftSec}>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={styles.myOrderLabel}>Order Id : </Text>
-                    <Text style={styles.myOrderText}>
-                      {' '}
-                      {item.invoice_number}
-                    </Text>
+              <View style={styles.orderItemOuter}>
+                <View style={{ borderBottomWidth: 1, borderColor: BKColor.inputBorder }}>
+                  <View
+                    style={styles.contactUsSec}
+                    key={key}
+                    >
+                    <View style={styles.orderLeftSec}>
+                      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={styles.myOrderLabel}>Order Id : </Text>
+                        <Text style={styles.myOrderText}>
+                          {' '}
+                          {item.invoice_number}
+                        </Text>
+                      </View>
+                      <Text style={styles.orderStatus}>{item.orders_status}</Text>
+                      <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: hp('0.5%') }}>
+                        <Text style={styles.contactUsText}>
+                          Order Date :
+                        </Text>
+                        <Text style={styles.myOrderDateText}> {item.date_purchased}</Text>
+                      </View>
+
+                      <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: hp('0.5%') }}>
+                        <Text style={styles.contactUsText}>
+                          Delivery By :
+                        </Text>
+                        <Text style={styles.myOrderDateText}> {item.date_purchased}</Text>
+                      </View>
+                      {/* <Text style={styles.orderStatusActive}>Delivered</Text> */}
+                    </View>
+                    {/* <View style={styles.orderRightSec}>
+                      <Entypo
+                        name="chevron-thin-right"
+                        color={BKColor.textColor1}
+                        size={fontSize.h2}
+                      />
+                    </View> */}
                   </View>
-                  <View style={{ flexDirection: 'row', alignItems: 'center',marginTop: hp('1%') }}>
-                    <Text style={styles.contactUsText}>
-                      Order Date :
-                    </Text>
-                    <Text style={styles.myOrderText}> {item.date_purchased}</Text>
-                  </View>
-                  <Text style={styles.orderStatus}>{item.orders_status}</Text>
-                  {/* <Text style={styles.orderStatusActive}>Delivered</Text> */}
                 </View>
-                <View style={styles.orderRightSec}>
-                  <Entypo
-                    name="chevron-thin-right"
-                    color={BKColor.textColor1}
-                    size={fontSize.h2}
-                  />
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <TouchableOpacity
+                  onPress={() => {
+                    // console.log('item ', item)
+                    navigation.navigate('OrderDetails', {
+                      orderId: item.orders_status_history[0].orders_id,
+                    });
+                  }}
+                  style={{
+                    flex: 1,
+                    borderRightWidth: 0.5,
+                    borderColor: BKColor.inputBorder
+                  }}>
+                    <Text style={styles.viewDetailsBtn}>View Details</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{
+                    flex: 1,
+                    borderLeftWidth: 0.5,
+                    borderColor: BKColor.inputBorder
+                  }}>
+                    <Text style={styles.orderCancelBtn}>Cancel Order</Text>
+                  </TouchableOpacity>
+
+                  {/* <TouchableOpacity style={{
+                    flex: 1,
+                    borderLeftWidth: 0.5,
+                    borderColor: BKColor.inputBorder
+                  }}>
+                    <Text style={styles.orderReviewlBtn}>Review</Text>
+                  </TouchableOpacity> */}
+
                 </View>
-              </TouchableOpacity>
+              </View>
             ))}
           </View>
         </ScrollView>

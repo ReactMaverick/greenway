@@ -104,7 +104,7 @@ export default StyleSheet.create({
     productQtySec: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: hp('1%')
+        // marginBottom: hp('1%')
     },
     productQtyText: {
         fontSize: fontSize.h4,
@@ -115,11 +115,11 @@ export default StyleSheet.create({
     productQty: {
         fontSize: fontSize.h4,
         fontFamily: fontFamily.regular,
-        color: BKColor.textColor1
+        color: BKColor.textColor1,
     },
     productPrice: {
         fontSize: fontSize.h3,
-        fontFamily: fontFamily.medium,
+        fontFamily: fontFamily.bold,
         color: BKColor.textColor2,
         textAlign:'right'
     },
