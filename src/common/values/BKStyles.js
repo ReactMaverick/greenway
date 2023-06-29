@@ -173,7 +173,7 @@ export const activeButton = {
   button: {
     alignItems: 'center',
     paddingHorizontal: wp('3.5%'),
-    paddingVertical: wp('1.5%'),
+    paddingVertical: wp('2.5%'),
     marginTop: hp('4%'),
     width: '100%',
     justifyContent: 'center',

@@ -68,23 +68,23 @@ import CongratulationPage from './src/screens/CongratulationPage';
 
 const Drawer = createDrawerNavigator();
 
-function MyDrawer() {
-  return (
-    <Drawer.Navigator
-      screenOptions={{
-        drawerStyle: {
-          width: '80%',
-        },
-      }}
-      drawerContent={props => <SlideMenu {...props} />}>
-      <Drawer.Screen
-        name="Home"
-        component={Home}
-        options={{ headerShown: false }}
-      />
-    </Drawer.Navigator>
-  );
-}
+// function MyDrawer() {
+//   return (
+//     <Drawer.Navigator
+//       screenOptions={{
+//         drawerStyle: {
+//           width: '80%',
+//         },
+//       }}
+//       drawerContent={props => <SlideMenu {...props} />}>
+//       <Drawer.Screen
+//         name="Home"
+//         component={Home}
+//         options={{ headerShown: false }}
+//       />
+//     </Drawer.Navigator>
+//   );
+// }
 
 function MyTabBar({ state, descriptors, navigation }) {
   const cartData = useSelector(state => state.CartReducer.value);
@@ -223,7 +223,8 @@ function MyTabs() {
       tabBar={props => <MyTabBar {...props} />}>
       <BottomTab.Screen
         name="HomeTab"
-        component={MyDrawer}
+        // component={MyDrawer}
+        component={Home}
         options={{
           tabBarIcon: ({ color, size, focused }) =>
             focused ? (

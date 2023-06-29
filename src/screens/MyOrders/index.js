@@ -26,17 +26,16 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import { POST_MY_ORDER_API } from '../../config/ApiConfig';
+import { POST_MY_ORDER_API,POST_CANCEL_ORDER } from '../../config/ApiConfig';
 import { PostApiFetch } from '../../config/CommonFunction';
 import { useSelector, useDispatch } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
 import CustomStatusBar from '../../common/components/statusbar';
-
+import { showMessage, hideMessage } from 'react-native-flash-message';
 function MyOrders({ navigation }) {
   const [orderData, setOrderData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const userData = useSelector(state => state.UserReducer.value);
-  // console.log('userData =>',userData)
   const isFocused = useIsFocused();
 
   const _getOrderData = () => {
@@ -57,7 +56,28 @@ function MyOrders({ navigation }) {
         setIsLoading(false);
       });
   };
-
+  const _cancelOrder = async (id) => {
+    setIsLoading(true);
+    const formData = new FormData();
+    formData.append('user_id', userData.id);
+    formData.append('orders_id', id);
+    PostApiFetch(POST_CANCEL_ORDER, formData)
+      .then(([status, response]) => {
+        if (response.status === true) {
+          // console.log('order cancel')
+          showMessage({
+            message: 'your order canceled successfully',
+            type: 'info',
+            backgroundColor: '#EC1F25',
+          });
+          _getOrderData();
+        }
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
   useEffect(() => {
     if (isFocused) {
       _getOrderData();
@@ -146,12 +166,12 @@ function MyOrders({ navigation }) {
                   }}>
                     <Text style={styles.viewDetailsBtn}>View Details</Text>
                   </TouchableOpacity>
-
+                  
                   <TouchableOpacity style={{
                     flex: 1,
                     borderLeftWidth: 0.5,
                     borderColor: BKColor.inputBorder
-                  }}>
+                  }} onPress={() => {_cancelOrder(item.orders_status_history[0].orders_id)}}>
                     <Text style={styles.orderCancelBtn}>Cancel Order</Text>
                   </TouchableOpacity>
 

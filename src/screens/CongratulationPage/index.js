@@ -37,68 +37,8 @@ import {
 } from 'react-native-responsive-screen';
 import CustomStatusBar from '../../common/components/statusbar';
 
-function CongratulationPage({ navigation }) {
-  const [fullName, setFullName] = useState('');
-  const [regEmail, setRegEmail] = useState('');
-  const [regPhoneNumber, setRegPhoneNumber] = useState('');
-  const [regPassword, setRegPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  // const [regErrorMsg, setRegErrorMessage] = useState('');
-  const [passwordEye, setPasswordEye] = useState(true);
-  const [confirmPasswordEye, setConfirmPasswordEye] = useState(true);
-  const [errorArr, setErrorArr] = useState({});
-
-  // const _signUpCheck = () => {
-  // //   let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-
-  //   if (fullName == '') {
-  //     setErrorArr({id: 1, message: 'Please enter full name'});
-  //   } else if (regEmail == '') {
-  //     setErrorArr({id: 2, message: 'Please enter email'});
-  //   } else if (reg.test(regEmail) === false) {
-  //     setErrorArr({id: 2, message: 'Please enter valid email'});
-  //   } else if (regPhoneNumber == '') {
-  //     setErrorArr({id: 3, message: 'Please enter phone number'});
-  //   } else if (regPhoneNumber.length != 10) {
-  //     setErrorArr({id: 3, message: 'Please enter valid phone number'});
-  //   } else if (regPassword == '') {
-  //     setErrorArr({id: 4, message: 'Please enter password'});
-  //   } else if (regPassword.length < 8) {
-  //     setErrorArr({id: 4, message: 'Password must be 8 character long'});
-  //   } else if (regPassword != confirmPassword) {
-  //     setErrorArr({
-  //       id: 5,
-  //       message: 'please check password and confirm password',
-  //     });
-  //   } else {
-  //     const formData = new FormData();
-
-  //     formData.append('fullname', fullName);
-  //     formData.append('phone', regPhoneNumber);
-  //     formData.append('email', regEmail);
-  //     formData.append('password', regPassword);
-
-  //     PostApiFetch(POST_SIGNUP_API, formData)
-  //       .then(([status, response]) => {
-  //         if (status == 200) {
-  //           console.log('status', status, 'response', response);
-  //           if (response.status == true) {
-  //             navigation.navigate('OtpVerification', {
-  //               response: response,
-  //             });
-  //             console.log('User registered successfully...');
-  //           } else {
-  //             setRegErrorMessage(response.message);
-  //           }
-  //         } else {
-  //           console.log('Something went wrong');
-  //         }
-  //       })
-  //       .catch(error => console.log(error))
-  //       .finally(() => {});
-  //   }
-  // };
-
+function CongratulationPage({ navigation,route}) {
+  const orderId = route.params.orderId;
   //   useEffect(() => {}, [navigation]);
 
   return (
@@ -116,6 +56,7 @@ function CongratulationPage({ navigation }) {
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end' }}>
               <Text style={styles.congratulationText1}>Congratulations</Text>
               <Text style={styles.congratulationText2}>Order has been placed</Text>
+              <Text style={styles.congratulationText2}>#{orderId}</Text>
             </View>
 
             <View style={{ flex: 1.3,justifyContent:'flex-end',marginBottom: hp('2%') }}>
@@ -125,7 +66,7 @@ function CongratulationPage({ navigation }) {
                 <Text style={activeButton.text}>My Orders</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={activeButton.button}
+                style={[activeButton.button,{backgroundColor: BKColor.textColor2}]}
                 onPress={() => navigation.navigate('HomeTab')}>
                 <Text style={activeButton.text}>Back to home</Text>
               </TouchableOpacity>

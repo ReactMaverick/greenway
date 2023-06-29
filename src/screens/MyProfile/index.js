@@ -44,8 +44,8 @@ import CustomStatusBar from '../../common/components/statusbar';
 function MyProfile({ navigation }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
-  // const userData = useSelector(state => state.userReducer.value);
-
+  const userData = useSelector(state => state.UserReducer.value);
+console.log("userData",userData);
   const socialSignOut = async () => {
     try {
       await GoogleSignin.revokeAccess();
@@ -107,7 +107,7 @@ function MyProfile({ navigation }) {
             </View>
           </View>
           <View style={{ alignItems:'center' }}>
-            <Text style={styles.userNameText}>Jashmine Hampton</Text>
+            <Text style={styles.userNameText}>{userData.first_name+" "+userData.last_name}</Text>
           </View>
           <View style={styles.regContainer}>
             {/* {userData != null ? */}

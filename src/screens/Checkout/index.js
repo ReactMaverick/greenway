@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -35,7 +35,7 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import { BKColor } from '../../common/values/BKColor';
+import {BKColor} from '../../common/values/BKColor';
 import {
   GET_MY_ADDRESS_API,
   GET_CART_API,
@@ -43,15 +43,15 @@ import {
   GET_PAYMENT_METHODS,
   POST_GENERATE_ORDER_ID,
 } from '../../config/ApiConfig';
-import { useSelector, useDispatch } from 'react-redux';
-import { GetApiFetch, PostApiFetch } from '../../config/CommonFunction';
+import {useSelector, useDispatch} from 'react-redux';
+import {GetApiFetch, PostApiFetch} from '../../config/CommonFunction';
 import DeviceInfo from 'react-native-device-info';
 import RazorpayCheckout from 'react-native-razorpay';
-import { showMessage, hideMessage } from 'react-native-flash-message';
+import {showMessage, hideMessage} from 'react-native-flash-message';
 import CustomStatusBar from '../../common/components/statusbar';
-import { useIsFocused } from '@react-navigation/native';
-
-function Checkout({ navigation }) {
+import {useIsFocused} from '@react-navigation/native';
+import {cartDetails} from '../../redux/reducers/CartReducer';
+function Checkout({navigation}) {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   // const sessionId = useSelector(state => state.SessionIdReducer.value);
@@ -64,7 +64,6 @@ function Checkout({ navigation }) {
   );
 
   const [isLoading, setIsLoading] = useState(true);
-
   const [productCartData, setProductCartData] = useState([]);
   const [changeOnCart, setChangeOnCart] = useState(0);
   const [coupon, setCoupon] = useState('');
@@ -136,10 +135,11 @@ function Checkout({ navigation }) {
   //     });
   //     rzr.open();
   // }
-  const _makeOnlinePayment = (key) => {
+  const _makeOnlinePayment = key => {
     var options = {
       description: 'Payment to Greenway',
-      image: 'http://demo203.amrithaa.com/vmasalaWeb/static/media/Logo-removebg-preview.17b9305b410df14eb25d.png',
+      image:
+        'http://demo203.amrithaa.com/vmasalaWeb/static/media/Logo-removebg-preview.17b9305b410df14eb25d.png',
       currency: 'INR',
       key: key,
       amount: totalPrice * 100,
@@ -149,21 +149,23 @@ function Checkout({ navigation }) {
       prefill: {
         email: userData.email,
         contact: userData.phone,
-        name: userData.first_name
+        name: userData.first_name,
       },
-      theme: { color: BKColor.textColor2 }
-    }
-    RazorpayCheckout.open(options).then((data) => {
-      // navigation.navigate('Thankyou');
-      // handle success
-      // alert(`Success: ${data.razorpay_payment_id}`);
-      _placeOrderCashOnDelivery(data.razorpay_payment_id)
-    }).catch((error) => {
-      //  navigation.navigate('Thankyou');
-      console.log(error.code, error.description);
-      // handle failure
-      // alert(`Error: ${error.code} | ${error.description}`);
-    });
+      theme: {color: BKColor.textColor2},
+    };
+    RazorpayCheckout.open(options)
+      .then(data => {
+        // navigation.navigate('Thankyou');
+        // handle success
+        // alert(`Success: ${data.razorpay_payment_id}`);
+        _placeOrderCashOnDelivery(data.razorpay_payment_id);
+      })
+      .catch(error => {
+        //  navigation.navigate('Thankyou');
+        console.log(error.code, error.description);
+        // handle failure
+        // alert(`Error: ${error.code} | ${error.description}`);
+      });
     // console.log('_makeOnlinePayment');
   };
 
@@ -206,10 +208,11 @@ function Checkout({ navigation }) {
             setGiftArea(response.giftArray);
             if (response.status == true) {
               if (response.cart.length > 0) {
-                dispatch({
-                  type: 'setCartData',
-                  payload: response.cart,
-                });
+                // dispatch({
+                //   type: 'setCartData',
+                //   payload: response.cart,
+                // });
+                dispatch(cartDetails(response.cart))
                 _calculateAmounts(
                   response.cart,
                   response.shipping_detail,
@@ -217,10 +220,11 @@ function Checkout({ navigation }) {
                   0,
                 );
               } else {
-                dispatch({
-                  type: 'setCartData',
-                  payload: null,
-                });
+                // dispatch({
+                //   type: 'setCartData',
+                //   payload: null,
+                // });
+                dispatch(cartDetails(null))
               }
             }
           }
@@ -234,7 +238,7 @@ function Checkout({ navigation }) {
       });
   };
   const _setSelectedShippingAddress = shipping => {
-    dispatch({ type: 'setSelectedShippingAddressData', payload: shipping });
+    dispatch({type: 'setSelectedShippingAddressData', payload: shipping});
   };
   const _calculateAmounts = async (
     cart,
@@ -420,10 +424,12 @@ function Checkout({ navigation }) {
 
       PostApiFetch(POST_ADD_ORDER, formData)
         .then(([status, response]) => {
-          console.log(status, response);
+          // console.log(status, response);
           if (status == 200) {
-            dispatch({ type: 'setCouponDetails', payload: null });
-            navigation.navigate('CongratulationPage');
+            dispatch({type: 'setCouponDetails', payload: null});
+            navigation.navigate('CongratulationPage', {
+              orderId: response.result.orders_data[0].invoice_number,
+            });
           }
         })
         .catch(error => console.log(error))
@@ -838,314 +844,313 @@ function Checkout({ navigation }) {
               />
             </TouchableOpacity>
             <Text style={pageHeader.text}>Checkout</Text>
-            <View style={{ width: wp('10%') }}></View>
+            <View style={{width: wp('10%')}}></View>
           </View>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={{ paddingBottom: hp('3%') }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('MyAddress')}
-              style={styles.checkOutOuter}>
-              <View style={styles.customerDetailsSec}>
-
-                <Entypo
-                  name="text-document-inverted"
-                  color={BKColor.textColor1}
-                  size={fontSize.h2}
-                />
-                <Text style={styles.addressHeading}>Billing Address</Text>
-
-              </View>
-              <View style={styles.customerDetails}>
-                <Text style={styles.customerAddressText}>
-                  {userBillingAddress.entry_firstname}
-                </Text>
-                <View style={styles.contactUsSec}>
-                  {/* <Text style={styles.contactUsLabel}>Address :</Text> */}
-                  <Text style={styles.contactUsText}>
-                    {userBillingAddress.entry_street_address},
-                    {' '}
-                    {userBillingAddress.entry_city},{' '}
-                    {userBillingAddress.states_name},{' '}
-                    {userBillingAddress.districts_name},{' '}
-                    {userBillingAddress.pincodes_val}
-                  </Text>
-                </View>
-                <View style={styles.contactUsSec}>
-                  {/* <Text style={styles.contactUsLabel}>Mobile Number :</Text> */}
-                  <Text style={styles.contactUsText}>
-                    {' '}
-                    {userBillingAddress.entry_phone}
-                  </Text>
-                </View>
-                <View style={styles.contactUsSec}>
-                  {/* <Text style={styles.contactUsLabel}>Email :</Text> */}
-                  <Text style={styles.contactUsText}>
-                    {' '}
-                    {userBillingAddress.entry_email}
-                  </Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate('MyAddress')}
-              style={styles.checkOutOuter}>
-              <View style={styles.customerDetailsSec}>
-
-                <FontAwesome
-                  name="home"
-                  color={BKColor.textColor1}
-                  size={fontSize.h1}
-                />
-                <Text style={styles.addressHeading}>Shipping Address</Text>
-
-              </View>
-              <View style={styles.customerDetails}>
-                <Text style={styles.customerAddressText}>
-                  {userBillingAddress.entry_firstname}
-                </Text>
-                <View style={styles.contactUsSec}>
-                  {/* <Text style={styles.contactUsLabel}>Address :</Text> */}
-                  <Text style={styles.contactUsText}>
-                    {userBillingAddress.entry_street_address},
-                    {' '}
-                    {userBillingAddress.entry_city},{' '}
-                    {userBillingAddress.states_name},{' '}
-                    {userBillingAddress.districts_name},{' '}
-                    {userBillingAddress.pincodes_val}
-                  </Text>
-                </View>
-                <View style={styles.contactUsSec}>
-                  {/* <Text style={styles.contactUsLabel}>Mobile Number :</Text> */}
-                  <Text style={styles.contactUsText}>
-                    {' '}
-                    {userBillingAddress.entry_phone}
-                  </Text>
-                </View>
-                <View style={styles.contactUsSec}>
-                  {/* <Text style={styles.contactUsLabel}>Email :</Text> */}
-                  <Text style={styles.contactUsText}>
-                    {' '}
-                    {userBillingAddress.entry_email}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles.customerDetailsSec}>
-                {sameAsBilling === 1 ? (
-                  <TouchableOpacity
-                    style={styles.checkBoxIcon}
-                    onPress={() => {
-                      setSameAsBilling(0);
-                    }}>
-                    <MaterialCommunityIcons
-                      name="circle-slice-8"
-                      color={BKColor.textColor1}
-                      size={fontSize.h2}
-                    />
-                  </TouchableOpacity>
-                ) : (
-                  <TouchableOpacity
-                    style={styles.checkBoxIcon}
-                    onPress={() => {
-                      setSameAsBilling(1);
-                      dispatch({
-                        type: 'setSelectedShippingAddressData',
-                        payload: null,
-                      });
-                    }}>
-                    <MaterialCommunityIcons
-                      name="circle-outline"
-                      color={BKColor.textColor1}
-                      size={fontSize.h2}
-                    />
-                  </TouchableOpacity>
-                )}
-                <View style={styles.sameBillingText}>
-                  <Text style={styles.contactUsText}>Same as billing</Text>
-                </View>
-              </View>
-
-            </TouchableOpacity>
-
-            <View
-              style={styles.checkOutOuter}>
-              <View style={styles.customerDetailsSec}>
-
-                <FontAwesome5
-                  name="clipboard-list"
-                  color={BKColor.textColor1}
-                  size={fontSize.h2}
-                />
-                <Text style={styles.addressHeading}>Item Summary</Text>
-
-              </View>
-              {cartData != null && (
-                <>
-                  {cartData.map((item, key) => (
-                    <View style={styles.customerOrderSec} key={key}>
-                      <View style={styles.productSec}>
-                        <Text style={styles.regContainer.text3}>
-                          {item.products_name} x {item.customers_basket_quantity}
-                        </Text>
-                      </View>
-                      <View style={styles.totalSec}>
-                        <Text style={styles.orderTotal}>
-                          Rs.{' '}
-                          {item.afterDiscountPrice *
-                            item.customers_basket_quantity}
-                        </Text>
-                      </View>
-                    </View>
-                  ))}
-                </>
-              )}
-
-              <View style={styles.customerOrderSec}>
-                <View style={styles.productSec}>
-                  <Text style={styles.regContainer.text3}>Cart Subtotal</Text>
-                </View>
-                <View style={styles.totalSec}>
-                  <Text style={styles.orderTotal}>Rs. {subTotal}</Text>
-                </View>
-              </View>
-
-              <View style={styles.customerOrderSec}>
-                <View style={styles.productSec}>
-                  <Text style={styles.regContainer.text3}>Shipping</Text>
-                </View>
-                <View style={styles.totalSec}>
-                  <Text style={styles.orderTotal}>Rs. {deliveryCharges}</Text>
-                </View>
-              </View>
-
-
-
-              {giftArea.length > 0 && (
-                <View style={styles.customerOrderSec}>
-                  <View style={styles.productSec}>
-                    <Text style={styles.regContainer.text3}>Gifts</Text>
-                  </View>
-                  {giftArea.map((item2, key2) => (
-                    <View style={styles.totalSec} key={key2}>
-                      <Text style={styles.orderTotal}>{item2.gift_title}</Text>
-                    </View>
-                  ))}
-                </View>
-              )}
-
-              <View style={styles.customerOrderSec}>
-                <View style={styles.productSec}>
-                  <Text style={styles.regContainer.text3}>Coupon applied</Text>
-                </View>
-                {couponDetails != null ? (
-                  <View style={styles.totalSec}>
-                    <Text style={styles.orderTotal}>₹ {couponDiscount}</Text>
-                  </View>
-                ) : (
-                  <View style={styles.totalSec}>
-                    <Text style={styles.orderTotal}>no coupon applied</Text>
-                  </View>
-                )}
-              </View>
-              <View style={styles.customerOrderSec}>
-                <View style={styles.productSec}>
-                  <Text style={styles.regContainer.text3}>Order Total</Text>
-                </View>
-                <View style={styles.totalSec}>
-                  <Text style={styles.orderTotal}>Rs. {totalPrice}</Text>
-                </View>
-              </View>
-
-            </View>
-
-            <View style={styles.checkOutOuter}>
-              <View style={styles.paymentSec}>
+            <View style={{paddingBottom: hp('3%')}}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('MyAddress')}
+                style={styles.checkOutOuter}>
                 <View style={styles.customerDetailsSec}>
-
                   <Entypo
-                    name="shield"
+                    name="text-document-inverted"
                     color={BKColor.textColor1}
                     size={fontSize.h2}
                   />
-                  <Text style={styles.addressHeading}>Payment Method</Text>
-
+                  <Text style={styles.addressHeading}>Billing Address</Text>
                 </View>
-                {cod != null && (
-                  <TouchableOpacity
-                    style={styles.paymentOuterSec}
-                    onPress={() => {
-                      setPaymentMethod('cash_on_delivery');
-                    }}>
-                    {paymentMethod === 'cash_on_delivery' ? (
-                      <MaterialCommunityIcons
-                      name="circle-slice-8"
-                      color={BKColor.textColor1}
-                      size={fontSize.h2}
-                    />
-                    ) : (
-                      <MaterialCommunityIcons
-                      name="circle-outline"
-                      color={BKColor.textColor1}
-                      size={fontSize.h2}
-                    />
-                    )}
+                <View style={styles.customerDetails}>
+                  <Text style={styles.customerAddressText}>
+                    {userBillingAddress.entry_firstname}
+                  </Text>
+                  <View style={styles.contactUsSec}>
+                    {/* <Text style={styles.contactUsLabel}>Address :</Text> */}
+                    <Text style={styles.contactUsText}>
+                      {userBillingAddress.entry_street_address},{' '}
+                      {userBillingAddress.entry_city},{' '}
+                      {userBillingAddress.states_name},{' '}
+                      {userBillingAddress.districts_name},{' '}
+                      {userBillingAddress.pincodes_val}
+                    </Text>
+                  </View>
+                  <View style={styles.contactUsSec}>
+                    {/* <Text style={styles.contactUsLabel}>Mobile Number :</Text> */}
+                    <Text style={styles.contactUsText}>
+                      {' '}
+                      {userBillingAddress.entry_phone}
+                    </Text>
+                  </View>
+                  <View style={styles.contactUsSec}>
+                    {/* <Text style={styles.contactUsLabel}>Email :</Text> */}
+                    <Text style={styles.contactUsText}>
+                      {' '}
+                      {userBillingAddress.entry_email}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
 
-                    <Text style={styles.paymentType}>Cash on delivery</Text>
-                  </TouchableOpacity>
-                )}
-                {razorPay != null && (
-                  <TouchableOpacity
-                    style={styles.paymentOuterSec}
-                    onPress={() => {
-                      setPaymentMethod('razor_pay');
-                    }}>
-                    {paymentMethod === 'razor_pay' ? (
-                      <MaterialCommunityIcons
-                      name="circle-slice-8"
-                      color={BKColor.textColor1}
-                      size={fontSize.h2}
-                    />
-                    ) : (
-                      <MaterialCommunityIcons
-                      name="circle-outline"
-                      color={BKColor.textColor1}
-                      size={fontSize.h2}
-                    />
-                    )}
+              <TouchableOpacity
+                onPress={() => navigation.navigate('MyAddress')}
+                style={styles.checkOutOuter}>
+                <View style={styles.customerDetailsSec}>
+                  <FontAwesome
+                    name="home"
+                    color={BKColor.textColor1}
+                    size={fontSize.h1}
+                  />
+                  <Text style={styles.addressHeading}>Shipping Address</Text>
+                </View>
+                <View style={styles.customerDetails}>
+                  {userShippingAddressList.length > 0 ? (
+                    <View>
+                      {userShippingAddressList.map((item,key) =>(
+                        <><Text style={styles.customerAddressText}>
+                        {item.entry_firstname}
+                      </Text>
+                      <View style={styles.contactUsSec}>
+                        {/* <Text style={styles.contactUsLabel}>Address :</Text> */}
+                        <Text style={styles.contactUsText}>
+                          {item.entry_street_address},{' '}
+                          {item.entry_city},{' '}
+                          {item.states_name},{' '}
+                          {item.districts_name},{' '}
+                          {item.pincodes_val}
+                        </Text>
+                      </View>
+                      <View style={styles.contactUsSec}>
+                        {/* <Text style={styles.contactUsLabel}>Mobile Number :</Text> */}
+                        <Text style={styles.contactUsText}>
+                          {' '}
+                          {item.entry_phone}
+                        </Text>
+                      </View>
+                      <View style={styles.contactUsSec}>
+                        {/* <Text style={styles.contactUsLabel}>Email :</Text> */}
+                        <Text style={styles.contactUsText}>
+                          {' '}
+                          {item.entry_email}
+                        </Text>
+                      </View></>
+                      ))}
+                    </View>
+                  ) : (
+                    <Text style={styles.contactUsLabel}>
+                      No shipping address added
+                    </Text>
+                  )}
+                </View>
 
-                    <Text style={styles.paymentType}>Razor Pay</Text>
-                  </TouchableOpacity>
+                <View style={styles.customerDetailsSec}>
+                  {sameAsBilling === 1 ? (
+                    <TouchableOpacity
+                      style={styles.checkBoxIcon}
+                      onPress={() => {
+                        setSameAsBilling(0);
+                      }}>
+                      <MaterialCommunityIcons
+                        name="circle-slice-8"
+                        color={BKColor.textColor1}
+                        size={fontSize.h2}
+                      />
+                    </TouchableOpacity>
+                  ) : (
+                    <TouchableOpacity
+                      style={styles.checkBoxIcon}
+                      onPress={() => {
+                        setSameAsBilling(1);
+                        dispatch({
+                          type: 'setSelectedShippingAddressData',
+                          payload: null,
+                        });
+                      }}>
+                      <MaterialCommunityIcons
+                        name="circle-outline"
+                        color={BKColor.textColor1}
+                        size={fontSize.h2}
+                      />
+                    </TouchableOpacity>
+                  )}
+                  <View style={styles.sameBillingText}>
+                    <Text style={styles.contactUsText}>Same as billing</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+
+              <View style={styles.checkOutOuter}>
+                <View style={styles.customerDetailsSec}>
+                  <FontAwesome5
+                    name="clipboard-list"
+                    color={BKColor.textColor1}
+                    size={fontSize.h2}
+                  />
+                  <Text style={styles.addressHeading}>Item Summary</Text>
+                </View>
+                {cartData != null && (
+                  <>
+                    {cartData.map((item, key) => (
+                      <View style={styles.customerOrderSec} key={key}>
+                        <View style={styles.productSec}>
+                          <Text style={styles.regContainer.text3}>
+                            {item.products_name} x{' '}
+                            {item.customers_basket_quantity}
+                          </Text>
+                        </View>
+                        <View style={styles.totalSec}>
+                          <Text style={styles.orderTotal}>
+                            Rs.{' '}
+                            {item.afterDiscountPrice *
+                              item.customers_basket_quantity}
+                          </Text>
+                        </View>
+                      </View>
+                    ))}
+                  </>
                 )}
+
+                <View style={styles.customerOrderSec}>
+                  <View style={styles.productSec}>
+                    <Text style={styles.regContainer.text3}>Cart Subtotal</Text>
+                  </View>
+                  <View style={styles.totalSec}>
+                    <Text style={styles.orderTotal}>Rs. {subTotal}</Text>
+                  </View>
+                </View>
+
+                <View style={styles.customerOrderSec}>
+                  <View style={styles.productSec}>
+                    <Text style={styles.regContainer.text3}>Shipping</Text>
+                  </View>
+                  <View style={styles.totalSec}>
+                    <Text style={styles.orderTotal}>Rs. {deliveryCharges}</Text>
+                  </View>
+                </View>
+
+                {giftArea.length > 0 && (
+                  <View style={styles.customerOrderSec}>
+                    <View style={styles.productSec}>
+                      <Text style={styles.regContainer.text3}>Gifts</Text>
+                    </View>
+                    {giftArea.map((item2, key2) => (
+                      <View style={styles.totalSec} key={key2}>
+                        <Text style={styles.orderTotal}>
+                          {item2.gift_title}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
+
+                <View style={styles.customerOrderSec}>
+                  <View style={styles.productSec}>
+                    <Text style={styles.regContainer.text3}>
+                      Coupon applied
+                    </Text>
+                  </View>
+                  {couponDetails != null ? (
+                    <View style={styles.totalSec}>
+                      <Text style={styles.orderTotal}>₹ {couponDiscount}</Text>
+                    </View>
+                  ) : (
+                    <View style={styles.totalSec}>
+                      <Text style={styles.orderTotal}>no coupon applied</Text>
+                    </View>
+                  )}
+                </View>
+                <View style={styles.customerOrderSec}>
+                  <View style={styles.productSec}>
+                    <Text style={styles.regContainer.text3}>Order Total</Text>
+                  </View>
+                  <View style={styles.totalSec}>
+                    <Text style={styles.orderTotal}>Rs. {totalPrice}</Text>
+                  </View>
+                </View>
               </View>
 
+              <View style={styles.checkOutOuter}>
+                <View style={styles.paymentSec}>
+                  <View style={styles.customerDetailsSec}>
+                    <Entypo
+                      name="shield"
+                      color={BKColor.textColor1}
+                      size={fontSize.h2}
+                    />
+                    <Text style={styles.addressHeading}>Payment Method</Text>
+                  </View>
+                  {cod != null && (
+                    <TouchableOpacity
+                      style={styles.paymentOuterSec}
+                      onPress={() => {
+                        setPaymentMethod('cash_on_delivery');
+                      }}>
+                      {paymentMethod === 'cash_on_delivery' ? (
+                        <MaterialCommunityIcons
+                          name="circle-slice-8"
+                          color={BKColor.textColor1}
+                          size={fontSize.h2}
+                        />
+                      ) : (
+                        <MaterialCommunityIcons
+                          name="circle-outline"
+                          color={BKColor.textColor1}
+                          size={fontSize.h2}
+                        />
+                      )}
+
+                      <Text style={styles.paymentType}>Cash on delivery</Text>
+                    </TouchableOpacity>
+                  )}
+                  {razorPay != null && (
+                    <TouchableOpacity
+                      style={styles.paymentOuterSec}
+                      onPress={() => {
+                        setPaymentMethod('razor_pay');
+                      }}>
+                      {paymentMethod === 'razor_pay' ? (
+                        <MaterialCommunityIcons
+                          name="circle-slice-8"
+                          color={BKColor.textColor1}
+                          size={fontSize.h2}
+                        />
+                      ) : (
+                        <MaterialCommunityIcons
+                          name="circle-outline"
+                          color={BKColor.textColor1}
+                          size={fontSize.h2}
+                        />
+                      )}
+
+                      <Text style={styles.paymentType}>Razor Pay</Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
+              </View>
+              {paymentMethod === 'cash_on_delivery' && (
+                <TouchableOpacity
+                  style={activeButton.button}
+                  onPress={() => {
+                    _placeOrderCashOnDelivery();
+                  }}>
+                  <Text style={activeButton.text}>Place Order</Text>
+                </TouchableOpacity>
+              )}
+              {paymentMethod === 'razor_pay' && (
+                <TouchableOpacity
+                  style={activeButton.button}
+                  onPress={() => {
+                    // _generateOrderId();
+                    if (razorPay != null) {
+                      _makeOnlinePayment('rzp_test_pGu27P88qj5UWo');
+                    }
+                  }}>
+                  <Text style={activeButton.text}>Proceed to Razorpay</Text>
+                </TouchableOpacity>
+              )}
             </View>
-            {paymentMethod === 'cash_on_delivery' && (
-              <TouchableOpacity
-                style={activeButton.button}
-                onPress={() => {
-                  _placeOrderCashOnDelivery();
-                }}>
-                <Text style={activeButton.text}>Place Order</Text>
-              </TouchableOpacity>
-            )}
-            {paymentMethod === 'razor_pay' && (
-              <TouchableOpacity
-                style={activeButton.button}
-                onPress={() => {
-                  _generateOrderId()
-                  if (razorPay != null) {
-                    _makeOnlinePayment('rzp_test_pGu27P88qj5UWo');
-                  }
-                }}>
-                <Text style={activeButton.text}>Proceed to Razorpay</Text>
-              </TouchableOpacity>
-            )}
-</View>
           </ScrollView>
-        </View >
-      </SafeAreaView >
-    )
+        </View>
+      </SafeAreaView>
+    );
   }
 }
 export default Checkout;

@@ -55,9 +55,10 @@ function Home({ navigation }) {
         <View style={pageHeader}>
           <TouchableOpacity
             style={styles.headerIcon}
-            onPress={() => {
-              navigation.toggleDrawer();
-            }}>
+            // onPress={() => {
+            //   navigation.toggleDrawer();
+            // }}
+            >
             <FontAwesome5
               name="map"
               color={BKColor.textColor1}
