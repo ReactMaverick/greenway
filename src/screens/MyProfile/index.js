@@ -62,9 +62,9 @@ function MyProfile({ navigation }) {
       <CustomStatusBar />
       <View style={pageContainerStyle2}>
 
-      <View style={pageHeader}>
+        <View style={pageHeader}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Fontisto
+            <Fontisto
               name="arrow-left"
               color={BKColor.textColor1}
               size={fontSize.h2}
@@ -73,7 +73,7 @@ function MyProfile({ navigation }) {
           <Text style={pageHeader.text}>Profile</Text>
           <View style={{ width: '10%' }}></View>
         </View>
-        
+
         <ScrollView showsVerticalScrollIndicator={false} style={{ marginBottom: hp('7%') }}>
           {/* <View style={pageHeader}>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
@@ -82,8 +82,8 @@ function MyProfile({ navigation }) {
                 <Text style={pageHeader.text}>Signup</Text>
                 <View></View>
             </View> */}
-            
-          <View style={styles.loginLogoSection}>
+
+          {/* <View style={styles.loginLogoSection}>
             <View style={styles.loginLogoSection.logo}>
               <Image
                 source={require('../../assets/images/user.png')}
@@ -95,18 +95,31 @@ function MyProfile({ navigation }) {
               />
             </View>
             <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
+          </View> */}
+
+          <View style={{ alignItems:'center' }}>
+            <View style={styles.userProfileImgOuter}>
+              <Image
+                source={require('../../assets/images/user.png')}
+                alt=""
+                style={styles.userProfileImg}
+              />
+            </View>
           </View>
-          <View style={[styles.regContainer, { paddingTop: hp('6%') }]}>
+          <View style={{ alignItems:'center' }}>
+            <Text style={styles.userNameText}>Jashmine Hampton</Text>
+          </View>
+          <View style={styles.regContainer}>
             {/* {userData != null ? */}
             <TouchableOpacity
               style={styles.regContainer.item}
               onPress={() => navigation.navigate('MyAccount')}>
               <View style={styles.itemOuter}>
                 <View style={styles.textOuter}>
-                  <SimpleLineIcons
+                  <FontAwesome
                     name="user"
                     style={{ color: BKColor.textColor1 }}
-                    size={fontSize.h2}
+                    size={fontSize.h1}
                   />
                   <Text style={styles.regContainer.text1}>My Account</Text>
                 </View>
@@ -134,8 +147,8 @@ function MyProfile({ navigation }) {
               onPress={() => navigation.navigate('MyAddress')}>
               <View style={styles.itemOuter}>
                 <View style={styles.textOuter}>
-                  <MaterialCommunityIcons
-                    name="format-list-checkbox"
+                  <FontAwesome
+                    name="map"
                     style={{ color: BKColor.textColor1 }}
                     size={fontSize.h2}
                   />
@@ -165,9 +178,9 @@ function MyProfile({ navigation }) {
               onPress={() => navigation.navigate('MyOrders')}>
               <View style={styles.itemOuter}>
                 <View style={styles.textOuter}>
-                  <Feather name="package"
+                  <FontAwesome name="shopping-bag"
                     style={{ color: BKColor.textColor1 }}
-                    size={fontSize.bh} />
+                    size={fontSize.h2} />
                   <Text style={styles.regContainer.text1}>My Orders</Text>
                 </View>
                 <Entypo
@@ -224,10 +237,10 @@ function MyProfile({ navigation }) {
               onPress={() => navigation.navigate('Cart')}>
               <View style={styles.itemOuter}>
                 <View style={styles.textOuter}>
-                  <MaterialCommunityIcons
-                    name="cart-heart"
+                  <FontAwesome
+                    name="shopping-cart"
                     style={{ color: BKColor.textColor1 }}
-                    size={fontSize.h2}
+                    size={fontSize.h1}
                   />
                   <Text style={styles.regContainer.text1}>Cart</Text>
                 </View>
@@ -276,8 +289,8 @@ function MyProfile({ navigation }) {
             </TouchableOpacity>
           </View>
         </ScrollView>
-      </View>
-    </SafeAreaView>
+      </View >
+    </SafeAreaView >
   );
 }
 export default MyProfile;

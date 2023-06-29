@@ -14,7 +14,7 @@ export default StyleSheet.create({
         // borderStyle: 'solid',
         // borderColor: BKColor.boxBorder,
         backgroundColor: BKColor.bgColor,
-        borderRadius: 11,
+        // borderRadius: 11,
         shadowColor: 'rgba(23, 149, 94, 0.90)',
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 1,
@@ -28,7 +28,7 @@ export default StyleSheet.create({
 
     contactUsText: {
         fontSize: fontSize.h4,
-        fontFamily: fontFamily.regular,
+        fontFamily: fontFamily.medium,
         color: BKColor.textColor1,
         marginTop: hp('0.5%')
     },
@@ -42,11 +42,11 @@ export default StyleSheet.create({
     },
     myAddHeading: {
         fontSize: fontSize.h2,
-        fontFamily: fontFamily.medium,
+        fontFamily: fontFamily.bold,
         color: BKColor.textColor1
     },
-    myOrderText: {
-        fontSize: fontSize.h2,
+    customerAddressText: {
+        fontSize: fontSize.h4,
         fontFamily: fontFamily.medium,
         color: BKColor.textColor1
     },
@@ -166,7 +166,7 @@ export default StyleSheet.create({
         // flexDirection: 'row',
         // alignItems: 'center',
         // justifyContent: 'space-between',
-        paddingVertical: hp('2%'),
+        // paddingVertical: hp('2%'),
         button: {
             alignItems: 'center',
             padding: hp('2%'),
@@ -199,13 +199,14 @@ export default StyleSheet.create({
         color: BKColor.white,
     },
     addressEditIcon: {
-        backgroundColor: BKColor.textColor1,
+        // backgroundColor: BKColor.textColor1,
         alignItems: 'center',
         marginBottom: hp('1%'),
-        color: BKColor.white,
-        fontSize: fontSize.heading,
+        color: BKColor.textColor1,
+        fontSize: fontSize.bh,
         borderRadius: wp('12.5%'),
-        padding: wp('1%')
+        padding: wp('1%'),
+        marginHorizontal:wp('0.5%')
     },
     addAddressIcon: {
         color: BKColor.textColor1,
@@ -233,7 +234,7 @@ export default StyleSheet.create({
         color: BKColor.textColor1
     },
     cancelBtnIcon: {
-        fontSize: fontSize.heading,
+        fontSize: fontSize.h1,
         color: BKColor.textColor1,
         // borderRadius: wp('12.5%')
     },

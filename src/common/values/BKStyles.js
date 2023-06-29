@@ -172,7 +172,8 @@ export const borderStyle = {
 export const activeButton = {
   button: {
     alignItems: 'center',
-    padding: wp('3.5%'),
+    paddingHorizontal: wp('3.5%'),
+    paddingVertical: wp('1.5%'),
     marginTop: hp('4%'),
     width: '100%',
     justifyContent: 'center',
@@ -282,7 +283,7 @@ export const pageHeader = {
   text: {
     fontSize: fontSize.h2,
     fontFamily: fontFamily.bold,
-    fontStyle: 'normal',
+    // fontStyle: 'normal',
     color: BKColor.textColor1,
   },
 };

@@ -236,7 +236,7 @@ function ProductDetails({navigation, route}) {
         <View style={pageHeader}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Fontisto
-              name="arrow-left-l"
+              name="arrow-left"
               color={BKColor.textColor1}
               size={fontSize.h2}
             />

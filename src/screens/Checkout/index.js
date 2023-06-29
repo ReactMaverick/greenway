@@ -12,6 +12,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Octicons from 'react-native-vector-icons/Octicons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
@@ -445,108 +447,490 @@ function Checkout({ navigation }) {
   if (isLoading) {
     return <></>;
   } else {
+    // return (
+    //   <SafeAreaView>
+    //     <CustomStatusBar />
+    //     <View style={pageContainerStyle2}>
+    //       <View style={pageHeader}>
+    //         <TouchableOpacity onPress={() => navigation.goBack()}>
+    //         <Fontisto
+    //           name="arrow-left"
+    //           color={BKColor.textColor1}
+    //           size={fontSize.h2}
+    //         />
+    //         </TouchableOpacity>
+    //         <Text style={pageHeader.text}>Checkout</Text>
+    //         <View style={{ width: wp('10%') }}></View>
+    //       </View>
+    //       <ScrollView showsVerticalScrollIndicator={false}>
+    //         <View style={styles.regContainer}>
+    //           <TouchableOpacity
+    //             style={styles.regContainer.item}
+    //             onPress={() => navigation.navigate('MyAddress')}>
+    //             <View style={styles.itemOuter}>
+    //               <View style={styles.textOuter}>
+    //                 <Ionicons
+    //                   name="location-outline"
+    //                   color="#000000"
+    //                   size={fontSize.h2}
+    //                 />
+    //                 <Text style={styles.regContainer.text1}>
+    //                   Billing Addresses
+    //                 </Text>
+    //               </View>
+    //               <Entypo
+    //                 name="chevron-thin-right"
+    //                 color="#000000"
+    //                 size={fontSize.h2}
+    //               />
+    //             </View>
+    //           </TouchableOpacity>
+    //           {userBillingAddress != null ? (
+    //             <View style={styles.customerDetailsSec}>
+    //               <View style={styles.checkBoxIcon}>
+    //                 <Fontisto
+    //                   name="checkbox-active"
+    //                   color="#000000"
+    //                   size={fontSize.h3}
+    //                 />
+    //               </View>
+    //               <View style={styles.customerDetails}>
+    //                 <Text style={styles.regContainer.text2}>
+    //                   {userBillingAddress.entry_firstname}
+    //                 </Text>
+    //                 <Text style={styles.contactUsText}>
+    //                   {userBillingAddress.entry_street_address},{' '}
+    //                   {userBillingAddress.entry_city},{' '}
+    //                   {userBillingAddress.states_name},{' '}
+    //                   {userBillingAddress.districts_name},{' '}
+    //                   {userBillingAddress.pincodes_val}
+    //                 </Text>
+    //                 <View style={styles.contactUsSec}>
+    //                   <Text style={styles.contactUsLabel}>Mobile Number :</Text>
+    //                   <Text style={styles.contactUsText}>
+    //                     {' '}
+    //                     {userBillingAddress.entry_phone}
+    //                   </Text>
+    //                 </View>
+    //                 <View style={styles.contactUsSec}>
+    //                   <Text style={styles.contactUsLabel}>Email :</Text>
+    //                   <Text style={styles.contactUsText}>
+    //                     {' '}
+    //                     {userBillingAddress.entry_email}
+    //                   </Text>
+    //                 </View>
+    //               </View>
+    //             </View>
+    //           ) : (
+    //             <Text style={styles.contactUsLabel}>
+    //               No billing address added
+    //             </Text>
+    //           )}
+    //         </View>
+    //         <View style={styles.regContainer}>
+    //           <TouchableOpacity
+    //             style={styles.regContainer.item}
+    //             onPress={() => navigation.navigate('MyAddress')}>
+    //             <View style={styles.itemOuter}>
+    //               <View style={styles.textOuter}>
+    //                 <Ionicons
+    //                   name="location-outline"
+    //                   color="#000000"
+    //                   size={fontSize.h2}
+    //                 />
+    //                 <Text style={styles.regContainer.text1}>
+    //                   Shipping Addresses
+    //                 </Text>
+    //               </View>
+    //               <Entypo
+    //                 name="chevron-thin-right"
+    //                 color="#000000"
+    //                 size={fontSize.h2}
+    //               />
+    //             </View>
+    //           </TouchableOpacity>
+    //           <View style={styles.customerDetailsSec}>
+    //             {sameAsBilling === 1 ? (
+    //               <TouchableOpacity
+    //                 style={styles.checkBoxIcon}
+    //                 onPress={() => {
+    //                   setSameAsBilling(0);
+    //                 }}>
+    //                 <Fontisto
+    //                   name="checkbox-active"
+    //                   color="#000000"
+    //                   size={fontSize.h3}
+    //                 />
+    //               </TouchableOpacity>
+    //             ) : (
+    //               <TouchableOpacity
+    //                 style={styles.checkBoxIcon}
+    //                 onPress={() => {
+    //                   setSameAsBilling(1);
+    //                   dispatch({
+    //                     type: 'setSelectedShippingAddressData',
+    //                     payload: null,
+    //                   });
+    //                 }}>
+    //                 <Fontisto
+    //                   name="checkbox-passive"
+    //                   color="#000000"
+    //                   size={fontSize.h3}
+    //                 />
+    //               </TouchableOpacity>
+    //             )}
+    //             <View style={styles.customerDetails}>
+    //               <Text style={styles.regContainer.text2}>Same as billing</Text>
+    //             </View>
+    //           </View>
+    //         </View>
+    //         <View style={styles.regContainer}>
+    //           {userShippingAddressList.length > 0 ? (
+    //             <View>
+    //               {userShippingAddressList.map((item, key) => (
+    //                 <View style={styles.customerDetailsSec} key={key}>
+    //                   {selectedShippingAddress != null &&
+    //                     item.address_book_id ==
+    //                     selectedShippingAddress.address_book_id ? (
+    //                     <TouchableOpacity
+    //                       style={styles.checkBoxIcon}
+    //                       onPress={() => {
+    //                         dispatch({
+    //                           type: 'setSelectedShippingAddressData',
+    //                           payload: null,
+    //                         });
+    //                         setSameAsBilling(1);
+    //                       }}>
+    //                       <Fontisto
+    //                         name="checkbox-active"
+    //                         color="#000000"
+    //                         size={fontSize.h3}
+    //                       />
+    //                     </TouchableOpacity>
+    //                   ) : (
+    //                     <TouchableOpacity
+    //                       style={styles.checkBoxIcon}
+    //                       onPress={() => {
+    //                         _setSelectedShippingAddress(item);
+    //                         setSameAsBilling(0);
+    //                       }}>
+    //                       <Fontisto
+    //                         name="checkbox-passive"
+    //                         color="#000000"
+    //                         size={fontSize.h3}
+    //                       />
+    //                     </TouchableOpacity>
+    //                   )}
+
+    //                   <View style={styles.customerDetails}>
+    //                     <Text style={styles.regContainer.text2}>
+    //                       {item.entry_firstname}
+    //                     </Text>
+    //                     <Text style={styles.contactUsText}>
+    //                       {item.entry_street_address}, {item.entry_city},{' '}
+    //                       {item.states_name}, {item.districts_name},{' '}
+    //                       {item.pincodes_val}
+    //                     </Text>
+    //                     <View style={styles.contactUsSec}>
+    //                       <Text style={styles.contactUsLabel}>
+    //                         Mobile Number :
+    //                       </Text>
+    //                       <Text style={styles.contactUsText}>
+    //                         {' '}
+    //                         {item.entry_phone}
+    //                       </Text>
+    //                     </View>
+    //                     <View style={styles.contactUsSec}>
+    //                       <Text style={styles.contactUsLabel}>Email :</Text>
+    //                       <Text style={styles.contactUsText}>
+    //                         {' '}
+    //                         {item.entry_email}
+    //                       </Text>
+    //                     </View>
+    //                   </View>
+    //                 </View>
+    //               ))}
+    //             </View>
+    //           ) : (
+    //             <Text style={styles.contactUsLabel}>
+    //               No shipping address added
+    //             </Text>
+    //           )}
+    //         </View>
+    //         <View style={styles.regContainer}>
+    //           <TouchableOpacity
+    //             style={styles.regContainer.item}
+    //             onPress={() => navigation.navigate('MyAddress')}>
+    //             <View style={styles.orderOuter}>
+    //               <View style={styles.textOuter}>
+    //                 <Text style={styles.regContainer.orderHeading}>
+    //                   Your Order
+    //                 </Text>
+    //               </View>
+    //             </View>
+    //           </TouchableOpacity>
+    //           <View style={styles.customerDetailsSec}>
+    //             <View style={styles.orderSec}>
+    //               <Text style={styles.regContainer.text3}>Product</Text>
+    //             </View>
+    //             <View style={styles.orderSec}>
+    //               <Text style={styles.regContainer.text3}>Total</Text>
+    //             </View>
+    //           </View>
+    //           {cartData != null && (
+    //             <>
+    //               {cartData.map((item, key) => (
+    //                 <View style={styles.customerOrderSec} key={key}>
+    //                   <View style={styles.productSec}>
+    //                     <Text style={styles.regContainer.text3}>
+    //                       {item.products_name} x {item.customers_basket_quantity}
+    //                     </Text>
+    //                   </View>
+    //                   <View style={styles.totalSec}>
+    //                     <Text style={styles.orderTotal}>
+    //                       ₹{' '}
+    //                       {item.afterDiscountPrice *
+    //                         item.customers_basket_quantity}
+    //                     </Text>
+    //                   </View>
+    //                 </View>
+    //               ))}
+    //             </>
+    //           )}
+
+    //           <View style={styles.customerOrderSec}>
+    //             <View style={styles.productSec}>
+    //               <Text style={styles.regContainer.text3}>Cart Subtotal</Text>
+    //             </View>
+    //             <View style={styles.totalSec}>
+    //               <Text style={styles.orderTotal}>₹ {subTotal}</Text>
+    //             </View>
+    //           </View>
+    //           <View style={styles.customerOrderSec}>
+    //             <View style={styles.productSec}>
+    //               <Text style={styles.regContainer.text3}>Shipping</Text>
+    //             </View>
+    //             <View style={styles.totalSec}>
+    //               <Text style={styles.orderTotal}>₹ {deliveryCharges}</Text>
+    //             </View>
+    //           </View>
+    //           {giftArea.length > 0 && (
+    //             <View style={styles.customerOrderSec}>
+    //               <View style={styles.productSec}>
+    //                 <Text style={styles.regContainer.text3}>Gifts</Text>
+    //               </View>
+    //               {giftArea.map((item2, key2) => (
+    //                 <View style={styles.totalSec} key={key2}>
+    //                   <Text style={styles.orderTotal}>{item2.gift_title}</Text>
+    //                 </View>
+    //               ))}
+    //             </View>
+    //           )}
+
+    //           <View style={styles.customerOrderSec}>
+    //             <View style={styles.productSec}>
+    //               <Text style={styles.regContainer.text3}>Coupon applied</Text>
+    //             </View>
+    //             {couponDetails != null ? (
+    //               <View style={styles.totalSec}>
+    //                 <Text style={styles.orderTotal}>₹ {couponDiscount}</Text>
+    //               </View>
+    //             ) : (
+    //               <View style={styles.totalSec}>
+    //                 <Text style={styles.orderTotal}>no coupon applied</Text>
+    //               </View>
+    //             )}
+    //           </View>
+    //           <View style={styles.customerOrderSec}>
+    //             <View style={styles.productSec}>
+    //               <Text style={styles.regContainer.text3}>Order Total</Text>
+    //             </View>
+    //             <View style={styles.totalSec}>
+    //               <Text style={styles.orderTotal}>₹ {totalPrice}</Text>
+    //             </View>
+    //           </View>
+    //         </View>
+    //         <View style={{ marginVertical: hp('3%') }}>
+    //           <View style={styles.paymentSec}>
+    //             {cod != null && (
+    //               <TouchableOpacity
+    //                 style={styles.paymentOuterSec}
+    //                 onPress={() => {
+    //                   setPaymentMethod('cash_on_delivery');
+    //                 }}>
+    //                 {paymentMethod === 'cash_on_delivery' ? (
+    //                   <MaterialIcons
+    //                     name="circle"
+    //                     color="#000000"
+    //                     size={fontSize.h2}
+    //                   />
+    //                 ) : (
+    //                   <MaterialCommunityIcons
+    //                     name="circle-outline"
+    //                     color="#000000"
+    //                     size={fontSize.h2}
+    //                   />
+    //                 )}
+
+    //                 <Text style={styles.paymentType}>Cash on delivery</Text>
+    //               </TouchableOpacity>
+    //             )}
+    //             {razorPay != null && (
+    //               <TouchableOpacity
+    //                 style={styles.paymentOuterSec}
+    //                 onPress={() => {
+    //                   setPaymentMethod('razor_pay');
+    //                 }}>
+    //                 {paymentMethod === 'razor_pay' ? (
+    //                   <MaterialIcons
+    //                     name="circle"
+    //                     color="#000000"
+    //                     size={fontSize.h2}
+    //                   />
+    //                 ) : (
+    //                   <MaterialCommunityIcons
+    //                     name="circle-outline"
+    //                     color="#000000"
+    //                     size={fontSize.h2}
+    //                   />
+    //                 )}
+
+    //                 <Text style={styles.paymentType}>Razor Pay</Text>
+    //               </TouchableOpacity>
+    //             )}
+    //           </View>
+    //           {paymentMethod === 'cash_on_delivery' && (
+    //             <TouchableOpacity
+    //               style={activeButton.button}
+    //               onPress={() => {
+    //                 _placeOrderCashOnDelivery();
+    //               }}>
+    //               <Text style={activeButton.text}>Place Order</Text>
+    //             </TouchableOpacity>
+    //           )}
+    //           {paymentMethod === 'razor_pay' && (
+    //             <TouchableOpacity
+    //               style={activeButton.button}
+    //               onPress={() => {
+    //                 _generateOrderId()
+    //                 if (razorPay != null) {
+    //                   _makeOnlinePayment('rzp_test_pGu27P88qj5UWo');
+    //                 }
+    //               }}>
+    //               <Text style={activeButton.text}>Proceed to Razorpay</Text>
+    //             </TouchableOpacity>
+    //           )}
+    //         </View>
+    //       </ScrollView>
+    //     </View>
+    //   </SafeAreaView>
+    // );
     return (
       <SafeAreaView>
         <CustomStatusBar />
         <View style={pageContainerStyle2}>
           <View style={pageHeader}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Fontisto
-              name="arrow-left"
-              color={BKColor.textColor1}
-              size={fontSize.h2}
-            />
+              <Fontisto
+                name="arrow-left"
+                color={BKColor.textColor1}
+                size={fontSize.h2}
+              />
             </TouchableOpacity>
             <Text style={pageHeader.text}>Checkout</Text>
             <View style={{ width: wp('10%') }}></View>
           </View>
-          <ScrollView>
-            <View style={styles.regContainer}>
-              <TouchableOpacity
-                style={styles.regContainer.item}
-                onPress={() => navigation.navigate('MyAddress')}>
-                <View style={styles.itemOuter}>
-                  <View style={styles.textOuter}>
-                    <Ionicons
-                      name="location-outline"
-                      color="#000000"
-                      size={fontSize.h2}
-                    />
-                    <Text style={styles.regContainer.text1}>
-                      Billing Addresses
-                    </Text>
-                  </View>
-                  <Entypo
-                    name="chevron-thin-right"
-                    color="#000000"
-                    size={fontSize.h2}
-                  />
-                </View>
-              </TouchableOpacity>
-              {userBillingAddress != null ? (
-                <View style={styles.customerDetailsSec}>
-                  <View style={styles.checkBoxIcon}>
-                    <Fontisto
-                      name="checkbox-active"
-                      color="#000000"
-                      size={fontSize.h3}
-                    />
-                  </View>
-                  <View style={styles.customerDetails}>
-                    <Text style={styles.regContainer.text2}>
-                      {userBillingAddress.entry_firstname}
-                    </Text>
-                    <Text style={styles.contactUsText}>
-                      {userBillingAddress.entry_street_address},{' '}
-                      {userBillingAddress.entry_city},{' '}
-                      {userBillingAddress.states_name},{' '}
-                      {userBillingAddress.districts_name},{' '}
-                      {userBillingAddress.pincodes_val}
-                    </Text>
-                    <View style={styles.contactUsSec}>
-                      <Text style={styles.contactUsLabel}>Mobile Number :</Text>
-                      <Text style={styles.contactUsText}>
-                        {' '}
-                        {userBillingAddress.entry_phone}
-                      </Text>
-                    </View>
-                    <View style={styles.contactUsSec}>
-                      <Text style={styles.contactUsLabel}>Email :</Text>
-                      <Text style={styles.contactUsText}>
-                        {' '}
-                        {userBillingAddress.entry_email}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              ) : (
-                <Text style={styles.contactUsLabel}>
-                  No billing address added
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={{ paddingBottom: hp('3%') }}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('MyAddress')}
+              style={styles.checkOutOuter}>
+              <View style={styles.customerDetailsSec}>
+
+                <Entypo
+                  name="text-document-inverted"
+                  color={BKColor.textColor1}
+                  size={fontSize.h2}
+                />
+                <Text style={styles.addressHeading}>Billing Address</Text>
+
+              </View>
+              <View style={styles.customerDetails}>
+                <Text style={styles.customerAddressText}>
+                  {userBillingAddress.entry_firstname}
                 </Text>
-              )}
-            </View>
-            <View style={styles.regContainer}>
-              <TouchableOpacity
-                style={styles.regContainer.item}
-                onPress={() => navigation.navigate('MyAddress')}>
-                <View style={styles.itemOuter}>
-                  <View style={styles.textOuter}>
-                    <Ionicons
-                      name="location-outline"
-                      color="#000000"
-                      size={fontSize.h2}
-                    />
-                    <Text style={styles.regContainer.text1}>
-                      Shipping Addresses
-                    </Text>
-                  </View>
-                  <Entypo
-                    name="chevron-thin-right"
-                    color="#000000"
-                    size={fontSize.h2}
-                  />
+                <View style={styles.contactUsSec}>
+                  {/* <Text style={styles.contactUsLabel}>Address :</Text> */}
+                  <Text style={styles.contactUsText}>
+                    {userBillingAddress.entry_street_address},
+                    {' '}
+                    {userBillingAddress.entry_city},{' '}
+                    {userBillingAddress.states_name},{' '}
+                    {userBillingAddress.districts_name},{' '}
+                    {userBillingAddress.pincodes_val}
+                  </Text>
                 </View>
-              </TouchableOpacity>
+                <View style={styles.contactUsSec}>
+                  {/* <Text style={styles.contactUsLabel}>Mobile Number :</Text> */}
+                  <Text style={styles.contactUsText}>
+                    {' '}
+                    {userBillingAddress.entry_phone}
+                  </Text>
+                </View>
+                <View style={styles.contactUsSec}>
+                  {/* <Text style={styles.contactUsLabel}>Email :</Text> */}
+                  <Text style={styles.contactUsText}>
+                    {' '}
+                    {userBillingAddress.entry_email}
+                  </Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => navigation.navigate('MyAddress')}
+              style={styles.checkOutOuter}>
+              <View style={styles.customerDetailsSec}>
+
+                <FontAwesome
+                  name="home"
+                  color={BKColor.textColor1}
+                  size={fontSize.h1}
+                />
+                <Text style={styles.addressHeading}>Shipping Address</Text>
+
+              </View>
+              <View style={styles.customerDetails}>
+                <Text style={styles.customerAddressText}>
+                  {userBillingAddress.entry_firstname}
+                </Text>
+                <View style={styles.contactUsSec}>
+                  {/* <Text style={styles.contactUsLabel}>Address :</Text> */}
+                  <Text style={styles.contactUsText}>
+                    {userBillingAddress.entry_street_address},
+                    {' '}
+                    {userBillingAddress.entry_city},{' '}
+                    {userBillingAddress.states_name},{' '}
+                    {userBillingAddress.districts_name},{' '}
+                    {userBillingAddress.pincodes_val}
+                  </Text>
+                </View>
+                <View style={styles.contactUsSec}>
+                  {/* <Text style={styles.contactUsLabel}>Mobile Number :</Text> */}
+                  <Text style={styles.contactUsText}>
+                    {' '}
+                    {userBillingAddress.entry_phone}
+                  </Text>
+                </View>
+                <View style={styles.contactUsSec}>
+                  {/* <Text style={styles.contactUsLabel}>Email :</Text> */}
+                  <Text style={styles.contactUsText}>
+                    {' '}
+                    {userBillingAddress.entry_email}
+                  </Text>
+                </View>
+              </View>
+
               <View style={styles.customerDetailsSec}>
                 {sameAsBilling === 1 ? (
                   <TouchableOpacity
@@ -554,10 +938,10 @@ function Checkout({ navigation }) {
                     onPress={() => {
                       setSameAsBilling(0);
                     }}>
-                    <Fontisto
-                      name="checkbox-active"
-                      color="#000000"
-                      size={fontSize.h3}
+                    <MaterialCommunityIcons
+                      name="circle-slice-8"
+                      color={BKColor.textColor1}
+                      size={fontSize.h2}
                     />
                   </TouchableOpacity>
                 ) : (
@@ -570,110 +954,31 @@ function Checkout({ navigation }) {
                         payload: null,
                       });
                     }}>
-                    <Fontisto
-                      name="checkbox-passive"
-                      color="#000000"
-                      size={fontSize.h3}
+                    <MaterialCommunityIcons
+                      name="circle-outline"
+                      color={BKColor.textColor1}
+                      size={fontSize.h2}
                     />
                   </TouchableOpacity>
                 )}
-                <View style={styles.customerDetails}>
-                  <Text style={styles.regContainer.text2}>Same as billing</Text>
+                <View style={styles.sameBillingText}>
+                  <Text style={styles.contactUsText}>Same as billing</Text>
                 </View>
               </View>
-            </View>
-            <View style={styles.regContainer}>
-              {userShippingAddressList.length > 0 ? (
-                <View>
-                  {userShippingAddressList.map((item, key) => (
-                    <View style={styles.customerDetailsSec} key={key}>
-                      {selectedShippingAddress != null &&
-                        item.address_book_id ==
-                        selectedShippingAddress.address_book_id ? (
-                        <TouchableOpacity
-                          style={styles.checkBoxIcon}
-                          onPress={() => {
-                            dispatch({
-                              type: 'setSelectedShippingAddressData',
-                              payload: null,
-                            });
-                            setSameAsBilling(1);
-                          }}>
-                          <Fontisto
-                            name="checkbox-active"
-                            color="#000000"
-                            size={fontSize.h3}
-                          />
-                        </TouchableOpacity>
-                      ) : (
-                        <TouchableOpacity
-                          style={styles.checkBoxIcon}
-                          onPress={() => {
-                            _setSelectedShippingAddress(item);
-                            setSameAsBilling(0);
-                          }}>
-                          <Fontisto
-                            name="checkbox-passive"
-                            color="#000000"
-                            size={fontSize.h3}
-                          />
-                        </TouchableOpacity>
-                      )}
 
-                      <View style={styles.customerDetails}>
-                        <Text style={styles.regContainer.text2}>
-                          {item.entry_firstname}
-                        </Text>
-                        <Text style={styles.contactUsText}>
-                          {item.entry_street_address}, {item.entry_city},{' '}
-                          {item.states_name}, {item.districts_name},{' '}
-                          {item.pincodes_val}
-                        </Text>
-                        <View style={styles.contactUsSec}>
-                          <Text style={styles.contactUsLabel}>
-                            Mobile Number :
-                          </Text>
-                          <Text style={styles.contactUsText}>
-                            {' '}
-                            {item.entry_phone}
-                          </Text>
-                        </View>
-                        <View style={styles.contactUsSec}>
-                          <Text style={styles.contactUsLabel}>Email :</Text>
-                          <Text style={styles.contactUsText}>
-                            {' '}
-                            {item.entry_email}
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                  ))}
-                </View>
-              ) : (
-                <Text style={styles.contactUsLabel}>
-                  No shipping address added
-                </Text>
-              )}
-            </View>
-            <View style={styles.regContainer}>
-              <TouchableOpacity
-                style={styles.regContainer.item}
-                onPress={() => navigation.navigate('MyAddress')}>
-                <View style={styles.orderOuter}>
-                  <View style={styles.textOuter}>
-                    <Text style={styles.regContainer.orderHeading}>
-                      Your Order
-                    </Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
+            </TouchableOpacity>
+
+            <View
+              style={styles.checkOutOuter}>
               <View style={styles.customerDetailsSec}>
-                <View style={styles.orderSec}>
-                  <Text style={styles.regContainer.text3}>Product</Text>
-                </View>
-                <View style={styles.orderSec}>
-                  <Text style={styles.regContainer.text3}>Total</Text>
-                </View>
+
+                <FontAwesome5
+                  name="clipboard-list"
+                  color={BKColor.textColor1}
+                  size={fontSize.h2}
+                />
+                <Text style={styles.addressHeading}>Item Summary</Text>
+
               </View>
               {cartData != null && (
                 <>
@@ -686,7 +991,7 @@ function Checkout({ navigation }) {
                       </View>
                       <View style={styles.totalSec}>
                         <Text style={styles.orderTotal}>
-                          ₹{' '}
+                          Rs.{' '}
                           {item.afterDiscountPrice *
                             item.customers_basket_quantity}
                         </Text>
@@ -701,17 +1006,21 @@ function Checkout({ navigation }) {
                   <Text style={styles.regContainer.text3}>Cart Subtotal</Text>
                 </View>
                 <View style={styles.totalSec}>
-                  <Text style={styles.orderTotal}>₹ {subTotal}</Text>
+                  <Text style={styles.orderTotal}>Rs. {subTotal}</Text>
                 </View>
               </View>
+
               <View style={styles.customerOrderSec}>
                 <View style={styles.productSec}>
                   <Text style={styles.regContainer.text3}>Shipping</Text>
                 </View>
                 <View style={styles.totalSec}>
-                  <Text style={styles.orderTotal}>₹ {deliveryCharges}</Text>
+                  <Text style={styles.orderTotal}>Rs. {deliveryCharges}</Text>
                 </View>
               </View>
+
+
+
               {giftArea.length > 0 && (
                 <View style={styles.customerOrderSec}>
                   <View style={styles.productSec}>
@@ -744,12 +1053,24 @@ function Checkout({ navigation }) {
                   <Text style={styles.regContainer.text3}>Order Total</Text>
                 </View>
                 <View style={styles.totalSec}>
-                  <Text style={styles.orderTotal}>₹ {totalPrice}</Text>
+                  <Text style={styles.orderTotal}>Rs. {totalPrice}</Text>
                 </View>
               </View>
+
             </View>
-            <View style={{ marginVertical: hp('3%') }}>
+
+            <View style={styles.checkOutOuter}>
               <View style={styles.paymentSec}>
+                <View style={styles.customerDetailsSec}>
+
+                  <Entypo
+                    name="shield"
+                    color={BKColor.textColor1}
+                    size={fontSize.h2}
+                  />
+                  <Text style={styles.addressHeading}>Payment Method</Text>
+
+                </View>
                 {cod != null && (
                   <TouchableOpacity
                     style={styles.paymentOuterSec}
@@ -757,17 +1078,17 @@ function Checkout({ navigation }) {
                       setPaymentMethod('cash_on_delivery');
                     }}>
                     {paymentMethod === 'cash_on_delivery' ? (
-                      <MaterialIcons
-                        name="circle"
-                        color="#000000"
-                        size={fontSize.h2}
-                      />
+                      <MaterialCommunityIcons
+                      name="circle-slice-8"
+                      color={BKColor.textColor1}
+                      size={fontSize.h2}
+                    />
                     ) : (
                       <MaterialCommunityIcons
-                        name="circle-outline"
-                        color="#000000"
-                        size={fontSize.h2}
-                      />
+                      name="circle-outline"
+                      color={BKColor.textColor1}
+                      size={fontSize.h2}
+                    />
                     )}
 
                     <Text style={styles.paymentType}>Cash on delivery</Text>
@@ -780,49 +1101,51 @@ function Checkout({ navigation }) {
                       setPaymentMethod('razor_pay');
                     }}>
                     {paymentMethod === 'razor_pay' ? (
-                      <MaterialIcons
-                        name="circle"
-                        color="#000000"
-                        size={fontSize.h2}
-                      />
+                      <MaterialCommunityIcons
+                      name="circle-slice-8"
+                      color={BKColor.textColor1}
+                      size={fontSize.h2}
+                    />
                     ) : (
                       <MaterialCommunityIcons
-                        name="circle-outline"
-                        color="#000000"
-                        size={fontSize.h2}
-                      />
+                      name="circle-outline"
+                      color={BKColor.textColor1}
+                      size={fontSize.h2}
+                    />
                     )}
 
                     <Text style={styles.paymentType}>Razor Pay</Text>
                   </TouchableOpacity>
                 )}
               </View>
-              {paymentMethod === 'cash_on_delivery' && (
-                <TouchableOpacity
-                  style={activeButton.button}
-                  onPress={() => {
-                    _placeOrderCashOnDelivery();
-                  }}>
-                  <Text style={activeButton.text}>Place Order</Text>
-                </TouchableOpacity>
-              )}
-              {paymentMethod === 'razor_pay' && (
-                <TouchableOpacity
-                  style={activeButton.button}
-                  onPress={() => {
-                    // _generateOrderId()
-                    if (razorPay != null) {
-                      _makeOnlinePayment('rzp_test_pGu27P88qj5UWo');
-                    }
-                  }}>
-                  <Text style={activeButton.text}>Proceed to Razorpay</Text>
-                </TouchableOpacity>
-              )}
+
             </View>
+            {paymentMethod === 'cash_on_delivery' && (
+              <TouchableOpacity
+                style={activeButton.button}
+                onPress={() => {
+                  _placeOrderCashOnDelivery();
+                }}>
+                <Text style={activeButton.text}>Place Order</Text>
+              </TouchableOpacity>
+            )}
+            {paymentMethod === 'razor_pay' && (
+              <TouchableOpacity
+                style={activeButton.button}
+                onPress={() => {
+                  _generateOrderId()
+                  if (razorPay != null) {
+                    _makeOnlinePayment('rzp_test_pGu27P88qj5UWo');
+                  }
+                }}>
+                <Text style={activeButton.text}>Proceed to Razorpay</Text>
+              </TouchableOpacity>
+            )}
+</View>
           </ScrollView>
-        </View>
-      </SafeAreaView>
-    );
+        </View >
+      </SafeAreaView >
+    )
   }
 }
 export default Checkout;
