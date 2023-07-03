@@ -191,7 +191,7 @@ export const activeButton = {
     marginTop: hp('2%'),
     width: '45%',
     borderRadius: 10,
-    backgroundColor: BKColor.btnBackgroundColor1
+    backgroundColor: BKColor.textColor1
   },
   cancelButton:{
     padding: hp('1%'),

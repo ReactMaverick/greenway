@@ -236,7 +236,7 @@ function SingleProduct({ navigation, index, item }) {
                   console.log('this product is out of stock.');
                 }
               }}>
-              <View style={{ position: 'absolute', bottom: -20, right: -18 }}>
+              <View style={{ position: 'absolute', bottom: -18, right: -15 }}>
                 {cartData != null &&
                   cartData.some(
                     value =>

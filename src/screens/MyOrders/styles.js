@@ -56,6 +56,12 @@ export default StyleSheet.create({
         color: '#1ab800',
         marginTop: hp('0.5%')
     },
+    orderStatusCancelled: {
+        fontSize: fontSize.h3,
+        fontFamily: fontFamily.bold,
+        color: '#f20000',
+        marginTop: hp('0.5%')
+    },
     orderStatusActive: {
         fontSize: fontSize.h3,
         color: '#579C43',
@@ -164,9 +170,46 @@ export default StyleSheet.create({
     orderReviewlBtn: {
         fontSize: fontSize.h3,
         fontFamily: fontFamily.medium,
-        color: '#7d7d7d ',
+        color: '#7d7d7d',
         textAlign:'center',
         marginVertical:hp('1.5%')
-    }
+    },
+    itemReviewImage: {
+        width: wp('50%'),
+        height: wp('50%'),
+        alignSelf: 'center',
+        marginBottom: 20
+    },
+    modalStar: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    modalText: {
+        fontWeight: '600',
+        fontSize: fontSize.h2,
+        color: BKColor.primaryColor,
+        paddingBottom: 10
+    },
+    textAreaContainer: {
+        borderColor: 'grey',
+        borderWidth: 1,
+        padding: 5
+    },
+    textArea: {
+        // justifyContent: "flex-start",
+        textAlignVertical: 'top',
+        height: 100,
+    },
+    headerPopup: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingBottom: 10,
+        marginBottom: 20,
+        borderBottomColor: 'grey',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+    },
 
 });

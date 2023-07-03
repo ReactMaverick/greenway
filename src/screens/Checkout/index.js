@@ -51,6 +51,8 @@ import {showMessage, hideMessage} from 'react-native-flash-message';
 import CustomStatusBar from '../../common/components/statusbar';
 import {useIsFocused} from '@react-navigation/native';
 import {cartDetails} from '../../redux/reducers/CartReducer';
+import {selectedShippingAddressDetails} from '../../redux/reducers/SelectedShippingAddressReducer';
+import Loading from '../../common/Loading/Loading';
 function Checkout({navigation}) {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
@@ -212,7 +214,7 @@ function Checkout({navigation}) {
                 //   type: 'setCartData',
                 //   payload: response.cart,
                 // });
-                dispatch(cartDetails(response.cart))
+                dispatch(cartDetails(response.cart));
                 _calculateAmounts(
                   response.cart,
                   response.shipping_detail,
@@ -224,7 +226,7 @@ function Checkout({navigation}) {
                 //   type: 'setCartData',
                 //   payload: null,
                 // });
-                dispatch(cartDetails(null))
+                dispatch(cartDetails(null));
               }
             }
           }
@@ -238,7 +240,8 @@ function Checkout({navigation}) {
       });
   };
   const _setSelectedShippingAddress = shipping => {
-    dispatch({type: 'setSelectedShippingAddressData', payload: shipping});
+    // dispatch({type: 'setSelectedShippingAddressData', payload: shipping});
+    dispatch(selectedShippingAddressDetails(shipping));
   };
   const _calculateAmounts = async (
     cart,
@@ -451,7 +454,7 @@ function Checkout({navigation}) {
   }, [navigation, isFocused]);
 
   if (isLoading) {
-    return <></>;
+    return  <Loading />;
   } else {
     // return (
     //   <SafeAreaView>
@@ -890,7 +893,7 @@ function Checkout({navigation}) {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity
+              <View
                 onPress={() => navigation.navigate('MyAddress')}
                 style={styles.checkOutOuter}>
                 <View style={styles.customerDetailsSec}>
@@ -904,34 +907,69 @@ function Checkout({navigation}) {
                 <View style={styles.customerDetails}>
                   {userShippingAddressList.length > 0 ? (
                     <View>
-                      {userShippingAddressList.map((item,key) =>(
-                        <><Text style={styles.customerAddressText}>
-                        {item.entry_firstname}
-                      </Text>
-                      <View style={styles.contactUsSec}>
-                        {/* <Text style={styles.contactUsLabel}>Address :</Text> */}
-                        <Text style={styles.contactUsText}>
-                          {item.entry_street_address},{' '}
-                          {item.entry_city},{' '}
-                          {item.states_name},{' '}
-                          {item.districts_name},{' '}
-                          {item.pincodes_val}
-                        </Text>
-                      </View>
-                      <View style={styles.contactUsSec}>
-                        {/* <Text style={styles.contactUsLabel}>Mobile Number :</Text> */}
-                        <Text style={styles.contactUsText}>
-                          {' '}
-                          {item.entry_phone}
-                        </Text>
-                      </View>
-                      <View style={styles.contactUsSec}>
-                        {/* <Text style={styles.contactUsLabel}>Email :</Text> */}
-                        <Text style={styles.contactUsText}>
-                          {' '}
-                          {item.entry_email}
-                        </Text>
-                      </View></>
+                      {userShippingAddressList.map((item, key) => (
+                        <View style={styles.customerDetailsSec} key={key}>
+                          {selectedShippingAddress != null &&
+                          item.address_book_id ==
+                            selectedShippingAddress.address_book_id ? (
+                            <TouchableOpacity
+                              style={styles.checkBoxIcon}
+                              onPress={() => {
+                                // dispatch({
+                                //   type: 'setSelectedShippingAddressData',
+                                //   payload: null,
+                                // });
+                                dispatch(selectedShippingAddressDetails(null));
+                                setSameAsBilling(1);
+                              }}>
+                              <MaterialCommunityIcons
+                                name="circle-slice-8"
+                                color={BKColor.textColor1}
+                                size={fontSize.h2}
+                              />
+                            </TouchableOpacity>
+                          ) : (
+                            <TouchableOpacity
+                              style={styles.checkBoxIcon}
+                              onPress={() => {
+                                _setSelectedShippingAddress(item);
+                                setSameAsBilling(0);
+                              }}>
+                              <MaterialCommunityIcons
+                                name="circle-outline"
+                                color={BKColor.textColor1}
+                                size={fontSize.h2}
+                              />
+                            </TouchableOpacity>
+                          )}
+
+                          <View style={styles.customerDetails}>
+                            <Text style={styles.regContainer.text2}>
+                              {item.entry_firstname}
+                            </Text>
+                            <Text style={styles.contactUsText}>
+                              {item.entry_street_address}, {item.entry_city},{' '}
+                              {item.states_name}, {item.districts_name},{' '}
+                              {item.pincodes_val}
+                            </Text>
+                            <View style={styles.contactUsSec}>
+                              <Text style={styles.contactUsLabel}>
+                                Mobile Number :
+                              </Text>
+                              <Text style={styles.contactUsText}>
+                                {' '}
+                                {item.entry_phone}
+                              </Text>
+                            </View>
+                            <View style={styles.contactUsSec}>
+                              <Text style={styles.contactUsLabel}>Email :</Text>
+                              <Text style={styles.contactUsText}>
+                                {' '}
+                                {item.entry_email}
+                              </Text>
+                            </View>
+                          </View>
+                        </View>
                       ))}
                     </View>
                   ) : (
@@ -959,10 +997,11 @@ function Checkout({navigation}) {
                       style={styles.checkBoxIcon}
                       onPress={() => {
                         setSameAsBilling(1);
-                        dispatch({
-                          type: 'setSelectedShippingAddressData',
-                          payload: null,
-                        });
+                        // dispatch({
+                        //   type: 'setSelectedShippingAddressData',
+                        //   payload: null,
+                        // });
+                        dispatch(selectedShippingAddressDetails(null));
                       }}>
                       <MaterialCommunityIcons
                         name="circle-outline"
@@ -975,8 +1014,7 @@ function Checkout({navigation}) {
                     <Text style={styles.contactUsText}>Same as billing</Text>
                   </View>
                 </View>
-              </TouchableOpacity>
-
+              </View>
               <View style={styles.checkOutOuter}>
                 <View style={styles.customerDetailsSec}>
                   <FontAwesome5

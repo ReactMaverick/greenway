@@ -76,7 +76,8 @@ export default StyleSheet.create({
     //     width: '90%',
     // },
     contactUsSec: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems:'center'
     },
     contactUsText: {
         fontSize: fontSize.h4,

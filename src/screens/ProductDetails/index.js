@@ -72,7 +72,6 @@ function ProductDetails({navigation, route}) {
   const regex = /(<([^>]+)>)/gi;
   const secondRegEx = /((&nbsp;))*/gim;
   const [productReview, setProductReview] = useState([]);
-
   const _getProductDetails = androidId => {
     setProductsAttributesChange(false);
     setChangeInCarts(false);
