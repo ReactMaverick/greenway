@@ -1,4 +1,4 @@
-import { BKColor } from './BKColor';
+import {BKColor} from './BKColor';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -52,7 +52,7 @@ export const pageContainerStyle = {
   // flex: 1,
   paddingHorizontal: wp('8%'),
   backgroundColor: BKColor.bgColor,
-  height: hp('100%')
+  height: hp('100%'),
 };
 export const pageContainerStyle2 = {
   // marginHorizontal: wp("3%"),
@@ -60,7 +60,7 @@ export const pageContainerStyle2 = {
   // flex: 1,
   paddingHorizontal: wp('4.5%'),
   backgroundColor: BKColor.white,
-  height: '100%'
+  height: '100%',
 };
 
 //Global padding
@@ -90,9 +90,9 @@ export const cardStyle = Object.assign({}, shadowStyle, {
 });
 
 export const fontFamily = {
-     bold: 'Poppins-Bold',
-     medium: 'Poppins-Medium',
-     regular: 'Poppins-Regular',
+  bold: 'Poppins-Bold',
+  medium: 'Poppins-Medium',
+  regular: 'Poppins-Regular',
 };
 
 export const TextboxWrapper = {
@@ -111,8 +111,17 @@ export const errorMessage = {
   alignSelf: 'center',
   padding: hp('1%'),
 };
+// export const inputContainer = {
+//   marginTop: hp('3%'),
+// };
+
 export const inputContainer = {
   marginTop: hp('3%'),
+  borderRadius: 30,
+  borderStyle: 'solid',
+  borderWidth: 1,
+  borderColor: BKColor.inputBorder,
+  justifyContent: 'center',
 };
 export const textInput = {
   color: BKColor.textColor1,
@@ -121,15 +130,12 @@ export const textInput = {
   fontSize: fontSize.h3,
   // width: '100%',
   // backgroundColor: BKColor.textboxBackground,
-  borderRadius: 30,
-  borderStyle: 'solid',
-  borderWidth: 1,
-  borderColor: BKColor.inputBorder,
+
   paddingHorizontal: wp('3%'),
-  flexDirection: 'row',
-  justifyContent: 'space-between',
+   flexDirection: 'row',
+  // justifyContent: 'space-between',
   // alignItems: 'center',
-  height: hp('6.5%')
+  //height: hp('6.5%'),
 };
 export const textInput2 = {
   color: BKColor.textColor1,
@@ -153,7 +159,7 @@ export const inputBottomLevel = {
   fontFamily: fontFamily.regular,
   fontSize: fontSize.h3,
   alignSelf: 'flex-end',
-  marginBottom: hp('1%')
+  marginBottom: hp('1%'),
 };
 export const placeHolderColor = '#cbded2';
 export const inputIcon = {
@@ -178,7 +184,7 @@ export const activeButton = {
     width: '100%',
     justifyContent: 'center',
     borderRadius: wp('12.5%'),
-    backgroundColor: BKColor.textColor1
+    backgroundColor: BKColor.textColor1,
   },
   text: {
     color: BKColor.white,
@@ -191,15 +197,15 @@ export const activeButton = {
     marginTop: hp('2%'),
     width: '45%',
     borderRadius: 10,
-    backgroundColor: BKColor.textColor1
+    backgroundColor: BKColor.textColor1,
   },
-  cancelButton:{
+  cancelButton: {
     padding: hp('1%'),
     marginTop: hp('2%'),
     width: '25%',
     borderRadius: 10,
-    backgroundColor: BKColor.textColor2
-}
+    backgroundColor: BKColor.textColor2,
+  },
 };
 
 export const passiveButton = {
@@ -224,7 +230,7 @@ export const passiveButton = {
   icon: {
     color: BKColor.textColor2,
     fontSize: fontSize.h1,
-  }
+  },
 };
 
 // snap carousel pagination style

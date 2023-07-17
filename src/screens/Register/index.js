@@ -103,8 +103,9 @@ function Register({ navigation }) {
   return (
     <SafeAreaView>
       <CustomStatusBar />
+      <ScrollView showsVerticalScrollIndicator={false}>
       <View style={pageContainerStyle}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        
 
           <View style={styles.loginLogoSection}>
             <View style={styles.loginLogoSection.logo}>
@@ -123,7 +124,8 @@ function Register({ navigation }) {
             {/* <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
               {regErrorMsg}
             </Text> */}
-            <View style={inputContainer}>
+
+            {/* <View style={inputContainer}>
               <TextInput
                 placeholder={'Full Name'}
                 placeholderTextColor={placeHolderColor}
@@ -141,13 +143,34 @@ function Register({ navigation }) {
               {errorArr.id == 1 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
               )}
+            </View> */}
+
+            <View style={inputContainer}>
+              <TextInput
+                placeholder={'Full Name'}
+                placeholderTextColor={placeHolderColor}
+                style={[
+                  textInput,
+                  errorArr.id == 1 && styles.errorInput,
+                ]}
+                key="fullname"
+                onChangeText={value => setFullName(value)}
+                value={fullName}
+                onFocus={() => {
+                  setErrorArr(0);
+                }}
+              />
+              {errorArr.id == 1 && (
+                <Text style={styles.errorText}>* {errorArr.message}</Text>
+              )}
             </View>
+
             <View style={inputContainer}>
               <TextInput
                 placeholder={'Enter email address'}
                 placeholderTextColor={placeHolderColor}
                 style={[
-                  styles.textInput,
+                  textInput,
                   errorArr.id == 2 && styles.errorInput,
                 ]}
                 key="email"
@@ -166,7 +189,7 @@ function Register({ navigation }) {
                 placeholder={'Phone Number'}
                 placeholderTextColor={placeHolderColor}
                 style={[
-                  styles.textInput,
+                  textInput,
                   errorArr.id == 3 && styles.errorInput,
                 ]}
                 key="Phone Number"
@@ -236,7 +259,7 @@ function Register({ navigation }) {
                   value={confirmPassword}
                   secureTextEntry={confirmPasswordEye}
                   placeholderTextColor={placeHolderColor}
-                  style={styles.passwordInput}
+                  // style={styles.passwordInput}
                   onFocus={() => {
                     setErrorArr(0);
                   }}
@@ -275,8 +298,9 @@ function Register({ navigation }) {
               </TouchableOpacity>
             </View>
           </View>
-        </ScrollView>
+       
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
