@@ -15,7 +15,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { pageContainerStyle, pageContainerStyle2 } from '../../common/values/BKStyles';
-import { pageHeader, fontSize, activeButton } from '../../common/values/BKStyles';
+import { pageHeader, fontSize, activeButton, fontFamily } from '../../common/values/BKStyles';
 import { BKColor } from '../../common/values/BKColor';
 import {
   heightPercentageToDP as hp,
@@ -585,37 +585,42 @@ function Cart({ navigation, route }) {
             <View style={{ paddingVertical: hp('3%') }}>
               <Text style={styles.cartCouponHeading}>Add coupon</Text>
 
+
               <View style={inputContainer}>
-                <View style={styles.couponInputSec}>
-                  <View style={styles.inputContainerWidth}>
-                    <TextInput
-                      placeholder={'Entry Voucher Code'}
-                      placeholderTextColor={placeHolderColor}
-                      // style={textInput}
-                      style={styles.inputText}
-                      onChangeText={value => setCoupon(value)}
-                      value={coupon}
-                    // onFocus={() => {
-                    //   setErrorMessage('')
-                    // }}
-                    />
+                <View
+                  style={
+                    textInput
+                  }>
+                  <TextInput
+                    placeholder={'Entry Voucher Code'}
+                    placeholderTextColor={placeHolderColor}
+                    style={{
+                      width: '92%',
+                      fontFamily: fontFamily.regular,
+                      fontSize: fontSize.h3,
+                      color: BKColor.textColor1,
+                    }}
+                    onChangeText={value => setCoupon(value)}
+                    value={coupon}
+                  />
+                  <View style={{ width: '8%', justifyContent: 'center', alignItems: 'flex-end' }}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        if (coupon != '' && userData != null) {
+                          _applyCoupon(coupon);
+                        }
+                      }}>
+                      <AntDesign
+                        name="arrowright"
+                        color={BKColor.textColor2}
+                        size={fontSize.h2}
+                      />
+
+                    </TouchableOpacity>
                   </View>
-                  <TouchableOpacity
-                    style={styles.couponApplyBtn}
-                    onPress={() => {
-                      if (coupon != '' && userData != null) {
-                        _applyCoupon(coupon);
-                      }
-                    }}>
-                    <AntDesign
-                      name="arrowright"
-                      color={BKColor.textColor2}
-                      size={fontSize.h2}
-                    />
-                    {/* <Text style={styles.couponApplyText}>Apply</Text> */}
-                  </TouchableOpacity>
                 </View>
               </View>
+
             </View>
 
             <View style={{ backgroundColor: BKColor.bgColor, padding: wp('3%'), borderRadius: 10 }}>

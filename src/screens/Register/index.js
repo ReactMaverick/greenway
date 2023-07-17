@@ -249,7 +249,6 @@ function Register({ navigation }) {
               <View
                 style={[
                   textInput,
-                  { paddingHorizontal: wp('3%'), paddingVertical: hp('0.5%') },
                   errorArr.id == 5 && styles.errorInput,
                 ]}>
                 <TextInput
@@ -259,7 +258,7 @@ function Register({ navigation }) {
                   value={confirmPassword}
                   secureTextEntry={confirmPasswordEye}
                   placeholderTextColor={placeHolderColor}
-                  // style={styles.passwordInput}
+                  style={styles.passwordInput}
                   onFocus={() => {
                     setErrorArr(0);
                   }}

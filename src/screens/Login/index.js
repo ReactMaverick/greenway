@@ -235,13 +235,13 @@ function Login({ navigation }) {
             <Text style={{ textAlign: 'center', color: BKColor.textColor2 }}>
               {loginErrorMessage}
             </Text>
-            <View>
+            <View style={inputContainer}>
               <TextInput
                 placeholder={'Enter email address'}
                 placeholderTextColor={placeHolderColor}
                 keyboardType="email-address"
                 style={[
-                  styles.textInput,
+                  textInput,
                   errorArr.id == 1 && styles.errorInput,
                 ]}
                 onChangeText={value => setUsername(value)}

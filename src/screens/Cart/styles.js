@@ -140,23 +140,23 @@ export default StyleSheet.create({
     fontFamily: fontFamily.bold,
     color: BKColor.textColor1
   },
-  couponInputSec: {
-    borderRadius: 30,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: BKColor.inputBorder,
-    paddingHorizontal: wp('4%'),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    height: hp('6.5%'),
-    // width:wp('80%')
-  },
-  inputText: {
-    color: BKColor.textColor1,
-    fontFamily: fontFamily.regular,
-    fontSize: fontSize.h3,
-  },
+  // couponInputSec: {
+  //   borderRadius: 30,
+  //   borderStyle: 'solid',
+  //   borderWidth: 1,
+  //   borderColor: BKColor.inputBorder,
+  //   paddingHorizontal: wp('4%'),
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   alignItems: 'center',
+  //   height: hp('6.5%'),
+  //   width:wp('80%')
+  // },
+  // inputText: {
+  //   color: BKColor.textColor1,
+  //   fontFamily: fontFamily.regular,
+  //   fontSize: fontSize.h3,
+  // },
   inputContainerWidth: {
     width: '90%'
   },

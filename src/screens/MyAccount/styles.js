@@ -27,7 +27,7 @@ export default StyleSheet.create({
         marginTop: hp('3%'),
         // height: hp('90%'),
     },
-    regBtmSection: {
+    regBtnSection: {
         // height: hp('20%'),
         flexDirection: 'row',
         alignItems: 'center',
