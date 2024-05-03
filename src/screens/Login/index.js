@@ -303,7 +303,7 @@ function Login({ navigation }) {
               <Text style={activeButton.text}>Login</Text>
             </TouchableOpacity>
 
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: hp('3%') }}>
+            {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: hp('3%') }}>
               <View style={{ width: wp('35%'), borderTopWidth: 1, borderColor: BKColor.textColor1 }}></View>
 
               <View style={{ marginHorizontal: wp('5%') }}>
@@ -320,7 +320,7 @@ function Login({ navigation }) {
                 <TouchableOpacity style={{ marginHorizontal: wp('4%') }}>
                   <Image source={require('../../assets/images/facebook-logo.png')} style={ styles.otherLoginIcon } />
                 </TouchableOpacity>
-            </View>
+            </View> */}
 
 
             {/* <View style={styles.socialLoginContainer}>

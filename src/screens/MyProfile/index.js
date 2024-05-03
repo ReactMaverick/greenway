@@ -7,6 +7,7 @@ import {
   ScrollView,
   Image,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -40,12 +41,61 @@ import {
 } from '@react-native-google-signin/google-signin';
 import { logOut } from '../../redux/reducers/UserReducer';
 import CustomStatusBar from '../../common/components/statusbar';
+import {PostApiFetch} from '../../config/CommonFunction';
+import { DELETE_ACCOUNT } from '../../config/ApiConfig';
 
 function MyProfile({ navigation }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const userData = useSelector(state => state.UserReducer.value);
 console.log("userData",userData);
+  const _deleteAccount = () => {
+    Alert.alert(
+      "Delete Account",
+      "Are you sure you want to delete your account?",
+      [
+        {
+          text: "No",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Yes", onPress: () => {
+          const formData = new FormData();
+          formData.append('user_id', userData.id);
+          PostApiFetch(DELETE_ACCOUNT, formData)
+            .then(([status, response]) => {
+             
+              if (status == 200) {
+                if (response.status) {
+                  dispatch(logOut());
+                  showMessage({
+                    message: 'Account deleted successfully',
+                    type: 'info',
+                    backgroundColor: '#808080',
+                  });
+                } else {
+                  showMessage({
+                    message: 'Something went wrong',
+                    type: 'info',
+                    backgroundColor: '#808080',
+                  });
+                }
+               
+              } else {
+                console.log('Something went wrong');
+              }
+            })
+            .catch(error => console.log(error))
+            .finally(() => {
+              setIsLoading(false);
+            });
+        } }
+      ],
+      { cancelable: false }
+    );
+
+    
+  };
   const socialSignOut = async () => {
     try {
       await GoogleSignin.revokeAccess();
@@ -251,6 +301,32 @@ console.log("userData",userData);
                 />
               </View>
             </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.regContainer.item}
+              onPress={() => {
+                _deleteAccount();
+              }}>
+            
+              <View style={styles.itemOuter}>
+                <View style={styles.textOuter}>
+                  <Entypo
+                    name="trash"
+                    style={{ color: BKColor.textColor1 }}
+                    size={fontSize.h1}
+                  />
+                  <Text style={styles.regContainer.text1}>Delete Account</Text>
+                </View>
+                <Entypo
+                  name="chevron-thin-right"
+                  style={{ color: BKColor.textColor1 }}
+                  size={fontSize.h2}
+                />
+              </View>
+            </TouchableOpacity>
+
+
+
             <TouchableOpacity
               style={styles.regContainer.item}
               onPress={() => {

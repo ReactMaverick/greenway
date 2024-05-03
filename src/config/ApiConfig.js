@@ -63,6 +63,7 @@ export const POST_DISTRICT_API = 'districtByStateId';
 export const GET_PINCODE_API = 'pincodeBydistricts';
 
 export const POST_SOCIAL_LOGIN = BASE_URL + 'socialLogin';
+export const DELETE_ACCOUNT = 'deleteUser';
 
 
 export const GOOGLE_LOGINKEY =
