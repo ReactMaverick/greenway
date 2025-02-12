@@ -93,22 +93,22 @@ function ForgetPassword({navigation}) {
         </View>
         <Text style={styles.loginLogoSection.text1}>Forget Password</Text>
       </View>
-      <View style={inputContainer}>
+      <View style={[inputContainer, errorArr.id == 1 && styles.errorInput]}>
         {/* <Text style={inputLevel}>Email / Phone Number</Text> */}
         <TextInput
           placeholder={'Enter email or phone number'}
           placeholderTextColor={placeHolderColor}
-          style={[textInput, errorArr.id == 1 && styles.errorInput]}
+          style={[textInput]}
           onChangeText={value => setEmailPhone(value)}
           value={emailPhone}
           onFocus={() => {
             setErrorArr(0);
           }}
         />
+      </View>
         {errorArr.id == 1 && (
           <Text style={styles.errorText}>* {errorArr.message}</Text>
         )}
-      </View>
       <TouchableOpacity style={activeButton.button} onPress={_submitEmailPhone}>
         <Text style={activeButton.text}>Submit</Text>
       </TouchableOpacity>

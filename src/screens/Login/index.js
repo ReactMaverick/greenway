@@ -77,9 +77,11 @@ function Login({ navigation }) {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (username == '') {
       setErrorArr({ id: 1, message: 'Enter Email/Phone' });
-    } else if (reg.test(username) === false && username.length != 10) {
-      setErrorArr({ id: 1, message: 'Please Enter Valid Email/Phone' });
-    } else if (password == '') {
+    } 
+    // else if (reg.test(username) === false && username.length != 10) {
+    //   setErrorArr({ id: 1, message: 'Please Enter Valid Email/Phone' });
+    // } 
+    else if (password == '') {
       setErrorArr({ id: 2, message: 'Enter Password' });
     } else {
       setIsLoading(true);
@@ -235,14 +237,13 @@ function Login({ navigation }) {
             <Text style={{ textAlign: 'center', color: BKColor.textColor2 }}>
               {loginErrorMessage}
             </Text>
-            <View style={inputContainer}>
+            <View style={[inputContainer, errorArr.id == 1 && styles.errorInput]}>
               <TextInput
                 placeholder={'Enter email address'}
                 placeholderTextColor={placeHolderColor}
                 keyboardType="email-address"
                 style={[
                   textInput,
-                  errorArr.id == 1 && styles.errorInput,
                 ]}
                 onChangeText={value => setUsername(value)}
                 value={username}
@@ -250,16 +251,17 @@ function Login({ navigation }) {
                   setErrorArr(0);
                 }}
               />
+            </View>
               {errorArr.id == 1 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
               )}
-            </View>
 
-            <View style={inputContainer}>
+            <View style={[inputContainer, errorArr.id == 2 && styles.errorInput]}>
               <View
                 style={[
-                  textInput, errorArr.id == 2 && styles.errorInput,
-                ]}>
+                  textInput
+                ]}
+                >
                 <TextInput
                   placeholder={'Password'}
                   placeholderTextColor={placeHolderColor}
@@ -290,11 +292,11 @@ function Login({ navigation }) {
                   </TouchableOpacity>
                 </View>
               </View>
-              {errorArr.id == 2 && (
-                <Text style={styles.errorText}>* {errorArr.message}</Text>
-              )}
+              
             </View>
-
+            {errorArr.id == 2 && (
+              <Text style={styles.errorText}>* {errorArr.message}</Text>
+            )}
             <TouchableOpacity
               onPress={() => navigation.navigate('ForgetPassword')}>
               <Text style={inputBottomLevel}>Forgot Password?</Text>

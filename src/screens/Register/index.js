@@ -145,13 +145,12 @@ function Register({ navigation }) {
               )}
             </View> */}
 
-            <View style={inputContainer}>
+            <View style={[inputContainer, errorArr.id == 1 && styles.errorInput]}>
               <TextInput
                 placeholder={'Full Name'}
                 placeholderTextColor={placeHolderColor}
                 style={[
-                  textInput,
-                  errorArr.id == 1 && styles.errorInput,
+                  textInput
                 ]}
                 key="fullname"
                 onChangeText={value => setFullName(value)}
@@ -160,18 +159,17 @@ function Register({ navigation }) {
                   setErrorArr(0);
                 }}
               />
+            </View>
               {errorArr.id == 1 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
               )}
-            </View>
 
-            <View style={inputContainer}>
+            <View style={[inputContainer, errorArr.id == 2 && styles.errorInput]}>
               <TextInput
                 placeholder={'Enter email address'}
                 placeholderTextColor={placeHolderColor}
                 style={[
-                  textInput,
-                  errorArr.id == 2 && styles.errorInput,
+                  textInput
                 ]}
                 key="email"
                 onChangeText={value => setRegEmail(value)}
@@ -180,17 +178,16 @@ function Register({ navigation }) {
                   setErrorArr(0);
                 }}
               />
+            </View>
               {errorArr.id == 2 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
               )}
-            </View>
-            <View style={inputContainer}>
+            <View style={[inputContainer, errorArr.id == 3 && styles.errorInput]}>
               <TextInput
                 placeholder={'Phone Number'}
                 placeholderTextColor={placeHolderColor}
                 style={[
-                  textInput,
-                  errorArr.id == 3 && styles.errorInput,
+                  textInput
                 ]}
                 key="Phone Number"
                 keyboardType="numeric"
@@ -201,16 +198,15 @@ function Register({ navigation }) {
                   setErrorArr(0);
                 }}
               />
+            </View>
               {errorArr.id == 3 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
               )}
-            </View>
 
-            <View style={inputContainer}>
+            <View style={[inputContainer, errorArr.id == 4 && styles.errorInput]}>
               <View
                 style={[
-                  textInput,
-                  errorArr.id == 4 && styles.errorInput,
+                  textInput
                 ]}>
                 <TextInput
                   placeholder={'Enter Password'}
@@ -240,16 +236,15 @@ function Register({ navigation }) {
                   </TouchableOpacity>
                 </View>
               </View>
+            </View>
               {errorArr.id == 4 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
               )}
-            </View>
 
-            <View style={inputContainer}>
+            <View style={[inputContainer, errorArr.id == 5 && styles.errorInput]}>
               <View
                 style={[
-                  textInput,
-                  errorArr.id == 5 && styles.errorInput,
+                  textInput
                 ]}>
                 <TextInput
                   placeholder={'Confirm Password'}
@@ -279,10 +274,10 @@ function Register({ navigation }) {
                   </TouchableOpacity>
                 </View>
               </View>
+            </View>
               {errorArr.id == 5 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
               )}
-            </View>
             <TouchableOpacity
               style={activeButton.button}
               onPress={_signUpCheck}>

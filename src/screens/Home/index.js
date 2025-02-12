@@ -89,7 +89,7 @@ function Home({ navigation }) {
           </TouchableOpacity>
         </View>
         <ScrollView
-          style={{ marginBottom: hp('11%') }}
+          // style={{ marginBottom: hp('5%') }}
           showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
