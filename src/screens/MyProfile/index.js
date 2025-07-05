@@ -34,11 +34,11 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { BKColor } from '../../common/values/BKColor';
 import { showMessage, hideMessage } from 'react-native-flash-message';
 import { useSelector, useDispatch } from 'react-redux';
-import auth from '@react-native-firebase/auth';
-import {
-  GoogleSignin,
-  statusCodes,
-} from '@react-native-google-signin/google-signin';
+// import auth from '@react-native-firebase/auth';
+// import {
+//   GoogleSignin,
+//   statusCodes,
+// } from '@react-native-google-signin/google-signin';
 import { logOut } from '../../redux/reducers/UserReducer';
 import CustomStatusBar from '../../common/components/statusbar';
 import {PostApiFetch} from '../../config/CommonFunction';
@@ -96,15 +96,15 @@ console.log("userData",userData);
 
     
   };
-  const socialSignOut = async () => {
-    try {
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
-      await auth().signOut();
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  // const socialSignOut = async () => {
+  //   try {
+  //     await GoogleSignin.revokeAccess();
+  //     await GoogleSignin.signOut();
+  //     await auth().signOut();
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
   //   useEffect(() => {}, [navigation]);
 
   return (

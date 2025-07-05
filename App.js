@@ -22,7 +22,6 @@ import FlashMessage from 'react-native-flash-message';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/redux/store';
-import { PersistGate } from 'reduxjs-toolkit-persist/integration/react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -65,6 +64,7 @@ import UpdatePassword from './src/screens/UpdatePassword';
 import Search from './src/screens/Search';
 import styles from './src/screens/Home/styles';
 import CongratulationPage from './src/screens/CongratulationPage';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const Drawer = createDrawerNavigator();
 

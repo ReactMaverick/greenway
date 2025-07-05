@@ -1,6 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { persistStore, persistReducer } from 'reduxjs-toolkit-persist';
 
 import UserReducer from './reducers/UserReducer';
 import WishlistReducer from './reducers/WishlistReducer';
@@ -9,6 +8,7 @@ import CouponDetailsReducer from './reducers/CouponDetailsReducer';
 import ShopNowReducer from './reducers/ShopNowReducer';
 import SelectedShippingAddressReducer from './reducers/SelectedShippingAddressReducer';
 import AlertReducer from './reducers/AlertReducer';
+import { persistReducer, persistStore } from 'redux-persist';
 
 const persistConfig = {
   key: 'root',

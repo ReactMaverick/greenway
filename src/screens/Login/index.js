@@ -44,12 +44,6 @@ import {
 
 import { userDetails } from '../../redux/reducers/UserReducer';
 import CustomStatusBar from '../../common/components/statusbar';
-// import {
-//   GoogleSignin,
-//   statusCodes,
-// } from '@react-native-google-signin/google-signin';
-// import auth from '@react-native-firebase/auth';
-//import { LoginManager, AccessToken, Settings } from 'react-native-fbsdk-next';
 
 // Settings.setAppID(FBAppId);
 
