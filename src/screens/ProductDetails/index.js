@@ -41,7 +41,7 @@ import DeviceInfo from 'react-native-device-info';
 import {addToCart, addToWishlist} from '../../config/CommonFunction';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 import {useSelector, useDispatch} from 'react-redux';
-import StarRating from 'react-native-star-rating';
+// import StarRating from 'react-native-star-rating';
 import {wishlistDetails} from '../../redux/reducers/WishlistReducer';
 import {cartDetails} from '../../redux/reducers/CartReducer';
 import {shopnowDetails} from '../../redux/reducers/ShopNowReducer';
@@ -449,13 +449,13 @@ function ProductDetails({navigation, route}) {
           <View style={styles.productReviewSec}>
             <Text style={styles.productReview}>Reviews</Text>
 
-            <StarRating
+            {/* <StarRating
               maxStars={5}
               disabled={true}
               starSize={20}
               fullStarColor={BKColor.textColor2}
               rating={Math.round(productDetails.rating)}
-            />
+            /> */}
           </View>
           {productReview.length < 0 ? (
             <View>
@@ -466,7 +466,7 @@ function ProductDetails({navigation, route}) {
               {productReview.map((item, key) => (
                 <View key={key} style={styles.reviewSec}>
                   <View style={styles.reviewStar}>
-                    <StarRating
+                    {/* <StarRating
                       maxStars={5}
                       disabled={true}
                       starSize={20}
@@ -475,7 +475,7 @@ function ProductDetails({navigation, route}) {
                       changeRating={item.reviews_rating}
                       rating={item.reviews_rating}
                       // name='rating'
-                    />
+                    /> */}
                   </View>
                   <View>
                     <Text>{item.reviews_text}</Text>

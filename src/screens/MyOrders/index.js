@@ -44,7 +44,7 @@ import {useIsFocused} from '@react-navigation/native';
 import CustomStatusBar from '../../common/components/statusbar';
 import {showMessage, hideMessage} from 'react-native-flash-message';
 import Modal from 'react-native-modal';
-import StarRating from 'react-native-star-rating';
+// import StarRating from 'react-native-star-rating';
 function MyOrders({navigation}) {
   const [orderData, setOrderData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -324,7 +324,7 @@ function MyOrders({navigation}) {
                   <></>
                 )}
               </Text>
-              <StarRating
+              {/* <StarRating
                 maxStars={5}
                 disabled={false}
                 starSize={20}
@@ -333,7 +333,7 @@ function MyOrders({navigation}) {
                 selectedStar={rating => setChangeRating(rating)}
                 rating={changeRating}
                 name="rating"
-              />
+              /> */}
             </View>
             <View>
               <Text style={{textAlign: 'center', color: '#EC1F25'}}>

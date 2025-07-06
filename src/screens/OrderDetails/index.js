@@ -37,7 +37,7 @@ import {
   POST_ORDER_DETAILS,
 } from '../../config/ApiConfig';
 import Modal from 'react-native-modal';
-import StarRating from 'react-native-star-rating';
+// import StarRating from 'react-native-star-rating';
 import { useSelector, useDispatch } from 'react-redux';
 import { showMessage, hideMessage } from 'react-native-flash-message';
 import { PostApiFetch, GetApiFetch } from '../../config/CommonFunction';
@@ -477,7 +477,7 @@ function OrderDetails({ navigation, route }) {
             </View>
             <View style={styles.modalStar}>
               <Text style={styles.modalText}>{reviewModal.products_name}</Text>
-              <StarRating
+              {/* <StarRating
                 maxStars={5}
                 disabled={false}
                 starSize={20}
@@ -486,7 +486,7 @@ function OrderDetails({ navigation, route }) {
                 selectedStar={rating => setChangeRating(rating)}
                 rating={changeRating}
                 name="rating"
-              />
+              /> */}
             </View>
             <View>
               <Text style={{ textAlign: 'center', color: '#EC1F25' }}>
