@@ -5,13 +5,14 @@ export const PostApiFetch = async (URL, formData) => {
   // console.log(BASE_URL + URL, formData)
     return await fetch(BASE_URL + URL, {
       method: "POST",
-      // headers: {
-      //   Accept: 'application/json',
-      //     'Content-Type': 'multipart/form-data',
-      // },
+      headers: {
+        Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+      },
       body: formData,
     }).then((response) => {
       const statusCode = response.status;
+      // console.log('statusCode',response, statusCode);
       const data = response.json();
       return Promise.all([statusCode, data]);
     });

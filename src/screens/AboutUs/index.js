@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -14,25 +14,28 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
 import {
+  commonStyle,
   pageContainerStyle,
   pageContainerStyle2,
 } from '../../common/values/BKStyles';
-import {pageHeader, fontSize, activeButton} from '../../common/values/BKStyles';
-import {BKColor} from '../../common/values/BKColor';
+import { pageHeader, fontSize, activeButton } from '../../common/values/BKStyles';
+import { BKColor } from '../../common/values/BKColor';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import {inputContainer, textInput} from '../../common/values/BKStyles';
+import { inputContainer, textInput } from '../../common/values/BKStyles';
 import {
   GET_ABOUT_US_API,
   IMAGE_BASE_PATH,
   BASE_URL,
 } from '../../config/ApiConfig';
-import {GetApiFetch} from '../../config/CommonFunction';
+import { GetApiFetch } from '../../config/CommonFunction';
 import CustomStatusBar from '../../common/components/statusbar';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { platform } from '../../common/values/BKConstants';
 
-function AboutUs({navigation}) {
+function AboutUs({ navigation }) {
   const [aboutUs, setAboutUs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const regex = /(<([^>]+)>)/gi;
@@ -65,7 +68,7 @@ function AboutUs({navigation}) {
     return (
       <>
         <SafeAreaView
-          style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <CustomStatusBar />
           <ActivityIndicator size="large" color={BKColor.textColor2} />
         </SafeAreaView>
@@ -73,39 +76,43 @@ function AboutUs({navigation}) {
     );
   } else {
     return (
-      <SafeAreaView style={pageContainerStyle2}>
-        <CustomStatusBar />
-        <View style={pageHeader}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Fontisto
-              name="arrow-left-l"
-              color={BKColor.textColor1}
-              size={fontSize.h2}
-            />
-          </TouchableOpacity>
-          <Text style={pageHeader.text}>About Us</Text>
-          <View></View>
-        </View>
-        <Image
-          source={require('../../assets/images/aboutus-aboutme.jpg')}
-          style={styles.bannerImage}
-        />
-        {/* <ImageBackground
+      <KeyboardAvoidingView
+        behavior={platform === 'ios' ? 'padding' : 'height'}
+        style={commonStyle.keyboardAvoidingView}>
+        <SafeAreaView style={pageContainerStyle2}>
+          <CustomStatusBar />
+          <View style={pageHeader}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Fontisto
+                name="arrow-left-l"
+                color={BKColor.textColor1}
+                size={fontSize.h2}
+              />
+            </TouchableOpacity>
+            <Text style={pageHeader.text}>About Us</Text>
+            <View></View>
+          </View>
+          <Image
+            source={require('../../assets/images/aboutus-aboutme.jpg')}
+            style={styles.bannerImage}
+          />
+          {/* <ImageBackground
           source={{uri: IMAGE_BASE_PATH + aboutUs.path}}
           resizeMode="cover"
           style={styles.bannerImage}
         /> */}
-        <View style={{paddingHorizontal: wp('3%')}}>
-          <Text style={styles.aboutUsDesc}>
-            {aboutUs.cms_text != null
-              ? aboutUs.cms_text
+          <View style={{ paddingHorizontal: wp('3%') }}>
+            <Text style={styles.aboutUsDesc}>
+              {aboutUs.cms_text != null
+                ? aboutUs.cms_text
                   .replace(regex, '')
                   .replace(secondRegEx, '')
                   .replace(ThirdRegEx, '')
-              : ''}
-          </Text>
-        </View>
-      </SafeAreaView>
+                : ''}
+            </Text>
+          </View>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 }

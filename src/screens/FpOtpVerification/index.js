@@ -19,6 +19,7 @@ import {
   textInput,
   inputContainer,
   activeButton,
+  commonStyle,
 } from '../../common/values/BKStyles';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { BKColor } from '../../common/values/BKColor';
@@ -27,6 +28,8 @@ import { POST_PROCESS_SIGNUP_API } from '../../config/ApiConfig';
 import { GetApiFetch, PostApiFetch } from '../../config/CommonFunction';
 import { useSelector, useDispatch } from 'react-redux';
 import CustomStatusBar from '../../common/components/statusbar';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { platform } from '../../common/values/BKConstants';
 
 function FpOtpVerification({ navigation, route }) {
   const dispatch = useDispatch();
@@ -51,59 +54,63 @@ function FpOtpVerification({ navigation, route }) {
   useEffect(() => { }, [navigation]);
 
   return (
-    <SafeAreaView>
-      <CustomStatusBar />
-      <ScrollView style={pageContainerStyle}>
-        <View style={styles.regContainer}>
-          <View style={styles.logoSection}>
-            {/* <Text>Phone Number</Text> */}
+    <KeyboardAvoidingView
+      behavior={platform === 'ios' ? 'padding' : 'height'}
+      style={commonStyle.keyboardAvoidingView}>
+      <SafeAreaView style={commonStyle.safeAreaView}>
+        <CustomStatusBar />
+        <ScrollView style={pageContainerStyle}>
+          <View style={styles.regContainer}>
+            <View style={styles.logoSection}>
+              {/* <Text>Phone Number</Text> */}
 
-            <View style={styles.loginLogoSection}>
-              <View style={styles.loginLogoSection.logo}>
-                <Image
-                  source={require('../../assets/images/header-logo.png')}
-                  style={{
-                    height: wp('38.8%'), width: wp('27.1%'),
-                    resizeMode: 'cover',
-                  }}
-                />
+              <View style={styles.loginLogoSection}>
+                <View style={styles.loginLogoSection.logo}>
+                  <Image
+                    source={require('../../assets/images/header-logo.png')}
+                    style={{
+                      height: wp('38.8%'), width: wp('27.1%'),
+                      resizeMode: 'cover',
+                    }}
+                  />
+                </View>
+                <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
+                <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
               </View>
-              <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
-              <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
-            </View>
-            
-          </View>
-          <Text style={styles.regContainer.headerText}>
-            Entry Your 4 digit code
-          </Text>
 
-          <OTPTextInput
-            textInputStyle={[styles.otpBoxStyle, errorArr.id == 1 && styles.errorInput]}
-            tintColor={BKColor.textColor2}
-            handleTextChange={otpInput => setOTP(otpInput)}
-            onFocus={() => {
-              setErrorArr(0);
-            }}
-          />
-          {errorArr.id == 1 && (
-            <Text style={styles.errorText}>* {errorArr.message}</Text>
-          )}
-          {/* <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
+            </View>
+            <Text style={styles.regContainer.headerText}>
+              Entry Your 4 digit code
+            </Text>
+
+            <OTPTextInput
+              textInputStyle={[styles.otpBoxStyle, errorArr.id == 1 && styles.errorInput]}
+              tintColor={BKColor.textColor2}
+              handleTextChange={otpInput => setOTP(otpInput)}
+              onFocus={() => {
+                setErrorArr(0);
+              }}
+            />
+            {errorArr.id == 1 && (
+              <Text style={styles.errorText}>* {errorArr.message}</Text>
+            )}
+            {/* <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
             {errorMessage}
           </Text> */}
 
-          <View style={styles.loginFooter}>
-            <Text style={styles.loginFooter.textLeft}>
-              Did you don’t get code?{' '}
-            </Text>
-            <Text style={styles.loginFooter.textRight}>Resend</Text>
+            <View style={styles.loginFooter}>
+              <Text style={styles.loginFooter.textLeft}>
+                Did you don’t get code?{' '}
+              </Text>
+              <Text style={styles.loginFooter.textRight}>Resend</Text>
+            </View>
+            <TouchableOpacity style={activeButton.button} onPress={_checkOtp}>
+              <Text style={activeButton.text}>Verify</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={activeButton.button} onPress={_checkOtp}>
-            <Text style={activeButton.text}>Verify</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 export default FpOtpVerification;

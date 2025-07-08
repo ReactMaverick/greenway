@@ -22,7 +22,8 @@ import {
   activeButton,
   fontSize,
   placeHolderColor,
-  fontFamily
+  fontFamily,
+  commonStyle
 } from '../../common/values/BKStyles';
 import { BKColor } from '../../common/values/BKColor';
 import { POST_ACCOUNT_UPDATE_API } from '../../config/ApiConfig';
@@ -35,6 +36,8 @@ import {
 } from 'react-native-responsive-screen';
 import CustomStatusBar from '../../common/components/statusbar';
 import { userDetails } from '../../redux/reducers/UserReducer';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { platform } from '../../common/values/BKConstants';
 function MyAccount({ navigation }) {
   const dispatch = useDispatch();
   const [updateData, setUpdateData] = useState([]);
@@ -131,181 +134,185 @@ function MyAccount({ navigation }) {
   //   useEffect(() => {}, [navigation]);
 
   return (
-    <SafeAreaView>
-      <CustomStatusBar />
-      <View style={pageContainerStyle2}>
-        <View style={pageHeader}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Fontisto
-              name="arrow-left"
-              color={BKColor.textColor1}
-              size={fontSize.h2}
-            />
-          </TouchableOpacity>
-          <Text style={pageHeader.text}>My Account</Text>
-          <View></View>
-        </View>
-        <ScrollView>
-          {/* <View style={pageHeader}>
+    <KeyboardAvoidingView
+      behavior={platform === 'ios' ? 'padding' : 'height'}
+      style={commonStyle.keyboardAvoidingView}>
+      <SafeAreaView style={commonStyle.safeAreaView}>
+        <CustomStatusBar />
+        <View style={pageContainerStyle2}>
+          <View style={pageHeader}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Fontisto
+                name="arrow-left"
+                color={BKColor.textColor1}
+                size={fontSize.h2}
+              />
+            </TouchableOpacity>
+            <Text style={pageHeader.text}>My Account</Text>
+            <View></View>
+          </View>
+          <ScrollView>
+            {/* <View style={pageHeader}>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
                     <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
                 </TouchableOpacity>
                 <Text style={pageHeader.text}>Signup</Text>
                 <View></View>
             </View> */}
-          <View style={styles.regContainer}>
-            <View style={inputContainer}>
-              {/* <Text style={inputLevel}>Name</Text> */}
-              <TextInput
-                placeholder={'full name'}
-                placeholderTextColor={placeHolderColor}
-                style={textInput}
-                key="fullname"
-                onChangeText={value => setFullName(value)}
-                value={fullName}
-              // secureTextEntry={passwordEye}
-              // onChangeText={(password) => setPassword(password)}
-              // onFocus={() => {
-              //   setErrorMessage('')
-              // }}
-              />
-            </View>
-            <View style={inputContainer}>
-              {/* <Text style={inputLevel}>Email</Text> */}
-              <TextInput
-                placeholder={'email'}
-                placeholderTextColor={placeHolderColor}
-                style={textInput}
-                key="email"
-                value={email}
-
-              // secureTextEntry={passwordEye}
-              // onChangeText={(password) => setPassword(password)}
-              // onFocus={() => {
-              //   setErrorMessage('')
-              // }}
-              />
-            </View>
-            <View style={inputContainer}>
-              {/* <Text style={inputLevel}>Phone Number</Text> */}
-              <TextInput
-                placeholder={'phone number'}
-                placeholderTextColor={placeHolderColor}
-                style={textInput}
-                key="phonenumber"
-                value={phoneNumber}
-
-              // secureTextEntry={passwordEye}
-              // onChangeText={(password) => setPassword(password)}
-              // onFocus={() => {
-              //   setErrorMessage('')
-              // }}
-              />
-            </View>
-            <View style={inputContainer}>
-              {/* <Text style={inputLevel}>Current Password</Text> */}
-              <TextInput
-                placeholderTextColor={placeHolderColor}
-                placeholder={'current password'}
-                style={textInput}
-                key="password"
-                onChangeText={password => setCurrentPassword(password)}
-                value={currentPassword}
-              // secureTextEntry={passwordEye}
-              // onChangeText={(password) => setPassword(password)}
-              // onFocus={() => {
-              //   setErrorMessage('')
-              // }}
-              />
-            </View>
-
-
-            <View style={inputContainer}>
-              <View
-                style={
-                  textInput
-                }>
+            <View style={styles.regContainer}>
+              <View style={inputContainer}>
+                {/* <Text style={inputLevel}>Name</Text> */}
                 <TextInput
-                  placeholder={'new password'}
+                  placeholder={'full name'}
                   placeholderTextColor={placeHolderColor}
-                  style={{
-                    width: '92%',
-                    fontFamily: fontFamily.regular,
-                    fontSize: fontSize.h3,
-                    color: BKColor.textColor1,
-                  }}
-                  key="password"
-                  onChangeText={password => setNewPassword(password)}
-                  value={newPassword}
-                  secureTextEntry={passwordEye}
+                  style={textInput}
+                  key="fullname"
+                  onChangeText={value => setFullName(value)}
+                  value={fullName}
+                // secureTextEntry={passwordEye}
+                // onChangeText={(password) => setPassword(password)}
+                // onFocus={() => {
+                //   setErrorMessage('')
+                // }}
                 />
-                <View style={{ width: '8%', justifyContent: 'center', alignItems: 'flex-end' }}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setPasswordEye(!passwordEye);
-                    }}>
-                    <Entypo
-                      name={passwordEye ? 'eye-with-line' : 'eye'}
-                      style={{
-                        fontSize: 20,
-                        color: BKColor.textColor1,
-                      }}
-                    />
+              </View>
+              <View style={inputContainer}>
+                {/* <Text style={inputLevel}>Email</Text> */}
+                <TextInput
+                  placeholder={'email'}
+                  placeholderTextColor={placeHolderColor}
+                  style={textInput}
+                  key="email"
+                  value={email}
 
-                  </TouchableOpacity>
+                // secureTextEntry={passwordEye}
+                // onChangeText={(password) => setPassword(password)}
+                // onFocus={() => {
+                //   setErrorMessage('')
+                // }}
+                />
+              </View>
+              <View style={inputContainer}>
+                {/* <Text style={inputLevel}>Phone Number</Text> */}
+                <TextInput
+                  placeholder={'phone number'}
+                  placeholderTextColor={placeHolderColor}
+                  style={textInput}
+                  key="phonenumber"
+                  value={phoneNumber}
+
+                // secureTextEntry={passwordEye}
+                // onChangeText={(password) => setPassword(password)}
+                // onFocus={() => {
+                //   setErrorMessage('')
+                // }}
+                />
+              </View>
+              <View style={inputContainer}>
+                {/* <Text style={inputLevel}>Current Password</Text> */}
+                <TextInput
+                  placeholderTextColor={placeHolderColor}
+                  placeholder={'current password'}
+                  style={textInput}
+                  key="password"
+                  onChangeText={password => setCurrentPassword(password)}
+                  value={currentPassword}
+                // secureTextEntry={passwordEye}
+                // onChangeText={(password) => setPassword(password)}
+                // onFocus={() => {
+                //   setErrorMessage('')
+                // }}
+                />
+              </View>
+
+
+              <View style={inputContainer}>
+                <View
+                  style={
+                    textInput
+                  }>
+                  <TextInput
+                    placeholder={'new password'}
+                    placeholderTextColor={placeHolderColor}
+                    style={{
+                      width: '92%',
+                      fontFamily: fontFamily.regular,
+                      fontSize: fontSize.h3,
+                      color: BKColor.textColor1,
+                    }}
+                    key="password"
+                    onChangeText={password => setNewPassword(password)}
+                    value={newPassword}
+                    secureTextEntry={passwordEye}
+                  />
+                  <View style={{ width: '8%', justifyContent: 'center', alignItems: 'flex-end' }}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setPasswordEye(!passwordEye);
+                      }}>
+                      <Entypo
+                        name={passwordEye ? 'eye-with-line' : 'eye'}
+                        style={{
+                          fontSize: 20,
+                          color: BKColor.textColor1,
+                        }}
+                      />
+
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
-            </View>
 
-            <View style={inputContainer}>
-              <View
-                style={
-                  textInput
-                }>
-                <TextInput
-                  placeholder={'confirm password'}
-                  placeholderTextColor={placeHolderColor}
-                  style={{
-                    width: '92%',
-                    fontFamily: fontFamily.regular,
-                    fontSize: fontSize.h3,
-                    color: BKColor.textColor1,
-                  }}
-                  key="password"
-                  onChangeText={password => setConfirmPassword(password)}
-                  value={confirmPassword}
-                  secureTextEntry={conPasswordEye}
-                />
-                <View style={{ width: '8%', justifyContent: 'center', alignItems: 'flex-end' }}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setConPasswordEye(!conPasswordEye);
-                    }}>
-                    <Entypo
-                      name={passwordEye ? 'eye-with-line' : 'eye'}
-                      style={{
-                        fontSize: 20,
-                        color: BKColor.textColor1,
-                      }}
-                    />
+              <View style={inputContainer}>
+                <View
+                  style={
+                    textInput
+                  }>
+                  <TextInput
+                    placeholder={'confirm password'}
+                    placeholderTextColor={placeHolderColor}
+                    style={{
+                      width: '92%',
+                      fontFamily: fontFamily.regular,
+                      fontSize: fontSize.h3,
+                      color: BKColor.textColor1,
+                    }}
+                    key="password"
+                    onChangeText={password => setConfirmPassword(password)}
+                    value={confirmPassword}
+                    secureTextEntry={conPasswordEye}
+                  />
+                  <View style={{ width: '8%', justifyContent: 'center', alignItems: 'flex-end' }}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setConPasswordEye(!conPasswordEye);
+                      }}>
+                      <Entypo
+                        name={passwordEye ? 'eye-with-line' : 'eye'}
+                        style={{
+                          fontSize: 20,
+                          color: BKColor.textColor1,
+                        }}
+                      />
 
-                  </TouchableOpacity>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
-            </View>
 
-            <View style={styles.regBtnSection}>
-              {/* <Text style={styles.regBtmSection.text1}>Update</Text> */}
-              <TouchableOpacity
-                style={activeButton.button}
-                onPress={_updateAccount}>
-                <Text style={activeButton.text}>Update</Text>
-              </TouchableOpacity>
+              <View style={styles.regBtnSection}>
+                {/* <Text style={styles.regBtmSection.text1}>Update</Text> */}
+                <TouchableOpacity
+                  style={activeButton.button}
+                  onPress={_updateAccount}>
+                  <Text style={activeButton.text}>Update</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </ScrollView>
-      </View>
-    </SafeAreaView>
+          </ScrollView>
+        </View>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 export default MyAccount;

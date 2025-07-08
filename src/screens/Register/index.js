@@ -25,6 +25,7 @@ import {
   fontSize,
   placeHolderColor,
   fontFamily,
+  commonStyle,
 } from '../../common/values/BKStyles';
 import { BKColor } from '../../common/values/BKColor';
 import { POST_SIGNUP_API } from '../../config/ApiConfig';
@@ -35,6 +36,8 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import CustomStatusBar from '../../common/components/statusbar';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { platform } from '../../common/values/BKConstants';
 
 function Register({ navigation }) {
   const [fullName, setFullName] = useState('');
@@ -101,31 +104,34 @@ function Register({ navigation }) {
   //   useEffect(() => {}, [navigation]);
 
   return (
-    <SafeAreaView>
-      <CustomStatusBar />
-      <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={pageContainerStyle}>
-        
+    <KeyboardAvoidingView
+      behavior={platform === 'ios' ? 'padding' : 'height'}
+      style={commonStyle.keyboardAvoidingView}>
+      <SafeAreaView style={commonStyle.safeAreaView}>
+        <CustomStatusBar />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={pageContainerStyle}>
 
-          <View style={styles.loginLogoSection}>
-            <View style={styles.loginLogoSection.logo}>
-              <Image
-                source={require('../../assets/images/header-logo.png')}
-                style={{
-                  height: wp('38.8%'), width: wp('27.1%'),
-                  resizeMode: 'cover',
-                }}
-              />
+
+            <View style={styles.loginLogoSection}>
+              <View style={styles.loginLogoSection.logo}>
+                <Image
+                  source={require('../../assets/images/header-logo.png')}
+                  style={{
+                    height: wp('38.8%'), width: wp('27.1%'),
+                    resizeMode: 'cover',
+                  }}
+                />
+              </View>
+              <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
+              <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
             </View>
-            <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
-            <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
-          </View>
-          <View>
-            {/* <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
+            <View>
+              {/* <Text style={{textAlign: 'center', color: BKColor.textColor2}}>
               {regErrorMsg}
             </Text> */}
 
-            {/* <View style={inputContainer}>
+              {/* <View style={inputContainer}>
               <TextInput
                 placeholder={'Full Name'}
                 placeholderTextColor={placeHolderColor}
@@ -145,157 +151,158 @@ function Register({ navigation }) {
               )}
             </View> */}
 
-            <View style={[inputContainer, errorArr.id == 1 && styles.errorInput]}>
-              <TextInput
-                placeholder={'Full Name'}
-                placeholderTextColor={placeHolderColor}
-                style={[
-                  textInput
-                ]}
-                key="fullname"
-                onChangeText={value => setFullName(value)}
-                value={fullName}
-                onFocus={() => {
-                  setErrorArr(0);
-                }}
-              />
-            </View>
+              <View style={[inputContainer, errorArr.id == 1 && styles.errorInput]}>
+                <TextInput
+                  placeholder={'Full Name'}
+                  placeholderTextColor={placeHolderColor}
+                  style={[
+                    textInput
+                  ]}
+                  key="fullname"
+                  onChangeText={value => setFullName(value)}
+                  value={fullName}
+                  onFocus={() => {
+                    setErrorArr(0);
+                  }}
+                />
+              </View>
               {errorArr.id == 1 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
               )}
 
-            <View style={[inputContainer, errorArr.id == 2 && styles.errorInput]}>
-              <TextInput
-                placeholder={'Enter email address'}
-                placeholderTextColor={placeHolderColor}
-                style={[
-                  textInput
-                ]}
-                key="email"
-                onChangeText={value => setRegEmail(value)}
-                value={regEmail}
-                onFocus={() => {
-                  setErrorArr(0);
-                }}
-              />
-            </View>
+              <View style={[inputContainer, errorArr.id == 2 && styles.errorInput]}>
+                <TextInput
+                  placeholder={'Enter email address'}
+                  placeholderTextColor={placeHolderColor}
+                  style={[
+                    textInput
+                  ]}
+                  key="email"
+                  onChangeText={value => setRegEmail(value)}
+                  value={regEmail}
+                  onFocus={() => {
+                    setErrorArr(0);
+                  }}
+                />
+              </View>
               {errorArr.id == 2 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
               )}
-            <View style={[inputContainer, errorArr.id == 3 && styles.errorInput]}>
-              <TextInput
-                placeholder={'Phone Number'}
-                placeholderTextColor={placeHolderColor}
-                style={[
-                  textInput
-                ]}
-                key="Phone Number"
-                keyboardType="numeric"
-                maxLength={10}
-                onChangeText={value => setRegPhoneNumber(value)}
-                value={regPhoneNumber}
-                onFocus={() => {
-                  setErrorArr(0);
-                }}
-              />
-            </View>
+              <View style={[inputContainer, errorArr.id == 3 && styles.errorInput]}>
+                <TextInput
+                  placeholder={'Phone Number'}
+                  placeholderTextColor={placeHolderColor}
+                  style={[
+                    textInput
+                  ]}
+                  key="Phone Number"
+                  keyboardType="numeric"
+                  maxLength={10}
+                  onChangeText={value => setRegPhoneNumber(value)}
+                  value={regPhoneNumber}
+                  onFocus={() => {
+                    setErrorArr(0);
+                  }}
+                />
+              </View>
               {errorArr.id == 3 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
               )}
 
-            <View style={[inputContainer, errorArr.id == 4 && styles.errorInput]}>
-              <View
-                style={[
-                  textInput
-                ]}>
-                <TextInput
-                  placeholder={'Enter Password'}
-                  key="email"
-                  onChangeText={value => setRegPassword(value)}
-                  value={regPassword}
-                  secureTextEntry={passwordEye}
-                  placeholderTextColor={placeHolderColor}
-                  style={styles.passwordInput}
-                  onFocus={() => {
-                    setErrorArr(0);
-                  }}
-                />
-                <View style={{ width: '8%', alignItems: 'flex-end', justifyContent: 'center' }}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setPasswordEye(!passwordEye);
-                    }}>
-                    <Entypo
-                      name={passwordEye ? 'eye-with-line' : 'eye'}
-                      style={{
-                        fontSize: 20,
-                        // marginRight: wp('3%'),
-                        color: BKColor.textColor1,
-                      }}
-                    />
-                  </TouchableOpacity>
+              <View style={[inputContainer, errorArr.id == 4 && styles.errorInput]}>
+                <View
+                  style={[
+                    textInput
+                  ]}>
+                  <TextInput
+                    placeholder={'Enter Password'}
+                    key="email"
+                    onChangeText={value => setRegPassword(value)}
+                    value={regPassword}
+                    secureTextEntry={passwordEye}
+                    placeholderTextColor={placeHolderColor}
+                    style={styles.passwordInput}
+                    onFocus={() => {
+                      setErrorArr(0);
+                    }}
+                  />
+                  <View style={{ width: '8%', alignItems: 'flex-end', justifyContent: 'center' }}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setPasswordEye(!passwordEye);
+                      }}>
+                      <Entypo
+                        name={passwordEye ? 'eye-with-line' : 'eye'}
+                        style={{
+                          fontSize: 20,
+                          // marginRight: wp('3%'),
+                          color: BKColor.textColor1,
+                        }}
+                      />
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
-            </View>
               {errorArr.id == 4 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
               )}
 
-            <View style={[inputContainer, errorArr.id == 5 && styles.errorInput]}>
-              <View
-                style={[
-                  textInput
-                ]}>
-                <TextInput
-                  placeholder={'Confirm Password'}
-                  key="email"
-                  onChangeText={value => setConfirmPassword(value)}
-                  value={confirmPassword}
-                  secureTextEntry={confirmPasswordEye}
-                  placeholderTextColor={placeHolderColor}
-                  style={styles.passwordInput}
-                  onFocus={() => {
-                    setErrorArr(0);
-                  }}
-                />
-                <View style={{ width: '8%', alignItems: 'flex-end', justifyContent: 'center' }}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setConfirmPasswordEye(!confirmPasswordEye);
-                    }}>
-                    <Entypo
-                      name={confirmPasswordEye ? 'eye-with-line' : 'eye'}
-                      style={{
-                        fontSize: 20,
-                        // marginRight: wp('3%'),
-                        color: BKColor.textColor1,
-                      }}
-                    />
-                  </TouchableOpacity>
+              <View style={[inputContainer, errorArr.id == 5 && styles.errorInput]}>
+                <View
+                  style={[
+                    textInput
+                  ]}>
+                  <TextInput
+                    placeholder={'Confirm Password'}
+                    key="email"
+                    onChangeText={value => setConfirmPassword(value)}
+                    value={confirmPassword}
+                    secureTextEntry={confirmPasswordEye}
+                    placeholderTextColor={placeHolderColor}
+                    style={styles.passwordInput}
+                    onFocus={() => {
+                      setErrorArr(0);
+                    }}
+                  />
+                  <View style={{ width: '8%', alignItems: 'flex-end', justifyContent: 'center' }}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setConfirmPasswordEye(!confirmPasswordEye);
+                      }}>
+                      <Entypo
+                        name={confirmPasswordEye ? 'eye-with-line' : 'eye'}
+                        style={{
+                          fontSize: 20,
+                          // marginRight: wp('3%'),
+                          color: BKColor.textColor1,
+                        }}
+                      />
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
-            </View>
               {errorArr.id == 5 && (
                 <Text style={styles.errorText}>* {errorArr.message}</Text>
               )}
-            <TouchableOpacity
-              style={activeButton.button}
-              onPress={_signUpCheck}>
-              <Text style={activeButton.text}>Sign Up</Text>
-            </TouchableOpacity>
-            <View style={styles.loginFooter}>
-              <Text style={styles.loginFooter.textLeft}>
-                Already Have Account?{' '}
-              </Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                <Text style={styles.loginFooter.textRight}>Login</Text>
+              <TouchableOpacity
+                style={activeButton.button}
+                onPress={_signUpCheck}>
+                <Text style={activeButton.text}>Sign Up</Text>
               </TouchableOpacity>
+              <View style={styles.loginFooter}>
+                <Text style={styles.loginFooter.textLeft}>
+                  Already Have Account?{' '}
+                </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                  <Text style={styles.loginFooter.textRight}>Login</Text>
+                </TouchableOpacity>
+              </View>
             </View>
+
           </View>
-       
-      </View>
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 export default Register;

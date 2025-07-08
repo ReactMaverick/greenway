@@ -8,13 +8,14 @@ import {
   Image,
   ActivityIndicator,
   SafeAreaView,
+  Modal,
 } from 'react-native';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { pageContainerStyle, pageContainerStyle2, pageHeader } from '../../common/values/BKStyles';
+import { commonStyle, pageContainerStyle, pageContainerStyle2, pageHeader } from '../../common/values/BKStyles';
 import {
   inputLevel,
   inputBottomLevel,
@@ -36,7 +37,6 @@ import {
   POST_RETURN_PRODUCT_API,
   POST_ORDER_DETAILS,
 } from '../../config/ApiConfig';
-import Modal from 'react-native-modal';
 // import StarRating from 'react-native-star-rating';
 import { useSelector, useDispatch } from 'react-redux';
 import { showMessage, hideMessage } from 'react-native-flash-message';
@@ -44,6 +44,9 @@ import { PostApiFetch, GetApiFetch } from '../../config/CommonFunction';
 import { Dropdown } from 'react-native-element-dropdown';
 import Moment from 'moment';
 import CustomStatusBar from '../../common/components/statusbar';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { platform } from '../../common/values/BKConstants';
+import CustomModal from '../../common/components/CustomModal';
 
 function OrderDetails({ navigation, route }) {
   const [orderDetails, setOrderDetails] = useState([]);
@@ -259,24 +262,27 @@ function OrderDetails({ navigation, route }) {
     );
   } else {
     return (
-      <SafeAreaView style={pageContainerStyle2}>
-        <CustomStatusBar />
-        <View style={pageHeader}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Fontisto
-              name="arrow-left"
-              color={BKColor.textColor1}
-              size={fontSize.h2}
-            />
-          </TouchableOpacity>
-          <Text style={pageHeader.text}>Order Details</Text>
-          <View style={{ width: wp('10%') }}></View>
-        </View>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.orderDetailsHeadSec}>
+      <KeyboardAvoidingView
+        behavior={platform === 'ios' ? 'padding' : 'height'}
+        style={commonStyle.keyboardAvoidingView}>
+        <SafeAreaView style={pageContainerStyle2}>
+          <CustomStatusBar />
+          <View style={pageHeader}>
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+              <Fontisto
+                name="arrow-left"
+                color={BKColor.textColor1}
+                size={fontSize.h2}
+              />
+            </TouchableOpacity>
+            <Text style={pageHeader.text}>Order Details</Text>
+            <View style={{ width: wp('10%') }}></View>
+          </View>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.orderDetailsHeadSec}>
 
 
-            {/* <View style={styles.itemHeadingSec}>
+              {/* <View style={styles.itemHeadingSec}>
               <Text style={styles.productItemHeading}>Items</Text>
               <Text style={styles.productItemText}>Items with ID proof (2)</Text>
               {orderDetails.orders_status != 'Return' ? (
@@ -297,187 +303,179 @@ function OrderDetails({ navigation, route }) {
               )}
             </View> */}
 
-            {orderDetails.products.map((item2, key) => (
-              <View style={styles.contactUsSec} key={key}>
-                <View style={{ flex: 1.4 }}>
-                  <View style={styles.productImageSec}>
-                    <Image
-                      source={{ uri: IMAGE_BASE_PATH + item2.image }}
-                      style={styles.itemImage}
-                      borderRadius={wp('12.5%')}
-                    />
+              {orderDetails.products.map((item2, key) => (
+                <View style={styles.contactUsSec} key={key}>
+                  <View style={{ flex: 1.4 }}>
+                    <View style={styles.productImageSec}>
+                      <Image
+                        source={{ uri: IMAGE_BASE_PATH + item2.image }}
+                        style={styles.itemImage}
+                        borderRadius={wp('12.5%')}
+                      />
+                    </View>
                   </View>
-                </View>
-                <View style={styles.productDetailsSec}>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <View style={{ flex: 1.8, paddingHorizontal: wp('3%') }}>
-                      <Text style={styles.productName}>{item2.products_name}</Text>
-                      <View style={styles.productQtySec}>
-                        <Text style={styles.productQtyText}>Quantity : </Text>
-                        <Text style={styles.productQty}>
-                          {' '}
-                          {item2.products_quantity}
-                        </Text>
-                      </View>
-                      <View style={styles.productQtySec}>
-                        {/* <Text style={styles.productQtyText}>
+                  <View style={styles.productDetailsSec}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                      <View style={{ flex: 1.8, paddingHorizontal: wp('3%') }}>
+                        <Text style={styles.productName}>{item2.products_name}</Text>
+                        <View style={styles.productQtySec}>
+                          <Text style={styles.productQtyText}>Quantity : </Text>
+                          <Text style={styles.productQty}>
+                            {' '}
+                            {item2.products_quantity}
+                          </Text>
+                        </View>
+                        <View style={styles.productQtySec}>
+                          {/* <Text style={styles.productQtyText}>
                           {item2.attributes[0].products_options} :{' '}
                         </Text> */}
-                        <Text style={styles.productQty}>
-                          {' '}
-                          {item2.attributes[0].products_options_values}
+                          <Text style={styles.productQty}>
+                            {' '}
+                            {item2.attributes[0].products_options_values}
+                          </Text>
+                        </View>
+                      </View>
+                      <View style={{ flex: 1.4 }}>
+                        <Text style={styles.productPrice}>
+                          Rs. {item2.products_price}
+                          {/* Price : ₹{item2.products_price} */}
                         </Text>
                       </View>
                     </View>
-                    <View style={{ flex: 1.4 }}>
-                      <Text style={styles.productPrice}>
-                        Rs. {item2.products_price}
-                        {/* Price : ₹{item2.products_price} */}
-                      </Text>
+                    <View style={styles.extraSec}>
+                      {orderDetails.orders_status == 'Completed' && (
+                        <TouchableOpacity
+                          style={activeButton.reviewButton}
+                          onPress={() => {
+                            toggleModal(item2).then(openModal);
+                          }}>
+                          <Text style={activeButton.text}>Review</Text>
+                        </TouchableOpacity>
+                      )}
+
+                      {orderDetails.orders_status == 'Completed' ? (
+                        <>
+                          {item2.returnable_days != 0 &&
+                            _returnDateCal(
+                              orderDetails.date_purchased,
+                              item2.returnable_days,
+                            ) &&
+                            returnRequested == 0 ? (
+                            <TouchableOpacity
+                              style={activeButton.reviewButton}
+                              onPress={() => {
+                                modalShow();
+                              }}>
+                              <Text style={activeButton.text}>Return</Text>
+                            </TouchableOpacity>
+                          ) : (
+                            <></>
+                          )}
+
+                          {returnRequested == 1 ? (
+                            <Text style={styles.returnProduct}>
+                              Return Request Submited
+                            </Text>
+                          ) : (
+                            <></>
+                          )}
+                        </>
+                      ) : (
+                        <></>
+                      )}
                     </View>
                   </View>
-                  <View style={styles.extraSec}>
-                    {orderDetails.orders_status == 'Completed' && (
-                      <TouchableOpacity
-                        style={activeButton.reviewButton}
-                        onPress={() => {
-                          toggleModal(item2).then(openModal);
-                        }}>
-                        <Text style={activeButton.text}>Review</Text>
-                      </TouchableOpacity>
-                    )}
+                </View>
+              ))}
+              {orderDetails.allGift.map((item3, key3) => (
+                <TouchableOpacity style={styles.contactUsSec} key={key3}>
+                  <View style={styles.productImageSec}>
+                    <Image
+                      source={{ uri: IMAGE_BASE_PATH + item3.image_path }}
+                      style={styles.itemImage}
+                      borderRadius={5}
+                    />
+                  </View>
 
-                    {orderDetails.orders_status == 'Completed' ? (
-                      <>
-                        {item2.returnable_days != 0 &&
-                          _returnDateCal(
-                            orderDetails.date_purchased,
-                            item2.returnable_days,
-                          ) &&
-                          returnRequested == 0 ? (
-                          <TouchableOpacity
-                            style={activeButton.reviewButton}
-                            onPress={() => {
-                              modalShow();
-                            }}>
-                            <Text style={activeButton.text}>Return</Text>
-                          </TouchableOpacity>
-                        ) : (
-                          <></>
-                        )}
+                  <View style={styles.productDetailsSec}>
+                    <Text style={styles.productName}>
+                      {item3.order_gift_title}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
 
-                        {returnRequested == 1 ? (
-                          <Text style={styles.returnProduct}>
-                            Return Request Submited
-                          </Text>
-                        ) : (
-                          <></>
-                        )}
-                      </>
-                    ) : (
-                      <></>
-                    )}
+
+
+              <View style={{ backgroundColor: BKColor.bgColor, borderRadius: 10, padding: wp('4%') }}>
+
+                <View style={styles.orderDetailsSec}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.orderTopHeading}>Order ID</Text>
+                    <Text style={styles.orderTextLeft}>
+                      {orderDetails.invoice_number}
+                    </Text>
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.orderTopHeading}>Placed On</Text>
+                    <Text style={styles.orderText}>
+                      {orderDetails.date_purchased}
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.orderDetailsSec}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.orderTopHeading}>Total Amount</Text>
+                    <Text style={styles.orderTextLeft}>
+                      {orderDetails.order_price}
+                    </Text>
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.orderTopHeading}>Payment Type</Text>
+                    <Text style={styles.orderText}>
+                      {orderDetails.payment_method}
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.orderDetailsSec}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.orderTopHeading}>Customer Name</Text>
+                    <Text style={styles.orderTextLeft}>
+                      {orderDetails.customers_name}
+                    </Text>
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.orderTopHeading}>Order Status</Text>
+                    <Text style={styles.orderTextLeft}>
+                      {orderDetails.orders_status}
+                    </Text>
                   </View>
                 </View>
               </View>
-            ))}
-            {orderDetails.allGift.map((item3, key3) => (
-              <TouchableOpacity style={styles.contactUsSec} key={key3}>
-                <View style={styles.productImageSec}>
-                  <Image
-                    source={{ uri: IMAGE_BASE_PATH + item3.image_path }}
-                    style={styles.itemImage}
-                    borderRadius={5}
-                  />
-                </View>
 
-                <View style={styles.productDetailsSec}>
-                  <Text style={styles.productName}>
-                    {item3.order_gift_title}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            ))}
-
-
-
-            <View style={{ backgroundColor:BKColor.bgColor,borderRadius:10,padding: wp('4%') }}>
-
-              <View style={styles.orderDetailsSec}>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.orderTopHeading}>Order ID</Text>
-                  <Text style={styles.orderTextLeft}>
-                    {orderDetails.invoice_number}
-                  </Text>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.orderTopHeading}>Placed On</Text>
-                  <Text style={styles.orderText}>
-                    {orderDetails.date_purchased}
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.orderDetailsSec}>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.orderTopHeading}>Total Amount</Text>
-                  <Text style={styles.orderTextLeft}>
-                    {orderDetails.order_price}
-                  </Text>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.orderTopHeading}>Payment Type</Text>
-                  <Text style={styles.orderText}>
-                    {orderDetails.payment_method}
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.orderDetailsSec}>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.orderTopHeading}>Customer Name</Text>
-                  <Text style={styles.orderTextLeft}>
-                    {orderDetails.customers_name}
-                  </Text>
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.orderTopHeading}>Order Status</Text>
-                  <Text style={styles.orderTextLeft}>
-                    {orderDetails.orders_status}
-                  </Text>
-                </View>
-              </View>
             </View>
-
-          </View>
-        </ScrollView>
-        {/* Review Modal */}
-        <Modal
-          isVisible={show}
-          onBackdropPress={closeModal}
-          style={{
-            margin: wp('5%'),
-            // marginHorizontal: wp("5%"),
-            // marginVertical: hp('20%'),
-            backgroundColor: BKColor.white,
-            padding: wp('3%'),
-            borderRadius: 15,
-          }}>
-          <ScrollView>
-            <View style={styles.headerPopup}>
-              <Text style={styles.modalText}>Review Product</Text>
-              <TouchableOpacity onPress={closeModal}>
-                <AntDesign name="close" style={styles.modalText} />
-              </TouchableOpacity>
-            </View>
-            <View>
-              <Image
-                source={{ uri: IMAGE_BASE_PATH + reviewModal.image }}
-                style={styles.itemReviewImage}
-                borderRadius={5}
-              />
-            </View>
-            <View style={styles.modalStar}>
-              <Text style={styles.modalText}>{reviewModal.products_name}</Text>
-              {/* <StarRating
+          </ScrollView>
+          {/* Review Modal */}
+          <CustomModal
+            visible={show}
+            onClose={closeModal}>
+            <ScrollView>
+              <View style={styles.headerPopup}>
+                <Text style={styles.modalText}>Review Product</Text>
+                <TouchableOpacity onPress={closeModal}>
+                  <AntDesign name="close" style={styles.modalText} />
+                </TouchableOpacity>
+              </View>
+              <View>
+                <Image
+                  source={{ uri: IMAGE_BASE_PATH + reviewModal.image }}
+                  style={styles.itemReviewImage}
+                  borderRadius={5}
+                />
+              </View>
+              <View style={styles.modalStar}>
+                <Text style={styles.modalText}>{reviewModal.products_name}</Text>
+                {/* <StarRating
                 maxStars={5}
                 disabled={false}
                 starSize={20}
@@ -487,108 +485,101 @@ function OrderDetails({ navigation, route }) {
                 rating={changeRating}
                 name="rating"
               /> */}
-            </View>
-            <View>
-              <Text style={{ textAlign: 'center', color: '#EC1F25' }}>
-                {fieldMessage}
-              </Text>
-            </View>
-            <View>
-              <Text style={{ paddingBottom: 10 }}>Write a review</Text>
-              <View style={styles.textAreaContainer}>
-                <TextInput
-                  multiline={true}
-                  numberOfLines={4}
-                  placeholder="put your review here"
-                  placeholderTextColor="grey"
-                  onChangeText={text => setReviewText(text)}
-                  value={reviewText}
-                  style={styles.textArea}
-                />
               </View>
-              <TouchableOpacity
-                style={[activeButton.reviewButton, { alignSelf: 'center' }]}
-                onPress={() => {
-                  _submitReview();
-                }}>
-                <Text style={activeButton.text}>Submit</Text>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
-        </Modal>
-        {/* End of Review Modal */}
-        {/* Return Modal */}
+              <View>
+                <Text style={{ textAlign: 'center', color: '#EC1F25' }}>
+                  {fieldMessage}
+                </Text>
+              </View>
+              <View>
+                <Text style={{ paddingBottom: 10 }}>Write a review</Text>
+                <View style={styles.textAreaContainer}>
+                  <TextInput
+                    multiline={true}
+                    numberOfLines={4}
+                    placeholder="put your review here"
+                    placeholderTextColor="grey"
+                    onChangeText={text => setReviewText(text)}
+                    value={reviewText}
+                    style={styles.textArea}
+                  />
+                </View>
+                <TouchableOpacity
+                  style={[activeButton.reviewButton, { alignSelf: 'center' }]}
+                  onPress={() => {
+                    _submitReview();
+                  }}>
+                  <Text style={activeButton.text}>Submit</Text>
+                </TouchableOpacity>
+              </View>
+            </ScrollView>
+          </CustomModal>
+          {/* End of Review Modal */}
+          {/* Return Modal */}
 
-        <Modal
-          isVisible={showReturn}
-          onBackdropPress={modalClose}
-          style={{
-            margin: wp('5%'),
-            // marginHorizontal: wp("5%"),
-            // marginVertical: hp('20%'),
-            backgroundColor: BKColor.white,
-            padding: wp('3%'),
-            borderRadius: 15,
-          }}>
-          <ScrollView>
-            <View style={styles.headerPopup}>
-              <Text style={styles.modalText}>Return Product</Text>
-              <TouchableOpacity onPress={modalClose}>
-                <AntDesign name="close" style={styles.modalText} />
-              </TouchableOpacity>
-            </View>
-            <View>
-              <Text style={{ textAlign: 'center', color: '#EC1F25' }}>
-                {fieldMessage}
-              </Text>
-            </View>
-            <View>
-              <Text style={{ paddingBottom: 10 }}>Return Reasons</Text>
-              <View style={styles.dropdownArea}>
-                <Dropdown
-                  // style={[styles.textInput, isFocus && { borderColor: '#DDDDDD' }]}
-                  // style={styles.dropdownArea}
-                  placeholder={!isFocus ? 'Select Reasons' : ''}
-                  onFocus={() => setIsFocus(true)}
-                  onBlur={() => setIsFocus(false)}
-                  value={returnReason}
-                  onChange={value => {
-                    setReturnReason(value.value);
-                    setIsFocus(false);
-                  }}
-                  data={returnReasonList}
-                  valueField="value"
-                  labelField="label"
-                  dropdownPosition="bottom"
-                />
+          <CustomModal
+            visible={showReturn}
+            onClose={modalClose}>
+            <ScrollView>
+              <View style={styles.headerPopup}>
+                <Text style={styles.modalText}>Return Product</Text>
+                <TouchableOpacity onPress={modalClose}>
+                  <AntDesign name="close" style={styles.modalText} />
+                </TouchableOpacity>
               </View>
-            </View>
+              <View>
+                <Text style={{ textAlign: 'center', color: '#EC1F25' }}>
+                  {fieldMessage}
+                </Text>
+              </View>
+              <View>
+                <Text style={{ paddingBottom: 10 }}>Return Reasons</Text>
+                <View style={styles.dropdownArea}>
+                  <Dropdown
+                    // style={[styles.textInput, isFocus && { borderColor: '#DDDDDD' }]}
+                    // style={styles.dropdownArea}
+                    placeholder={!isFocus ? 'Select Reasons' : ''}
+                    onFocus={() => setIsFocus(true)}
+                    onBlur={() => setIsFocus(false)}
+                    value={returnReason}
+                    onChange={value => {
+                      setReturnReason(value.value);
+                      setIsFocus(false);
+                    }}
+                    data={returnReasonList}
+                    valueField="value"
+                    labelField="label"
+                    dropdownPosition="bottom"
+                  />
+                </View>
+              </View>
 
-            <View>
-              <Text style={{ paddingBottom: 10 }}>Write a comment</Text>
-              <View style={styles.textAreaContainer}>
-                <TextInput
-                  multiline={true}
-                  numberOfLines={4}
-                  placeholder="put your comment here"
-                  placeholderTextColor="grey"
-                  onChangeText={text => setComment(text)}
-                  value={comment}
-                  style={styles.textArea}
-                />
+              <View>
+                <Text style={{ paddingBottom: 10 }}>Write a comment</Text>
+                <View style={styles.textAreaContainer}>
+                  <TextInput
+                    multiline={true}
+                    numberOfLines={4}
+                    placeholder="put your comment here"
+                    placeholderTextColor="grey"
+                    onChangeText={text => setComment(text)}
+                    value={comment}
+                    style={styles.textArea}
+                  />
+                </View>
+                <TouchableOpacity
+                  style={[activeButton.reviewButton, { alignSelf: 'center' }]}
+                  onPress={() => {
+                    // console.log('Return')
+                    _submitReturnComment();
+                  }}>
+                  <Text style={activeButton.text}>Submit</Text>
+                </TouchableOpacity>
               </View>
-              <TouchableOpacity
-                style={[activeButton.reviewButton, { alignSelf: 'center' }]}
-                onPress={() => {
-                  // console.log('Return')
-                  _submitReturnComment();
-                }}>
-                <Text style={activeButton.text}>Submit</Text>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
-        </Modal>
-      </SafeAreaView>
+            </ScrollView>
+          </CustomModal>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 }

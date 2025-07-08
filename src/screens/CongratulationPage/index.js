@@ -26,6 +26,7 @@ import {
   fontSize,
   placeHolderColor,
   fontFamily,
+  commonStyle,
 } from '../../common/values/BKStyles';
 import { BKColor } from '../../common/values/BKColor';
 import { POST_SIGNUP_API } from '../../config/ApiConfig';
@@ -36,46 +37,52 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import CustomStatusBar from '../../common/components/statusbar';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { platform } from '../../common/values/BKConstants';
 
-function CongratulationPage({ navigation,route}) {
+function CongratulationPage({ navigation, route }) {
   const orderId = route.params.orderId;
   //   useEffect(() => {}, [navigation]);
 
   return (
-    <SafeAreaView>
-      <CustomStatusBar />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {/* <View style={{ flex: 1 }}> */}
-        <ImageBackground
-          source={require('../../assets/images/congratulationPageBg.png')}
-          resizeMode='cover'
-          style={{ width: '100%', height: hp('100%') }}
-        >
+    <KeyboardAvoidingView
+      behavior={platform === 'ios' ? 'padding' : 'height'}
+      style={commonStyle.keyboardAvoidingView}>
+      <SafeAreaView style={commonStyle.safeAreaView}>
+        <CustomStatusBar />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {/* <View style={{ flex: 1 }}> */}
+          <ImageBackground
+            source={require('../../assets/images/congratulationPageBg.png')}
+            resizeMode='cover'
+            style={{ width: '100%', height: hp('100%') }}
+          >
 
-          <View style={{ flex: 1, padding: wp('4%') }}>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end' }}>
-              <Text style={styles.congratulationText1}>Congratulations</Text>
-              <Text style={styles.congratulationText2}>Order has been placed</Text>
-              <Text style={styles.congratulationText2}>#{orderId}</Text>
-            </View>
+            <View style={{ flex: 1, padding: wp('4%') }}>
+              <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end' }}>
+                <Text style={styles.congratulationText1}>Congratulations</Text>
+                <Text style={styles.congratulationText2}>Order has been placed</Text>
+                <Text style={styles.congratulationText2}>#{orderId}</Text>
+              </View>
 
-            <View style={{ flex: 1.3,justifyContent:'flex-end',marginBottom: hp('2%') }}>
-              <TouchableOpacity
-                style={activeButton.button}
-                onPress={() => navigation.navigate('MyOrders')}>
-                <Text style={activeButton.text}>My Orders</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[activeButton.button,{backgroundColor: BKColor.textColor2}]}
-                onPress={() => navigation.navigate('HomeTab')}>
-                <Text style={activeButton.text}>Back to home</Text>
-              </TouchableOpacity>
+              <View style={{ flex: 1.3, justifyContent: 'flex-end', marginBottom: hp('2%') }}>
+                <TouchableOpacity
+                  style={activeButton.button}
+                  onPress={() => navigation.navigate('MyOrders')}>
+                  <Text style={activeButton.text}>My Orders</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[activeButton.button, { backgroundColor: BKColor.textColor2 }]}
+                  onPress={() => navigation.navigate('Home')}>
+                  <Text style={activeButton.text}>Back to home</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </ImageBackground>
-        {/* </View> */}
-      </ScrollView>
-    </SafeAreaView>
+          </ImageBackground>
+          {/* </View> */}
+        </ScrollView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 export default CongratulationPage;

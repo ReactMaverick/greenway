@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,19 +13,21 @@ import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
-import {pageContainerStyle} from '../../common/values/BKStyles';
-import {pageHeader, fontSize, activeButton} from '../../common/values/BKStyles';
-import {BKColor} from '../../common/values/BKColor';
+import { commonStyle, pageContainerStyle } from '../../common/values/BKStyles';
+import { pageHeader, fontSize, activeButton } from '../../common/values/BKStyles';
+import { BKColor } from '../../common/values/BKColor';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import {inputContainer, textInput} from '../../common/values/BKStyles';
-import {GET_PRIVACY_POLICY_API} from '../../config/ApiConfig';
-import {GetApiFetch} from '../../config/CommonFunction';
+import { inputContainer, textInput } from '../../common/values/BKStyles';
+import { GET_PRIVACY_POLICY_API } from '../../config/ApiConfig';
+import { GetApiFetch } from '../../config/CommonFunction';
 import CustomStatusBar from '../../common/components/statusbar';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { platform } from '../../common/values/BKConstants';
 
-function PrivacyPolicy({navigation}) {
+function PrivacyPolicy({ navigation }) {
   const [privacyPolicy, setPrivacyPolicy] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const regex = /(<([^>]+)>)/gi;
@@ -56,40 +58,44 @@ function PrivacyPolicy({navigation}) {
     return (
       <>
         <SafeAreaView
-          style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <CustomStatusBar/>
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <CustomStatusBar />
           <ActivityIndicator size="large" color={BKColor.textColor2} />
         </SafeAreaView>
       </>
     );
   } else {
     return (
-      <SafeAreaView style={pageContainerStyle}>
-        <CustomStatusBar/>
-        <View style={pageHeader}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Fontisto
-              name="arrow-left-l"
-              color={BKColor.textColor1}
-              size={fontSize.h2}
-            />
-          </TouchableOpacity>
-          <Text style={pageHeader.text}>Privacy Policy</Text>
-          <View></View>
-        </View>
+      <KeyboardAvoidingView
+        behavior={platform === 'ios' ? 'padding' : 'height'}
+        style={commonStyle.keyboardAvoidingView}>
+        <SafeAreaView style={pageContainerStyle}>
+          <CustomStatusBar />
+          <View style={pageHeader}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Fontisto
+                name="arrow-left-l"
+                color={BKColor.textColor1}
+                size={fontSize.h2}
+              />
+            </TouchableOpacity>
+            <Text style={pageHeader.text}>Privacy Policy</Text>
+            <View></View>
+          </View>
 
-        <View style={{paddingHorizontal: wp('3%')}}>
-          {/* <Text style={styles.aboutUsHeading}>Privacy Policy What is Lorem Ipsum?</Text> */}
-          <Text style={styles.aboutUsDesc}>
-            {privacyPolicy.cms_text != null
-              ? privacyPolicy.cms_text
+          <View style={{ paddingHorizontal: wp('3%') }}>
+            {/* <Text style={styles.aboutUsHeading}>Privacy Policy What is Lorem Ipsum?</Text> */}
+            <Text style={styles.aboutUsDesc}>
+              {privacyPolicy.cms_text != null
+                ? privacyPolicy.cms_text
                   .replace(regex, '')
                   .replace(secondRegEx, '')
                   .replace(ThirdRegEx, '')
-              : ''}
-          </Text>
-        </View>
-      </SafeAreaView>
+                : ''}
+            </Text>
+          </View>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 }

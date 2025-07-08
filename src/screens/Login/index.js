@@ -16,7 +16,7 @@ import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { pageContainerStyle } from '../../common/values/BKStyles';
+import { commonStyle, pageContainerStyle } from '../../common/values/BKStyles';
 import {
   inputLevel,
   inputBottomLevel,
@@ -44,6 +44,8 @@ import {
 
 import { userDetails } from '../../redux/reducers/UserReducer';
 import CustomStatusBar from '../../common/components/statusbar';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { platform } from '../../common/values/BKConstants';
 
 // Settings.setAppID(FBAppId);
 
@@ -71,7 +73,7 @@ function Login({ navigation }) {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (username == '') {
       setErrorArr({ id: 1, message: 'Enter Email/Phone' });
-    } 
+    }
     // else if (reg.test(username) === false && username.length != 10) {
     //   setErrorArr({ id: 1, message: 'Please Enter Valid Email/Phone' });
     // } 
@@ -88,7 +90,7 @@ function Login({ navigation }) {
       // console.log('formData',formData);
       PostApiFetch(POST_SIGNIN_API, formData)
         .then(([status, response]) => {
-          // console.log('response',response);
+          console.log('response', response);
           if (status == 200) {
             // setIsLoading(true)
             if (response.status == false) {
@@ -214,92 +216,95 @@ function Login({ navigation }) {
     );
   } else {
     return (
-      <SafeAreaView>
-        <CustomStatusBar />
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={pageContainerStyle}>
-            <View style={styles.loginLogoSection}>
-              <View style={styles.loginLogoSection.logo}>
-                <Image
-                  source={require('../../assets/images/header-logo.png')}
-                  style={{ height: wp('38.8%'), width: wp('27.1%') }}
-                />
+      <KeyboardAvoidingView
+        behavior={platform === 'ios' ? 'padding' : 'height'}
+        style={commonStyle.keyboardAvoidingView}>
+        <SafeAreaView style={commonStyle.safeAreaView}>
+          <CustomStatusBar />
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={pageContainerStyle}>
+              <View style={styles.loginLogoSection}>
+                <View style={styles.loginLogoSection.logo}>
+                  <Image
+                    source={require('../../assets/images/header-logo.png')}
+                    style={{ height: wp('38.8%'), width: wp('27.1%') }}
+                  />
+                </View>
+                <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
+                <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
               </View>
-              <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
-              <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
-            </View>
-            <Text style={{ textAlign: 'center', color: BKColor.textColor2 }}>
-              {loginErrorMessage}
-            </Text>
-            <View style={[inputContainer, errorArr.id == 1 && styles.errorInput]}>
-              <TextInput
-                placeholder={'Enter email address'}
-                placeholderTextColor={placeHolderColor}
-                keyboardType="email-address"
-                style={[
-                  textInput,
-                ]}
-                onChangeText={value => setUsername(value)}
-                value={username}
-                onFocus={() => {
-                  setErrorArr(0);
-                }}
-              />
-            </View>
-              {errorArr.id == 1 && (
-                <Text style={styles.errorText}>* {errorArr.message}</Text>
-              )}
-
-            <View style={[inputContainer, errorArr.id == 2 && styles.errorInput]}>
-              <View
-                style={[
-                  textInput
-                ]}
-                >
+              <Text style={{ textAlign: 'center', color: BKColor.textColor2 }}>
+                {loginErrorMessage}
+              </Text>
+              <View style={[inputContainer, errorArr.id == 1 && styles.errorInput]}>
                 <TextInput
-                  placeholder={'Password'}
+                  placeholder={'Enter email address'}
                   placeholderTextColor={placeHolderColor}
-                  style={{
-                    width: '92%',
-                    fontFamily: fontFamily.regular,
-                    fontSize: fontSize.h3,
-                    color: BKColor.textColor1,
-                  }}
-                  secureTextEntry={passwordEye}
-                  onChangeText={value => setPassword(value)}
-                  value={password}
+                  keyboardType="email-address"
+                  style={[
+                    textInput,
+                  ]}
+                  onChangeText={value => setUsername(value)}
+                  value={username}
                   onFocus={() => {
                     setErrorArr(0);
                   }}
                 />
-                <View style={{ width: '8%', justifyContent: 'center', alignItems: 'flex-end' }}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setPasswordEye(!passwordEye);
-                    }}>
-                    {/* <Text>Show</Text> */}
-                    <Entypo
-                      name={passwordEye ? 'eye-with-line' : 'eye'}
-                      style={{ fontSize: 20, color: BKColor.textColor1 }}
-                    />
-
-                  </TouchableOpacity>
-                </View>
               </View>
-              
-            </View>
-            {errorArr.id == 2 && (
-              <Text style={styles.errorText}>* {errorArr.message}</Text>
-            )}
-            <TouchableOpacity
-              onPress={() => navigation.navigate('ForgetPassword')}>
-              <Text style={inputBottomLevel}>Forgot Password?</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={activeButton.button} onPress={_signIn}>
-              <Text style={activeButton.text}>Login</Text>
-            </TouchableOpacity>
+              {errorArr.id == 1 && (
+                <Text style={styles.errorText}>* {errorArr.message}</Text>
+              )}
 
-            {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: hp('3%') }}>
+              <View style={[inputContainer, errorArr.id == 2 && styles.errorInput]}>
+                <View
+                  style={[
+                    textInput
+                  ]}
+                >
+                  <TextInput
+                    placeholder={'Password'}
+                    placeholderTextColor={placeHolderColor}
+                    style={{
+                      width: '92%',
+                      fontFamily: fontFamily.regular,
+                      fontSize: fontSize.h3,
+                      color: BKColor.textColor1,
+                    }}
+                    secureTextEntry={passwordEye}
+                    onChangeText={value => setPassword(value)}
+                    value={password}
+                    onFocus={() => {
+                      setErrorArr(0);
+                    }}
+                  />
+                  <View style={{ width: '8%', justifyContent: 'center', alignItems: 'flex-end' }}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setPasswordEye(!passwordEye);
+                      }}>
+                      {/* <Text>Show</Text> */}
+                      <Entypo
+                        name={passwordEye ? 'eye-with-line' : 'eye'}
+                        style={{ fontSize: 20, color: BKColor.textColor1 }}
+                      />
+
+                    </TouchableOpacity>
+                  </View>
+                </View>
+
+              </View>
+              {errorArr.id == 2 && (
+                <Text style={styles.errorText}>* {errorArr.message}</Text>
+              )}
+              <TouchableOpacity
+                onPress={() => navigation.navigate('ForgetPassword')}>
+                <Text style={inputBottomLevel}>Forgot Password?</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={activeButton.button} onPress={_signIn}>
+                <Text style={activeButton.text}>Login</Text>
+              </TouchableOpacity>
+
+              {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginVertical: hp('3%') }}>
               <View style={{ width: wp('35%'), borderTopWidth: 1, borderColor: BKColor.textColor1 }}></View>
 
               <View style={{ marginHorizontal: wp('5%') }}>
@@ -319,7 +324,7 @@ function Login({ navigation }) {
             </View> */}
 
 
-            {/* <View style={styles.socialLoginContainer}>
+              {/* <View style={styles.socialLoginContainer}>
             <TouchableOpacity
               style={styles.socialLoginButton.button}
               onPress={() => {
@@ -372,17 +377,18 @@ function Login({ navigation }) {
               <Text style={styles.socialLoginButton.text2}>Facebook</Text>
             </TouchableOpacity>
           </View> */}
-            <View style={styles.loginFooter}>
-              <Text style={styles.loginFooter.textLeft}>
-                Don’t have account?{' '}
-              </Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                <Text style={styles.loginFooter.textRight}>Sign up</Text>
-              </TouchableOpacity>
+              <View style={styles.loginFooter}>
+                <Text style={styles.loginFooter.textLeft}>
+                  Don’t have account?{' '}
+                </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                  <Text style={styles.loginFooter.textRight}>Sign up</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+          </ScrollView>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 }

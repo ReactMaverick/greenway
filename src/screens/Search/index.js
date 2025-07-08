@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   ScrollView,
@@ -22,6 +22,7 @@ import {
   fontSize,
   passiveButton,
   pageContainerStyle2,
+  commonStyle,
 } from '../../common/values/BKStyles';
 import {
   heightPercentageToDP as hp,
@@ -31,15 +32,17 @@ import {
   GET_SEARCH_SUGGESSION,
   POST_SHOP_PAGE_API,
 } from '../../config/ApiConfig';
-import {GetApiFetch, PostApiFetch} from '../../config/CommonFunction';
+import { GetApiFetch, PostApiFetch } from '../../config/CommonFunction';
 import styles from './style';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import {BKColor} from '../../common/values/BKColor';
+import { BKColor } from '../../common/values/BKColor';
 import PopularProducts from '../../common/components/home/PopularProducts';
 import SingleProduct from '../../common/components/home/SingleProduct';
 import DeviceInfo from 'react-native-device-info';
-function Search({navigation, route}) {
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { platform } from '../../common/values/BKConstants';
+function Search({ navigation, route }) {
   const [result, setResult] = useState('');
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -84,7 +87,7 @@ function Search({navigation, route}) {
         }
       })
       .catch(error => console.log(error))
-      .finally(() => {});
+      .finally(() => { });
   };
   useEffect(() => {
     DeviceInfo.getAndroidId().then(androidId => {
@@ -97,7 +100,7 @@ function Search({navigation, route}) {
       <View style={styles.searchSection}>
         {result != '' ? (
           <TouchableOpacity
-            style={{marginRight: wp('3%')}}
+            style={{ marginRight: wp('3%') }}
             onPress={() => navigation.goBack()}>
             <Fontisto
               name="arrow-left-l"
@@ -117,7 +120,7 @@ function Search({navigation, route}) {
         />
       </View>
       {isLoading ? (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <ActivityIndicator size="large" color={BKColor.textColor2} />
         </View>
       ) : (
@@ -134,11 +137,11 @@ function Search({navigation, route}) {
               style={styles.searchResult}>
               <View>
                 <Image
-                  source={{uri: item.image_path}}
+                  source={{ uri: item.image_path }}
                   style={styles.searchImage}
                 />
               </View>
-              <View style={{flex: 1}}>
+              <View style={{ flex: 1 }}>
                 <Text style={styles.searchResultText}>
                   {item.products_name}{' '}
                 </Text>
@@ -150,23 +153,27 @@ function Search({navigation, route}) {
           ))}
         </View>
       )}
-      <SafeAreaView>
-        <View style={pageContainerStyle2}>
-          <ScrollView ScrollIndicator={false}>
-            <View style={styles.productContainer}>
-              {allProducts.length > 0 &&
-                allProducts.map((item, key) => (
-                  <SingleProduct
-                    navigation={navigation}
-                    index={key}
-                    key={key}
-                    item={item}
-                  />
-                ))}
-            </View>
-          </ScrollView>
-        </View>
-      </SafeAreaView>
+      <KeyboardAvoidingView
+        behavior={platform === 'ios' ? 'padding' : 'height'}
+        style={commonStyle.keyboardAvoidingView}>
+        <SafeAreaView style={commonStyle.safeAreaView}>
+          <View style={pageContainerStyle2}>
+            <ScrollView ScrollIndicator={false}>
+              <View style={styles.productContainer}>
+                {allProducts.length > 0 &&
+                  allProducts.map((item, key) => (
+                    <SingleProduct
+                      navigation={navigation}
+                      index={key}
+                      key={key}
+                      item={item}
+                    />
+                  ))}
+              </View>
+            </ScrollView>
+          </View>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     </>
   );
 }

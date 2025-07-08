@@ -74,7 +74,7 @@ export default StyleSheet.create({
     flexWrap: 'wrap',
   },
   singleProductContainer: {
-    width: wp('45.5%'),
+    width: wp('45%'),
     // height: wp('45.5%'),
     justifyContent: 'center',
     alignItems: 'center',

@@ -7,16 +7,16 @@ import {BKColor} from '../../common/values/BKColor';
 export default StyleSheet.create({
   searchSection: {
     borderWidth: 1,
-    borderColor: '#A9A9A9',
-    borderRadius: 3,
+    borderColor: BKColor.boxBorder,
+    borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 5,
+    paddingHorizontal: 5,
+    marginHorizontal: wp('4.5%'),
   },
   searchSectionText: {
-    flexDirection: 'row',
     fontFamily: 'Poppins-bold',
-    fontSize: 14,
+    fontSize: 15,
     color: '#000',
     paddingLeft: 5,
     width: '88%',

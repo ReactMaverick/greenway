@@ -5,7 +5,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { pageContainerStyle } from "../../common/values/BKStyles";
+import { commonStyle, pageContainerStyle } from "../../common/values/BKStyles";
 import { pageHeader, fontSize, activeButton } from "../../common/values/BKStyles";
 import { BKColor } from "../../common/values/BKColor";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
@@ -15,6 +15,8 @@ import { GET_FAQ_API, BASE_URL } from "../../config/ApiConfig";
 import { GetApiFetch } from "../../config/CommonFunction";
 import { TrimString } from "../../config/CommonFunction";
 import CustomStatusBar from "../../common/components/statusbar";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
+import { platform } from "../../common/values/BKConstants";
 
 
 function Faq({ navigation }) {
@@ -51,35 +53,37 @@ function Faq({ navigation }) {
         return (
             <>
                 <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <CustomStatusBar/>
+                    <CustomStatusBar />
                     <ActivityIndicator size="large" color={BKColor.textColor2} />
                 </SafeAreaView>
             </>
         )
     } else {
         return (
-
-            <SafeAreaView style={pageContainerStyle}>
-                <CustomStatusBar/>
-                <View style={pageHeader}>
-                    <TouchableOpacity onPress={() => navigation.goBack()} >
-                        <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
-                    </TouchableOpacity>
-                    <Text style={pageHeader.text}>Faq</Text>
-                    <View></View>
-                </View>
-                <ScrollView showsVerticalScrollIndicator={false} style={{ marginBottom: hp('6%'), }}>
-                    <View style={{ paddingHorizontal: wp('3%') }}>
-
-                        <Text style={styles.aboutUsHeading}>Below are frequently asked questions, you may find the answer for yourself</Text>
+            <KeyboardAvoidingView
+                behavior={platform === 'ios' ? 'padding' : 'height'}
+                style={commonStyle.keyboardAvoidingView}>
+                <SafeAreaView style={pageContainerStyle}>
+                    <CustomStatusBar />
+                    <View style={pageHeader}>
+                        <TouchableOpacity onPress={() => navigation.goBack()} >
+                            <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
+                        </TouchableOpacity>
+                        <Text style={pageHeader.text}>Faq</Text>
+                        <View></View>
                     </View>
-                    {faq.map((item, key) => (
-                        <Accordion key={key} heading={item.faq_title} details={item.faq_desc != null ? (((item.faq_desc).replace(regex, '')).replace(secondRegEx, '')).replace(ThirdRegEx, '') : ''} />
-                    ))}
+                    <ScrollView showsVerticalScrollIndicator={false} style={{ marginBottom: hp('6%'), }}>
+                        <View style={{ paddingHorizontal: wp('3%') }}>
 
-                </ScrollView>
-            </SafeAreaView>
+                            <Text style={styles.aboutUsHeading}>Below are frequently asked questions, you may find the answer for yourself</Text>
+                        </View>
+                        {faq.map((item, key) => (
+                            <Accordion key={key} heading={item.faq_title} details={item.faq_desc != null ? (((item.faq_desc).replace(regex, '')).replace(secondRegEx, '')).replace(ThirdRegEx, '') : ''} />
+                        ))}
 
+                    </ScrollView>
+                </SafeAreaView>
+            </KeyboardAvoidingView>
         )
     }
 

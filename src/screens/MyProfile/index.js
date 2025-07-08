@@ -29,6 +29,7 @@ import {
   inputContainer,
   activeButton,
   fontSize,
+  commonStyle,
 } from '../../common/values/BKStyles';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { BKColor } from '../../common/values/BKColor';
@@ -41,14 +42,16 @@ import { useSelector, useDispatch } from 'react-redux';
 // } from '@react-native-google-signin/google-signin';
 import { logOut } from '../../redux/reducers/UserReducer';
 import CustomStatusBar from '../../common/components/statusbar';
-import {PostApiFetch} from '../../config/CommonFunction';
+import { PostApiFetch } from '../../config/CommonFunction';
 import { DELETE_ACCOUNT } from '../../config/ApiConfig';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { platform } from '../../common/values/BKConstants';
 
 function MyProfile({ navigation }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const userData = useSelector(state => state.UserReducer.value);
-console.log("userData",userData);
+  console.log("userData", userData);
   const _deleteAccount = () => {
     Alert.alert(
       "Delete Account",
@@ -59,42 +62,44 @@ console.log("userData",userData);
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "Yes", onPress: () => {
-          const formData = new FormData();
-          formData.append('user_id', userData.id);
-          PostApiFetch(DELETE_ACCOUNT, formData)
-            .then(([status, response]) => {
-             
-              if (status == 200) {
-                if (response.status) {
-                  dispatch(logOut());
-                  showMessage({
-                    message: 'Account deleted successfully',
-                    type: 'info',
-                    backgroundColor: '#808080',
-                  });
+        {
+          text: "Yes", onPress: () => {
+            const formData = new FormData();
+            formData.append('user_id', userData.id);
+            PostApiFetch(DELETE_ACCOUNT, formData)
+              .then(([status, response]) => {
+
+                if (status == 200) {
+                  if (response.status) {
+                    dispatch(logOut());
+                    showMessage({
+                      message: 'Account deleted successfully',
+                      type: 'info',
+                      backgroundColor: '#808080',
+                    });
+                  } else {
+                    showMessage({
+                      message: 'Something went wrong',
+                      type: 'info',
+                      backgroundColor: '#808080',
+                    });
+                  }
+
                 } else {
-                  showMessage({
-                    message: 'Something went wrong',
-                    type: 'info',
-                    backgroundColor: '#808080',
-                  });
+                  console.log('Something went wrong');
                 }
-               
-              } else {
-                console.log('Something went wrong');
-              }
-            })
-            .catch(error => console.log(error))
-            .finally(() => {
-              setIsLoading(false);
-            });
-        } }
+              })
+              .catch(error => console.log(error))
+              .finally(() => {
+                setIsLoading(false);
+              });
+          }
+        }
       ],
       { cancelable: false }
     );
 
-    
+
   };
   // const socialSignOut = async () => {
   //   try {
@@ -106,26 +111,28 @@ console.log("userData",userData);
   //   }
   // };
   //   useEffect(() => {}, [navigation]);
-
   return (
-    <SafeAreaView>
-      <CustomStatusBar />
-      <View style={pageContainerStyle2}>
+    <KeyboardAvoidingView
+      behavior={platform === 'ios' ? 'padding' : 'height'}
+      style={commonStyle.keyboardAvoidingView}>
+      <SafeAreaView style={commonStyle.safeAreaView}>
+        <CustomStatusBar />
+        <View style={pageContainerStyle2}>
 
-        <View style={pageHeader}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Fontisto
-              name="arrow-left"
-              color={BKColor.textColor1}
-              size={fontSize.h2}
-            />
-          </TouchableOpacity>
-          <Text style={pageHeader.text}>Profile</Text>
-          <View style={{ width: '10%' }}></View>
-        </View>
+          <View style={pageHeader}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Fontisto
+                name="arrow-left"
+                color={BKColor.textColor1}
+                size={fontSize.h2}
+              />
+            </TouchableOpacity>
+            <Text style={pageHeader.text}>Profile</Text>
+            <View style={{ width: '10%' }}></View>
+          </View>
 
-        <ScrollView showsVerticalScrollIndicator={false} style={{ marginBottom: hp('7%') }}>
-          {/* <View style={pageHeader}>
+          <ScrollView showsVerticalScrollIndicator={false} style={{ marginBottom: hp('7%') }}>
+            {/* <View style={pageHeader}>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
                     <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
                 </TouchableOpacity>
@@ -133,7 +140,7 @@ console.log("userData",userData);
                 <View></View>
             </View> */}
 
-          {/* <View style={styles.loginLogoSection}>
+            {/* <View style={styles.loginLogoSection}>
             <View style={styles.loginLogoSection.logo}>
               <Image
                 source={require('../../assets/images/user.png')}
@@ -147,40 +154,40 @@ console.log("userData",userData);
             <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
           </View> */}
 
-          <View style={{ alignItems:'center' }}>
-            <View style={styles.userProfileImgOuter}>
-              <Image
-                source={require('../../assets/images/user.png')}
-                alt=""
-                style={styles.userProfileImg}
-              />
-            </View>
-          </View>
-          <View style={{ alignItems:'center' }}>
-            <Text style={styles.userNameText}>{userData.first_name+" "+userData.last_name}</Text>
-          </View>
-          <View style={styles.regContainer}>
-            {/* {userData != null ? */}
-            <TouchableOpacity
-              style={styles.regContainer.item}
-              onPress={() => navigation.navigate('MyAccount')}>
-              <View style={styles.itemOuter}>
-                <View style={styles.textOuter}>
-                  <FontAwesome
-                    name="user"
-                    style={{ color: BKColor.textColor1 }}
-                    size={fontSize.h1}
-                  />
-                  <Text style={styles.regContainer.text1}>My Account</Text>
-                </View>
-                <Entypo
-                  name="chevron-thin-right"
-                  style={{ color: BKColor.textColor1 }}
-                  size={fontSize.h2}
+            <View style={{ alignItems: 'center' }}>
+              <View style={styles.userProfileImgOuter}>
+                <Image
+                  source={require('../../assets/images/user.png')}
+                  alt=""
+                  style={styles.userProfileImg}
                 />
               </View>
-            </TouchableOpacity>
-            {/* :
+            </View>
+            <View style={{ alignItems: 'center' }}>
+              <Text style={styles.userNameText}>{userData.first_name + " " + userData.last_name}</Text>
+            </View>
+            <View style={styles.regContainer}>
+              {/* {userData != null ? */}
+              <TouchableOpacity
+                style={styles.regContainer.item}
+                onPress={() => navigation.navigate('MyAccount')}>
+                <View style={styles.itemOuter}>
+                  <View style={styles.textOuter}>
+                    <FontAwesome
+                      name="user"
+                      style={{ color: BKColor.textColor1 }}
+                      size={fontSize.h1}
+                    />
+                    <Text style={styles.regContainer.text1}>My Account</Text>
+                  </View>
+                  <Entypo
+                    name="chevron-thin-right"
+                    style={{ color: BKColor.textColor1 }}
+                    size={fontSize.h2}
+                  />
+                </View>
+              </TouchableOpacity>
+              {/* :
                     <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('Login')}>
                         <View style={styles.itemOuter}>
                             <View style={styles.textOuter}>
@@ -191,27 +198,27 @@ console.log("userData",userData);
                         </View>
                     </TouchableOpacity>
                 } */}
-            {/* {userData != null ? */}
-            <TouchableOpacity
-              style={styles.regContainer.item}
-              onPress={() => navigation.navigate('MyAddress')}>
-              <View style={styles.itemOuter}>
-                <View style={styles.textOuter}>
-                  <FontAwesome
-                    name="map"
+              {/* {userData != null ? */}
+              <TouchableOpacity
+                style={styles.regContainer.item}
+                onPress={() => navigation.navigate('MyAddress')}>
+                <View style={styles.itemOuter}>
+                  <View style={styles.textOuter}>
+                    <FontAwesome
+                      name="map"
+                      style={{ color: BKColor.textColor1 }}
+                      size={fontSize.h2}
+                    />
+                    <Text style={styles.regContainer.text1}>My Address</Text>
+                  </View>
+                  <Entypo
+                    name="chevron-thin-right"
                     style={{ color: BKColor.textColor1 }}
                     size={fontSize.h2}
                   />
-                  <Text style={styles.regContainer.text1}>My Address</Text>
                 </View>
-                <Entypo
-                  name="chevron-thin-right"
-                  style={{ color: BKColor.textColor1 }}
-                  size={fontSize.h2}
-                />
-              </View>
-            </TouchableOpacity>
-            {/* :
+              </TouchableOpacity>
+              {/* :
                     <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('Login')}>
                         <View style={styles.itemOuter}>
                             <View style={styles.textOuter}>
@@ -222,25 +229,25 @@ console.log("userData",userData);
                         </View>
                     </TouchableOpacity>
                 } */}
-            {/* {userData != null ? */}
-            <TouchableOpacity
-              style={styles.regContainer.item}
-              onPress={() => navigation.navigate('MyOrders')}>
-              <View style={styles.itemOuter}>
-                <View style={styles.textOuter}>
-                  <FontAwesome name="shopping-bag"
+              {/* {userData != null ? */}
+              <TouchableOpacity
+                style={styles.regContainer.item}
+                onPress={() => navigation.navigate('MyOrders')}>
+                <View style={styles.itemOuter}>
+                  <View style={styles.textOuter}>
+                    <FontAwesome name="shopping-bag"
+                      style={{ color: BKColor.textColor1 }}
+                      size={fontSize.h2} />
+                    <Text style={styles.regContainer.text1}>My Orders</Text>
+                  </View>
+                  <Entypo
+                    name="chevron-thin-right"
                     style={{ color: BKColor.textColor1 }}
-                    size={fontSize.h2} />
-                  <Text style={styles.regContainer.text1}>My Orders</Text>
+                    size={fontSize.h2}
+                  />
                 </View>
-                <Entypo
-                  name="chevron-thin-right"
-                  style={{ color: BKColor.textColor1 }}
-                  size={fontSize.h2}
-                />
-              </View>
-            </TouchableOpacity>
-            {/* :
+              </TouchableOpacity>
+              {/* :
                     <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('Login')}>
                         <View style={styles.itemOuter}>
                             <View style={styles.textOuter}>
@@ -251,9 +258,9 @@ console.log("userData",userData);
                         </View>
                     </TouchableOpacity>
                 } */}
-            {/* {userData != null ? */}
+              {/* {userData != null ? */}
 
-            {/* <TouchableOpacity
+              {/* <TouchableOpacity
             style={styles.regContainer.item}
             onPress={() => navigation.navigate('Wishlist')}>
             <View style={styles.itemOuter}>
@@ -270,7 +277,7 @@ console.log("userData",userData);
               />
             </View>
           </TouchableOpacity> */}
-            {/* :
+              {/* :
                     <TouchableOpacity style={styles.regContainer.item} onPress={() => navigation.navigate('Login')}>
                         <View style={styles.itemOuter}>
                             <View style={styles.textOuter}>
@@ -282,91 +289,92 @@ console.log("userData",userData);
                     </TouchableOpacity>
                 } */}
 
-            <TouchableOpacity
-              style={styles.regContainer.item}
-              onPress={() => navigation.navigate('Cart')}>
-              <View style={styles.itemOuter}>
-                <View style={styles.textOuter}>
-                  <FontAwesome
-                    name="shopping-cart"
-                    style={{ color: BKColor.textColor1 }}
-                    size={fontSize.h1}
-                  />
-                  <Text style={styles.regContainer.text1}>Cart</Text>
-                </View>
-                <Entypo
-                  name="chevron-thin-right"
-                  style={{ color: BKColor.textColor1 }}
-                  size={fontSize.h2}
-                />
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.regContainer.item}
-              onPress={() => {
-                _deleteAccount();
-              }}>
-            
-              <View style={styles.itemOuter}>
-                <View style={styles.textOuter}>
+              <TouchableOpacity
+                style={styles.regContainer.item}
+                onPress={() => navigation.navigate('Cart')}>
+                <View style={styles.itemOuter}>
+                  <View style={styles.textOuter}>
+                    <FontAwesome
+                      name="shopping-cart"
+                      style={{ color: BKColor.textColor1 }}
+                      size={fontSize.h1}
+                    />
+                    <Text style={styles.regContainer.text1}>Cart</Text>
+                  </View>
                   <Entypo
-                    name="trash"
-                    style={{ color: BKColor.textColor1 }}
-                    size={fontSize.h1}
-                  />
-                  <Text style={styles.regContainer.text1}>Delete Account</Text>
-                </View>
-                <Entypo
-                  name="chevron-thin-right"
-                  style={{ color: BKColor.textColor1 }}
-                  size={fontSize.h2}
-                />
-              </View>
-            </TouchableOpacity>
-
-
-
-            <TouchableOpacity
-              style={styles.regContainer.item}
-              onPress={() => {
-                // dispatch({ type: 'setUserData', payload: null })
-                // dispatch({ type: 'setCartData', payload: null })
-                // dispatch({ type: 'setWishlistData', payload: null })
-                // dispatch({ type: 'setCouponDetails', payload: null })
-                // try{
-                //     socialSignOut()
-                //   }catch(e){
-                //     console.log('error',e)
-                //   }
-                // navigation.navigate('Login')
-                dispatch(logOut());
-                showMessage({
-                  message: 'You are logged out',
-                  type: 'info',
-                  backgroundColor: '#808080',
-                });
-              }}>
-              <View style={styles.itemOuter}>
-                <View style={styles.textOuter}>
-                  <MaterialIcons
-                    name="logout"
+                    name="chevron-thin-right"
                     style={{ color: BKColor.textColor1 }}
                     size={fontSize.h2}
                   />
-                  <Text style={styles.regContainer.text1}>Log Out</Text>
                 </View>
-                <Entypo
-                  name="chevron-thin-right"
-                  style={{ color: BKColor.textColor1 }}
-                  size={fontSize.h2}
-                />
-              </View>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </View >
-    </SafeAreaView >
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.regContainer.item}
+                onPress={() => {
+                  _deleteAccount();
+                }}>
+
+                <View style={styles.itemOuter}>
+                  <View style={styles.textOuter}>
+                    <Entypo
+                      name="trash"
+                      style={{ color: BKColor.textColor1 }}
+                      size={fontSize.h1}
+                    />
+                    <Text style={styles.regContainer.text1}>Delete Account</Text>
+                  </View>
+                  <Entypo
+                    name="chevron-thin-right"
+                    style={{ color: BKColor.textColor1 }}
+                    size={fontSize.h2}
+                  />
+                </View>
+              </TouchableOpacity>
+
+
+
+              <TouchableOpacity
+                style={styles.regContainer.item}
+                onPress={() => {
+                  // dispatch({ type: 'setUserData', payload: null })
+                  // dispatch({ type: 'setCartData', payload: null })
+                  // dispatch({ type: 'setWishlistData', payload: null })
+                  // dispatch({ type: 'setCouponDetails', payload: null })
+                  // try{
+                  //     socialSignOut()
+                  //   }catch(e){
+                  //     console.log('error',e)
+                  //   }
+                  // navigation.navigate('Login')
+                  dispatch(logOut());
+                  showMessage({
+                    message: 'You are logged out',
+                    type: 'info',
+                    backgroundColor: '#808080',
+                  });
+                }}>
+                <View style={styles.itemOuter}>
+                  <View style={styles.textOuter}>
+                    <MaterialIcons
+                      name="logout"
+                      style={{ color: BKColor.textColor1 }}
+                      size={fontSize.h2}
+                    />
+                    <Text style={styles.regContainer.text1}>Log Out</Text>
+                  </View>
+                  <Entypo
+                    name="chevron-thin-right"
+                    style={{ color: BKColor.textColor1 }}
+                    size={fontSize.h2}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        </View >
+      </SafeAreaView >
+    </KeyboardAvoidingView>
   );
 }
 export default MyProfile;

@@ -16,5 +16,6 @@ export const BKColor = {
   btnTextColor: '#FFFFFF',
 
   boxBorder: '#DDDDDD',
-  boxBorderActive: '#EC1F25'
+  boxBorderActive: '#EC1F25',
+  white: '#ffffff',
 };

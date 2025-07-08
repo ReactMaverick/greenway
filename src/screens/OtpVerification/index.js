@@ -19,6 +19,7 @@ import {
   inputContainer,
   activeButton,
   fontSize,
+  commonStyle,
 } from '../../common/values/BKStyles';
 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -30,6 +31,8 @@ import { GetApiFetch, PostApiFetch } from '../../config/CommonFunction';
 import { useSelector, useDispatch } from 'react-redux';
 import { userDetails } from '../../redux/reducers/UserReducer';
 import CustomStatusBar from '../../common/components/statusbar';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { platform } from '../../common/values/BKConstants';
 function OtpVerification({ navigation, route }) {
   const dispatch = useDispatch();
   const [OTP, setOTP] = useState('');
@@ -72,51 +75,55 @@ function OtpVerification({ navigation, route }) {
   //   useEffect(() => {}, [navigation]);
 
   return (
-    <SafeAreaView>
-      <CustomStatusBar />
-      <ScrollView style={pageContainerStyle}>
-        <View style={styles.regContainer}>
-          
-          <View style={styles.logoSection}>
-            {/* <Text>Phone Number</Text> */}
+    <KeyboardAvoidingView
+      behavior={platform === 'ios' ? 'padding' : 'height'}
+      style={commonStyle.keyboardAvoidingView}>
+      <SafeAreaView style={commonStyle.safeAreaView}>
+        <CustomStatusBar />
+        <ScrollView style={pageContainerStyle}>
+          <View style={styles.regContainer}>
 
-            <View style={styles.loginLogoSection.logo}>
-              <Image
-                source={require('../../assets/images/header-logo.png')} style={{ height: wp('38.8%'), width: wp('27.1%'), resizeMode: "cover" }}
-              />
-              <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
-              <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
+            <View style={styles.logoSection}>
+              {/* <Text>Phone Number</Text> */}
+
+              <View style={styles.loginLogoSection.logo}>
+                <Image
+                  source={require('../../assets/images/header-logo.png')} style={{ height: wp('38.8%'), width: wp('27.1%'), resizeMode: "cover" }}
+                />
+                <Text style={styles.loginLogoSection.text1}>Welcome to</Text>
+                <Text style={styles.loginLogoSection.text2}>Fresh Fruits</Text>
+              </View>
             </View>
-          </View>
-          <Text style={styles.regContainer.headerText}>
-            Entry Your 4 digit code
-          </Text>
-          <OTPTextInput
-            textInputStyle={styles.otpBoxStyle}
-            tintColor={BKColor.textColor2}
-            // inputCellLength={1}
-            // onChangeText={(value) => setOTP(value)}
-            handleTextChange={otpInput => setOTP(otpInput)}
-          />
-          <Text style={{ textAlign: 'center', color: BKColor.textColor2 }}>
-            {errorMessage}
-          </Text>
-
-          
-          <TouchableOpacity style={activeButton.button} onPress={_checkOtp}>
-            <Text style={activeButton.text}>Verify</Text>
-          </TouchableOpacity>
-
-          <View style={styles.loginFooter}>
-            <Text style={styles.loginFooter.textLeft}>
-              Did you don’t get code?{' '}
+            <Text style={styles.regContainer.headerText}>
+              Entry Your 4 digit code
             </Text>
-            <Text style={styles.loginFooter.textRight}>Resend</Text>
-          </View>
+            <OTPTextInput
+              textInputStyle={styles.otpBoxStyle}
+              tintColor={BKColor.textColor2}
+              // inputCellLength={1}
+              // onChangeText={(value) => setOTP(value)}
+              handleTextChange={otpInput => setOTP(otpInput)}
+            />
+            <Text style={{ textAlign: 'center', color: BKColor.textColor2 }}>
+              {errorMessage}
+            </Text>
 
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+
+            <TouchableOpacity style={activeButton.button} onPress={_checkOtp}>
+              <Text style={activeButton.text}>Verify</Text>
+            </TouchableOpacity>
+
+            <View style={styles.loginFooter}>
+              <Text style={styles.loginFooter.textLeft}>
+                Did you don’t get code?{' '}
+              </Text>
+              <Text style={styles.loginFooter.textRight}>Resend</Text>
+            </View>
+
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 export default OtpVerification;

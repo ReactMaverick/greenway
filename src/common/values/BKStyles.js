@@ -1,4 +1,5 @@
-import {BKColor} from './BKColor';
+import { StyleSheet } from 'react-native';
+import { BKColor } from './BKColor';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -132,7 +133,7 @@ export const textInput = {
   // backgroundColor: BKColor.textboxBackground,
 
   paddingHorizontal: wp('3%'),
-   flexDirection: 'row',
+  flexDirection: 'row',
   // justifyContent: 'space-between',
   // alignItems: 'center',
   //height: hp('6.5%'),
@@ -293,3 +294,12 @@ export const pageHeader = {
     color: BKColor.textColor1,
   },
 };
+
+export const commonStyle = StyleSheet.create({
+  keyboardAvoidingView: {
+    flex: 1,
+  },
+  safeAreaView: {
+    flex: 1,
+  },
+});

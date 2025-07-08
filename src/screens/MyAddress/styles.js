@@ -145,7 +145,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingBottom: 10
+        paddingBottom: 10,
     },
     headText: {
         color: BKColor.primaryColor,

@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, SafeAreaView, ScrollView, ActivityIndicat
 import styles from "./styles";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import { pageContainerStyle } from "../../common/values/BKStyles";
+import { commonStyle, pageContainerStyle } from "../../common/values/BKStyles";
 import { pageHeader } from "../../common/values/BKStyles";
 import { fontSize } from "../../common/values/BKStyles";
 import SingleCategory from "../../common/components/category/SingleCategory";
@@ -12,6 +12,8 @@ import { GetApiFetch } from "../../config/CommonFunction";
 import { BKColor } from "../../common/values/BKColor";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
 import CustomStatusBar from "../../common/components/statusbar";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
+import { platform } from "../../common/values/BKConstants";
 
 function CategoryList({ navigation }) {
     const [popularCategory, setPopularCategory] = useState([]);
@@ -42,15 +44,18 @@ function CategoryList({ navigation }) {
         return (
             <>
                 <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <CustomStatusBar/>
+                    <CustomStatusBar />
                     <ActivityIndicator size="large" color={BKColor.textColor2} />
                 </SafeAreaView>
             </>
         )
     } else {
         return (
-            <SafeAreaView style={pageContainerStyle}>
-                <CustomStatusBar/>
+            <KeyboardAvoidingView
+                behavior={platform === 'ios' ? 'padding' : 'height'}
+                style={commonStyle.keyboardAvoidingView}>
+                <SafeAreaView style={pageContainerStyle}>
+                    <CustomStatusBar />
                     <View style={pageHeader}>
                         <TouchableOpacity onPress={() => navigation.goBack()} >
                             <Fontisto name="arrow-left-l" color={BKColor.textColor1} size={fontSize.h2} />
@@ -68,7 +73,8 @@ function CategoryList({ navigation }) {
                         </View>
                     </ScrollView>
 
-            </SafeAreaView>
+                </SafeAreaView>
+            </KeyboardAvoidingView>
         )
     }
 

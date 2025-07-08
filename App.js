@@ -65,6 +65,7 @@ import Search from './src/screens/Search';
 import styles from './src/screens/Home/styles';
 import CongratulationPage from './src/screens/CongratulationPage';
 import { PersistGate } from 'redux-persist/integration/react';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 const Drawer = createDrawerNavigator();
 
@@ -175,20 +176,20 @@ function MyTabBar({ state, descriptors, navigation }) {
               style={{ flex: 1, position: 'relative' }}>
               {icon}
               {index == 2 && cartData != null ? (
-                <View style={{ 
+                <View style={{
                   position: 'absolute',
                   backgroundColor: BKColor.white,
-                  borderRadius:wp('12.5%'),
+                  borderRadius: wp('12.5%'),
                   width: wp('8%'),
                   height: wp('8%'),
-                  justifyContent:'center',
-                  alignItems:'center',
-                  borderWidth:1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderWidth: 1,
                   borderColor: BKColor.textColor2,
-                  right:2,
-                  top:-5
-                  }}>
-                  <Text style={{paddingTop: 5, fontSize: fontSize.h4,fontFamily: fontFamily.regular, color: BKColor.textColor1 }}>{cartData.length}</Text>
+                  right: 2,
+                  top: -5
+                }}>
+                  <Text style={{ paddingTop: 5, fontSize: fontSize.h4, fontFamily: fontFamily.regular, color: BKColor.textColor1 }}>{cartData.length}</Text>
                 </View>
               ) : (
                 <></>
@@ -432,7 +433,7 @@ function MyTabs() {
                   <Octicons name="checklist" size={size} color={color} />
                 </View>
                 <Text style={{ color: BKColor.textColor1, textAlign: 'center' }}>
-                Wishlist
+                  Wishlist
                 </Text>
               </View>
             ),
@@ -497,7 +498,7 @@ function Stack1() {
   // const userDetails = useSelector(state => state.userReducer);
   if (userData == null) {
     return (
-      <Stack.Navigator>
+      <Stack.Navigator id={'Login'}>
         <Stack.Screen
           name="Login"
           component={Login}
@@ -540,7 +541,7 @@ function Stack1() {
     );
   } else {
     return (
-      <Stack.Navigator>
+      <Stack.Navigator id={'Home'}>
         <Stack.Screen
           name="Home"
           component={MyTabs}
@@ -663,15 +664,17 @@ export default function App() {
     SplashScreen.hide();
   }, []);
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <Stack1 />
-          </PersistGate>
-        </Provider>
-        <FlashMessage position="bottom" floating={true} duration={3000} />
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <KeyboardProvider>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <Stack1 />
+            </PersistGate>
+          </Provider>
+          <FlashMessage position="bottom" floating={true} duration={3000} />
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </KeyboardProvider>
   );
 }

@@ -21,6 +21,7 @@ import {
   inputContainer,
   activeButton,
   fontSize,
+  commonStyle,
 } from '../../common/values/BKStyles';
 import { BKColor } from '../../common/values/BKColor';
 import {
@@ -38,6 +39,8 @@ import GiftsArea from '../../common/components/home/GiftsArea';
 import PopularCategory from '../../common/components/home/PopularCategory';
 import { useSelector, useDispatch } from 'react-redux';
 import CustomStatusBar from '../../common/components/statusbar';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { platform } from '../../common/values/BKConstants';
 
 function Home({ navigation }) {
   const [refreshing, setRefreshing] = useState(true);
@@ -49,71 +52,75 @@ function Home({ navigation }) {
     setRefreshing(true);
   };
   return (
-    <SafeAreaView>
-      <CustomStatusBar />
-      <View style={pageContainerStyle2}>
-        <View style={pageHeader}>
-          <TouchableOpacity
-            style={styles.headerIcon}
+    <KeyboardAvoidingView
+      behavior={platform === 'ios' ? 'padding' : 'height'}
+      style={commonStyle.keyboardAvoidingView}>
+      <SafeAreaView style={commonStyle.safeAreaView}>
+        <CustomStatusBar />
+        <View style={pageContainerStyle2}>
+          <View style={pageHeader}>
+            <TouchableOpacity
+              style={styles.headerIcon}
             // onPress={() => {
             //   navigation.toggleDrawer();
             // }}
             >
-            <FontAwesome5
-              name="map"
-              color={BKColor.textColor1}
-              size={fontSize.h3}
-              style={styles.headerIcon.icon}
-            />
-            {/* <Image
+              <FontAwesome5
+                name="map"
+                color={BKColor.textColor1}
+                size={fontSize.h3}
+                style={styles.headerIcon.icon}
+              />
+              {/* <Image
               source={require('../../assets/images/menu_alt_03.png')}
               resizeMode="cover"
             /> */}
-          </TouchableOpacity>
-          <Image
-            source={require('../../assets/images/homeHeaderLogo.png')}
-            resizeMode="cover"
-          />
-          {/* <Text style={pageHeader.text}>Greenway</Text> */}
-          <TouchableOpacity
-            style={styles.headerIcon}
-            onPress={() => {
-              navigation.navigate('Search');
-            }}>
-            <Fontisto
-              name="search"
-              color={BKColor.textColor1}
-              size={fontSize.h3}
-              style={styles.headerIcon.icon}
+            </TouchableOpacity>
+            <Image
+              source={require('../../assets/images/homeHeaderLogo.png')}
+              resizeMode="cover"
             />
-          </TouchableOpacity>
+            {/* <Text style={pageHeader.text}>Greenway</Text> */}
+            <TouchableOpacity
+              style={styles.headerIcon}
+              onPress={() => {
+                navigation.navigate('Search');
+              }}>
+              <Fontisto
+                name="search"
+                color={BKColor.textColor1}
+                size={fontSize.h3}
+                style={styles.headerIcon.icon}
+              />
+            </TouchableOpacity>
+          </View>
+          <ScrollView
+            // style={{ marginBottom: hp('5%') }}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }>
+
+
+            <Slider navigation={navigation} />
+            {/* <Banner navigation={navigation} /> */}
+            <PopularProducts navigation={navigation} refreshing={refreshing} stopRefreshing={() => {
+              setRefreshing(false);
+            }} />
+            <WholeSaleProduct navigation={navigation} refreshing={refreshing} stopRefreshing={() => {
+              setRefreshing(false);
+            }} />
+            {/* <Brands navigation={navigation} /> */}
+            <PopularCategory navigation={navigation} refreshing={refreshing} stopRefreshing={() => {
+              setRefreshing(false);
+            }} />
+            {/* <ShippingArea navigation={navigation} /> */}
+
+            {/* <GiftsArea navigation={navigation} /> */}
+          </ScrollView>
         </View>
-        <ScrollView
-          // style={{ marginBottom: hp('5%') }}
-          showsVerticalScrollIndicator={false}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }>
-
-
-          <Slider navigation={navigation} />
-          {/* <Banner navigation={navigation} /> */}
-          <PopularProducts navigation={navigation} refreshing={refreshing} stopRefreshing={() => {
-            setRefreshing(false);
-          }} />
-          <WholeSaleProduct navigation={navigation} refreshing={refreshing} stopRefreshing={() => {
-            setRefreshing(false);
-          }} />
-          {/* <Brands navigation={navigation} /> */}
-          <PopularCategory navigation={navigation} refreshing={refreshing} stopRefreshing={() => {
-            setRefreshing(false);
-          }} />
-          {/* <ShippingArea navigation={navigation} /> */}
-
-          {/* <GiftsArea navigation={navigation} /> */}
-        </ScrollView>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 export default Home;
