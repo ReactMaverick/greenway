@@ -18,4 +18,5 @@ export const BKColor = {
   boxBorder: '#DDDDDD',
   boxBorderActive: '#EC1F25',
   white: '#ffffff',
+  black : '#000000'
 };

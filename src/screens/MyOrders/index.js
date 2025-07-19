@@ -48,6 +48,7 @@ import { showMessage, hideMessage } from 'react-native-flash-message';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { platform } from '../../common/values/BKConstants';
 import CustomModal from '../../common/components/CustomModal';
+import { Rating } from 'react-native-ratings';
 // import StarRating from 'react-native-star-rating';
 function MyOrders({ navigation }) {
   const [orderData, setOrderData] = useState([]);
@@ -323,16 +324,16 @@ function MyOrders({ navigation }) {
                     <></>
                   )}
                 </Text>
-                {/* <StarRating
-                maxStars={5}
-                disabled={false}
-                starSize={20}
-                fullStarColor={BKColor.textColor1}
-                halfStarColor={'white'}
-                selectedStar={rating => setChangeRating(rating)}
-                rating={changeRating}
-                name="rating"
-              /> */}
+                <Rating
+                  type='custom'
+                  ratingColor={BKColor.textColor1}
+                  ratingBackgroundColor={BKColor.boxBorder}
+                  ratingCount={5}
+                  imageSize={20}
+                  style={{ paddingVertical: 10 }}
+                  startingValue={0}
+                  onFinishRating={rating => setChangeRating(rating)}
+                />
               </View>
               <View>
                 <Text style={{ textAlign: 'center', color: '#EC1F25' }}>

@@ -66,6 +66,7 @@ import styles from './src/screens/Home/styles';
 import CongratulationPage from './src/screens/CongratulationPage';
 import { PersistGate } from 'redux-persist/integration/react';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
+import GetStarted from './src/screens/GetStarted/GetStarted';
 
 const Drawer = createDrawerNavigator();
 
@@ -499,6 +500,11 @@ function Stack1() {
   if (userData == null) {
     return (
       <Stack.Navigator id={'Login'}>
+        <Stack.Screen
+          name="Splash"
+          component={GetStarted}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="Login"
           component={Login}

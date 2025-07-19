@@ -49,6 +49,7 @@ import { shopnowDetails } from '../../redux/reducers/ShopNowReducer';
 import CustomStatusBar from '../../common/components/statusbar';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { platform } from '../../common/values/BKConstants';
+import { Rating } from 'react-native-ratings';
 
 function ProductDetails({ navigation, route }) {
   const dispatch = useDispatch();
@@ -458,14 +459,16 @@ function ProductDetails({ navigation, route }) {
             {/* Review list Section Start */}
             <View style={styles.productReviewSec}>
               <Text style={styles.productReview}>Reviews</Text>
-
-              {/* <StarRating
-              maxStars={5}
-              disabled={true}
-              starSize={20}
-              fullStarColor={BKColor.textColor2}
-              rating={Math.round(productDetails.rating)}
-            /> */}
+              <Rating
+                type='custom'
+                ratingColor={BKColor.textColor2}
+                ratingBackgroundColor={BKColor.boxBorder}
+                ratingCount={5}
+                imageSize={20}
+                style={{ paddingVertical: 10 }}
+                readonly
+                startingValue={Math.round(productDetails.rating)}
+              />
             </View>
             {productReview.length < 0 ? (
               <View>
@@ -476,16 +479,16 @@ function ProductDetails({ navigation, route }) {
                 {productReview.map((item, key) => (
                   <View key={key} style={styles.reviewSec}>
                     <View style={styles.reviewStar}>
-                      {/* <StarRating
-                      maxStars={5}
-                      disabled={true}
-                      starSize={20}
-                      fullStarColor={BKColor.textColor2}
-                      // halfStarColor={'white'}
-                      changeRating={item.reviews_rating}
-                      rating={item.reviews_rating}
-                      // name='rating'
-                    /> */}
+                      <Rating
+                        type='custom'
+                        ratingColor={BKColor.textColor2}
+                        ratingBackgroundColor={BKColor.boxBorder}
+                        ratingCount={5}
+                        imageSize={20}
+                        style={{ paddingVertical: 10 }}
+                        startingValue={item.reviews_rating}
+                        readonly
+                      />
                     </View>
                     <View>
                       <Text>{item.reviews_text}</Text>

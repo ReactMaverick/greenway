@@ -47,6 +47,7 @@ import CustomStatusBar from '../../common/components/statusbar';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { platform } from '../../common/values/BKConstants';
 import CustomModal from '../../common/components/CustomModal';
+import { Rating } from 'react-native-ratings';
 
 function OrderDetails({ navigation, route }) {
   const [orderDetails, setOrderDetails] = useState([]);
@@ -475,16 +476,16 @@ function OrderDetails({ navigation, route }) {
               </View>
               <View style={styles.modalStar}>
                 <Text style={styles.modalText}>{reviewModal.products_name}</Text>
-                {/* <StarRating
-                maxStars={5}
-                disabled={false}
-                starSize={20}
-                fullStarColor={'#C2C71B'}
-                halfStarColor={'white'}
-                selectedStar={rating => setChangeRating(rating)}
-                rating={changeRating}
-                name="rating"
-              /> */}
+                <Rating
+                  type='custom'
+                  ratingColor={'#C2C71B'}
+                  ratingBackgroundColor={BKColor.boxBorder}
+                  ratingCount={5}
+                  imageSize={20}
+                  style={{ paddingVertical: 10 }}
+                  startingValue={changeRating}
+                  onFinishRating={rating => setChangeRating(rating)}
+                />
               </View>
               <View>
                 <Text style={{ textAlign: 'center', color: '#EC1F25' }}>
