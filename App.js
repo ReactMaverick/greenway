@@ -500,11 +500,11 @@ function Stack1() {
   if (userData == null) {
     return (
       <Stack.Navigator id={'Login'}>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Splash"
           component={GetStarted}
           options={{ headerShown: false }}
-        />
+        /> */}
         <Stack.Screen
           name="Login"
           component={Login}
